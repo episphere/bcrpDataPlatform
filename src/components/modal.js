@@ -81,7 +81,10 @@ export const fileVersionsModal = () => {
 
 const createConsortiaOptions = async () => {
     let template = ``;
-    const response = await getFolderItems(0);
+    // Normally, there would be a zero here to get the consortium study in the top level directory of the user's Box account but that's not the case here.
+    // This should be adjusted once we do have a means to give users folder permissions back to 0. For administrators, I'm not sure how this would work
+    // differently unless we account for it in the code.
+    const response = await getFolderItems(145996351913);
     const array = filterConsortiums(response.entries);
     for(let consortia of array){
         const bool = checkDataSubmissionPermissionLevel(await getCollaboration(consortia.id, `${consortia.type}s`), JSON.parse(localStorage.parms).login);

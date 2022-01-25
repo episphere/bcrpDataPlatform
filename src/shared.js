@@ -576,7 +576,13 @@ export const getValidConsortium = async () => {
     return filterConsortiums(response.entries);
 }
 
-const consortiums = ['Confluence_NCI', 'Confluence_BCAC', 'Confluence_LAGENO', 'Confluence_OCPL', 'Confluence_CIMBA'];
+// const consortiums = ['Confluence_NCI', 'Confluence_BCAC', 'Confluence_LAGENO', 'Confluence_OCPL', 'Confluence_CIMBA'];
+const consortiums = [
+    'Pilot - BCRP_NHS2_Study_Info_and_Data',
+    'Pilot - BCRP_NHS_Study_Info_and_Data',
+    'Pilot - BCRP_CPS3_Study_Info_and_Data',
+    'Pilot - BCRP_CPS2_Study_Info_and_Data'
+];
 
 export const filterConsortiums = (array) => {
     return array.filter(obj => obj.type === 'folder' && consortiums.includes(obj.name));
@@ -852,6 +858,8 @@ export const handleRangeRequests = async () => {
 // Need to change to BCRPP urls
 export const applicationURLs = {
     'dev': 'https://episphere.github.io/bcrpDataPlatform',
-    'stage': 'https://confluence-stage.cancer.gov',
-    'prod': 'https://confluence.cancer.gov'
+    // 'stage': 'https://confluence-stage.cancer.gov',
+    // 'prod': 'https://confluence.cancer.gov'
+    'stage': 'https://episphere.github.io/bcrpDataPlatform',
+    'prod': 'https://episphere.github.io/bcrpDataPlatform'
 }
