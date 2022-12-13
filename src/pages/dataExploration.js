@@ -138,18 +138,26 @@ export const dataSummaryStatisticsTemplate = () => {
  * @returns html template
  */
 const filterItemTemplate = (title, values) => {
-  if (values.length > 6) {
+  if (values.length > 4) {
     return `
-<span class="font-bold">${title}:</span>
-<span>
-${values.slice(0, 5).join(", ")} 
-</span>
-`;
+      <span class="font-bold">${title}:</span>
+      <span>
+      ${values
+        .map((option) => option.replaceAll(/_|-/g, " "))
+        .slice(0, 4)
+        .join(", ")}
+      , and other
+      </span>
+      `;
   } else
     return `
     <span class="font-bold">${title}:</span>
     <span>
-    ${values.join(", ")}
+      ${
+        values.length
+          ? values.map((option) => option.replaceAll(/_|-/g, " ")).join(", ")
+          : "None"
+      }
     </span>
   `;
 };
@@ -196,7 +204,7 @@ export const dataSummaryMissingTemplate = async () => {
   //const status = headers.filter((dt) => /status_/i.test(dt) === true);
   console.log({ headers });
   const initialSelection =
-    variables.length > 6 ? variables.slice(0, 6) : variables;
+    variables.length > 4 ? variables.slice(0, 4) : variables;
   // const studies = data.map(dt => dt['study']).filter((item, i, ar) => ar.indexOf(item) === i);
   // const studies = {};
   // data.forEach((dt) => {
@@ -234,7 +242,7 @@ export const dataSummaryMissingTemplate = async () => {
   console.log({ ethnicity });
 
   const div1 = document.createElement("div");
-  div1.classList = ["col-xl-2 filter-column"];
+  div1.classList = ["col-xl-3 filter-column"];
   div1.id = "missingnessFilter";
 
   const div2 = document.createElement("div");
@@ -244,7 +252,7 @@ export const dataSummaryMissingTemplate = async () => {
    * 2. Create a function to make one filter item
    */
 
-  div2.classList = ["col-xl-10"];
+  div2.classList = ["col-xl-9"];
   div2.innerHTML = `
         <button id="filterBarToggle">
             <i class="fas fa-lg fa-caret-left"></i>
@@ -252,11 +260,11 @@ export const dataSummaryMissingTemplate = async () => {
         <div class="main-summary-row" style="min-height: 10px;margin-bottom: 1rem;margin-left: 1rem;">
             <div class="col white-bg div-border align-left font-size-17" style="padding: 0.5rem;" id="listFilters">
                 <!---<span class="font-bold">Status:</span> All<span class="vertical-line"></span>--->
-                ${filterItemTemplate("Cohort", ["All"])}
-                <span style="padding-left: 5px; padding-right: 5px">|</span>
                 ${filterItemTemplate("Race", ["All"])}
                 <span style="padding-left: 5px; padding-right: 5px">|</span>
                 ${filterItemTemplate("Ethnicity", ["All"])}
+                <span style="padding-left: 5px; padding-right: 5px">|</span>
+                ${filterItemTemplate("Cohort", ["All"])}
                 <span style="padding-left: 5px; padding-right: 5px">|</span>
                 ${filterItemTemplate("Variable", ["All"])}
             </div>
@@ -386,16 +394,23 @@ const renderMidsetFilterData = (
       anc[1] === "All" ? "selected" : ""
     }>${anc[1]}</option>`;
   });
-  template += `</select></div>
+  template += "</select></div>";
+  template += `
         <div class="form-group" id='midsetCohorts'>
-        <li class="filter-list-item">
-          <label class="filter-label font-size-13" for="studiesList">Cohort<span class='required-label'>*&nbsp;</span></label>
-          <label>
-          <input id="cohortallcheckbox"checked type="checkbox" class="cohort-name" title="all">
-                Check All
-          </label>
-        </li>
-                `;
+          <li class="filter-list-item">
+            <label class="filter-label font-size-13" for="studiesList">Cohort<span class='required-label'>*&nbsp;</span></label>
+            <label>
+              <input
+                id="cohortallcheckbox"
+                checked
+                type="checkbox"
+                class="cohort-name select-all"
+                title="all"
+              />
+              Check All
+            </label>
+          </li>
+  `;
   // cohortsTemplate += `
   //   <li class="filter-list-item">
   //     <input
@@ -480,11 +495,10 @@ const renderMidsetFilterData = (
                             ? "checked"
                             : ""
                         } data-variable="${variable}" id="label${variable}" class="select-variable"/>
-                        <label for="label${variable}" class="variable-name" title="${variable}">${
-      variable.replace("_Data available", "").length > 20
-        ? `${variable.replace("_Data available", "").slice(0, 20)}...`
-        : `${variable.replace("_Data available", "")}`
-    }`;
+                        <label for="label${variable}" class="variable-name" title="${variable}">
+                        ${variable
+                          .replace("_Data available", "")
+                          .replace(/_|-/g, " ")}`;
     if (
       variable === "Reproductive_History1" ||
       variable === "Reproductive_History2"
@@ -517,25 +531,46 @@ const generateFilterSummery = () => {
     (el) => el.value.toString() === ethnicityValue.toString()
   ).text;
 
+  // Total variables
+  // total: 4
+  // selected: 2
   const selectedVariables = getSelectedVariables("midsetVariables");
+  const totalVariables = getAllVariables("midsetVariables");
+  console.log("inja", selectedVariables, totalVariables);
+  const isAllVariablesSelected = selectedVariables.length === totalVariables;
+  // Total Cohort
   const selectedCohorts = getSelectedVariables("midsetCohorts");
-  console.log({ selectedCohorts });
+  const totalCohorts = getAllVariables("midsetCohorts");
+  console.log("inja2", selectedCohorts, totalCohorts);
+  const isAllCohortsSelected =
+    selectedCohorts.filter((cohort) => {
+      return cohort !== undefined;
+    }).length === totalCohorts;
 
   const container = document.getElementById("listFilters");
 
   container.innerHTML = `
   ${filterItemTemplate(
     "Cohort",
-    selectedCohorts.filter((cohort) => {
-      return cohort !== undefined;
-    })
+    isAllCohortsSelected
+      ? ["All"]
+      : selectedCohorts.filter((cohort) => {
+          return cohort !== undefined;
+        })
   )}
-                <span style="padding-left: 5px; padding-right: 5px">|</span>
-                ${filterItemTemplate("Race", [raceText])}
-                <span style="padding-left: 5px; padding-right: 5px">|</span>
-                ${filterItemTemplate("Ethnicity", [ethnicityText])}
-                <span style="padding-left: 5px; padding-right: 5px">|</span>
-                ${filterItemTemplate("Variable", selectedVariables)}
+    <span style="padding-left: 5px; padding-right: 5px">|</span>
+    ${filterItemTemplate("Race", [raceText])}
+    <span style="padding-left: 5px; padding-right: 5px">|</span>
+    ${filterItemTemplate("Ethnicity", [ethnicityText])}
+    <span style="padding-left: 5px; padding-right: 5px">|</span>
+    ${filterItemTemplate(
+      "Variable",
+      isAllVariablesSelected
+        ? ["All"]
+        : selectedVariables.filter((cohort) => {
+            return cohort !== undefined;
+          })
+    )}
   `;
 
   /**
@@ -574,11 +609,14 @@ const addEventMidsetFilterForm = (data) => {
   });
   const cohortsAllCheckbox = document.getElementById("cohortallcheckbox");
   const cohorts = document.getElementsByClassName("select-cohort");
+
   Array.from(cohorts).forEach((ele) => {
     ele.addEventListener("change", () => {
       const selectedCohorts = document.querySelectorAll(
         ".select-cohort:checked"
       );
+      if (cohorts.length === selectedCohorts.length)
+        cohortsAllCheckbox.checked = true;
       if (selectedCohorts.length < cohorts.length) {
         cohortsAllCheckbox.checked = false;
       }
@@ -590,9 +628,9 @@ const addEventMidsetFilterForm = (data) => {
   cohortsAllCheckbox.addEventListener("change", (e) => {
     Array.from(cohorts).forEach((input) => {
       input.checked = e.target.checked;
-      generateFilterSummery();
-      filterMidsetData(data);
     });
+    generateFilterSummery();
+    filterMidsetData(data);
   });
 
   // const consortias = document.getElementsByClassName("select-consortium");
@@ -697,6 +735,12 @@ const getSelectedVariables = (parentId) => {
   return selections;
 };
 
+const getAllVariables = (parentId) => {
+  let cardBody = document.getElementById(parentId);
+  const variables = cardBody.querySelectorAll("input:not(.select-all)");
+  return variables.length;
+};
+
 // const getSelectedValues = (parentId) => {
 //   const selections = [];
 //   let cardBody = document.getElementById(parentId);
@@ -740,10 +784,9 @@ const midset = (data, acceptedVariables) => {
     }
     template += `<th class="missing-column"></th></tr><tr><td class="missing-column"></td>`;
     for (let variable in headerCount) {
-      template += `<th class="missing-column cell-equal-width">${variable.replace(
-        "_Data available",
-        ""
-      )}</th>`;
+      template += `<th class="missing-column cell-equal-width">${variable
+        .replace("_Data available", "")
+        .replace(/_|-/g, " ")}</th>`;
     }
     template += `<th class="missing-column"></th>
                     <th class="missing-column"><button class="info-btn variable-definition" aria-label="More info" data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#confluenceMainModal"  data-variable='midsetSideBars'><i class="fas fa-question-circle cursor-pointer"></i></button></th>

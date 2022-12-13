@@ -90,13 +90,15 @@ export const dataAccess = (activeTab, showDescripton) => {
   let authDacc =
     emailforDACC.indexOf(JSON.parse(localStorage.parms).login) !== -1;
   let navBarItems = "";
+  console.log(authChair);
+  console.log(authDacc);
   if (authDacc && authChair) {
     navBarItems = pageNavBar(
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
-      "View Submissions",
+      //"Project Concept Form",
+      //"View Submissions",
       "Chair Menu",
       "DACC Menu"
     );
@@ -106,8 +108,8 @@ export const dataAccess = (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
-      "View Submissions",
+      //"Project Concept Form",
+      //"View Submissions",
       "Chair Menu"
     );
     // navBarItems = pageNavBar('data_access', activeTab, 'Overview', 'Project Concept Form', 'Accepted', 'Chair Menu');
@@ -116,8 +118,8 @@ export const dataAccess = (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
-      "View Submissions",
+      //"Project Concept Form",
+      //"View Submissions",
       "DACC Menu"
     );
     // navBarItems = pageNavBar('data_access', activeTab, 'Overview', 'Project Concept Form', 'Accepted', 'DACC Menu');
@@ -126,8 +128,8 @@ export const dataAccess = (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
-      "View Submissions"
+      //"Project Concept Form",
+      //"View Submissions"
     );
     // navBarItems = pageNavBar('data_access', activeTab, 'Overview', 'Project Concept Form', 'Accepted');
   }
