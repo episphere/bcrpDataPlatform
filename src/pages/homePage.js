@@ -19,6 +19,7 @@ export const infoDeck = () => {
             <div class="container align-middle text-center" style="margin-top: 70px;">
                 <div class="card-deck" id="infoDeck" style="min-height: 200px;">`;
   template += cardContents({
+    header: "Learn about BCRPP",
     button: "Learn about BCRPP",
     href: "#about/overview",
     icon: "fa-download",
