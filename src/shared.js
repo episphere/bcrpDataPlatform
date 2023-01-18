@@ -3,11 +3,11 @@ import { logOut } from "./manageAuthentication.js";
 import { confluence } from "../confluence.js";
 
 export const emailsAllowedToUpdateData = [
-  "patelbhp@nih.gov",
+  "kopchickbp@nih.gov",
   "ahearntu@nih.gov",
 ];
 
-export const emailforChair = ["kopchickbp@nih.gov", "sbehpour@deloitte.com", "ahearntu@nih.gov"];
+export const emailforChair = [];
 //  [
 // "Roger.Milne@cancervic.org.au",
 // "ahearntu@nih.gov",
@@ -16,7 +16,7 @@ export const emailforChair = ["kopchickbp@nih.gov", "sbehpour@deloitte.com", "ah
 // "kopchickbp@nih.gov",
 // ];
 
-export const emailforDACC = ["kopchickbp@nih.gov", "sbehpour@deloitte.com", "ahearntu@nih.gov"];
+export const emailforDACC = [];
 
 // [
 //   "pkraft@hsph.harvard.edu",
