@@ -794,6 +794,7 @@ export const populateAmendSelect = async () => {
     amendmentEl.appendChild(optionEl);
   });
 };
+
 export const acceptedStudiesSection = (activeTab) => {
   let authChair =
     emailforChair.indexOf(JSON.parse(localStorage.parms).login) !== -1;

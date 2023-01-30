@@ -1499,7 +1499,9 @@ export const checkDataSubmissionPermissionLevel = (data, login) => {
   } else if (
     array[0].role === "editor" ||
     array[0].role === "co-owner" ||
-    array[0].role === "uploader"
+    array[0].role === "uploader" ||
+    array[0].role === "previewer uploader" ||
+    array[0].role === "viewer uploader"
   ) {
     return true;
   }
