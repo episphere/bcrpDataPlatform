@@ -259,12 +259,14 @@ export const confluence = async () => {
           uploadFormFolder,
           "folders"
         ); //144028521583, 155292358576
+        console.log(getCollaborators);
         let getMyPermissionLevel = false;
         if (getCollaborators)
           getMyPermissionLevel = checkDataSubmissionPermissionLevel(
             getCollaborators,
             JSON.parse(localStorage.parms).login
           );
+        console.log(getMyPermissionLevel);
         if (getMyPermissionLevel) {
           confluenceDiv.innerHTML = await formSection("form");
           populateAmendSelect();

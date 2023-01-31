@@ -12,7 +12,7 @@ export const infoDeck = () => {
                     <div class="col-xl-12">
                         <h1 class="banner-overlay-h1">The Breast Cancer Risk Prediction Project (BCRPP)</h1>
                         <div class="banner-overlay-line"></div>
-                        <h2 class="banner-overlay-h3" style="font-size:1.7vw;"> Building an integrated, multi-ethnic breast cancer risk prediction model</h2>
+                        <h2 class="banner-overlay-h3" style="font-size:1.7vw;"> Building an integrated multi-ethnic breast cancer risk prediction model</h2>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@ export const infoDeck = () => {
             <div class="font-size-28 font-bold font-family-helvetica our-goals mt-3 mb-2">OUR GOALS</div>
             <div class="row">
                 <div class="col-lg-3"></div>
-                <div class="col-lg-6 font-size-18 align-left">To build a large-scale collaborative research resource with data from over 1.5 million women of different race/ethnic backgrounds participating in prospective cohort studies or trials to:</div>
+                <div class="col-lg-6 font-size-18 align-left">To build a large-scale collaborative research resource with data from over 1.5 million women of different racial/ethnic backgrounds participating in prospective cohort studies or trials to:</div>
                 <div class="col-lg-3"></div>
             </div>
             <br>
@@ -91,7 +91,7 @@ export const infoDeckAfterLoggedIn = async () => {
                     <div class="col-md-12">
                         <h1 class="banner-overlay-h1">The Breast Cancer Risk Prediction Project (BCRPP)</h1>
                         <div class="banner-overlay-line"></div>
-                        <h2 class="banner-overlay-h3" style="font-size:1.7vw;"> Building an integrated, multi-ethnic breast cancer risk prediction model</h2>
+                        <h2 class="banner-overlay-h3" style="font-size:1.7vw;"> Building an integrated multi-ethnic breast cancer risk prediction model</h2>
                     </div>
                 </div>
             </div>
@@ -134,7 +134,7 @@ export const infoDeckAfterLoggedIn = async () => {
             <div class="font-size-28 font-bold font-family-montserrat our-goals mt-3 mb-2">OUR GOALS</div>
             <div class="row">
                 <div class="col-lg-3"></div>
-                <div class="col-lg-6 font-size-18 align-left">To build a large-scale collaborative research resource with data from over 1.5 million women of different race/ethnic backgrounds participating in prospective cohort studies or trials to:</div>
+                <div class="col-lg-6 font-size-18 align-left">To build a large-scale collaborative research resource with data from over 1.5 million women of different racial/ethnic backgrounds participating in prospective cohort studies or trials to:</div>
                 <div class="col-lg-3"></div>
             </div>
             <br>

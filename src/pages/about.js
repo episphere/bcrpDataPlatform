@@ -27,7 +27,7 @@ export const aboutConfluence = (activeTab, showDescripton) => {
                 ${navBarItems}
                     <button class="sub-menu-btn"><a class="nav-link ${
                       activeTab === "contact" ? "active" : ""
-                    } black-font font-size-14" href="#about/contact"> <strong> Scientific Committee</strong></a></button>
+                    } black-font font-size-14" href="#about/contact"> <strong> </strong></a></button>
                
             </div>
         </div>
@@ -48,13 +48,11 @@ export const renderOverView = async () => {
                 <div class="col align-left">
                     </br>
                     <span>
-                    The BCRPP will develop a comprehensive tool that will predict breast cancer risk, overall and by sub-types, across racial/ethnic groups.
+                    Breast cancer is the most diagnosed non-skin cancer and the second most common cause of cancer death among U.S. women. Breast cancer is a complex disease influenced by inherited genetic factors, behaviors, and extrinsic exposures.  Breast cancer is also a heterogeneous disease: survival rates and treatments vary across biologically distinct tumor subtypes, and incidence and survival rates vary across racial and ethnic groups and internationally. 
                     </span>
                     </br></br>
                     <span>
-                    The BCRPP includes individual level data on over 1.5 million  women from the NCI Cohort Consortium Study and other large cohort studies 
-                    and is harmonizing information on family-history, polygenic risk-scores, anthropometric, life-style and reproductive factors, 
-                    hormonal biomarkers and mammographic density. The aims of the BCRP are:
+                    The Breast Cancer Risk Prediction Project will bring together data on over 1.5 million women from the NCI Cohort Consortium Study and other large cohort studies to develop an integrated model that will predict breast cancer risk, overall and by sub-types, across racial and ethnic groups. This model will include data on family history; common genetic variation (polygenic risk scores); anthropometric, lifestyle and reproductive factors; and mammographic density. The aims of the BCRP are:
                     </span>
                     </br></br>
                     <div style="margin-left: 40px"> <b>Aim 1:</b> <i>Develop a comprehensive and multi-ethnic model for estimating absolute risk of breast cancer by incorporating information on known breast cancer risk factors </i> </div>
@@ -63,6 +61,15 @@ export const renderOverView = async () => {
                     </br>
                     <div style="margin-left: 40px"> <b>Aim 3:</b> <i>Evaluate the validity of the risk models developed in Aim 1 and Aim 2 in integrated health care systems, mammography, registries, and an ongoing risk-based mammographic screening trail in the US </i> </div>
                     </br>
+                    <span>
+                    A list of contributing cohorts;
+                    <span>
+                    Carotene and Retinol Efficacy Trial (CARET)
+                    Cancer Prevention Study 2 (CPS2)
+                    Cancer Prevention Study 3 (CPS3)
+
+                    <span>
+
                 </div>
             </div>
             <div class="align-left" id="confluenceDataSummary"></div>

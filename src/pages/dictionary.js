@@ -187,7 +187,7 @@ const renderDataDictionaryFilters = (dictionary, headers) => {
   template += `
                 </ul>
 
-                <label class="filter-label font-size-13" for="variableTypeList">Mammographic density</label>
+                <label class="filter-label font-size-13" for="variableTypeList">Mammographic Density</label>
                 <ul class="remove-padding-left font-size-15 allow-overflow" id="variableTypeList">
                 `;
   mamuniqueType.forEach((vt) => {
