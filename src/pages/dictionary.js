@@ -194,7 +194,7 @@ const renderDataDictionaryFilters = (dictionary, headers) => {
     template += `
                         <li class="filter-list-item">
                             <input type="checkbox" data-variable-type="${vt}" id="label${vt}" class="select-variable-type" style="margin-left: 1px !important;">
-                            <label for="label${vt}" class="sub-category" title="${vt}">${shortenText(
+                            <label for="label${vt}" class="sub-category" style="text-transform: capitalize" title="${vt}">${shortenText(
       vt,
       60
     )}</label>

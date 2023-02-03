@@ -62,12 +62,11 @@ export const renderOverView = async () => {
                     <div style="margin-left: 40px"> <b>Aim 3:</b> <i>Evaluate the validity of the risk models developed in Aim 1 and Aim 2 in integrated health care systems, mammography, registries, and an ongoing risk-based mammographic screening trail in the US </i> </div>
                     </br>
                     <span>
-                    A list of contributing cohorts;
+                    A list of contributing cohorts:
                     <span>
-                    Carotene and Retinol Efficacy Trial (CARET)
-                    Cancer Prevention Study 2 (CPS2)
-                    Cancer Prevention Study 3 (CPS3)
-
+                    <br><a href= "https://clinicaltrials.gov/ct2/show/NCT00712647">Carotene and Retinol Efficacy Trial (CARET)</a> 
+                    <br><a href= "https://clinicaltrials.gov/ct2/show/NCT00712647">Carotene and Cancer Prevention Study 2 (CPS2)</a> 
+                    <br><a href= "https://clinicaltrials.gov/ct2/show/NCT00712647">Cancer Prevention Study3 (CPS3)</a> 
                     <span>
 
                 </div>
