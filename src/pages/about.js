@@ -54,26 +54,26 @@ export const renderOverView = async () => {
                     <span>
                     The Breast Cancer Risk Prediction Project will bring together data on over 1.5 million women from the NCI Cohort Consortium Study and other large cohort studies to develop an integrated model that will predict breast cancer risk, overall and by sub-types, across racial and ethnic groups. This model will include data on family history; common genetic variation (polygenic risk scores); anthropometric, lifestyle and reproductive factors; and mammographic density. The aims of the BCRP are:
                     </span>
-                    </br></br>
-                    <div style="margin-left: 40px"> <b>Aim 1:</b> <i>Develop a comprehensive and multi-ethnic model for estimating absolute risk of breast cancer by incorporating information on known breast cancer risk factors </i> </div>
-                    </br>
-                    <div style="margin-left: 40px"> <b>Aim 2:</b> <i>Extend the multi-ethnic risk model for the risk prediction of estrogen receptor definced breast cancer </i> </div>
-                    </br>
-                    <div style="margin-left: 40px"> <b>Aim 3:</b> <i>Evaluate the validity of the risk models developed in Aim 1 and Aim 2 in integrated health care systems, mammography, registries, and an ongoing risk-based mammographic screening trail in the US </i> </div>
-                    </br>
-                    <span>
-                    A list of contributing cohorts:
-                    <span>
-                    <br><a href= "https://clinicaltrials.gov/ct2/show/NCT00712647">Carotene and Retinol Efficacy Trial (CARET)</a> 
-                    <br><a href= "https://clinicaltrials.gov/ct2/show/NCT00712647">Carotene and Cancer Prevention Study 2 (CPS2)</a> 
-                    <br><a href= "https://clinicaltrials.gov/ct2/show/NCT00712647">Cancer Prevention Study3 (CPS3)</a> 
-                    <span>
+                    <div style="margin-left: 40px"> <b></b><ul><li> Develop a comprehensive and multi-ethnic model for estimating absolute risk of breast cancer by incorporating information on known breast cancer risk factors </li><ul></div>
+                  
+                    <div style="margin-left: 40px"> <b></b><ul> <li>Extend the multi-ethnic risk model for the risk prediction of estrogen receptor definced breast cancer </li> <ul></div>
+                  
+                    <div style="margin-left: 40px"> <b></b><ul> <li>Evaluate the validity of the risk models developed in the first and second steps in integrated health care systems, mammography, registries, and an ongoing risk-based mammographic screening trail in the US </li></div>
+                    <ul><br>
+                
+    <div class="col align-left">Explore the number of study participants and breast cancer cases for each cohort checked:</div>
+                
 
+                    <span>
                 </div>
             </div>
             <div class="align-left" id="confluenceDataSummary"></div>
+     
+      <div class="align-left">
+      <span class="required">*</span><span>If no boxes are checked, the data is for all cohorts combined.
         </div>
     `;
+    
   document.getElementById("overview").innerHTML = template;
   const response = await fetch("./publicDataSet.json");
   countPublicStatistics(await response.json(), true);
@@ -91,7 +91,7 @@ const countPublicStatistics = (d, caseControl) => {
             <div class="main-summary-row" style="margin: 0px 15px;margin-bottom:10px">
                 <div class="col-md-3" style="padding: 0px">
                     <div class="custom-border allow-overflow align-left" style="height:100%; padding-left: 5px !important; margin-right: 15px;">
-                    <span class="font-size-17 font-bold">Cohort:</span></br>
+                    <span class="font-size-17 font-bold"> <span class="required">*</span>Cohort:</span></br>
                     <!---<span class="font-size-15">Cohort:</span></br>--->
                     <ul class="about-consortia" id='about-consortia-check'>
     `;
@@ -122,7 +122,10 @@ const countPublicStatistics = (d, caseControl) => {
   }
   summary += `</ul></div></div>
                 <div class="col-md-9 align-center" style="padding: 0px">
+                
                     <div class="custom-border" style="margin-right: 15px; height: 100%;" id="renderDataSummaryCounts"></div>
+                    
+                    
                 </div></div>
                 <div class="col data-last-modified align-left">Data last modified at - ${new Date(
                   data["dataModifiedAt"]
@@ -150,6 +153,7 @@ export const renderDataSummary = (obj, caseControl) => {
                 <span class="font-size-32">${numberWithCommas(
                   obj.totalConsortia
                 )}</span>
+                <br><br>     
             </div>
             <div class="col">
                 <span class="font-size-22">Study Participants</span></br>
@@ -161,8 +165,9 @@ export const renderDataSummary = (obj, caseControl) => {
                 <span class="font-size-22">Breast Cancer Cases</span></br>
                 <span class="font-size-32">${numberWithCommas(
                   obj.totalPatients
-                )}</span>
+                )}</span><br>               
             </div>
+
         </div>
     `;
 };

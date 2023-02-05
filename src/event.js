@@ -70,7 +70,7 @@ export const addEventStudyRadioBtn = () => {
                             <select class="form-control" id="selectStudyUIS" name="selectedStudy" required></select>
                         </div>
                         <div class="form-group">
-                            <label for="uploadDataUIS">Submit data</label> <span class="required">*</span>
+                            <label for="uploadDataUIS">Submit data</label> <span class="required"></span>
                             <input type="file" class="form-control-file" id="uploadDataUIS" name="dataFile" required>
                         </div>
                     `;
