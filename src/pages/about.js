@@ -38,40 +38,34 @@ export const aboutConfluence = (activeTab, showDescripton) => {
 // Changes needed here for definitions
 export const renderOverView = async () => {
   let template = `
-      <div class="main-summary-row">
+    <div class="main-summary-row">
       <div class="align-left">
            <h1 class="page-header">BCRPP Overview</h1>
       </div>
    </div>
-        <div class="home-page-stats font-size-18">
-            <div class="main-summary-row">
-                <div class="col align-left">
-                    </br>
-                    <span>
-                    Breast cancer is the most diagnosed non-skin cancer and the second most common cause of cancer death among U.S. women. Breast cancer is a complex disease influenced by inherited genetic factors, behaviors, and extrinsic exposures.  Breast cancer is also a heterogeneous disease: survival rates and treatments vary across biologically distinct tumor subtypes, and incidence and survival rates vary across racial and ethnic groups and internationally. 
-                    </span>
-                    </br></br>
-                    <span>
-                    The Breast Cancer Risk Prediction Project will bring together data on over 1.5 million women from the NCI Cohort Consortium Study and other large cohort studies to develop an integrated model that will predict breast cancer risk, overall and by sub-types, across racial and ethnic groups. This model will include data on family history; common genetic variation (polygenic risk scores); anthropometric, lifestyle and reproductive factors; and mammographic density. The aims of the BCRP are:
-                    </span>
-                    <div style="margin-left: 40px"> <b></b><ul><li> Develop a comprehensive and multi-ethnic model for estimating absolute risk of breast cancer by incorporating information on known breast cancer risk factors </li><ul></div>
-                  
-                    <div style="margin-left: 40px"> <b></b><ul> <li>Extend the multi-ethnic risk model for the risk prediction of estrogen receptor definced breast cancer </li> <ul></div>
-                  
-                    <div style="margin-left: 40px"> <b></b><ul> <li>Evaluate the validity of the risk models developed in the first and second steps in integrated health care systems, mammography, registries, and an ongoing risk-based mammographic screening trail in the US </li></div>
-                    <br>
+      <div class="home-page-stats font-size-18">
+        <div class="main-summary-row">
+          <div class="col align-left">
+                        </br>
+                      <span>
+                      Breast cancer is the most diagnosed non-skin cancer and the second most common cause of cancer death among U.S. women. Breast cancer is a complex disease influenced by inherited genetic factors, behaviors, and extrinsic exposures.  Breast cancer is also a heterogeneous disease: survival rates and treatments vary across biologically distinct tumor subtypes, and incidence and survival rates vary across racial and ethnic groups and internationally. 
+                      </span>
+                      </br></br>
+                      <span>
+                      The Breast Cancer Risk Prediction Project will bring together data on over 1.5 million women from the NCI Cohort Consortium Study and other large cohort studies to develop an integrated model that will predict breast cancer risk, overall and by sub-types, across racial and ethnic groups. This model will include data on family history; common genetic variation (polygenic risk scores); anthropometric, lifestyle and reproductive factors; and mammographic density. The aims of the BCRP are:
+                      </span>
+                      <div style="margin-left: 40px"> <b></b><ul><li> Develop a comprehensive and multi-ethnic model for estimating absolute risk of breast cancer by incorporating information on known breast cancer risk factors </li><ul></div>
+                    
+                      <div style="margin-left: 40px"> <b></b><ul> <li>Extend the multi-ethnic risk model for the risk prediction of estrogen receptor definced breast cancer </li> <ul></div>
+                    
+                      <div style="margin-left: 40px"> <b></b><ul> <li>Evaluate the validity of the risk models developed in the first and second steps in integrated health care systems, mammography, registries, and an ongoing risk-based mammographic screening trail in the US </li></div>
+                      </br>
                 
-    <div class="align-left">Explore the number of study participants and breast cancer cases for each cohort checked:</div>
+                      <div class="align-left">Explore the number of study participants and breast cancer cases for each cohort checked:</div>
                 
-
-                    <span>
-                </div>
-            </div>
-            <div class="align-left" id="confluenceDataSummary"></div>
-     
-      <div class="col align-left">
-      <span class="required">*</span><span>If no boxes are checked, the data is for all cohorts combined.
+          </div>
         </div>
+          <div class="align-left" id="confluenceDataSummary"></div>
     `;
     
   document.getElementById("overview").innerHTML = template;
@@ -127,6 +121,9 @@ const countPublicStatistics = (d, caseControl) => {
                     
                     
                 </div></div>
+                <div class="col align-left">
+                  <span class="required">*</span><span>If no boxes are checked, the data is for all cohorts combined.
+                </div>
                 <div class="col data-last-modified align-left">Data last modified at - ${new Date(
                   data["dataModifiedAt"]
                 ).toLocaleString()}</div></div>
@@ -167,7 +164,8 @@ export const renderDataSummary = (obj, caseControl) => {
                   obj.totalPatients
                 )}</span><br>               
             </div>
-
+            <div class="row"><div class="col"><span>Explore the number of study participants and breast cancer cases for each cohort checked:</span></div></div>
+            
         </div>
     `;
 };

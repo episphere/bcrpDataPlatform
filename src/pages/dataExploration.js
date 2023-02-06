@@ -8,6 +8,7 @@ import {
   missingnessStatsFileId,
   reSizePlots,
   applicationURLs,
+  consortiumSelection,
 } from "../shared.js";
 import {
   addEventConsortiumSelect,
@@ -236,7 +237,9 @@ export const dataSummaryMissingTemplate = async () => {
     race,
     ethnicity
   );
-  midset(data, initialSelection);
+  console.log(initialSelection);
+  console.log(cohorts);
+  midset(data, initialSelection, cohorts);
   addEventMissingnessFilterBarToggle();
 };
 
@@ -508,7 +511,8 @@ const filterMidsetData = (data) => {
   if (race !== "all") {
     newData = newData.filter((dt) => dt.race === race);
   }
-  midset(newData, selectedVariables);
+  console.log(selectedCohorts)
+  midset(newData, selectedVariables, selectedCohorts);
 };
 const getSelectedVariables = (parentId) => {
   const selections = [];
@@ -523,13 +527,13 @@ const getAllVariables = (parentId) => {
   const variables = cardBody.querySelectorAll("input:not(.select-all)");
   return variables.length;
 };
-const midset = (data, acceptedVariables) => {
+const midset = (data, acceptedVariables, acceptedCohorts) => {
   let template = "";
   let plotData = [];
   let headerData = "";
 
-  if (acceptedVariables.length === 0) {
-    template += "No variable selected.";
+  if (acceptedVariables.length === 0 ||acceptedCohorts.length===0 ) {
+    template += "No variable or cohort selected. Please, select at least one variable and one cohort.";
     hideAnimation();
     document.getElementById("missingnessTable").innerHTML = template;
     return;

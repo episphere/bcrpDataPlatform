@@ -1635,12 +1635,36 @@ export const tsv2Json = (tsv) => {
     headers,
   };
 };
-
-export const tsv2Json2 = (tsv) => {
+export const tsv2Jsondic = (tsv) => {
   const lines = tsv
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "")
+    .replace(/\n/g, "")
+    .split(/[\r]+/g);
+  const result = [];
+  const headers = lines[0].replace(/"/g, "").split(/[\t]/g);
+  for (let i = 1; i < lines.length; i++) {
+    const obj = {};
+    const currentline = lines[i].split(/[\t]/g);
+    for (let j = 0; j < headers.length; j++) {
+      if (currentline[j]) {
+        let value = headers[j];
+        obj[value] = currentline[j];
+      }
+    }
+    if (Object.keys(obj).length > 0) result.push(obj);
+  }
+  return {
+    data: result,
+    headers,
+  };
+};
+export const tsv2Json2 = (tsv) => {
+  const lines = tsv
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "|")
     .split(/\r?\n/);
   const result = [];
   const headers = lines[0].replace(/"/g, "").split(/[\t]/g);
@@ -1706,9 +1730,7 @@ export const json2other = (json, fields, tsv) => {
   let csv = json.map((row) => {
     return fields
       .map((fieldName) => {
-        if (fieldName.toLowerCase() === 'coding') {
-          return JSON.stringify(row[fieldName].replaceAll('-', '|'), replacer);
-        }
+        
         return JSON.stringify(row[fieldName], replacer);
       })
       .join(`${tsv ? "\t" : ","}`); // \t for tsv
