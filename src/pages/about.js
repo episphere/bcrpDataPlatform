@@ -59,9 +59,9 @@ export const renderOverView = async () => {
                     <div style="margin-left: 40px"> <b></b><ul> <li>Extend the multi-ethnic risk model for the risk prediction of estrogen receptor definced breast cancer </li> <ul></div>
                   
                     <div style="margin-left: 40px"> <b></b><ul> <li>Evaluate the validity of the risk models developed in the first and second steps in integrated health care systems, mammography, registries, and an ongoing risk-based mammographic screening trail in the US </li></div>
-                    <ul><br>
+                    <br>
                 
-    <div class="col align-left">Explore the number of study participants and breast cancer cases for each cohort checked:</div>
+    <div class="align-left">Explore the number of study participants and breast cancer cases for each cohort checked:</div>
                 
 
                     <span>
@@ -69,7 +69,7 @@ export const renderOverView = async () => {
             </div>
             <div class="align-left" id="confluenceDataSummary"></div>
      
-      <div class="align-left">
+      <div class="col align-left">
       <span class="required">*</span><span>If no boxes are checked, the data is for all cohorts combined.
         </div>
     `;

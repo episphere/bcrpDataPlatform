@@ -1706,10 +1706,14 @@ export const json2other = (json, fields, tsv) => {
   let csv = json.map((row) => {
     return fields
       .map((fieldName) => {
+        if (fieldName.toLowerCase() === 'coding') {
+          return JSON.stringify(row[fieldName].replaceAll('-', '|'), replacer);
+        }
         return JSON.stringify(row[fieldName], replacer);
       })
       .join(`${tsv ? "\t" : ","}`); // \t for tsv
   });
+  csv = csv.map(i => i.replaceAll('#', ''))
   csv.unshift(fields.join(`${tsv ? "\t" : ","}`)); // add header column  \t for tsv
   csv = csv.join("\r\n");
   return csv;
