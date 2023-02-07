@@ -164,7 +164,7 @@ export const renderDataSummary = (obj, caseControl) => {
                   obj.totalPatients
                 )}</span><br>               
             </div>
-            <div class="row"><div class="col"><span>Explore the number of study participants and breast cancer cases for each cohort checked:</span></div></div>
+            <div class="row" style="margin:0;  padding-left: 1rem; padding-right: 1rem;"><div class="col align-left"><span>Explore the number of study participants and breast cancer cases for each cohort checked Explore the number of study participants and breast cancer cases for each cohort checked:</span></div></div>
             
         </div>
     `;

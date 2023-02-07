@@ -1635,12 +1635,11 @@ export const tsv2Json = (tsv) => {
     headers,
   };
 };
-export const tsv2Jsondic = (tsv) => {
+export const tsv2JsonDic = (tsv) => {
   const lines = tsv
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "")
-    .replace(/\n/g, "")
     .split(/[\r]+/g);
   const result = [];
   const headers = lines[0].replace(/"/g, "").split(/[\t]/g);
@@ -1650,11 +1649,16 @@ export const tsv2Jsondic = (tsv) => {
     for (let j = 0; j < headers.length; j++) {
       if (currentline[j]) {
         let value = headers[j];
-        obj[value] = currentline[j];
+        if (value.toLowerCase() === 'coding') {
+          obj[value] = currentline[j].replace(/\n/g, "<br/>");
+        } else {
+          obj[value] = currentline[j].replace(/\n/g, "");
+        }
       }
     }
     if (Object.keys(obj).length > 0) result.push(obj);
   }
+  console.log('tsv2JsonDic', result)
   return {
     data: result,
     headers,
@@ -1730,7 +1734,9 @@ export const json2other = (json, fields, tsv) => {
   let csv = json.map((row) => {
     return fields
       .map((fieldName) => {
-        
+        if (fieldName.toLowerCase() === 'coding') {
+          return JSON.stringify(row[fieldName]?.replaceAll('<br/>', ' | '), replacer);
+        } 
         return JSON.stringify(row[fieldName], replacer);
       })
       .join(`${tsv ? "\t" : ","}`); // \t for tsv
