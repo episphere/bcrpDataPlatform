@@ -12,10 +12,6 @@ import {
 import { variables } from "./variables.js";
 import { addEventSummaryStatsFilterForm } from "./event.js";
 
-// dc = require('dc');
-// d3 = require('d3');
-// crossfilter = require('crossfilter2');
-
 const plotTextSize = 10.5;
 
 const chartLabels = {
@@ -132,46 +128,19 @@ const allFilters = (jsonData, headers, caseSelection) => {
             </div>
             
             <div class="form-group">
-                <label class="filter-label font-size-13" for="studySelection">Cohort</label>
+                <label class="filter-label font-size-13" for="studySelection">
+                  Cohort
+                  <a href="#about/description">
+                    <img src="./static/images/icons/arrow_out.png" width="18" height="18" />
+                  </a>
+                </label>
                 <select class="form-control font-size-15" id="studySelection" data-variable='study'>
                     <option selected value='all'>All</option>
                     ${studyOptions}
                 </select>
             </div>
     `;
-  // template += `
-  // <div class="form-group" style="display: none">
-  //     <label class="filter-label font-size-13" for="consortiumTypeSelection">Consortium</label>
-  //     <select class="form-control font-size-15" id="consortiumTypeSelection">
-  //         <option value='allOther'>Non-CIMBA</option>
-  //     </select>
-  // </div>
-  // `
-  //console.log(obj)
-  // for(let consortium in obj){
-  //     let innerTemplate = `
-  //                 <ul class="remove-padding-left font-size-15 consortium-ul" data-consortium="${consortium}">
-  //                     <li class="custom-borders filter-list-item">
-  //                         <button type="button" class="consortium-selection consortium-selection-btn" data-toggle="collapse" href="#toggle${consortium.replace(/ /g, '')}">
-  //                             <i class="fas fa-caret-down"></i>
-  //                         </button>
-  //                         <input type="checkbox" data-consortia="${consortium}" id="label${consortium}" class="select-consortium"/>
-  //                         <label for="label${consortium}" class="consortia-name">${consortium}</label>
-  //                     </li>
-  //                     <ul class="collapse no-list-style custom-padding allow-overflow max-height-study-list" id="toggle${consortium.replace(/ /g, '')}">`;
-  //     for(let study in obj[consortium]){
-  //         if(study !== 'consortiumTotal') {
-  //             const total = obj[consortium][study].total;
-  //             innerTemplate += `<li class="filter-list-item">
-  //                             <input type="checkbox" data-study="${study}" data-consortium="${consortium}" id="label${study}" class="select-study"/>
-  //                             <label for="label${study}" class="study-name" title="${study}">${study.length > 10 ? `${study.substr(0,10)}...`:study}</label>
-  //                         </li>`;
-  //         }
-  //     }
-  //     innerTemplate += `</ul></ul>`
-  //     template += innerTemplate;d
 
-  // }
   template += `</br>
     </div>`;
   div1.innerHTML = template;
@@ -184,16 +153,6 @@ const aggegrateData = (jsonData) => {
   let obj = {};
   // obj['totalSubjects'] = 0;
   jsonData.forEach((value) => {
-    // console.log(
-    //   "Total subjects in",
-    //   value.race,
-    //   value.study,
-    //   value.ethnicity,
-    //   "is",
-    //   value.TotalSubjects
-    // );
-
-    // console.log('Total subjects', totalSubjects);
     if (obj[value.consortium] === undefined) obj[value.consortium] = {};
     if (obj[value.consortium]) {
       if (obj[value.consortium]["consortiumTotal"] === undefined)
@@ -205,18 +164,12 @@ const aggegrateData = (jsonData) => {
       }
       obj[value.consortium][value.study].total += parseInt(value.total);
     }
-    // obj['totalSubjects'] += parseInt(value.TotalSubjects);
   });
-  // document.getElementById('participantCount').innerHTML = `# of participants: ${obj.totalSubjects}`;
   return obj;
 };
 const getStudies = (jsonData) => {
   let obj = {};
-  // obj['totalSubjects'] = 0;
   jsonData.forEach((value) => {
-    // console.log('Total subjects in', value.race, value.study, value.ethnicity, 'is', value.TotalSubjects);
-    // console.log('Total subjects', totalSubjects);
-    //console.log({ value });
     if (obj[value.study] === undefined) obj[value.study] = {};
     if (obj[value.study]) {
       if (obj[value.study]["consortiumTotal"] === undefined)
@@ -224,34 +177,23 @@ const getStudies = (jsonData) => {
       obj[value.study]["consortiumTotal"] += parseInt(value.total);
       obj[value.study].total += parseInt(value.total);
     }
-    // obj['totalSubjects'] += parseInt(value.TotalSubjects);
   });
-  // document.getElementById('participantCount').innerHTML = `# of participants: ${obj.totalSubjects}`;
   return obj;
 };
 const getRace = (jsonData) => {
   let obj = {};
   // obj['totalSubjects'] = 0;
   jsonData.forEach((value) => {
-    // console.log('Total subjects in', value.race, value.study, value.ethnicity, 'is', value.TotalSubjects);
     obj[value.race] = value.race;
-
-    // console.log('Total subjects', totalSubjects);
-    // obj['totalSubjects'] += parseInt(value.TotalSubjects);
   });
-  // document.getElementById('participantCount').innerHTML = `# of participants: ${obj.totalSubjects}`;
   return obj;
 };
 const getEthnicity = (jsonData) => {
   let obj = {};
   // obj['totalSubjects'] = 0;
   jsonData.forEach((value) => {
-    // console.log('Total subjects in', value.race, value.study, value.ethnicity, 'is', value.TotalSubjects);
     obj[value.ethnicity] = value.ethnicity;
-    // console.log('Total subjects', totalSubjects);
-    // obj['totalSubjects'] += parseInt(value.TotalSubjects);
   });
-  // document.getElementById('participantCount').innerHTML = `# of participants: ${obj.totalSubjects}`;
   return obj;
 };
 export const addEventConsortiumSelect = () => {
@@ -267,58 +209,16 @@ export const addEventConsortiumSelect = () => {
       }
     });
   });
-
-  // this is for the old one when we had a group of chckboxes, this would toggle all of them
-  // don't neet it anymore
-
-  // const consortiums = document.querySelectorAll(".select-consortium input");
-  // console.log({ consortiums });
-  // Array.from(consortiums).forEach((el) => {
-  //   el.addEventListener("click", (e) => {
-  //     console.log({ e: e.target });
-  // if (el.checked) {
-  //   Array.from(el.parentNode.querySelectorAll(".select-study")).forEach(
-  //     (btns) => (btns.checked = true)
-  //   );
-  // } else {
-  //   Array.from(el.parentNode.querySelectorAll(".select-study")).forEach(
-  //     (btns) => (btns.checked = false)
-  //   );
-  // }
-  //   });
-  // });
-
   const cohorts = document.querySelectorAll(".select-cohorts .select-study");
-  console.log({ cohorts });
   Array.from(cohorts).forEach((element) => {
-    element.addEventListener("click", () => {
-      // const allStudiesInConsortium =
-      //   element.parentElement.querySelectorAll(".select-study").length;
-      // console.log({ allStudiesInConsortium });
-      // const selectedStudiesInConsortium =
-      //   element.parentElement.querySelectorAll(
-      //     "input:checked.select-study"
-      //   ).length;
-      // console.log({ selectedStudiesInConsortium });
-      // if (allStudiesInConsortium === selectedStudiesInConsortium) {
-      //   element.parentElement.parentElement.parentElement.querySelector(
-      //     ".select-consortium"
-      //   ).checked = true;
-      // } else {
-      //   element.parentElement.parentElement.parentElement.querySelector(
-      //     ".select-consortium"
-      //   ).checked = false;
-      // }
-    });
+    element.addEventListener("click", () => {});
   });
 };
-
 export const renderAllCharts = (data) => {
   document.getElementById("chartRow1").innerHTML = "";
   document.getElementById("chartRow2").innerHTML = "";
   let finalData = {};
   finalData = data;
-
   let totalSubjects = 0;
   data.forEach((value) => (totalSubjects += parseInt(value.TotalSubjects)));
   document.getElementById(
@@ -441,7 +341,6 @@ export const updateCounts = (data) => {
     }
   }
 };
-// exactly
 export const getSelectedStudies = () => {
   const elements = document.querySelectorAll(`input:checked.select-study`);
   const array = [];
@@ -505,19 +404,6 @@ const generateAgeBarChart = (parameter, id, labelID, jsonData, chartRow) => {
       type: "bar",
     },
   ];
-  // let total = 0;
-  // total += mapReduce(jsonData, '<20');
-  // total += mapReduce(jsonData, '20 to 29');
-  // total += mapReduce(jsonData, '30 to 39');
-  // total += mapReduce(jsonData, '40 to 49');
-  // total += mapReduce(jsonData, '50 to 59');
-  // total += mapReduce(jsonData, '60 to 69');
-  // total += mapReduce(jsonData, '70 to 79');
-  // total += mapReduce(jsonData, '80 to 89');
-  // total += mapReduce(jsonData, '90 to 99');
-  // total += mapReduce(jsonData, '>99');
-  // total += mapReduce(jsonData, 'age_DK');
-
   const layout = {
     xaxis: {
       fixedrange: true,
@@ -533,7 +419,6 @@ const generateAgeBarChart = (parameter, id, labelID, jsonData, chartRow) => {
     },
     paper_bgcolor: "rgba(0,0,0,0)",
     plot_bgcolor: "rgba(0,0,0,0)",
-    // title : total,
   };
   Plotly.newPlot(`${id}`, data, layout, {
     responsive: true,
@@ -717,13 +602,6 @@ const generateTumorGradeBarChart = (
     cardBodyId: id,
   });
   document.getElementById(chartRow).appendChild(div);
-  // jsonData.forEach((element) => {
-  //     for(const key in element) {
-  //         if (key.startsWith('grade_primary1'))
-  //             if(isNaN(parseInt(element[key])) === false)
-  //             total += parseInt(element[key]);
-  //     }
-  // } )
   const data = [
     {
       x: [
@@ -853,12 +731,6 @@ const generateBirthBarChart = (parameter, id, labelID, jsonData, chartRow) => {
   document.getElementById(
     labelID
   ).innerHTML = `${variables.BCRPP[parameter]["label"]}`;
-
-  // const div1 = document.createElement('div');
-  // div1.classList = ['col-xl-4 pl-2 padding-right-zero mb-3'];
-  // div1.innerHTML = dataVisulizationCards({cardHeaderId: 'test', cardBodyId: 'testChart'});
-  // document.getElementById('chartRow2').appendChild(div1);
-  //renderDCSummaryStats();
 };
 
 const generateMenarcheBarChart = (
@@ -942,15 +814,6 @@ const generateParityBarChart = (parameter, id, labelID, jsonData, chartRow) => {
     .map((dt) => parseInt(dt["parous_0"]))
     .filter((dt) => isNaN(dt) === false);
   let total = 0;
-
-  // jsonData.forEach((element) => {
-  //     for(const key in element) {
-  //         if (key.startsWith('parous'))
-  //             if(isNaN(parseInt(element[key])) === false)
-  //             total += parseInt(element[key]);
-  //     }
-  // } )
-
   const data = [
     {
       x: ["Nullparous", "Parous", "Unknown"],
@@ -981,12 +844,6 @@ const generateParityBarChart = (parameter, id, labelID, jsonData, chartRow) => {
     },
     paper_bgcolor: "rgba(0,0,0,0)",
     plot_bgcolor: "rgba(0,0,0,0)",
-    // annotations : [
-    //     {
-    //         text: total
-    //     }
-    // ]
-    // title : total,
   };
   Plotly.newPlot(`${id}`, data, layout, {
     responsive: true,
@@ -1080,13 +937,6 @@ const generatePregnaciesBarChart = (
     },
   ];
   let total = 0;
-  // jsonData.forEach((element) => {
-  //     for(const key in element) {
-  //         if (key.startsWith('parity')) //&& !(key.endsWith('14') || key.endsWith('15') || key.endsWith('16') ))
-  //             if(isNaN(parseInt(element[key])) === false)
-  //             total += parseInt(element[key]);
-  //     }
-  // } )
   const layout = {
     xaxis: {
       type: "category",
@@ -1157,14 +1007,6 @@ const generateBMIBarChart = (parameter, id, labelID, jsonData, chartRow) => {
       type: "bar",
     },
   ];
-  // let total = 0;
-  // jsonData.forEach((element) => {
-  //     for(const key in element) {
-  //         if (key.startsWith('bmi_'))
-  //             if(isNaN(parseInt(element[key])) === false)
-  //             total += parseInt(element[key]);
-  //     }
-  // } )
   const layout = {
     xaxis: {
       type: "category",
@@ -1181,8 +1023,6 @@ const generateBMIBarChart = (parameter, id, labelID, jsonData, chartRow) => {
     },
     paper_bgcolor: "rgba(0,0,0,0)",
     plot_bgcolor: "rgba(0,0,0,0)",
-
-    // title : total,
   };
   Plotly.newPlot(`${id}`, data, layout, {
     responsive: true,
@@ -1192,7 +1032,6 @@ const generateBMIBarChart = (parameter, id, labelID, jsonData, chartRow) => {
     labelID
   ).innerHTML = `${variables.BCRPP[parameter]["label"]}`;
 };
-
 const generateYearsDiagBarChart = (
   parameter,
   id,
@@ -1207,7 +1046,6 @@ const generateYearsDiagBarChart = (
     cardBodyId: id,
   });
   document.getElementById(chartRow).appendChild(div);
-  console.log(jsonData);
   const data = [
     {
       x: [
@@ -1571,20 +1409,7 @@ const dataVisulizationCards = (obj) => `
             </div>
             <div class="card-body viz-card-body">
                 <div class="dataSummary-chart" id="${obj.cardBodyId}"></div>
-                <div><p>Download Data</p></div>
+                <!---<div><p>Download Data</p></div>--->
             </div>
         </div>
     `;
-// export const renderDCSummaryStats = async () => {
-//     //create chart objects
-//     const volumeChart = new dc.BarChart('#testChart');
-//     //load the data
-//     // const {jsonData, headers} = csvJSON(await getFile(summaryStatsFileId)); // Get summary level data
-//     let summaryFile = await getFile(summaryStatsFileId); // Get summary level data
-//     console.log('Summary File:', summaryFile);
-//     d3.csv(summaryFile).then(data => {
-//         console.log('Summary file data',data);
-//     });
-
-//create crossfilters
-//}

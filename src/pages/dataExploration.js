@@ -1,4 +1,3 @@
-//this is a test
 import {
   getFile,
   hideAnimation,
@@ -9,6 +8,7 @@ import {
   missingnessStatsFileId,
   reSizePlots,
   applicationURLs,
+  consortiumSelection,
 } from "../shared.js";
 import {
   addEventConsortiumSelect,
@@ -163,24 +163,6 @@ const filterItemTemplate = (title, values) => {
 };
 
 export const dataSummaryMissingTemplate = async () => {
-  //   const div1 = document.createElement("div");
-  //   // div1.classList = ['row'];
-  //   div1.innerHTML = `
-  //     <div class='row'>
-  //         <div class='col-12'>
-  //             <div class="card">
-  //                 <div class="card-header align-left card-filter-header">
-  //                     <strong class="side-panel-header font-size-17">Disclaimer</strong>
-  //                 </div>
-  //                 <div id="cardContent" class="card-body">
-  //                     <p>We are currently working on creating a new file with subset statistics for BCRPP</p>
-  //                     <p class='text-left'>Check back soon!</p>
-  //                 </div>
-  //             </div>
-  //         </div>
-  //     </div>`;
-  //   document.getElementById("dataSummaryStatistics").appendChild(div1);
-  // };
   const response = await getFile(missingnessStatsFileId);
   const lastModified = (await getFileInfo(missingnessStatsFileId)).modified_at;
   document.getElementById(
@@ -189,48 +171,19 @@ export const dataSummaryMissingTemplate = async () => {
     lastModified
   ).toLocaleString()}`;
   const { data, headers } = csv2Json(response);
-  console.log({ data });
-  const variables = headers.filter(
-    (dt) => !dt.match(/ethnicity|race|cohort/i)
-    // /status_/i.test(dt) === false &&
-    // /study/i.test(dt) === false &&
-    // /consortia/i.test(dt) === false &&
-    // /ethnicityClass_/i.test(dt) === false &&
-    // /bcac_id/i.test(dt) === false
-    // /cohort/i.test(dt) === false &&
-    // /race/i.test(dt) === false &&
-    // /ethnicity/i.test(dt) === false
-  );
-  //const status = headers.filter((dt) => /status_/i.test(dt) === true);
-  console.log({ headers });
+  const variables = headers.filter((dt) => !dt.match(/ethnicity|race|cohort/i));
   const initialSelection =
     variables.length > 4 ? variables.slice(0, 4) : variables;
-  // const studies = data.map(dt => dt['study']).filter((item, i, ar) => ar.indexOf(item) === i);
-  // const studies = {};
-  // data.forEach((dt) => {
-  //   // console.log({ dt: dt.Cohort });
-  //   if (studies[dt["Cohort"]] === undefined) studies[dt["Cohort"]] = {};
-  //   // if (dt["Cohort"] && studies[dt["Consortia"]][dt["Cohort"]] === undefined)
-  //   //   studies[dt["Consortia"]][dt["Cohort"]] = {};
-  // });
-
   const cohorts = {};
   data.forEach((dataOption) => {
     if (cohorts[dataOption.Cohort]) return;
     cohorts[dataOption.Cohort] = {};
   });
-  console.log("keys", Object.keys(cohorts));
-  console.log(cohorts);
-  // const ancestory = headers.filter(
-  //   (dt) => /ethnicityClass_/i.test(dt) === true
-  // );
-
   const race = {};
   data.forEach((dataOption) => {
     //if (race[dataOption.race]) return;
     race[dataOption.race] = CONSTANTS.BCRPP.race[dataOption.race];
   });
-  // console.log("race", Object.keys(race));
 
   const ethnicity = {};
   data.forEach((dataOption) => {
@@ -238,8 +191,6 @@ export const dataSummaryMissingTemplate = async () => {
     ethnicity[dataOption.ethnicity] =
       CONSTANTS.BCRPP.ethnicityClass[dataOption.ethnicity];
   });
-  // console.log("ethnicity", Object.keys(ethnicity));
-  console.log({ ethnicity });
 
   const div1 = document.createElement("div");
   div1.classList = ["col-xl-3 filter-column"];
@@ -283,14 +234,12 @@ export const dataSummaryMissingTemplate = async () => {
     initialSelection,
     Object.keys(cohorts),
     variables,
-    //status,
-    //cohorts,
-    //ancestory,
     race,
-    // Object.keys(ethnicity)
     ethnicity
   );
-  midset(data, initialSelection);
+  console.log(initialSelection);
+  console.log(cohorts);
+  midset(data, initialSelection, cohorts);
   addEventMissingnessFilterBarToggle();
 };
 
@@ -299,13 +248,9 @@ const renderFilter = (
   acceptedVariables,
   acceptedCohorts,
   headers,
-  //status,
-  //cohorts,
-  //ancestory,
   race,
   ethnicity
 ) => {
-  console.log({ acceptedCohorts });
   let template = "";
   template += `
     <div class="card midset-card">
@@ -334,44 +279,19 @@ const renderMidsetFilterData = (
   acceptedVariables,
   acceptedCohorts,
   headers,
-  // status,
-  // cohorts,
-  // ancestory,
   race,
   ethnicity
 ) => {
   let template = "";
-  //ancestory.splice(ancestory.indexOf("ethnicityClass_Other"), 1);
-  //ancestory.sort();
-  //ancestory.push("ethnicityClass_Other");
-  // race.push("All");
 
   const transformRace = Object.entries(race);
-  console.log({ transformRace });
   transformRace.push(["all", "All"]);
   const transformEthnicity = Object.entries(ethnicity);
-  console.log({ transformEthnicity });
-
-  // ethnicity.push("All"); ['all', 'All']
   transformEthnicity.push(["all", "All"]);
 
   template += `
         <div style="width:100%;">
             `;
-  // ancestory.forEach((anc) => {
-  //   template += `<option value="${anc}" ${
-  //     anc === "All" ? "selected" : ""
-  //   }>${anc.replace(new RegExp("ethnicityClass_", "i"), "")}</option>`;
-  // });
-
-  // Data transformation
-  // Display
-  // Add All option
-
-  // <option value="10" selected>
-  //   Test
-  // </option>;
-
   template += `
             <div class="form-group" id="raceList">
             <label class="filter-label font-size-13" for="raceSelection">Race</label>
@@ -411,20 +331,8 @@ const renderMidsetFilterData = (
             </label>
           </li>
   `;
-  // cohortsTemplate += `
-  //   <li class="filter-list-item">
-  //     <input
-  //       type="checkbox"
-  //       id="cohortallcheckbox" checked
-  //     />
-  //     <label for="cohortallcheckbox" class="cohort-name" title="all">
-  //       Check All
-  //     </label>
-  //   </li>
-  // `;
   let cohortsTemplate = "<ul class='remove-padding-left font-size-15'>";
   for (let cohort of acceptedCohorts) {
-    //${acceptedCohorts.indexOf(cohort) !== -1 ? "checked" : ""}
     cohortsTemplate += `
   <li class="filter-list-item">
       <input
@@ -440,47 +348,6 @@ const renderMidsetFilterData = (
   </li>`;
   }
   cohortsTemplate += "</ul>";
-  // for (let consortium in studies) {
-  //   let innerTemplate = `
-  //           <ul class="remove-padding-left">
-  //               <li class="custom-borders filter-list-item consortia-study-list" data-consortia="${consortium}">
-  //                   <input type="checkbox" data-consortia="${consortium}" id="label${consortium}" class="select-consortium"/>
-  //                   <label for="label${consortium}" class="consortia-name">${consortium}</label>
-  //                   <div class="ml-auto">
-  //                       <button type="button" ${
-  //                         Object.keys(studies[consortium]).length !== 0
-  //                           ? ``
-  //                           : `disabled title="Doesn't have any study data."`
-  //                       } class="consortium-selection consortium-selection-btn" data-toggle="collapse" href="#toggle${consortium.replace(
-  //     / /g,
-  //     ""
-  //   )}">
-  //                           <i class="fas fa-caret-down"></i>
-  //                       </button>
-  //                   </div>
-  //               </li>
-  //       `;
-  //   if (Object.keys(studies[consortium]).length !== 0) {
-  //     innerTemplate += `<ul class="collapse no-list-style custom-padding allow-overflow max-height-study-list" id="toggle${consortium.replace(
-  //       / /g,
-  //       ""
-  //     )}">`;
-
-  // for (let study in studies[consortium]) {
-  //   innerTemplate += `
-  //               <li class="filter-list-item">
-  //                   <input type="checkbox" data-study="${study}" data-consortium="${consortium}" id="label${study}" class="select-study"/>
-  //                   <label for="label${study}" class="study-name" title="${study}">${
-  //     study.length > 10 ? `${study.substr(0, 10)}...` : study
-  //   }</label>
-  //               </li>`;
-  // }
-  //     innerTemplate += `</ul>`;
-  //   }
-  //   innerTemplate += "</ul>";
-  //   template += innerTemplate;
-  // }
-
   template += `${cohortsTemplate}
 
             </div>
@@ -519,7 +386,6 @@ const renderMidsetFilterData = (
 };
 
 const generateFilterSummery = () => {
-  // id => listFilters
   const raceEl = document.getElementById("raceSelection");
   const raceValue = raceEl.value;
   const raceText = Array.from(raceEl.options).find(
@@ -536,12 +402,10 @@ const generateFilterSummery = () => {
   // selected: 2
   const selectedVariables = getSelectedVariables("midsetVariables");
   const totalVariables = getAllVariables("midsetVariables");
-  console.log("inja", selectedVariables, totalVariables);
   const isAllVariablesSelected = selectedVariables.length === totalVariables;
   // Total Cohort
   const selectedCohorts = getSelectedVariables("midsetCohorts");
   const totalCohorts = getAllVariables("midsetCohorts");
-  console.log("inja2", selectedCohorts, totalCohorts);
   const isAllCohortsSelected =
     selectedCohorts.filter((cohort) => {
       return cohort !== undefined;
@@ -580,15 +444,6 @@ const generateFilterSummery = () => {
    */
 };
 const addEventMidsetFilterForm = (data) => {
-  // const status = document.getElementById('statusSelection');
-  // status.addEventListener('change', () => {
-  //     filterMidsetData(data)
-  // });
-
-  // const ancestry = document.getElementById("ancestrySelection");
-  // ancestry.addEventListener("change", () => {
-  //   filterMidsetData(data);
-  // });
   const race = document.getElementById("raceSelection");
   race.addEventListener("change", () => {
     filterMidsetData(data);
@@ -632,27 +487,9 @@ const addEventMidsetFilterForm = (data) => {
     generateFilterSummery();
     filterMidsetData(data);
   });
-
-  // const consortias = document.getElementsByClassName("select-consortium");
-  // Array.from(consortias).forEach((ele) => {
-  //   ele.addEventListener("click", () => {
-  //     filterMidsetData(data);
-  //   });
-  // });
-
-  // const studies = document.getElementsByClassName("select-study");
-  // console.log({ studies });
-  // Array.from(studies).forEach((ele) => {
-  //   ele.addEventListener("click", () => {
-  //     console.log({ data });
-  //     filterMidsetData(data);
-  //   });
-  // });
 };
 
 const filterMidsetData = (data) => {
-  //const status = document.getElementById("statusSelection").value;
-  //const ancestry = document.getElementById("ancestrySelection").value;
   const race = document.getElementById("raceSelection").value;
   const ethnicity = document.getElementById("ethnicitySelection").value;
   const selectedVariables = getSelectedVariables("midsetVariables");
@@ -671,61 +508,11 @@ const filterMidsetData = (data) => {
     newData = newData.filter((dt) => dt.ethnicity === ethnicity);
   }
 
-  // newData = newData.filter(
-  //   (dt) => dt.ethnicity === (ethnicity.toLowerCase() !== "all" ? ethnicity : "0")
-  // );
-
-  console.log(newData);
   if (race !== "all") {
     newData = newData.filter((dt) => dt.race === race);
   }
-  // newData = newData.filter(
-  //   (dt) => dt.race === (race.toLowerCase() !== "all" ? race : "1")
-  // );
-  console.log(newData);
-
-  // document.getElementById("listFilters").innerHTML =
-  // `
-  //   <!---<span class="font-bold">Status: </span>${status.replace(
-  //     "status_",
-  //     ""
-  //   )}<span class="vertical-line"></span>--->
-  //   <span class="font-bold">Ancestry: </span>${ancestry.replace(
-  //     "ethnicityClass_",
-  //     ""
-  //   )}
-  //   ${
-  //     selectedVariables.length > 0
-  //       ? `
-  //       <span class="vertical-line"></span><span class="font-bold">Variable: </span>${
-  //         selectedVariables[0]
-  //       } ${
-  //           selectedVariables.length > 1
-  //             ? `and <span class="other-variable-count">${
-  //                 selectedVariables.length - 1
-  //               } other</span>`
-  //             : ``
-  //         }
-  //   `
-  //       : ``
-  //   }
-  //   ${
-  //     selectedCohorts.length > 0
-  //       ? `
-  //       <span class="vertical-line"></span><span class="font-bold">Cohort: </span>${
-  //         selectedCohorts[0]
-  //       } ${
-  //           selectedCohorts.length > 1
-  //             ? `and <span class="other-variable-count">${
-  //                 selectedCohorts.length - 1
-  //               } other</span>`
-  //             : ``
-  //         }
-  //   `
-  //       : ``
-  //   }
-  //   `;
-  midset(newData, selectedVariables);
+  console.log(selectedCohorts)
+  midset(newData, selectedVariables, selectedCohorts);
 };
 const getSelectedVariables = (parentId) => {
   const selections = [];
@@ -740,25 +527,13 @@ const getAllVariables = (parentId) => {
   const variables = cardBody.querySelectorAll("input:not(.select-all)");
   return variables.length;
 };
-
-// const getSelectedValues = (parentId) => {
-//   const selections = [];
-//   let cardBody = document.getElementById(parentId);
-//   const variables = cardBody.querySelectorAll("input:checked");
-//   Array.from(variables).forEach((el) => {
-//     console.log({ el });
-//     selections.push(el.dataset.variable);
-//   });
-//   return selections;
-// };
-
-const midset = (data, acceptedVariables) => {
+const midset = (data, acceptedVariables, acceptedCohorts) => {
   let template = "";
   let plotData = [];
   let headerData = "";
 
-  if (acceptedVariables.length === 0) {
-    template += "No variable selected.";
+  if (acceptedVariables.length === 0 ||acceptedCohorts.length===0 ) {
+    template += "No variable or cohort selected. Please, select at least one variable and one cohort.";
     hideAnimation();
     document.getElementById("missingnessTable").innerHTML = template;
     return;

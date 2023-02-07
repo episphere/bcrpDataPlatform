@@ -6,7 +6,6 @@ export const emailsAllowedToUpdateData = [
   "kopchickbp@nih.gov",
   "ahearntu@nih.gov",
 ];
-
 export const emailforChair = [];
 //  [
 // "Roger.Milne@cancervic.org.au",
@@ -134,7 +133,6 @@ export const getFile = async (id) => {
     if (r.status === 401) {
       if ((await refreshToken()) === true) return await getFile(id);
     } else if (r.status === 200) {
-      console.log(r);
       return r.text();
     } else if (r.status === 404) {
       return "{'status':'File does not exist'}";
@@ -208,7 +206,6 @@ export const storeAccessToken = async () => {
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-    //myHeaders.append("Authorization", "Bearer r1Qy6afk7duk0Pmhs7iJPbRBSpNCGCI2");
 
     var urlencoded = new URLSearchParams();
     urlencoded.append("grant_type", "authorization_code");
@@ -222,30 +219,13 @@ export const storeAccessToken = async () => {
       body: urlencoded,
       redirect: "follow",
     };
-
-    console.log("Auth code: ", parms.code);
     const response = await fetch(
       "https://api.box.com/oauth2/token",
       requestOptions
     );
-    // .then(response => response.json())
-    // .then(result => console.log(result))
-    // .catch(error => console.log('error', error));
     if (response.status === 400) {
       window.history.replaceState({}, "", "./#home");
-      console.log("exited with 400");
-      console.log(await response.json());
-      //console.log(await response.json());
     }
-    //         let url = `https://api.box.com/oauth2/token`;
-
-    //         const response = await fetch(url, {
-    //             headers: {
-    //                 'Content-Type': 'application/x-www-form-urlencoded'
-    //             },
-    //             method:'POST',
-    //             body: `grant_type=authorization_code&code=${parms.code}&client_id=${clt.client_id}&client_secret=${clt.server_id}`
-    //         });
     if (response.status && response.status === 200) {
       localStorage.parms = JSON.stringify(await response.json());
       window.history.replaceState({}, "", "./#home");
@@ -265,56 +245,6 @@ export const storeAccessToken = async () => {
     }
   }
 };
-
-// export const storeAccessToken = async () => {
-//     let parms = searchParms();
-//     console.log('Store Access Token params', parms);
-//     if (parms.code) {
-//         //exchange code for authorization token
-//         let clt = {}
-//         if (location.origin.indexOf('localhost') !== -1) clt = config.iniAppLocal;
-//         else if (location.origin.indexOf('episphere') !== -1) clt = config.iniAppDev;
-//         else if (location.origin.indexOf(applicationURLs.stage) !== -1) clt = config.iniAppStage;
-//         else if (location.origin.indexOf(applicationURLs.prod) !== -1) clt = config.iniAppProd;
-
-//         document.getElementById('confluenceDiv').innerHTML = '';
-//         let url = `https://api.box.com/oauth2/token/`;
-//         console.log('Client ID + Server Secret', clt.client_id, clt.server_id);
-//         console.log(parms.code);
-//         try {
-//             const response = await fetch(url, {
-//                 headers: {
-//                     'Content-Type': 'application/x-www-form-urlencoded'
-//                 },
-//                 method: 'POST',
-//                 body: `grant_type=authorization_code&code=${parms.code}&client_id=${clt.client_id}&client_secret=${clt.server_id}`
-//             });
-//             if (response.status) {
-//                 console.log(response);
-//             }
-//             if (response.status && response.status === 200) {
-//                 localStorage.parms = JSON.stringify(await response.json());
-//                 window.history.replaceState({}, '', './#home');
-//                 confluence();
-//                 document.getElementById('loginBoxAppDev').hidden = true;
-//                 document.getElementById('loginBoxAppStage').hidden = true;
-//                 document.getElementById('loginBoxAppEpisphere').hidden = true;
-//                 document.getElementById('loginBoxAppProd').hidden = true;
-//             }
-
-//         } catch(err){
-//         console.log('HTTP error on token fetch', err);
-//         }
-//     } else {
-//         if (localStorage.parms) {
-//             confluence.parms = JSON.parse(localStorage.parms)
-//             if (confluence.parms.access_token === undefined) {
-//                 localStorage.clear();
-//                 alert('access token not found, please contact system administrator');
-//             }
-//         }
-//     }
-// }
 
 export const refreshToken = async () => {
   if (!localStorage.parms) return;
@@ -532,7 +462,6 @@ export const uploadWordFile = async (data, fileName, folderId, html) => {
       contentType: false,
     });
     if (response.status === 400) {
-      console.log(response.status);
       if (response.code === "bad_request") {
         return "Bad request";
       }
@@ -552,12 +481,10 @@ export const uploadWordFile = async (data, fileName, folderId, html) => {
       };
     }
   } catch (err) {
-    console.log(err);
     if ((await refreshToken()) === true)
       return await uploadWordFile(data, fileName, folderId, html);
   }
 };
-
 export const uploadFileVersion = async (data, fileId, type) => {
   try {
     const access_token = JSON.parse(localStorage.parms).access_token;
@@ -644,8 +571,6 @@ export const updateDuplicateFileName = async (fileId) => {
   const folderFilenames = folderItems.map((item) => item.name);
   const [name, extension] = filename.split(".");
   let i = 1;
-  console.log(name);
-
   while (folderFilenames.includes(filename)) {
     if (filename.includes(")")) {
       const [name, version] = filename.split("(");
@@ -653,7 +578,6 @@ export const updateDuplicateFileName = async (fileId) => {
     } else {
       filename = name + `(${i}).` + extension;
     }
-    console.log("New name", filename);
     i++;
   }
 
@@ -826,12 +750,10 @@ export const deleteTask = async (taskId) => {
         "Allow-Access-Control-Methods": "DELETE",
       },
     });
-    console.log(response);
     if (response.status === 403) {
       if ((await refreshToken()) === true) return await getTaskList(taskId);
     }
     if (response.status === 404) {
-      console.log("Task not found, cannot be deleted");
       return;
     }
     if (response.status === 204) {
@@ -985,7 +907,6 @@ export const updateTaskAssignment = async (id, res_state, msg = "") => {
       : JSON.stringify({
           resolution_state: res_state,
         });
-    console.log(body);
     const access_token = JSON.parse(localStorage.parms).access_token;
     const response = await fetch(
       `https://api.box.com/2.0/task_assignments/${id}`,
@@ -1018,7 +939,6 @@ export const getChairApprovalDate = async (id) => {
       let task_assignments = task.task_assignment_collection.entries;
       task_assignments.forEach((task_assignment) => {
         if (task_assignment.completed_at !== undefined) {
-          console.log(task_assignment.completed_at);
           completion_date = new Date(task_assignment.completed_at)
             .toDateString()
             .substring(4);
@@ -1084,7 +1004,6 @@ export async function showComments(id) {
       const comment_date = new Date(comment.created_at);
       const date = comment_date.toLocaleDateString();
       const time = comment_date.toLocaleTimeString();
-      console.log("Comment", comment);
       template += `
         <div>
             <div class='row'>
@@ -1129,7 +1048,6 @@ export async function showComments(id) {
         const comment_date = new Date(comment.created_at);
         const date = comment_date.toLocaleDateString();
         const time = comment_date.toLocaleTimeString();
-        console.log("Comment", comment);
         template += `
         <div>
             <div class='row'>
@@ -1170,19 +1088,16 @@ export async function showComments(id) {
     if (
       document.getElementById("finalChairDecision").style.display === "block"
     ) {
-      console.log(commentSection);
       template += `
         <input type='button' class='btn-secondary' value='Copy'  id='copyBtn' onclick="
         const comments = Array.from(document.getElementsByName('comments'));
-    console.log(comments);
+  
      let copiedComments = [];
      for(const comment of comments){
-         console.log(comment);
-         console.log(comment.checked);
+      
 
          if (comment.checked){
              let commentText = document.getElementById('comment' + comment.id).innerText;
-             console.log(commentText);
              if(commentText.includes('Rating:')){
                 copiedComments.push(commentText.split(':')[2]);
              }
@@ -1191,7 +1106,7 @@ export async function showComments(id) {
             }
          }
      }
-     console.log(copiedComments);
+    
      navigator.clipboard.writeText(copiedComments.join('\\n'));
         "/>
         <div class='text-muted small'>Select comments to copy to clipboard. Paste comments in text box below.</div>
@@ -1206,13 +1121,9 @@ export async function showComments(id) {
 export async function showCommentsDropDown(id) {
   const commentSection = document.getElementById(`file${id}Comments`);
   const response = await listComments(id);
-
-  console.log(commentSection);
-
   let comments = JSON.parse(response).entries;
   if (comments.length === 0) {
     const dropdownSection = document.getElementById(`file${id}Comments`);
-    console.log(dropdownSection);
     dropdownSection.innerHTML = `
               
                     No Comments to show.
@@ -1229,7 +1140,6 @@ export async function showCommentsDropDown(id) {
       const comment_date = new Date(comment.created_at);
       const date = comment_date.toLocaleDateString();
       const time = comment_date.toLocaleTimeString();
-      console.log("Comment", comment);
       template += `
         <div>
             <div class='row'>
@@ -1261,7 +1171,6 @@ export async function showCommentsDropDown(id) {
         const comment_date = new Date(comment.created_at);
         const date = comment_date.toLocaleDateString();
         const time = comment_date.toLocaleTimeString();
-        console.log("Comment", comment);
         template += `
         <div>
             <div class='row'>
@@ -1382,20 +1291,6 @@ export const updateMetadata = async (id, path, value) => {
 };
 
 export const getMetadata = async (id) => {
-  // var myHeaders = new Headers();
-  // const access_token = JSON.parse(localStorage.parms).access_token;
-  // myHeaders.append("Authorization", "Bearer " + access_token);
-
-  // var requestOptions = {
-  //     method: 'GET',
-  //     headers: myHeaders,
-  //     redirect: 'follow'
-  // };
-
-  // await fetch(`https://api.box.com/2.0/files/${id}/metadata`, requestOptions)
-  //     .then(response => response.json())
-  //     .then(result => console.log(result))
-  //     .catch(error => console.log('error', error));
   try {
     const access_token = JSON.parse(localStorage.parms).access_token;
     const response = await fetch(
@@ -1425,19 +1320,10 @@ export const searchMetadata = async (res_state) => {
     const response = await fetch(
       `https://api.box.com/2.0/search?query=BCRPP_uploading_complete`,
       {
-        //enterprise_355526
         method: "GET",
         headers: {
-          Authorization: "Bearer " + access_token, //,
-          //'Content-Type': 'application/json'
-        }, //,
-        // body: JSON.stringify({
-        //     from: "global.properties",
-        //     query: "BCRPP_stage = :BCRPP_stage",
-        //     query_params: {"BCRPP_stage": "0"},
-        //     ancestor_folder_id: "0",
-        //     fields: ["id"]
-        // })
+          Authorization: "Bearer " + access_token,
+        },
       }
     );
     if (response.status === 401) {
@@ -1450,41 +1336,12 @@ export const searchMetadata = async (res_state) => {
     if ((await refreshToken()) === true) return await searchMetadata(res_state);
   }
 };
-
-// export const createMetadata = async (id, res_state, msg="") => {
-//     try {
-//         const access_token = JSON.parse(localStorage.parms).access_token;
-//         const response = await fetch(`https://api.box.com/2.0/comments`, {
-//             method: 'POST',
-//             headers: {
-//                 Authorization: "Bearer "+access_token
-//             },
-//             body: JSON.stringify({
-//                 message: msg.toString(),
-//                 item: {
-//                     type: "file",
-//                     id: id.toString()
-//                 }
-//             })
-//         });
-//         if(response.status === 401) {
-//             if((await refreshToken()) === true) return await createMetadata(id, res_state, msg);
-//         } else {
-//             return response
-//         }
-//     }
-//     catch(err) {
-//         if ((await refreshToken()) === true) return await createMetadata(id, res_state, msg);
-//     }
-// }
-
 export const removeActiveClass = (className, activeClass) => {
   let fileIconElement = document.getElementsByClassName(className);
   Array.from(fileIconElement).forEach((elm) => {
     elm.classList.remove(activeClass);
   });
 };
-
 export const sessionExpired = () => {
   delete localStorage.parms;
   location.reload();
@@ -1642,7 +1499,9 @@ export const checkDataSubmissionPermissionLevel = (data, login) => {
   } else if (
     array[0].role === "editor" ||
     array[0].role === "co-owner" ||
-    array[0].role === "uploader"
+    array[0].role === "uploader" ||
+    array[0].role === "previewer uploader" ||
+    array[0].role === "viewer uploader"
   ) {
     return true;
   }
@@ -1776,12 +1635,41 @@ export const tsv2Json = (tsv) => {
     headers,
   };
 };
-
-export const tsv2Json2 = (tsv) => {
+export const tsv2JsonDic = (tsv) => {
   const lines = tsv
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "")
+    .replace(/m2/g, "m<sup>2</sup>")
+    .split(/[\r]+/g);
+  const result = [];
+  const headers = lines[0].replace(/"/g, "").split(/[\t]/g);
+  for (let i = 1; i < lines.length; i++) {
+    const obj = {};
+    const currentline = lines[i].split(/[\t]/g);
+    for (let j = 0; j < headers.length; j++) {
+      if (currentline[j]) {
+        let value = headers[j];
+        if (value.toLowerCase() === 'coding') {
+          obj[value] = currentline[j].replace(/\n/g, "<br/>").replace("kg/m2", "kg/m<sup>2</sup>");
+        } else {
+          obj[value] = currentline[j].replace(/\n/g, "");
+        }
+      }
+    }
+    if (Object.keys(obj).length > 1) result.push(obj);
+  }
+  console.log('tsv2JsonDic', result);
+  return {
+    data: result,
+    headers,
+  };
+};
+export const tsv2Json2 = (tsv) => {
+  const lines = tsv
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "|")
     .split(/\r?\n/);
   const result = [];
   const headers = lines[0].replace(/"/g, "").split(/[\t]/g);
@@ -1847,10 +1735,14 @@ export const json2other = (json, fields, tsv) => {
   let csv = json.map((row) => {
     return fields
       .map((fieldName) => {
+        if (fieldName.toLowerCase() === 'coding') {
+          return JSON.stringify(row[fieldName]?.replaceAll('<br/>', ' | '), replacer);
+        } 
         return JSON.stringify(row[fieldName], replacer);
       })
       .join(`${tsv ? "\t" : ","}`); // \t for tsv
   });
+  csv = csv.map(i => i.replaceAll('#', ''))
   csv.unshift(fields.join(`${tsv ? "\t" : ","}`)); // add header column  \t for tsv
   csv = csv.join("\r\n");
   return csv;
@@ -1867,7 +1759,6 @@ export const mapReduce = (data, variable) => {
   const filteredData = data
     .map((dt) => parseInt(dt[variable]))
     .filter((dt) => isNaN(dt) === false);
-  // console.log(data, variable, filteredData);
   if (filteredData.length > 0) return filteredData.reduce((a, b) => a + b);
   else return 0;
 };
@@ -1899,7 +1790,6 @@ export const defaultPageSize = 40;
 export const handleRangeRequests = async () => {
   const fileInfo = await getFileInfo("751586322923");
   const fileSize = fileInfo.size;
-  console.log(`File size ${fileSize / 1000000} MB`);
   const rangeStart = 0;
   const rangeEnd = 10000000;
   console.time("Downloading 10 MB of data");
@@ -1909,15 +1799,12 @@ export const handleRangeRequests = async () => {
   const lines = rangeData.trim().split(/[\n]/g);
   const header = lines[0];
   const headerArray = header.split(/[\s]/g);
-  console.log(headerArray);
   const dataArray = [];
   lines.forEach((l, i) => {
     if (rangeStart === 0 && i === 0) return;
     if (i === lines.length - 1) return;
     dataArray.push(l.split(/[\s]/g));
   });
-  console.timeEnd("Parsing");
-  console.log(dataArray);
 };
 
 // Need to change to BCRPP urls

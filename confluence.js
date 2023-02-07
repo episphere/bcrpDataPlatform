@@ -76,14 +76,17 @@ import { renderDescription } from "./src/pages/description.js";
 import { dataDictionaryTemplate } from "./src/pages/dictionary.js";
 import { showPreview } from "./src/components/boxPreview.js";
 
+/**
+ * 1. add Scientifix comitte to menu
+ * 2. add corresponsing page
+ * 3.
+ */
+
 export const confluence = async () => {
-  // handleRangeRequests();
   if ("serviceWorker" in navigator) {
     try {
       navigator.serviceWorker.register("./serviceWorker.js");
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   }
   const confluenceDiv = document.getElementById("confluenceDiv");
   const navBarOptions = document.getElementById("navBarOptions");
@@ -131,10 +134,10 @@ export const confluence = async () => {
     const viewUserSubmissionElement =
       document.getElementById("userSubmissions");
 
+    
     const dataSubmissionElement = document.getElementById("dataSubmission");
     const dataSummaryElement = document.getElementById("dataSummary");
-    const dataSummarySubsetElement =
-      document.getElementById("dataSummarySubset");
+    const dataSummarySubsetElement = document.getElementById("dataSummarySubset");
     const dataDictionaryElement = document.getElementById("dataDictionary");
     const dataRequestElement = document.getElementById("dataRequest");
     const dataFormElement = document.getElementById("dataForm");
@@ -256,17 +259,16 @@ export const confluence = async () => {
           uploadFormFolder,
           "folders"
         ); //144028521583, 155292358576
+        console.log(getCollaborators);
         let getMyPermissionLevel = false;
         if (getCollaborators)
           getMyPermissionLevel = checkDataSubmissionPermissionLevel(
             getCollaborators,
             JSON.parse(localStorage.parms).login
           );
-        //console.log(getMyPermissionLevel);
+        console.log(getMyPermissionLevel);
         if (getMyPermissionLevel) {
           confluenceDiv.innerHTML = await formSection("form");
-          //confluenceDiv.innerHTML = approveRejectSection();
-          //document.getElementById('importDictvars').addEventListener('click', importDictVars);
           populateAmendSelect();
           document
             .getElementById("amendmentyes")
@@ -276,210 +278,10 @@ export const confluence = async () => {
             .addEventListener("click", amendFormSelect);
           await dataForm();
         } else {
-          console.log(getMyPermissionLevel);
           confluenceDiv.innerHTML = await formSectionOther("form");
           hideAnimation();
         }
-        //dataApproval();
         formFunctions();
-        //Testing json
-        // let obj = {
-        //     date: "2022-09-02",
-        //     projname: "Testing1233",
-        //     amendment: "Yes",
-        //     investigators: "Navado Wray",
-        //     institution: "NCI DCEG",
-        //     email: "wraynr@nih.gov",
-        //     member: "Yes",
-        //     acro: "test",
-        //     allinvest: "test",
-        //     confirmation: "Yes",
-        //     background: "test",
-        //     aims: " test",
-        //     analyplan: " test",
-        //     basevar: [
-        //         "Identification/Dates",
-        //         "Physical Activity"
-        //     ],
-        //     mmdvarv: "Mammographic Density",
-        //     reqcoh: [
-        //         "BWHS"
-        //     ],
-        //     timeline: "test",
-        //     authconf: "Yes",
-        //     authorship: "",
-        //     ibcvar: ['Pathology']
-        // };
-        // document.getElementById('downloadJSON').addEventListener('click', async () => {
-        //     let response = await getFile('1013095224409');
-        //     // let projname = document.getElementById('projname');
-        //     let blob = new Blob([response], {
-        //         type: 'application/json'
-        //     });
-
-        //     const docUrl = URL.createObjectURL(blob);
-
-        //     let el = document.createElement('a');
-
-        //     el.href = docUrl;
-        //     el.download = JSON.parse(response).projname;
-
-        //     el.click();
-        // })
-        // document.getElementById('downloadWord').addEventListener('click', async () => {
-        //     let response = await getFile('1002570031083');
-        //     console.log(response);
-        //     //blob type application/vnd.openxmlformats-officedocument.wordprocessingml.document
-        //     let blob = new Blob([response], {
-        //         type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-        //     });
-
-        //     console.log(blob);
-        //     const docUrl = URL.createObjectURL(blob);
-
-        //     let el = document.createElement('a');
-
-        //     el.href = docUrl;
-        //     // el.download = '';
-
-        //     // el.click();
-        // })
-        // document.getElementById('uploadJSON').addEventListener('change', (e) => {
-        //     const jsonFile = document.getElementById('uploadJSON').files[0];
-        //     console.log(jsonFile);
-        //     const reader = new FileReader();
-        //     let fileContent;
-        //     console.log(reader);
-        //     reader.readAsText(jsonFile);
-        //     reader.onload = function (e) {
-        //         fileContent = reader.result;
-        //         console.log(fileContent);
-
-        //         const fileData = JSON.parse(reader.result);
-        //         console.log(fileData);
-        //         for (let [k, v] of Object.entries(fileData)) {
-        //             let inputField;
-        //             if (k === 'amendment') {
-        //                 k = 'amendment' + v.toLowerCase();
-        //                 inputField = document.getElementById(k);
-        //             } else if (k === 'member') {
-        //                 k = 'member' + v.toLowerCase();
-        //                 inputField = document.getElementById(k);
-        //             } else if (k === 'reqcoh') {
-        //                 console.log('Request cohorts');
-        //                 inputField = document.getElementsByName('reqcoh');
-        //             } else if (k === 'basevar') {
-        //                 console.log('basevarsss');
-        //                 inputField = document.getElementsByName(k);
-        //             } else if (k === 'mmdvarv') {
-        //                 console.log('mmdvarvvv');
-        //                 inputField = document.getElementById(k);
-        //                 inputField.checked = true;
-        //                 continue;
-        //             } else if (k === 'ibcvar') {
-        //                 console.log('ibcvar');
-        //                 inputField = document.getElementsByName(k);
-        //             } else if (k === 'confirmation') {
-        //                 inputField = document.getElementById(k);
-        //                 inputField.checked = true;
-        //                 continue;
-        //             } else {
-        //                 console.log('regular');
-        //                 inputField = document.getElementById(k);
-        //             }
-        //             if (k.startsWith('amendment')) {
-        //                 inputField.checked = true;
-        //             } else if (k.startsWith('member')) {
-        //                 inputField.checked = true;
-        //             } else if (k === 'basevar') {
-        //                 for (const el of inputField) {
-        //                     if (v.includes(el.value)) {
-        //                         el.checked = true;
-        //                     }
-        //                 }
-        //             } else if (k === 'reqcoh') {
-        //                 for (const el of inputField) {
-        //                     if (v.includes(el.value)) {
-        //                         el.checked = true;
-        //                     }
-        //                 }
-        //             } else if (k === 'ibcvar') {
-        //                 for (const el of inputField) {
-        //                     if (v.includes(el.value)) {
-        //                         el.checked = true;
-        //                     }
-        //                 }
-        //             } else {
-        //                 inputField.value = v;
-        //             }
-        //         }
-        //     };
-
-        // }, false);
-        // document.getElementById('otherButton').addEventListener('click', async () => {
-        //     //    let response = await getFile('1012486081122');
-        //     let response = await getFile('1013095224409');
-        //     console.log(response);
-        //     const fileData = JSON.parse(response);
-
-        //     for (let [k, v] of Object.entries(fileData)) {
-        //         let inputField;
-        //         if (k === 'amendment') {
-        //             k = 'amendment' + v.toLowerCase();
-        //             inputField = document.getElementById(k);
-        //         } else if (k === 'member') {
-        //             k = 'member' + v.toLowerCase();
-        //             inputField = document.getElementById(k);
-        //         } else if (k === 'reqcoh') {
-        //             console.log('Request cohorts');
-        //             inputField = document.getElementsByName('reqcoh');
-        //         } else if (k === 'basevar') {
-        //             console.log('basevarsss');
-        //             inputField = document.getElementsByName(k);
-        //         } else if (k === 'mmdvarv') {
-        //             console.log('mmdvarvvv');
-        //             inputField = document.getElementById(k);
-        //             inputField.checked = true;
-        //             continue;
-        //         } else if (k === 'ibcvar') {
-        //             console.log('ibcvar');
-        //             inputField = document.getElementsByName(k);
-        //         } else if (k === 'confirmation') {
-        //             inputField = document.getElementById(k);
-        //             inputField.checked = true;
-        //             continue;
-        //         } else {
-        //             console.log('regular');
-        //             inputField = document.getElementById(k);
-        //         }
-        //         if (k.startsWith('amendment')) {
-        //             inputField.checked = true;
-        //         } else if (k.startsWith('member')) {
-        //             inputField.checked = true;
-        //         } else if (k === 'basevar') {
-        //             for (const el of inputField) {
-        //                 if (v.includes(el.value)) {
-        //                     el.checked = true;
-        //                 }
-        //             }
-        //         } else if (k === 'reqcoh') {
-        //             for (const el of inputField) {
-        //                 if (v.includes(el.value)) {
-        //                     el.checked = true;
-        //                 }
-        //             }
-        //         } else if (k === 'ibcvar') {
-        //             for (const el of inputField) {
-        //                 if (v.includes(el.value)) {
-        //                     el.checked = true;
-        //                 }
-        //             }
-        //         } else {
-        //             inputField.value = v;
-        //         }
-        //     }
-
-        // })
         hideAnimation();
       });
     }
@@ -492,11 +294,8 @@ export const confluence = async () => {
         if (element.classList.contains("navbar-active")) return;
         document.title = "BCRPP - Accepted Studies";
         assignNavbarActive(element, 1);
-        //dataForm();
         confluenceDiv.innerHTML = acceptedStudiesSection("acceptedStudies");
-        //confluenceDiv.innerHTML = approveRejectSection();
         acceptedStudiesView();
-        //dataApproval();
         hideAnimation();
       });
     }
@@ -509,12 +308,8 @@ export const confluence = async () => {
         if (element.classList.contains("navbar-active")) return;
         document.title = "BCRPP - Chair View";
         assignNavbarActive(element, 1);
-        //dataForm();
         confluenceDiv.innerHTML = chairSection("chairView");
         chairFileView();
-        //hideAnimation();
-        //dataForm();
-        //hideAnimation();
       });
     }
     if (daccViewElement) {
@@ -526,54 +321,21 @@ export const confluence = async () => {
         if (element.classList.contains("navbar-active")) return;
         document.title = "BCRPP - DACC View";
         assignNavbarActive(element, 1);
-        //dataForm();
         confluenceDiv.innerHTML = daccSection("daccView");
         daccFileView();
-        //hideAnimation();
-        //dataForm();
-        //hideAnimation();
       });
     }
 
     dataRequestElement.addEventListener("click", () => {
       if (dataRequestElement.classList.contains("navbar-active")) return;
-      // const confluenceDiv = document.getElementById('dataRequest');
-      // showAnimation();
-      // assignNavbarActive(dataRequestElement, 1)
-      // document.title = 'BCRPP - Data Access';
-      //confluenceDiv.innerHTML = dataAccessNotSignedIn();
-      //dataForm();
-      //dataApproval();
-      //hideAnimation();
       const element = document.getElementById("dataRequest");
       if (!element) return;
       if (element.classList.contains("navbar-active")) return;
       document.title = "BCRPP - Data Access";
       assignNavbarActive(element, 1);
-      //dataRequestTemplate();
-      //confluenceDiv.innerHTML = formSection('form');
       confluenceDiv.innerHTML = dataRequestTemplate("overview");
-      //dataForm();
-      //dataApproval();
       hideAnimation();
     });
-    // platformTutorialElement.addEventListener('click', () => {
-    //     if (platformTutorialElement.classList.contains('navbar-active')) return;
-    //     showAnimation();
-    //     assignNavbarActive(platformTutorialElement)
-    //     document.title = 'Confluence Platform Tutorials';
-    //     confluenceDiv.innerHTML = dataRequestTemplate();
-    //     hideAnimation();
-    // });
-    // dataAnalysisElement.addEventListener('click', () => {
-    //     if (dataAnalysisElement.classList.contains('navbar-active')) return;
-    //     showAnimation();
-    //     assignNavbarActive(dataAnalysisElement, 1);
-    //     document.title = 'Confluence - Data Analysis';
-    //     confluenceDiv.innerHTML = dataAnalysisTemplate();
-    //     hideAnimation();
-    // });
-
     const folders = await getFolderItems(0);
     const array = filterConsortiums(folders.entries);
     const projectArray = filterProjects(folders.entries);
@@ -584,14 +346,7 @@ export const confluence = async () => {
         getCollaborators,
         JSON.parse(localStorage.parms).login
       );
-    //console.log('145995765326 '+getMyPermissionLevel);
     let showProjects = false;
-    // for (let obj of projectArray) {
-    //     if (showProjects === false) {
-    //         const bool = amIViewer(await getCollaboration(obj.id, `${obj.type}s`), JSON.parse(localStorage.parms).login);
-    //         if (bool === true) showProjects = true;
-    //     }
-    // }
     if (array.length > 0 && projectArray.length > 0 && showProjects === true) {
       document.getElementById("governanceNav").innerHTML = `
                 ${
@@ -641,7 +396,6 @@ const manageRouter = async () => {
   document.querySelector("[role='contentinfo']").innerHTML = footerTemplate();
   if (localStorage.parms !== undefined) return;
   const hash = decodeURIComponent(window.location.hash);
-  console.log(hash);
   if (
     !document.getElementById("navBarBtn").classList.contains("collapsed") &&
     document.getElementById("navbarToggler").classList.contains("show")
@@ -659,11 +413,20 @@ const manageRouter = async () => {
     const element = document.getElementById("aboutBCRPP");
     if (!element) return;
     if (element.classList.contains("navbar-active")) return;
+    console.log("about overview clicked");
     document.title = "BCRPP - Overview";
-    console.log("Overview");
     assignNavbarActive(element, 1);
     aboutConfluence("overview");
     renderOverView();
+  } else if (hash === "#about/contact") {
+    const element = document.getElementById("contactBCRPP");
+    if (!element) return;
+    if (element.classList.contains("navbar-active")) return;
+    document.title = "BCRP - Scientific Committe";
+    assignNavbarActive(element, 1);
+    aboutConfluence("overview");
+    confluenceContactPage();
+    hideAnimation();
   } else if (hash === "#join") {
     const element = document.getElementById("resourcesBCRPP");
     if (!element) return;
@@ -671,24 +434,22 @@ const manageRouter = async () => {
     document.title = "BCRPP - Resources";
     assignNavbarActive(element, 1);
     confluenceResources();
-  } else if (hash === "#contact") {
-    const element = document.getElementById("contactBCRPP");
-    if (!element) return;
-    if (element.classList.contains("navbar-active")) return;
-    document.title = "BCRPP - Contact";
-    assignNavbarActive(element, 1);
-    confluenceDiv.innerHTML = confluenceContactPage();
-  } else if (hash === "#data_access/overview") {
+  }
+  // else if (hash === "#contact") {
+  //   const element = document.getElementById("contactBCRPP");
+  //   if (!element) return;
+  //   if (element.classList.contains("navbar-active")) return;
+  //   document.title = "BCRPP - Contact";
+  //   assignNavbarActive(element, 1);
+  //   confluenceDiv.innerHTML = confluenceContactPage();
+  // }
+  else if (hash === "#data_access/overview") {
     const element = document.getElementById("dataRequest");
     if (!element) return;
     if (element.classList.contains("navbar-active")) return;
     document.title = "BCRPP - Data Access";
     assignNavbarActive(element, 1);
     confluenceDiv.innerHTML = dataAccessNotSignedIn();
-    //confluenceDiv.innerHTML = dataRequestTemplate();
-    //dataForm();
-    //dataApproval();
-    //hideAnimation();
   } else if (hash === "#data_access/form") {
     const dataFormElement = document.getElementById("dataForm");
     if (!dataFormElement) return;
@@ -697,7 +458,6 @@ const manageRouter = async () => {
     assignNavbarActive(dataFormElement, 1);
     document.title = "BCRPP - Data Form";
     confluenceDiv.innerHTML = await formSection();
-    //confluenceDiv.innerHTML = approveRejectSection();
     removeActiveClass("nav-link", "active");
     formFunctions();
   } else if (hash === "#data_access/acceptedStudies") {
@@ -723,7 +483,6 @@ const manageRouter = async () => {
   } else if (hash === "#data_access/daccView") {
     const daccViewElement = document.getElementById("daccView");
     showAnimation();
-    console.log("hello world");
     if (!daccViewElement) return;
     if (daccViewElement.classList.contains("navbar-active")) return;
     assignNavbarActive(daccViewElement, 1);
@@ -772,7 +531,6 @@ const manageHash = async () => {
   document.querySelector("[role='contentinfo']").innerHTML = footerTemplate();
   if (localStorage.parms === undefined) return;
   const hash = decodeURIComponent(window.location.hash);
-  console.log(hash);
   if (
     !document.getElementById("navBarBtn").classList.contains("collapsed") &&
     document.getElementById("navbarToggler").classList.contains("show")
@@ -797,12 +555,7 @@ const manageHash = async () => {
     const element = document.getElementById("userSubmissions");
     if (!element) return;
     element.click();
-  }
-  // else if (hash === '#data_analysis') {
-  //     const element = document.getElementById('dataAnalysis');
-  //     element.click();
-  // }
-  else if (hash === "#data_access/overview") {
+  } else if (hash === "#data_access/overview") {
     const element = document.getElementById("dataRequest");
     element.click();
   } else if (hash === "#data_access/form") {
@@ -821,12 +574,7 @@ const manageHash = async () => {
     const element = document.getElementById("daccView");
     if (!element) return;
     element.click();
-  }
-  // else if (hash === '#tutorials') {
-  //     const element = document.getElementById('platformTutorial');
-  //     element.click();
-  // }
-  else if (hash === "#data_submission") {
+  } else if (hash === "#data_submission") {
     const element = document.getElementById("dataSubmission");
     element.click();
   } else if (hash === "#data_governance") {
@@ -853,27 +601,34 @@ const manageHash = async () => {
   } else if (hash === "#about/overview") {
     const element = document.getElementById("aboutBCRPP");
     if (!element) return;
-    // if(element.classList.contains('navbar-active')) return;
+    //if (element.classList.contains("navbar-active")) return;
     assignNavbarActive(element, 1);
     document.title = "BCRP - Overview";
-
     const fileInfo = await getFileInfo(904897189551);
     aboutConfluence("overview", fileInfo ? true : false);
     renderOverView();
     hideAnimation();
+  } else if (hash === "#about/contact") {
+    const element = document.getElementById("contactBCRPP");
+    //console.log({ element });
+    if (!element) return;
+    if (element.classList.contains("navbar-active")) return;
+    assignNavbarActive(element, 1);
+    document.title = "BCRP - Scientific Committe";
+    //const fileInfo = await getFileInfo(904897189551);
+    //console.log({ fileInfo });
+    //aboutConfluence("contact", fileInfo ? true : false);
+    aboutConfluence("overview", false);
+    confluenceContactPage();
+    hideAnimation();
   } else if (hash === "#about/description") {
     const element = document.getElementById("aboutBCRPP");
     if (!element) return;
-    // if(element.classList.contains('navbar-active')) return;
+    //if (element.classList.contains("navbar-active")) return;
     assignNavbarActive(element, 1);
     document.title = "BCRP - Study Description";
     showAnimation();
     const fileInfo = await getFileInfo(904897189551); //new: 904897189551; original: 881144462693
-    //if(!fileInfo) {
-    //    location.hash = '#about/overview';
-    //    hideAnimation();
-    //    return;
-    //}
     aboutConfluence("description", fileInfo ? true : false);
     renderDescription(fileInfo["content_modified_at"]);
     hideAnimation();
@@ -885,15 +640,17 @@ const manageHash = async () => {
     document.title = "BCRP - Resources";
     confluenceResources();
     hideAnimation();
-  } else if (hash === "#contact") {
-    const element = document.getElementById("contactBCRPP");
-    if (!element) return;
-    if (element.classList.contains("navbar-active")) return;
-    assignNavbarActive(element, 1);
-    document.title = "BCRP - Committee";
-    confluenceDiv.innerHTML = confluenceContactPage();
-    hideAnimation();
-  } else window.location.hash = "#home";
+  }
+  // else if (hash === "#contact") {
+  //   const element = document.getElementById("contactBCRPP");
+  //   if (!element) return;
+  //   if (element.classList.contains("navbar-active")) return;
+  //   assignNavbarActive(element, 1);
+  //   document.title = "BCRP - Committee";
+  //   confluenceDiv.innerHTML = confluenceContactPage();
+  //   hideAnimation();
+  // }
+  else window.location.hash = "#home";
 };
 
 window.onload = async () => {
