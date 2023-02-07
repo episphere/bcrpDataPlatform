@@ -4,7 +4,7 @@ import {
   getFile,
   hideAnimation,
   shortenText,
-  tsv2JsonDic,
+  tsv2JsonDic, tsv2Json,
   json2other,
 } from "./../shared.js";
 import {
@@ -259,12 +259,8 @@ const filterDataBasedOnSelection = (dictionary, headers) => {
     highlightData,
     pageSize
   );
+  renderDataDictionary(highlightData, document.getElementById("pageSizeSelector").value, headers);
   addEventPageSizeSelection(highlightData);
-  renderDataDictionary(
-    highlightData,
-    document.getElementById("pageSizeSelector").value,
-    headers
-  );
 };
 
 const filterDataHandler = (dictionary) => {
@@ -310,6 +306,7 @@ const filterDataHandler = (dictionary) => {
   previousValue = currentValue;
   let searchedData = JSON.parse(JSON.stringify(filteredData));
   searchedData = searchedData.filter((dt) => {
+    console.log(dt["Variable Name"]);
     let found = false;
     if (dt["Variable Name"].toLowerCase().includes(currentValue)) found = true;
     if (dt["Label"].toLowerCase().includes(currentValue)) found = true;
@@ -361,8 +358,6 @@ const addEventSortColumn = (dictionary, pageSize, headers) => {
 };
 
 const renderDataDictionary = (dictionary, pageSize, headers) => {
-  console.log(dictionary);
-  console.log(pageSize);
   let template = `
         <div class="row pt-md-3 pb-md-3 m-0 align-left div-sticky">
             <div class="col-md-11">
@@ -473,7 +468,6 @@ export const downloadFiles = (data, headers, fileName, studyDescription) => {
     const csvContent =
       "data:text/csv;charset=utf-8," +
       json2other(data, headers).replace(/(<b>)|(<\/b>)/g, "");
-    //console.log(csvContent);
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);

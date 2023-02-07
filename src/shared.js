@@ -1640,6 +1640,7 @@ export const tsv2JsonDic = (tsv) => {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "")
+    .replace(/m2/g, "m<sup>2</sup>")
     .split(/[\r]+/g);
   const result = [];
   const headers = lines[0].replace(/"/g, "").split(/[\t]/g);
@@ -1650,15 +1651,15 @@ export const tsv2JsonDic = (tsv) => {
       if (currentline[j]) {
         let value = headers[j];
         if (value.toLowerCase() === 'coding') {
-          obj[value] = currentline[j].replace(/\n/g, "<br/>");
+          obj[value] = currentline[j].replace(/\n/g, "<br/>").replace("kg/m2", "kg/m<sup>2</sup>");
         } else {
           obj[value] = currentline[j].replace(/\n/g, "");
         }
       }
     }
-    if (Object.keys(obj).length > 0) result.push(obj);
+    if (Object.keys(obj).length > 1) result.push(obj);
   }
-  console.log('tsv2JsonDic', result)
+  console.log('tsv2JsonDic', result);
   return {
     data: result,
     headers,
