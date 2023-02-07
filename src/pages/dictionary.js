@@ -467,7 +467,7 @@ export const downloadFiles = (data, headers, fileName, studyDescription) => {
     e.stopPropagation();
     const csvContent =
       "data:text/csv;charset=utf-8," +
-      json2other(data, headers).replace(/(<b>)|(<\/b>)/g, "");
+      json2other(data, headers).replace(/(<b>)|(<\/b>)/g, "").replace(/(m<sup>2<\/sup>)/g, "m2");
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
