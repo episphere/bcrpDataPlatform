@@ -4,7 +4,7 @@ import {
   getFile,
   hideAnimation,
   shortenText,
-  tsv2Jsondic,
+  tsv2Json,
   json2other,
 } from "./../shared.js";
 import {
@@ -17,7 +17,7 @@ let previousValue = "";
 
 export const dataDictionaryTemplate = async () => {
   const data = await (await fetch("./BCRP_DataDictionary.txt")).text();
-  const tsvData = tsv2Jsondic(data);
+  const tsvData = tsv2Json(data);
   const dictionary = tsvData.data;
   const headers = tsvData.headers;
   let template = `
@@ -123,9 +123,9 @@ const addEventPageBtns = (pageSize, data, headers) => {
           .querySelector(`button[data-page="${pageNumber}"]`)
           .classList.add("active-page");
       }
-    });
+    })
   });
-};
+}
 
 const renderDataDictionaryFilters = (dictionary, headers) => {
   var coreArray = Object.values(dictionary).filter(function (el) {
@@ -177,33 +177,25 @@ const renderDataDictionaryFilters = (dictionary, headers) => {
     template += `
                         <li class="filter-list-item">
                             <input type="checkbox" data-variable-type="${vt}" id="label${vt}" class="select-variable-type" style="margin-left: 1px !important;">
-                            <label for="label${vt}" class="sub-category" title="${vt}">${shortenText(
-      vt,
-      60
-    )}</label>
+                            <label for="label${vt}" class="sub-category" title="${vt}">${shortenText(vt,60)}</label>
                         </li>
                     `;
   });
   template += `
                 </ul>
-
-                <label class="filter-label font-size-13" for="variableTypeList">Mammographic Density</label>
+                <label class="filter-label font-size-13" for="variableTypeList">Mammographic density</label>
                 <ul class="remove-padding-left font-size-15 allow-overflow" id="variableTypeList">
                 `;
   mamuniqueType.forEach((vt) => {
     template += `
                         <li class="filter-list-item">
                             <input type="checkbox" data-variable-type="${vt}" id="label${vt}" class="select-variable-type" style="margin-left: 1px !important;">
-                            <label for="label${vt}" class="sub-category" style="text-transform: capitalize" title="${vt}">${shortenText(
-      vt,
-      60
-    )}</label>
+                            <label for="label${vt}" class="sub-category" title="${vt}">${shortenText(vt,60)}</label>
                         </li>
                     `;
   });
   template += `
                 </ul>
-
                 <label class="filter-label font-size-13" for="variableTypeList">Incident Breast Cancer</label>
                 <ul class="remove-padding-left font-size-15 allow-overflow" id="variableTypeList">
                 `;
@@ -211,10 +203,7 @@ const renderDataDictionaryFilters = (dictionary, headers) => {
     template += `
                         <li class="filter-list-item">
                             <input type="checkbox" data-variable-type="${vt}" id="label${vt}" class="select-variable-type" style="margin-left: 1px !important;">
-                            <label for="label${vt}" class="sub-category" title="${vt}">${shortenText(
-      vt,
-      60
-    )}</label>
+                            <label for="label${vt}" class="sub-category" title="${vt}">${shortenText(vt,60)}</label>
                         </li>
                     `;
   });
@@ -228,10 +217,7 @@ const renderDataDictionaryFilters = (dictionary, headers) => {
   document.getElementById("filterDataDictionary").innerHTML = template;
   addEventFilterDataDictionary(dictionary, headers);
   downloadFiles(dictionary, headers, "dictionary");
-  document.getElementById("pageSizeContainer").innerHTML = pageSizeTemplate(
-    dictionary,
-    60
-  );
+  document.getElementById("pageSizeContainer").innerHTML = pageSizeTemplate(dictionary,60);
   addEventPageSizeSelection(dictionary, headers);
 };
 
@@ -262,11 +248,6 @@ const addEventFilterDataDictionary = (dictionary, headers) => {
 
 const filterDataBasedOnSelection = (dictionary, headers) => {
   const highlightData = filterDataHandler(dictionary);
-  renderDataDictionary(
-    highlightData,
-    document.getElementById("pageSizeSelector").value,
-    headers
-  );
   const pageSize =
     highlightData.length < 60
       ? Math.floor(highlightData.length / 10) * 10 === 0
@@ -279,6 +260,11 @@ const filterDataBasedOnSelection = (dictionary, headers) => {
     pageSize
   );
   addEventPageSizeSelection(highlightData);
+  renderDataDictionary(
+    highlightData,
+    document.getElementById("pageSizeSelector").value,
+    headers
+  );
 };
 
 const filterDataHandler = (dictionary) => {
@@ -291,7 +277,7 @@ const filterDataHandler = (dictionary) => {
   let filteredData = dictionary;
   if (variableTypeSelection.length > 0) {
     filteredData = filteredData.filter(
-      (dt) => variableTypeSelection.indexOf(dt["Sub-Category"]) !== -1
+      dt => variableTypeSelection.indexOf(dt["Sub-Category"]) !== -1
     );
   }
   if (variableTypeSelection.length === 0) filteredData = dictionary;
@@ -375,6 +361,8 @@ const addEventSortColumn = (dictionary, pageSize, headers) => {
 };
 
 const renderDataDictionary = (dictionary, pageSize, headers) => {
+  console.log(dictionary);
+  console.log(pageSize);
   let template = `
         <div class="row pt-md-3 pb-md-3 m-0 align-left div-sticky">
             <div class="col-md-11">
@@ -485,6 +473,7 @@ export const downloadFiles = (data, headers, fileName, studyDescription) => {
     const csvContent =
       "data:text/csv;charset=utf-8," +
       json2other(data, headers).replace(/(<b>)|(<\/b>)/g, "");
+    //console.log(csvContent);
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
