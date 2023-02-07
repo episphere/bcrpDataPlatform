@@ -53,7 +53,7 @@ export const renderOverView = async () => {
                       </br></br>
                       <span>
                       The Breast Cancer Risk Prediction Project will bring together data on over 1.5 million women from the NCI Cohort Consortium Study and other large cohort studies to develop an integrated model that will predict breast cancer risk, overall and by sub-types, across racial and ethnic groups. This model will include data on family history; common genetic variation (polygenic risk scores); anthropometric, lifestyle and reproductive factors; and mammographic density. The aims of the BCRP are:
-                      </span>
+                      </span><br></br>
                       <div style="margin-left: 40px"> <b></b><ul><li> Develop a comprehensive and multi-ethnic model for estimating absolute risk of breast cancer by incorporating information on known breast cancer risk factors </li><ul></div>
                     
                       <div style="margin-left: 40px"> <b></b><ul> <li>Extend the multi-ethnic risk model for the risk prediction of estrogen receptor definced breast cancer </li> <ul></div>
