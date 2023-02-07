@@ -4,7 +4,7 @@ import {
   getFile,
   hideAnimation,
   shortenText,
-  tsv2Json,
+  tsv2JsonDic,
   json2other,
 } from "./../shared.js";
 import {
@@ -17,7 +17,7 @@ let previousValue = "";
 
 export const dataDictionaryTemplate = async () => {
   const data = await (await fetch("./BCRP_DataDictionary.txt")).text();
-  const tsvData = tsv2Json(data);
+  const tsvData = tsv2JsonDic(data);
   const dictionary = tsvData.data;
   const headers = tsvData.headers;
   let template = `
