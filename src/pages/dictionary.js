@@ -484,7 +484,7 @@ export const downloadFiles = (data, headers, fileName, studyDescription) => {
     e.stopPropagation();
     let tsvContent =
       "data:text/tsv;charset=utf-8," +
-      json2other(data, headers, true).replace(/(<b>)|(<\/b>)/g, "");
+      json2other(data, headers, true).replace(/(<b>)|(<\/b>)/g, "").replace(/(m<sup>2<\/sup>)/g, "m2");
     const encodedUri = encodeURI(tsvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
