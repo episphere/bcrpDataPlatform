@@ -15,7 +15,7 @@ export const emailforChair = ['Roger.Milne@cancervic.org.au','ahearntu@nih.gov',
 // "kopchickbp@nih.gov",
 // ];
 
-export const emailforDACC = ['pkraft@hsph.harvard.edu', 'garciacm@nih.gov', 'ahearntu@nih.gov',  'mukopadhyays2@nih.gov'];;
+export const emailforDACC = ['pkraft@hsph.harvard.edu', 'garciacm@nih.gov', 'ahearntu@nih.gov',  'mukopadhyays2@nih.gov', 'sbehpour@deloitte.com'];
 
 // [
 //   "pkraft@hsph.harvard.edu",
