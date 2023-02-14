@@ -140,7 +140,7 @@ export const dataSummaryStatisticsTemplate = () => {
 const filterItemTemplate = (title, values) => {
   if (values.length > 4) {
     return `
-      <span class="font-bold">${title}:</span>
+      <span class="font-bold" style="text-transform:capitalize;">${title}:</span>
       <span>
       ${values
         .map((option) => option.replaceAll(/_|-/g, " "))
@@ -151,7 +151,7 @@ const filterItemTemplate = (title, values) => {
       `;
   } else
     return `
-    <span class="font-bold">${title}:</span>
+    <span class="font-bold" style="text-transform:capitalize;">${title}:</span>
     <span>
       ${
         values.length

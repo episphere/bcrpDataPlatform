@@ -36,8 +36,8 @@ export const dataDictionaryTemplate = async () => {
     <div class="col-xl-10 padding-right-zero" id="summaryStatsCharts">
         <button id="filterBarToggle"><i class="fas fa-lg fa-caret-left"></i></button>
         <div class="main-summary-row pl-2" style="min-height: 10px;margin-bottom: 1rem;">
-            <div class="col white-bg div-border align-left font-size-17" style="padding: 0.5rem;" id="listFilters">
-                <span class="font-bold">Categories:</span> All
+            <div class="col white-bg div-border align-left font-size-17" style="padding: 0.5rem; text-transform: capitalize;" id="listFilters">
+                <span class="font-bold" style="text-transform: capitalize;">Categories:</span> All
             </div>
         </div>
         <div class="main-summary-row pl-2">
@@ -132,7 +132,7 @@ const renderDataDictionaryFilters = (dictionary, headers) => {
     return el.Category === "Core";
   });
   var mamArray = Object.values(dictionary).filter(function (el) {
-    return el.Category === "Mammographic density";
+    return el.Category === "Mammographic Density";
   });
   var incArray = Object.values(dictionary).filter(function (el) {
     return el.Category === "Incident Breast Cancer ";
@@ -178,7 +178,7 @@ const renderDataDictionaryFilters = (dictionary, headers) => {
                         <li class="filter-list-item">
                             <input type="checkbox" data-variable-type="${vt}" id="label${vt}" class="select-variable-type" style="margin-left: 1px !important;">
                             <label for="label${vt}" class="sub-category" title="${vt}">${shortenText(
-      vt,
+      vt.replace("Identification", "ID"),
       60
     )}</label>
                         </li>
@@ -300,7 +300,7 @@ const filterDataHandler = (dictionary) => {
     ${
       variableTypeSelection.length > 0
         ? `
-        <span class="font-bold">Category: </span>${variableTypeSelection[0]} ${
+        <span class="font-bold" style="text-transform:capitalize;">Category: </span>${variableTypeSelection[0].replace("Identification", "ID")} ${
             variableTypeSelection.length > 1
               ? `and <span class="other-variable-count">${
                   variableTypeSelection.length - 1
@@ -309,7 +309,7 @@ const filterDataHandler = (dictionary) => {
           }
     `
         : `
-        <span class="font-bold">Category:</span> All`
+        <span class="font-bold" style="text-transform:capitalize;">Category:</span> All`
     }
     `;
 
@@ -405,7 +405,7 @@ const renderDataDictionary = (dictionary, pageSize, headers) => {
                               desc["Label"] ? desc["Label"] : ""
                             }</div>
                             <div class="col-md-3">${
-                              desc["Sub-Category"] ? desc["Sub-Category"] : ""
+                              desc["Sub-Category"] ? desc["Sub-Category"].replace("Identification","ID") : ""
                             }</div>
                         </div>
                     </div>

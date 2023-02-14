@@ -1649,10 +1649,15 @@ export const tsv2JsonDic = (tsv) => {
     for (let j = 0; j < headers.length; j++) {
       if (currentline[j]) {
         let value = headers[j];
+        let tempstring=currentline[j].toLowerCase().replace(/\b[a-z]/g, function (letter) {
+          return letter.toUpperCase();
+      }).replace(/\b\w\b/g, function (letter) {
+          return letter.toLowerCase();
+      })
         if (value.toLowerCase() === 'coding') {
-          obj[value] = currentline[j].replace(/\n/g, "<br/>");
+          obj[value] = tempstring.replace(/\n/g, "<br/>");
         } else {
-          obj[value] = currentline[j].replace(/\n/g, "");
+          obj[value] = tempstring.replace(/\n/g, "");
         }
       }
     }
