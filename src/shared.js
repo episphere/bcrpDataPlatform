@@ -1654,6 +1654,25 @@ export const tsv2JsonDic = (tsv) => {
         } else {
           obj[value] = currentline[j].replace(/\n/g, "");
         }
+        if (value.toLowerCase() === 'category') {
+          if (currentline[j].trim().toLowerCase() === 'mammographic density') {
+            obj[value] = currentline[j].trim().toLowerCase().replace('mammographic density', "Mammographic Density")
+          }
+          if (currentline[j].trim().toLowerCase() === 'identification/dates') {
+            obj[value] = currentline[j].trim().toLowerCase().replace('identification/dates', "IDs/Dates")
+          }
+        }
+        if (value.toLowerCase() === 'sub-category') {
+          if (currentline[j].trim().toLowerCase() === 'mammographic density') {
+            obj[value] = currentline[j].trim().toLowerCase().replace('mammographic density', "Mammographic Density")
+            console.log(obj[value]);
+          }
+          console.log(currentline[j].trim().toLowerCase())
+          if (currentline[j].trim().toLowerCase() === 'identification/dates') {
+            obj[value] = currentline[j].trim().toLowerCase().replace('identification/dates', "IDs/Dates")
+            console.log(obj[value]);
+          }
+        }
       }
     }
     if (Object.keys(obj).length > 0) result.push(obj);
