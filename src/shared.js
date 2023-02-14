@@ -3,10 +3,10 @@ import { logOut } from "./manageAuthentication.js";
 import { confluence } from "../confluence.js";
 
 export const emailsAllowedToUpdateData = [
-  "ahearntu@nih.gov", "kopchickbp@nih.gov"
+  "kopchickbp@nih.gov",
+  "ahearntu@nih.gov",
 ];
-
-export const emailforChair = ['Roger.Milne@cancervic.org.au','ahearntu@nih.gov', 'garciacm@nih.gov', 'sbehpour@deloitte.com','kopchickbp@nih.gov'];
+export const emailforChair = [];
 //  [
 // "Roger.Milne@cancervic.org.au",
 // "ahearntu@nih.gov",
@@ -15,7 +15,8 @@ export const emailforChair = ['Roger.Milne@cancervic.org.au','ahearntu@nih.gov',
 // "kopchickbp@nih.gov",
 // ];
 
-export const emailforDACC = ['pkraft@hsph.harvard.edu', 'garciacm@nih.gov', 'ahearntu@nih.gov',  'mukopadhyays2@nih.gov', 'sbehpour@deloitte.com'];
+
+export const emailforDACC = [];
 
 // [
 //   "pkraft@hsph.harvard.edu",
@@ -1640,6 +1641,7 @@ export const tsv2JsonDic = (tsv) => {
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "")
+    .replace(/m2/g, "m<sup>2</sup>")
     .split(/[\r]+/g);
   const result = [];
   const headers = lines[0].replace(/"/g, "").split(/[\t]/g);
@@ -1650,7 +1652,7 @@ export const tsv2JsonDic = (tsv) => {
       if (currentline[j]) {
         let value = headers[j];
         if (value.toLowerCase() === 'coding') {
-          obj[value] = currentline[j].replace(/\n/g, "<br/>");
+          obj[value] = currentline[j].replace(/\n/g, "<br/>").replace("kg/m2", "kg/m<sup>2</sup>");
         } else {
           obj[value] = currentline[j].replace(/\n/g, "");
         }
@@ -1675,9 +1677,9 @@ export const tsv2JsonDic = (tsv) => {
         }
       }
     }
-    if (Object.keys(obj).length > 0) result.push(obj);
+    if (Object.keys(obj).length > 1) result.push(obj);
   }
-  console.log('tsv2JsonDic', result)
+  console.log('tsv2JsonDic', result);
   return {
     data: result,
     headers,
