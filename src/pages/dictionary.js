@@ -132,7 +132,7 @@ const renderDataDictionaryFilters = (dictionary, headers) => {
     return el.Category === "Core";
   });
   var mamArray = Object.values(dictionary).filter(function (el) {
-    return el.Category === "Mammographic density";
+    return el.Category === "Mammographic Density";
   });
   var incArray = Object.values(dictionary).filter(function (el) {
     return el.Category === "Incident Breast Cancer ";
