@@ -614,19 +614,19 @@ const manageHash = async () => {
     if (!element) return;
     if (element.classList.contains("navbar-active")) return;
     assignNavbarActive(element, 1);
-    document.title = "BCRP - Scientific Committe";
+    document.title = "BCRPP - Scientific Committe";
     //const fileInfo = await getFileInfo(904897189551);
     //console.log({ fileInfo });
     //aboutConfluence("contact", fileInfo ? true : false);
-    aboutConfluence("overview", false);
+    aboutConfluence("contact", true);
     confluenceContactPage();
     hideAnimation();
   } else if (hash === "#about/description") {
-    const element = document.getElementById("aboutBCRPP");
+    const element = document.getElementById("resourcesBCRPP");
     if (!element) return;
     //if (element.classList.contains("navbar-active")) return;
     assignNavbarActive(element, 1);
-    document.title = "BCRP - Study Description";
+    document.title = "BCRPP - Study Description";
     showAnimation();
     const fileInfo = await getFileInfo(904897189551); //new: 904897189551; original: 881144462693
     aboutConfluence("description", fileInfo ? true : false);
