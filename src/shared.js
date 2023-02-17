@@ -1663,6 +1663,9 @@ export const tsv2JsonDic = (tsv) => {
           if (currentline[j].trim().toLowerCase() === 'identification/dates') {
             obj[value] = currentline[j].trim().toLowerCase().replace('identification/dates', "IDs/Dates")
           }
+          if (currentline[j].trim().toLowerCase() === 'personal and family health history') {
+            obj[value] = currentline[j].trim().toLowerCase().replace('personal and family health history', "Personal/Family History")
+          }
         }
         if (value.toLowerCase() === 'sub-category') {
           if (currentline[j].trim().toLowerCase() === 'mammographic density') {
@@ -1672,6 +1675,10 @@ export const tsv2JsonDic = (tsv) => {
           console.log(currentline[j].trim().toLowerCase())
           if (currentline[j].trim().toLowerCase() === 'identification/dates') {
             obj[value] = currentline[j].trim().toLowerCase().replace('identification/dates', "IDs/Dates")
+            console.log(obj[value]);
+          }
+          if (currentline[j].trim().toLowerCase() === 'personal and family health history') {
+            obj[value] = currentline[j].trim().toLowerCase().replace('personal and family health history',"Personal/Family History")
             console.log(obj[value]);
           }
         }
