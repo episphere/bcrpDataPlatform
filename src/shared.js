@@ -6,17 +6,18 @@ export const emailsAllowedToUpdateData = [
   "kopchickbp@nih.gov",
   "ahearntu@nih.gov",
 ];
-export const emailforChair = [];
+export const emailforChair = ["kopchickbp@nih.gov"];
 //  [
 // "Roger.Milne@cancervic.org.au",
 // "ahearntu@nih.gov",
 // "garciacm@nih.gov",
 // "wraynr@nih.gov",
 // "kopchickbp@nih.gov",
+//sbehpour@deloitte.com
 // ];
 
 
-export const emailforDACC = [];
+export const emailforDACC = ['kopchickbp@nih.gov'];
 
 // [
 //   "pkraft@hsph.harvard.edu",
@@ -190,7 +191,6 @@ export const getFileVersions = async (id) => {
     if ((await refreshToken()) === true) return await getFileVersions(id);
   }
 };
-
 export const storeAccessToken = async () => {
   let parms = searchParms();
   if (parms.code) {
@@ -1020,8 +1020,7 @@ export async function showComments(id) {
           template += `
                 <div class='col-4'>
                     <input type='checkbox' name='comments' id='${comment.id}' class='mb-0'>
-                </div>
-                
+                </div>   
                 `;
         }
       }
@@ -1064,8 +1063,7 @@ export async function showComments(id) {
             template += `
                 <div class='col-4'>
                     <input type='checkbox' name='comments' id='${comment.id}' class='mb-0'>
-                </div>
-                
+                </div>   
                 `;
           }
         }
@@ -1179,7 +1177,6 @@ export async function showCommentsDropDown(id) {
                     <p class='text-primary small mb-0 align-left'>${comment.created_by.name}</p>
                 </div>
             `;
-
         template += `    
             </div>
             <div class='row'>
@@ -1198,10 +1195,8 @@ export async function showCommentsDropDown(id) {
   // template += '</div>'
 
   commentSection.innerHTML = template;
-
   return;
 }
-
 export const listComments = async (id) => {
   try {
     const access_token = JSON.parse(localStorage.parms).access_token;
@@ -1209,17 +1204,13 @@ export const listComments = async (id) => {
       `https://api.box.com/2.0/files/${id}/comments`,
       {
         method: "GET",
-
         headers: {
           Authorization: "Bearer " + access_token,
-
           "Content-Type": "application/json",
         },
-
         redirect: "follow",
       }
     );
-
     if (response.status === 401) {
       if ((await refreshToken()) === true) return await listComments(id);
     } else {
@@ -1663,6 +1654,9 @@ export const tsv2JsonDic = (tsv) => {
           if (currentline[j].trim().toLowerCase() === 'identification/dates') {
             obj[value] = currentline[j].trim().toLowerCase().replace('identification/dates', "IDs/Dates")
           }
+          if (currentline[j].trim().toLowerCase() === 'personal and family health history') {
+            obj[value] = currentline[j].trim().toLowerCase().replace('personal and family health history', "Personal/Family History")
+          }
         }
         if (value.toLowerCase() === 'sub-category') {
           if (currentline[j].trim().toLowerCase() === 'mammographic density') {
@@ -1672,6 +1666,10 @@ export const tsv2JsonDic = (tsv) => {
           console.log(currentline[j].trim().toLowerCase())
           if (currentline[j].trim().toLowerCase() === 'identification/dates') {
             obj[value] = currentline[j].trim().toLowerCase().replace('identification/dates', "IDs/Dates")
+            console.log(obj[value]);
+          }
+          if (currentline[j].trim().toLowerCase() === 'personal and family health history') {
+            obj[value] = currentline[j].trim().toLowerCase().replace('personal and family health history',"Personal/Family History")
             console.log(obj[value]);
           }
         }
