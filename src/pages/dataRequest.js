@@ -1074,7 +1074,7 @@ export const chairFileView = async () => {
     filescompleted.length !== 0 ||
     filesinprogress.length !== 0 ||
     filesincomplete.length !== 0 ||
-    filesdecided !== 0
+    filesdecided.length !== 0
   ) {
     template += `
         <div class='row'>
