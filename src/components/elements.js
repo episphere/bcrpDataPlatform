@@ -116,7 +116,6 @@ export function renderFilePreviewDropdown(files, tab) {
     return;
   }
   if (files.length != 0) {
-    console.log(tab);
     if (
       tab !== "daccReview" &&
       tab !== "dacctoBeCompleted" &&
