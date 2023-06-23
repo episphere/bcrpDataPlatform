@@ -125,12 +125,21 @@ export function renderFilePreviewDropdown(files, tab) {
       template += `<div class='card-body p-0'>
                 <div class='card-title'>
                 <label for='${tab}selectedDoc'>
-                    <b>Select Concept Form:</b>
-                    <div class='text-muted small'>Hold Ctrl to select multiple concept forms </div>
+                    <b>Select Concept Form:</b>`
+      if (tab === "toBeCompleted" || tab === "inProgress") {
+      template += `
+                <div class='text-muted small'>Hold Ctrl to select multiple concept forms </div>
                 </label>
                 <br>
-                <select id='${tab}selectedDoc' multiple size='3'>
+                <select id='${tab}selectedDoc' size='4' multiple>
             `;
+      } else {
+        template += `
+                  </label>
+                  <br>
+                  <select id='${tab}selectedDoc' size='1'>
+              `;
+      }
     } else {
       template += `<div class='card-body p-0'>
                 <div class='card-title'>

@@ -1074,7 +1074,7 @@ export const chairFileView = async () => {
     filescompleted.length !== 0 ||
     filesinprogress.length !== 0 ||
     filesincomplete.length !== 0 ||
-    filesdecided !== 0
+    filesdecided.length !== 0
   ) {
     template += `
         <div class='row'>
@@ -1111,8 +1111,8 @@ export const chairFileView = async () => {
             <option value = "2"> 2 - Approved, pending conditions/clarification of some issues </option>
             <option value = "3"> 3 - Approved, but data release will be delayed </option>
             <option value = "4"> 4 - Not approved </option>
-            <option value = "6"> 6 - Decision pending clarification of several issues</option>
-            <option value = "777"> 777 - Duplicate Proposal</option>
+            <option value = "5"> 5 - Decision pending clarification of several issues</option>
+           <!--- <option value = "777"> 777 - Duplicate Proposal</option>-->
             </select>
           <br>
             <div class="input-group">
