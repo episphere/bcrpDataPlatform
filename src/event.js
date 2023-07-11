@@ -27,6 +27,7 @@ import {
   assignNavbarActive,
   reSizePlots,
   showComments,
+  summaryStatsFolder,
 } from "./shared.js";
 import { renderDataSummary } from "./pages/about.js";
 import { variables } from "./variables.js";
@@ -1273,11 +1274,14 @@ export const addEventUpdateSummaryStatsData = () => {
                             </button>`;
 
     let template = '<form id="updateSummaryStatsForm">';
-    template += `<label>Select data type</label></br> <div style="padding-left:40px"><input type="radio" required value="summary" name="summarydataType"> Summary data</div><div style="padding-left:40px"><input value="missingness" required type="radio" name="summarydataType"> Missingness data</div>`;
+    template += `<label>Select data type</label></br> 
+                <div style="padding-left:40px"><input type="radio" required value="summaryCohort" name="summarydataType"> Summary data - Full Cohort </div>
+                <div style="padding-left:40px"><input type="radio" required value="summaryCases" name="summarydataType"> Summary data - Cases </div>
+                <div style="padding-left:40px"><input value="missingness" required type="radio" name="summarydataType"> Missingness data </div>`;
     template += '</br><div id="summaryDataFolderList"></div>';
 
     template +=
-      '<div class="modal-footer"><button type="submit" class="btn btn-outline-primary">Update data</button></div>';
+      '<div class="modal-footer"><button type="submit" class="btn btn-outline-primary" disabled>Update data</button></div>';
     template += "</form>";
     body.innerHTML = template;
     addEventDataTypeRadio();
@@ -1293,7 +1297,7 @@ const addEventDataTypeRadio = () => {
         document.getElementsByName("summarydataType")
       ).filter((ele) => ele.checked === true)[0].value;
       let template = "";
-      const response = await getFolderItems(106289683820);
+      const response = await getFolderItems(summaryStatsFolder);
       let summaryFolder = [];
       if (dataType === "summary") {
         summaryFolder = response.entries.filter(

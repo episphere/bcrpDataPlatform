@@ -36,6 +36,8 @@ export const missingnessStatsFileId = 1043323929905; //653087731560; //Unknown, 
 // export const missingnessStatsFileId = 653087731560;
 export const cps2StatsFileId = 908522264695;
 
+export const summaryStatsFolder = 145995372820;
+
 export const uploadFormFolder = 155292358576;
 
 export const daccReviewFolder = 161192245846;
