@@ -291,7 +291,7 @@ const renderMidsetFilterData = (
             `;
   template += `
             <div class="form-group" id="raceList">
-            <label class="filter-label font-size-13" for="raceSelection">Race</label>
+            <label class="filter-label font-size-13" for="raceSelection">Races</label>
             <select class="form-control font-size-15" id="raceSelection">`;
   transformRace.forEach((anc) => {
     if (anc[0] === "undefined") return;
