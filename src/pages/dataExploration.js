@@ -1,5 +1,6 @@
 import {
   getFile,
+  showAnimation,
   hideAnimation,
   csv2Json,
   numberWithCommas,
@@ -162,13 +163,13 @@ const filterItemTemplate = (title, values) => {
 };
 
 export const dataSummaryMissingTemplate = async (popVal) => {
+  showAnimation();
   let response = "";
   if (popVal == "Full Cohort"){
     response = await getFile(missingnessStatsFileId);
   } else {
     response = await getFile(missingnessStatsCasesFileId);
   }
-  console.log(response);
   const lastModified = (await getFileInfo(missingnessStatsFileId)).modified_at;
   document.getElementById(
     "dataLastModified"
@@ -240,10 +241,12 @@ export const dataSummaryMissingTemplate = async (popVal) => {
     Object.keys(cohorts),
     variables,
     race,
-    ethnicity
+    ethnicity,
+    popVal
   );
   midset(data, initialSelection);
   addEventMissingnessFilterBarToggle();
+  hideAnimation();
 };
 
 const renderFilter = (
@@ -252,7 +255,8 @@ const renderFilter = (
   acceptedCohorts,
   headers,
   race,
-  ethnicity
+  ethnicity,
+  popVal
 ) => {
   let template = "";
   template += `
@@ -273,7 +277,8 @@ const renderFilter = (
     acceptedCohorts,
     headers,
     race,
-    ethnicity
+    ethnicity,
+    popVal
   );
 };
 
@@ -283,7 +288,8 @@ const renderMidsetFilterData = (
   acceptedCohorts,
   headers,
   race,
-  ethnicity
+  ethnicity,
+  popVal
 ) => {
   let template = "";
 
@@ -295,14 +301,27 @@ const renderMidsetFilterData = (
   template += `
         <div style="width:100%;">
             `;
+  console.log(popVal);
+  if (popVal == "Full Cohort") {
   template += `
         <div class="form-group" id="population">
         <label class="filter-label font-size-13" for="populationSelection">Population</label>
         <select class="form-control font-size-15" id="populationSelection">
-          <option value="Full Cohort">Full Cohort</option>
+          <option value="Full Cohort" selected>Full Cohort</option>
           <option value="Cases">Cases</option>
         </select>
   `
+  };
+  if (popVal == "Cases") {
+    template += `
+          <div class="form-group" id="population">
+          <label class="filter-label font-size-13" for="populationSelection">Population</label>
+          <select class="form-control font-size-15" id="populationSelection">
+            <option value="Full Cohort">Full Cohort</option>
+            <option value="Cases" selected>Cases</option>
+          </select>
+    `
+    };
   template += `
             <div class="form-group" id="raceList">
             <label class="filter-label font-size-13" for="raceSelection">Race</label>
@@ -475,6 +494,13 @@ const addEventMidsetFilterForm = (data) => {
       filterMidsetData(data);
     });
   });
+
+  const popSelection = document.getElementById("populationSelection");
+  popSelection.addEventListener("change", function (event) {
+    if (event.target.value == "Full Cohort") dataSummaryMissingTemplate("Full Cohort");
+    if (event.target.value == "Cases") dataSummaryMissingTemplate("Cases");
+  });
+
   const cohortsAllCheckbox = document.getElementById("cohortallcheckbox");
   const cohorts = document.getElementsByClassName("select-cohort");
 

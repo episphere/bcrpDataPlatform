@@ -1,4 +1,5 @@
 import {
+  showAnimation,
   hideAnimation,
   getFile,
   csvJSON,
@@ -23,6 +24,7 @@ const chartLabels = {
 };
 
 export const getFileContent = async () => {
+  showAnimation();
   const { jsonData, headers } = csvJSON(await getFile(summaryStatsFileId)); // Get summary level data
   const lastModified = (await getFileInfo(summaryStatsFileId)).modified_at;
   document.getElementById(
@@ -30,7 +32,6 @@ export const getFileContent = async () => {
   ).innerHTML = `Data last modified at - ${new Date(
     lastModified
   ).toLocaleString()}`;
-  hideAnimation();
   if (jsonData.length === 0) {
     document.getElementById(
       "confluenceDiv"
@@ -39,9 +40,11 @@ export const getFileContent = async () => {
   }
   renderAllCharts(jsonData, headers);
   allFilters(jsonData, headers, "all");
+  hideAnimation();
 };
 
 export const getFileContentCases = async () => {
+  showAnimation();
   const { jsonData, headers } = csvJSON(await getFile(summaryStatsCasesFileId)); // Get summary level data
   const lastModified = (await getFileInfo(summaryStatsCasesFileId)).modified_at;
   document.getElementById(
@@ -49,7 +52,6 @@ export const getFileContentCases = async () => {
   ).innerHTML = `Data last modified at - ${new Date(
     lastModified
   ).toLocaleString()}`;
-  hideAnimation();
   if (jsonData.length === 0) {
     document.getElementById(
       "confluenceDiv"
@@ -58,6 +60,7 @@ export const getFileContentCases = async () => {
   }
   renderAllCasesCharts(jsonData, headers);
   allFilters(jsonData, headers, "cases");
+  hideAnimation();
 };
 
 const allFilters = (jsonData, headers, caseSelection) => {

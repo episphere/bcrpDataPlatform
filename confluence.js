@@ -162,7 +162,6 @@ export const confluence = async () => {
 
     dataSummaryElement.addEventListener("click", async () => {
       if (dataSummaryElement.classList.contains("navbar-active")) return;
-      showAnimation();
       assignNavbarActive(dataSummaryElement, 1);
       document.title = "BCRPP - Summary Statistics";
       confluenceDiv.innerHTML = dataSummary("Summary Statistics", false, true, true);
@@ -180,7 +179,6 @@ export const confluence = async () => {
       dataSummarySubsetElement.addEventListener("click", async () => {
         if (dataSummarySubsetElement.classList.contains("navbar-active")) return;
         const confluenceDiv = document.getElementById("confluenceDiv");
-        showAnimation();
         assignNavbarActive(dataSummarySubsetElement, 1);
         document.title = "BCRPP - Subset Statistics";
         confluenceDiv.innerHTML = dataSummary("Subset Statistics", false, true, true);
@@ -189,11 +187,16 @@ export const confluence = async () => {
         document.querySelectorAll('[href="#data_exploration/subset"]')[1].classList.add("active");
         await dataSummaryMissingTemplate("Full Cohort");
         const popSelection = document.getElementById("populationSelection");
-        populationSelection.addEventListener("change", function (event) {
-          if (event.target.value == "Full Cohort") dataSummaryMissingTemplate("Full Cohort");
-          if (event.target.value == "Cases") dataSummaryMissingTemplate("Cases");
+        popSelection.addEventListener("change", function (event) {
+          console.log("popSelection Changed");
+          if (event.target.value == "Full Cohort") {
+            dataSummaryMissingTemplate("Full Cohort");
+          }
+          if (event.target.value == "Cases") {
+            console.log("Cases");
+            dataSummaryMissingTemplate("Cases");
+          }
         })
-        hideAnimation();
       });
     }
     if (viewUserSubmissionElement) {
