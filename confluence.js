@@ -159,29 +159,15 @@ export const confluence = async () => {
       addEventUploadStudyForm();
       hideAnimation();
     });
+
     dataSummaryElement.addEventListener("click", async () => {
       if (dataSummaryElement.classList.contains("navbar-active")) return;
       showAnimation();
       assignNavbarActive(dataSummaryElement, 1);
       document.title = "BCRPP - Summary Statistics";
-      confluenceDiv.innerHTML = dataSummary(
-        "Summary Statistics",
-        false,
-        true,
-        true
-      );
-      await addEventUpdateSummaryStatsData();
-      await dataSummaryStatisticsTemplate();
-      // if(document.getElementById('dataSummaryFilter')) document.getElementById('dataSummaryFilter').addEventListener('click', e => {
-      //     e.preventDefault();
-      //     const header = document.getElementById('confluenceModalHeader');
-      //     const body = document.getElementById('confluenceModalBody');
-      //     header.innerHTML = `<h5 class="modal-title">Filter summary data</h5>
-      //                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      //                             <span aria-hidden="true">&times;</span>
-      //                         </button>`;
-      //     body.innerHTML = `<span>Select Consortia or Studies to Display</span>`;
-      // })
+      confluenceDiv.innerHTML = dataSummary("Summary Statistics", false, true, true);
+      addEventUpdateSummaryStatsData();
+      dataSummaryStatisticsTemplate();
       await getFileContent();
       const subcasesSelection = document.getElementById("subcasesSelection");
       subcasesSelection.addEventListener("change", function (event) {
@@ -191,25 +177,22 @@ export const confluence = async () => {
     });
 
     if (dataSummarySubsetElement) {
-      dataSummarySubsetElement.addEventListener("click", () => {
-        if (dataSummarySubsetElement.classList.contains("navbar-active"))
-          return;
+      dataSummarySubsetElement.addEventListener("click", async () => {
+        if (dataSummarySubsetElement.classList.contains("navbar-active")) return;
         const confluenceDiv = document.getElementById("confluenceDiv");
         showAnimation();
         assignNavbarActive(dataSummarySubsetElement, 1);
         document.title = "BCRPP - Subset Statistics";
-        confluenceDiv.innerHTML = dataSummary(
-          "Subset Statistics",
-          false,
-          true,
-          true
-        );
+        confluenceDiv.innerHTML = dataSummary("Subset Statistics", false, true, true);
         addEventUpdateSummaryStatsData();
         removeActiveClass("nav-link", "active");
-        document
-          .querySelectorAll('[href="#data_exploration/subset"]')[1]
-          .classList.add("active");
-        dataSummaryMissingTemplate();
+        document.querySelectorAll('[href="#data_exploration/subset"]')[1].classList.add("active");
+        await dataSummaryMissingTemplate("Full Cohort");
+        const popSelection = document.getElementById("populationSelection");
+        populationSelection.addEventListener("change", function (event) {
+          if (event.target.value == "Full Cohort") dataSummaryMissingTemplate("Full Cohort");
+          if (event.target.value == "Cases") dataSummaryMissingTemplate("Cases");
+        })
         hideAnimation();
       });
     }

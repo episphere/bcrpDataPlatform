@@ -6,6 +6,7 @@ import {
   emailsAllowedToUpdateData,
   getFileInfo,
   missingnessStatsFileId,
+  missingnessStatsCasesFileId,
   reSizePlots,
   applicationURLs,
 } from "../shared.js";
@@ -107,7 +108,6 @@ export const dataSummaryStatisticsTemplate = () => {
             </div>
             <div id="cardContent" class="card-body">
                 <div id="allFilters" class="align-left"></div>
-                <!---<p id='participantCount'></p>--->
             </div>
         </div>
     </div>
@@ -161,8 +161,14 @@ const filterItemTemplate = (title, values) => {
   `;
 };
 
-export const dataSummaryMissingTemplate = async () => {
-  const response = await getFile(missingnessStatsFileId);
+export const dataSummaryMissingTemplate = async (popVal) => {
+  let response = "";
+  if (popVal == "Full Cohort"){
+    response = await getFile(missingnessStatsFileId);
+  } else {
+    response = await getFile(missingnessStatsCasesFileId);
+  }
+  console.log(response);
   const lastModified = (await getFileInfo(missingnessStatsFileId)).modified_at;
   document.getElementById(
     "dataLastModified"
@@ -290,8 +296,16 @@ const renderMidsetFilterData = (
         <div style="width:100%;">
             `;
   template += `
+        <div class="form-group" id="population">
+        <label class="filter-label font-size-13" for="populationSelection">Population</label>
+        <select class="form-control font-size-15" id="populationSelection">
+          <option value="Full Cohort">Full Cohort</option>
+          <option value="Cases">Cases</option>
+        </select>
+  `
+  template += `
             <div class="form-group" id="raceList">
-            <label class="filter-label font-size-13" for="raceSelection">Races</label>
+            <label class="filter-label font-size-13" for="raceSelection">Race</label>
             <select class="form-control font-size-15" id="raceSelection">`;
   transformRace.forEach((anc) => {
     if (anc[0] === "undefined") return;
@@ -382,7 +396,9 @@ const renderMidsetFilterData = (
   addEventMidsetFilterForm(data);
 };
 
-const generateFilterSummery = () => {
+const generateFilterSummary = () => {
+  const popEl = document.getElementById("populationSelection");
+  const popValue = popEl.value;
   const raceEl = document.getElementById("raceSelection");
   const raceValue = raceEl.value;
   const raceText = Array.from(raceEl.options).find(
@@ -444,18 +460,18 @@ const addEventMidsetFilterForm = (data) => {
   const race = document.getElementById("raceSelection");
   race.addEventListener("change", () => {
     filterMidsetData(data);
-    generateFilterSummery();
+    generateFilterSummary();
   });
   const ethnicity = document.getElementById("ethnicitySelection");
   ethnicity.addEventListener("change", () => {
-    generateFilterSummery();
+    generateFilterSummary();
     filterMidsetData(data);
   });
 
   const variables = document.getElementsByClassName("select-variable");
   Array.from(variables).forEach((ele) => {
     ele.addEventListener("click", () => {
-      generateFilterSummery();
+      generateFilterSummary();
       filterMidsetData(data);
     });
   });
@@ -472,7 +488,7 @@ const addEventMidsetFilterForm = (data) => {
       if (selectedCohorts.length < cohorts.length) {
         cohortsAllCheckbox.checked = false;
       }
-      generateFilterSummery();
+      generateFilterSummary();
       filterMidsetData(data);
     });
   });
@@ -481,12 +497,13 @@ const addEventMidsetFilterForm = (data) => {
     Array.from(cohorts).forEach((input) => {
       input.checked = e.target.checked;
     });
-    generateFilterSummery();
+    generateFilterSummary();
     filterMidsetData(data);
   });
 };
 
 const filterMidsetData = (data) => {
+  const population = document.getElementById("populationSelection").value
   const race = document.getElementById("raceSelection").value;
   const ethnicity = document.getElementById("ethnicitySelection").value;
   const selectedVariables = getSelectedVariables("midsetVariables");
