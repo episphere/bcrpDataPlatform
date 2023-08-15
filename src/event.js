@@ -1435,38 +1435,22 @@ export const addEventFilterBarToggle = () => {
       reSizePlots();
       child.classList.remove("fa-caret-left");
       child.classList.add("fa-caret-right");
-      document
-        .getElementById("summaryFilterSiderBar")
-        .classList.remove("col-xl-2");
+      document.getElementById("summaryFilterSiderBar").classList.remove("col-xl-2");
       document.getElementById("summaryFilterSiderBar").classList.add("d-none");
-      document
-        .getElementById("summaryStatsCharts")
-        .classList.remove("col-xl-10");
+      document.getElementById("summaryStatsCharts").classList.remove("col-xl-10");
       document.getElementById("summaryStatsCharts").classList.add("col-xl-12");
-      document
-        .getElementById("dataLastModified")
-        .classList.remove("offset-xl-2");
-      document
-        .getElementById("dataLastModified")
-        .classList.remove("padding-left-20");
+      document.getElementById("dataLastModified").classList.remove("offset-xl-2");
+      document.getElementById("dataLastModified").classList.remove("padding-left-20");
     } else {
       reSizePlots();
       child.classList.remove("fa-caret-right");
       child.classList.add("fa-caret-left");
-      document
-        .getElementById("summaryFilterSiderBar")
-        .classList.add("col-xl-2");
-      document
-        .getElementById("summaryFilterSiderBar")
-        .classList.remove("d-none");
+      document.getElementById("summaryFilterSiderBar").classList.add("col-xl-2");
+      document.getElementById("summaryFilterSiderBar").classList.remove("d-none");
       document.getElementById("summaryStatsCharts").classList.add("col-xl-10");
-      document
-        .getElementById("summaryStatsCharts")
-        .classList.remove("col-xl-12");
+      document.getElementById("summaryStatsCharts").classList.remove("col-xl-12");
       document.getElementById("dataLastModified").classList.add("offset-xl-2");
-      document
-        .getElementById("dataLastModified")
-        .classList.add("padding-left-20");
+      document.getElementById("dataLastModified").classList.add("padding-left-20");
     }
   });
 };
@@ -1474,6 +1458,7 @@ export const addEventFilterBarToggle = () => {
 export const addEventMissingnessFilterBarToggle = () => {
   const button = document.getElementById("filterBarToggle");
   button.addEventListener("click", () => {
+    console.log("Button Clicked");
     const child = button.querySelector(".fas");
     if (child.classList.contains("fa-caret-left")) {
       reSizePlots();

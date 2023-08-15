@@ -10,6 +10,7 @@ import {
   dataSummary,
   dataSummaryMissingTemplate,
   dataSummaryStatisticsTemplate,
+  dataSummaryMissingTopBarTemplate,
 } from "./src/pages/dataExploration.js";
 import {
   dataAccess as dataRequestTemplate,
@@ -185,7 +186,9 @@ export const confluence = async () => {
         addEventUpdateSummaryStatsData();
         removeActiveClass("nav-link", "active");
         document.querySelectorAll('[href="#data_exploration/subset"]')[1].classList.add("active");
+        dataSummaryMissingTopBarTemplate();
         await dataSummaryMissingTemplate("Full Cohort");
+        
         const popSelection = document.getElementById("populationSelection");
         popSelection.addEventListener("change", function (event) {
           console.log("popSelection Changed");

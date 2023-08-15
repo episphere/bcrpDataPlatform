@@ -162,6 +162,44 @@ const filterItemTemplate = (title, values) => {
   `;
 };
 
+export const dataSummaryMissingTopBarTemplate = () => {
+  const div1 = document.createElement("div");
+  div1.classList = ["col-xl-3 filter-column"];
+  div1.id = "missingnessFilter";
+
+  const div2 = document.createElement("div");
+
+  /**
+   
+   * 2. Create a function to make one filter item
+   */
+
+  div2.classList = ["col-xl-9"];
+  div2.innerHTML = `
+        <button id="filterBarToggle">
+            <i class="fas fa-lg fa-caret-left"></i>
+        </button>
+        <div class="main-summary-row" style="min-height: 10px;margin-bottom: 1rem;margin-left: 1rem;">
+            <div class="col white-bg div-border align-left font-size-17" style="padding: 0.5rem;" id="listFilters">
+                ${filterItemTemplate("Race", ["All"])}
+                <span style="padding-left: 5px; padding-right: 5px">|</span>
+                ${filterItemTemplate("Ethnicity", ["All"])}
+                <span style="padding-left: 5px; padding-right: 5px">|</span>
+                ${filterItemTemplate("Cohort", ["All"])}
+                <span style="padding-left: 5px; padding-right: 5px">|</span>
+                ${filterItemTemplate("Variable", ["All"])}
+            </div>
+        </div>
+        `;
+  const row = document.createElement("div");
+  row.classList = ["main-summary-row div-border overflow-x mb-2"];
+  row.id = "missingnessTable";
+
+  div2.appendChild(row);
+  document.getElementById("dataSummaryStatistics").appendChild(div1);
+  document.getElementById("dataSummaryStatistics").appendChild(div2);
+}
+
 export const dataSummaryMissingTemplate = async (popVal) => {
   showAnimation();
   let response = "";
@@ -171,11 +209,7 @@ export const dataSummaryMissingTemplate = async (popVal) => {
     response = await getFile(missingnessStatsCasesFileId);
   }
   const lastModified = (await getFileInfo(missingnessStatsFileId)).modified_at;
-  document.getElementById(
-    "dataLastModified"
-  ).innerHTML = `Data last modified at - ${new Date(
-    lastModified
-  ).toLocaleString()}`;
+  document.getElementById("dataLastModified").innerHTML = `Data last modified at - ${new Date(lastModified).toLocaleString()}`;
   const { data, headers } = csv2Json(response);
   const variables = headers.filter((dt) => !dt.match(/ethnicity|race|cohort/i));
   const initialSelection =
@@ -198,52 +232,7 @@ export const dataSummaryMissingTemplate = async (popVal) => {
       CONSTANTS.BCRPP.ethnicityClass[dataOption.ethnicity];
   });
 
-  const div1 = document.createElement("div");
-  div1.classList = ["col-xl-3 filter-column"];
-  div1.id = "missingnessFilter";
-
-  const div2 = document.createElement("div");
-
-  /**
-   
-   * 2. Create a function to make one filter item
-   */
-
-  div2.classList = ["col-xl-9"];
-  div2.innerHTML = `
-        <button id="filterBarToggle">
-            <i class="fas fa-lg fa-caret-left"></i>
-        </button>
-        <div class="main-summary-row" style="min-height: 10px;margin-bottom: 1rem;margin-left: 1rem;">
-            <div class="col white-bg div-border align-left font-size-17" style="padding: 0.5rem;" id="listFilters">
-                <!---<span class="font-bold">Status:</span> All<span class="vertical-line"></span>--->
-                ${filterItemTemplate("Race", ["All"])}
-                <span style="padding-left: 5px; padding-right: 5px">|</span>
-                ${filterItemTemplate("Ethnicity", ["All"])}
-                <span style="padding-left: 5px; padding-right: 5px">|</span>
-                ${filterItemTemplate("Cohort", ["All"])}
-                <span style="padding-left: 5px; padding-right: 5px">|</span>
-                ${filterItemTemplate("Variable", ["All"])}
-            </div>
-        </div>
-        `;
-  const row = document.createElement("div");
-  row.classList = ["main-summary-row div-border overflow-x mb-2"];
-  row.id = "missingnessTable";
-
-  div2.appendChild(row);
-  document.getElementById("dataSummaryStatistics").appendChild(div1);
-  document.getElementById("dataSummaryStatistics").appendChild(div2);
-
-  renderFilter(
-    data,
-    initialSelection,
-    Object.keys(cohorts),
-    variables,
-    race,
-    ethnicity,
-    popVal
-  );
+  renderFilter(data,initialSelection,Object.keys(cohorts),variables,race,ethnicity,popVal);
   midset(data, initialSelection);
   addEventMissingnessFilterBarToggle();
   hideAnimation();
@@ -567,6 +556,7 @@ const getAllVariables = (parentId) => {
   return variables.length;
 };
 const midset = (data, acceptedVariables) => {
+  console.log(acceptedVariables);
   let template = "";
   let plotData = [];
   let headerData = "";
