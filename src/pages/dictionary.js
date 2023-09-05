@@ -23,9 +23,7 @@ export const dataDictionaryTemplate = async () => {
     record.Category = record.Category.replace('\n', '');
     if (record.Coding) {
       record.Coding = record.Coding.replaceAll('\n', '<br>');
-    };
-    console.log(record.Category);
-    console.log(record.Coding);
+      };
     }
   );
   console.log(tsvData);
@@ -155,14 +153,14 @@ const renderDataDictionaryFilters = (dictionary, headers) => {
   //const allVariableType = Object.values(dictionary).map(dt => dt['Sub-Category']);
   //const uniqueType = allVariableType.filter((d,i) => allVariableType.indexOf(d) === i).sort();
   const coreuniqueType = coreVariableType
-    .filter((d, i) => coreVariableType.indexOf(d) === i)
-    .sort();
+    .filter((d, i) => coreVariableType.indexOf(d) === i);
+    // .sort();
   const mamuniqueType = mamVariableType
-    .filter((d, i) => mamVariableType.indexOf(d) === i)
-    .sort();
+    .filter((d, i) => mamVariableType.indexOf(d) === i);
+    // .sort();
   const incuniqueType = incVariableType
-    .filter((d, i) => incVariableType.indexOf(d) === i)
-    .sort();
+    .filter((d, i) => incVariableType.indexOf(d) === i);
+    // .sort();
 
   let template = "";
   template += `
@@ -188,16 +186,12 @@ const renderDataDictionaryFilters = (dictionary, headers) => {
     template += `
                         <li class="filter-list-item">
                             <input type="checkbox" data-variable-type="${vt}" id="label${vt}" class="select-variable-type" style="margin-left: 1px !important;">
-                            <label for="label${vt}" class="sub-category" title="${vt}">${shortenText(
-      vt,
-      60
-    )}</label>
+                            <label for="label${vt}" class="sub-category" title="${vt}">${shortenText(vt,60)}</label>
                         </li>
                     `;
   });
   template += `
                 </ul>
-
                 <label class="filter-label font-size-13" for="variableTypeList">Mammographic density</label>
                 <ul class="remove-padding-left font-size-15 allow-overflow" id="variableTypeList">
                 `;
@@ -205,16 +199,12 @@ const renderDataDictionaryFilters = (dictionary, headers) => {
     template += `
                         <li class="filter-list-item">
                             <input type="checkbox" data-variable-type="${vt}" id="label${vt}" class="select-variable-type" style="margin-left: 1px !important;">
-                            <label for="label${vt}" class="sub-category" title="${vt}">${shortenText(
-      vt,
-      60
-    )}</label>
+                            <label for="label${vt}" class="sub-category" title="${vt}">${shortenText(vt,60)}</label>
                         </li>
                     `;
   });
   template += `
                 </ul>
-
                 <label class="filter-label font-size-13" for="variableTypeList">Incident Breast Cancer</label>
                 <ul class="remove-padding-left font-size-15 allow-overflow" id="variableTypeList">
                 `;
@@ -222,16 +212,12 @@ const renderDataDictionaryFilters = (dictionary, headers) => {
     template += `
                         <li class="filter-list-item">
                             <input type="checkbox" data-variable-type="${vt}" id="label${vt}" class="select-variable-type" style="margin-left: 1px !important;">
-                            <label for="label${vt}" class="sub-category" title="${vt}">${shortenText(
-      vt,
-      60
-    )}</label>
+                            <label for="label${vt}" class="sub-category" title="${vt}">${shortenText(vt,60)}</label>
                         </li>
                     `;
   });
   template += `
                 </ul>
-
             </div>
         </div>
     </div>
@@ -239,10 +225,7 @@ const renderDataDictionaryFilters = (dictionary, headers) => {
   document.getElementById("filterDataDictionary").innerHTML = template;
   addEventFilterDataDictionary(dictionary, headers);
   downloadFiles(dictionary, headers, "dictionary");
-  document.getElementById("pageSizeContainer").innerHTML = pageSizeTemplate(
-    dictionary,
-    60
-  );
+  document.getElementById("pageSizeContainer").innerHTML = pageSizeTemplate(dictionary,60);
   addEventPageSizeSelection(dictionary, headers);
 };
 
@@ -290,6 +273,8 @@ const filterDataBasedOnSelection = (dictionary, headers) => {
     pageSize
   );
   addEventPageSizeSelection(highlightData);
+  console.log(highlightData);
+  console.log(pageSize);
 };
 
 const filterDataHandler = (dictionary) => {
@@ -400,13 +385,11 @@ const renderDataDictionary = (dictionary, pageSize, headers) => {
         <div class="row m-0 align-left allow-overflow w-100">
         `;
   dictionary.forEach((desc, index) => {
-    console.log(desc.Coding);
+    //console.log(desc.Coding);
     if (index > pageSize) return;
     template += `
         <div class="card border-0 mt-1 mb-1 align-left w-100 pt-md-1 dictionaryData">
-            <div class="pl-3 pt-1 pr-3 pb-1" aria-expanded="false" id="heading${
-              desc["Variable Name"]
-            }">
+            <div class="pl-3 pt-1 pr-3 pb-1" aria-expanded="false" id="heading${desc["Variable Name"]}">
                 <div class="row">
                     <div class="col-md-11">
                         <div class="row">
@@ -422,21 +405,12 @@ const renderDataDictionary = (dictionary, pageSize, headers) => {
                         </div>
                     </div>
                     <div class="ml-auto">
-                        <div class="col-md-12"><button title="Expand/Collapse" class="transparent-btn collapse-panel-btn" data-toggle="collapse" data-target="#study${desc[
-                          "Variable Name"
-                        ].replace(
-                          /(<b>)|(<\/b>)/g,
-                          ""
-                        )}"><i class="fas fa-caret-down fa-2x"></i></button></div>
+                        <div class="col-md-12"><button title="Expand/Collapse" class="transparent-btn collapse-panel-btn" data-toggle="collapse" 
+                        data-target="#study${desc["Variable Name"] ? desc["Variable Name"].replace(/(<b>)|(<\/b>)/g,"") : ""}"><i class="fas fa-caret-down fa-2x"></i></button></div>
                     </div>
                 </div>
             </div>
-            <div id="study${desc["Variable Name"].replace(
-              /(<b>)|(<\/b>)/g,
-              ""
-            )}" class="collapse" aria-labelledby="heading${
-      desc["Variable Name"]
-    }">
+            <div id="study${desc["Variable Name"] ? desc["Variable Name"].replace(/(<b>)|(<\/b>)/g,"") : ""}" class="collapse" aria-labelledby="heading${desc["Variable Name"]}">
                 <div class="card-body" style="padding-left: 10px;background-color:#f6f6f6;">
                     <!---${
                       desc["Category"]

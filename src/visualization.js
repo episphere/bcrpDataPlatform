@@ -9,8 +9,10 @@ import {
   mapReduce,
   summaryStatsCasesFileId,
   reSizePlots,
+  csv2Json2
 } from "./shared.js";
 import { variables } from "./variables.js";
+import { graphVariables } from "./graphVariables.js";
 import { addEventSummaryStatsFilterForm } from "./event.js";
 
 const plotTextSize = 10.5;
@@ -26,6 +28,8 @@ const chartLabels = {
 export const getFileContent = async () => {
   showAnimation();
   const { jsonData, headers } = csvJSON(await getFile(summaryStatsFileId)); // Get summary level data
+  //const testing = await (await fetch("./BCRP_Summary_Results_AllSubjects_TEST_SELECT_VAR - Copy.csv")).text();
+  let exists = Object.values(graphVariables)//.includes("age_at_record_date")
   const lastModified = (await getFileInfo(summaryStatsFileId)).modified_at;
   document.getElementById(
     "dataLastModified"
@@ -38,6 +42,7 @@ export const getFileContent = async () => {
     ).innerHTML = `You don't have access to summary level data, please contact NCI for the access.`;
     return;
   }
+  console.log(jsonData);
   renderAllCharts(jsonData, headers);
   allFilters(jsonData, headers, "all");
   hideAnimation();
@@ -224,49 +229,45 @@ export const renderAllCharts = (data) => {
   finalData = data;
   let totalSubjects = 0;
   data.forEach((value) => (totalSubjects += parseInt(value.TotalSubjects)));
-  document.getElementById(
-    "participantCount"
-  ).innerHTML = `<b>No. of Participants:</b> ${totalSubjects.toLocaleString(
-    "en-US"
-  )}`;
+  document.getElementById("participantCount").innerHTML = `<b>No. of Participants:</b> ${totalSubjects.toLocaleString("en-US")}`;
 
-  generateBirthBarChart(
-    "bYear",
+  generateBarChart(
+    "birth_year",
     "dataSummaryVizChart1",
     "dataSummaryVizLabel1",
     finalData,
     "chartRow1"
   );
-  generateAgeBarChart(
-    "ageInt",
+  generateBarChart(
+    "age",
     "dataSummaryVizChart2",
     "dataSummaryVizLabel2",
     finalData,
     "chartRow1"
   );
-  generateMenarcheBarChart(
-    "ageMenarche",
+  generateBarChart(
+    "AJAncestry",
     "dataSummaryVizChart3",
     "dataSummaryVizLabel3",
     finalData,
     "chartRow1"
   );
-  generateParityBarChart(
-    "parous",
+  generateBarChart(
+    "alcohol_status",
     "dataSummaryVizChart4",
     "dataSummaryVizLabel4",
     finalData,
     "chartRow2"
   );
-  generatePregnaciesBarChart(
-    "parity",
+  generateBarChart(
+    "BBD_type",
     "dataSummaryVizChart5",
     "dataSummaryVizLabel5",
     finalData,
     "chartRow2"
   );
-  generateBMIBarChart(
-    "BMI",
+  generateBarChart(
+    "BBD_number",
     "dataSummaryVizChart6",
     "dataSummaryVizLabel6",
     finalData,
@@ -354,6 +355,55 @@ export const getSelectedStudies = () => {
     if (array.indexOf(value) === -1) array.push(value);
   });
   return array;
+};
+
+const generateBarChart = (parameter, id, labelID, jsonData, chartRow) => {
+  const div = document.createElement("div");
+  div.classList = ["col-xl-4 pl-2 padding-right-zero mb-3"];
+  div.innerHTML = dataVisulizationCards({
+    cardHeaderId: labelID,
+    cardBodyId: id,
+  });
+  let x = Object.values(graphVariables[parameter].values);
+  let y = Object.keys(graphVariables[parameter].values).map(key => mapReduce(jsonData, key));
+  console.log(x);
+  console.log(y);
+  document.getElementById(chartRow).appendChild(div);
+  const data = [
+    {
+      x: x,
+      y: y,
+      marker: {
+        color: Array(Math.ceil(x.length/2)).fill(["#8bc1e8","#319fbe"]).flat(),
+      },
+      type: "bar",
+    },
+  ];
+  const layout = {
+    xaxis: {
+      fixedrange: true,
+      automargin: true,
+      tickangle: 45,
+      tickfont: { size: plotTextSize },
+      type: 'category',
+    },
+    yaxis: {
+      title: `Count`,
+      fixedrange: true,
+      tickformat: ",d",
+      tickfont: { size: plotTextSize },
+    },
+    paper_bgcolor: "rgba(0,0,0,0)",
+    plot_bgcolor: "rgba(0,0,0,0)",
+  };
+  Plotly.newPlot(`${id}`, data, layout, {
+    responsive: true,
+    displayModeBar: false,
+  });
+
+  document.getElementById(
+    labelID
+  ).innerHTML = `${graphVariables[parameter]["title"]}`;
 };
 
 const generateAgeBarChart = (parameter, id, labelID, jsonData, chartRow) => {

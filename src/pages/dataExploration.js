@@ -21,6 +21,7 @@ import {
   addEventMissingnessFilterBarToggle,
 } from "../event.js";
 import { variables as CONSTANTS } from "../variables.js";
+import {graphVariables} from "../graphVariables.js";
 
 import { pageNavBar } from "../components/navBarMenuItems.js";
 
