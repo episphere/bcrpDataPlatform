@@ -43,6 +43,7 @@ import {
   getSelectedStudies,
   renderAllCasesCharts,
   renderAllCharts,
+  updateAllCharts,
   updateCounts,
   getFileContent,
   getFileContentCases,
@@ -1534,7 +1535,7 @@ export const addEventSummaryStatsFilterForm = (jsonData, headers) => {
   });
 };
 
-const filterData = (jsonData, headers) => {
+export const filterData = (jsonData, headers) => {
   const ethnicity = document.getElementById("ethnicitySelection").value;
   const study = document.getElementById("studySelection").value;
   const race = document.getElementById("raceSelection").value;
@@ -1585,7 +1586,7 @@ const filterData = (jsonData, headers) => {
     totalSubjects += value.TotalSubjects;
   });
   if (subCases == "all") {
-    renderAllCharts(finalData);
+    updateAllCharts(finalData);
   } else renderAllCasesCharts(finalData);
 };
 

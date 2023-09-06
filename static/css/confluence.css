@@ -2215,3 +2215,5 @@ th {
   text-align: left;
   padding: 8px;
 }
+
+select { width: 100%; text-align-last:center; overflow-wrap: break-word; white-space: nowrap; text-overflow: ellipsis;}

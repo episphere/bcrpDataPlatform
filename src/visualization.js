@@ -13,7 +13,7 @@ import {
 } from "./shared.js";
 import { variables } from "./variables.js";
 import { graphVariables } from "./graphVariables.js";
-import { addEventSummaryStatsFilterForm } from "./event.js";
+import { addEventSummaryStatsFilterForm, filterData } from "./event.js";
 
 const plotTextSize = 10.5;
 
@@ -43,7 +43,45 @@ export const getFileContent = async () => {
     return;
   }
   console.log(jsonData);
-  renderAllCharts(jsonData, headers);
+  await renderAllCharts(jsonData, headers);
+
+  const graph1 = document.getElementById("dataSummaryVizLabel1");
+    graph1.addEventListener("change", function (event) {
+      filterData(jsonData, headers);
+      // updateBarChart(
+      //   event.target.value,
+      //   "dataSummaryVizChart1",
+      //   "dataSummaryVizLabel1",
+      //   jsonData,
+      //   "chartRow1"
+      // );
+      });
+
+  const graph2 = document.getElementById("dataSummaryVizLabel2");
+    graph2.addEventListener("change", function (event) {
+      filterData(jsonData, headers);
+      });
+
+  const graph3 = document.getElementById("dataSummaryVizLabel3");
+    graph3.addEventListener("change", function (event) {
+      filterData(jsonData, headers);
+      });
+
+  const graph4 = document.getElementById("dataSummaryVizLabel4");
+    graph4.addEventListener("change", function (event) {
+      filterData(jsonData, headers);
+      });
+
+  const graph5 = document.getElementById("dataSummaryVizLabel5");
+    graph5.addEventListener("change", function (event) {
+      filterData(jsonData, headers);
+      });
+
+  const graph6 = document.getElementById("dataSummaryVizLabel6");
+    graph6.addEventListener("change", function (event) {
+      filterData(jsonData, headers);
+      });
+
   allFilters(jsonData, headers, "all");
   hideAnimation();
 };
@@ -275,6 +313,57 @@ export const renderAllCharts = (data) => {
   );
 };
 
+export const updateAllCharts = (data) => {
+  let finalData = {};
+  finalData = data;
+  let totalSubjects = 0;
+  data.forEach((value) => (totalSubjects += parseInt(value.TotalSubjects)));
+  document.getElementById("participantCount").innerHTML = `<b>No. of Participants:</b> ${totalSubjects.toLocaleString("en-US")}`;
+
+  updateBarChart(
+    document.getElementById("dataSummaryVizLabel1").value,
+    "dataSummaryVizChart1",
+    "dataSummaryVizLabel1",
+    finalData,
+    "chartRow1"
+  );
+  updateBarChart(
+    document.getElementById("dataSummaryVizLabel2").value,
+    "dataSummaryVizChart2",
+    "dataSummaryVizLabel2",
+    finalData,
+    "chartRow1"
+  );
+  updateBarChart(
+    document.getElementById("dataSummaryVizLabel3").value,
+    "dataSummaryVizChart3",
+    "dataSummaryVizLabel3",
+    finalData,
+    "chartRow1"
+  );
+  updateBarChart(
+    document.getElementById("dataSummaryVizLabel4").value,
+    "dataSummaryVizChart4",
+    "dataSummaryVizLabel4",
+    finalData,
+    "chartRow2"
+  );
+  updateBarChart(
+    document.getElementById("dataSummaryVizLabel5").value,
+    "dataSummaryVizChart5",
+    "dataSummaryVizLabel5",
+    finalData,
+    "chartRow2"
+  );
+  updateBarChart(
+    document.getElementById("dataSummaryVizLabel6").value,
+    "dataSummaryVizChart6",
+    "dataSummaryVizLabel6",
+    finalData,
+    "chartRow2"
+  );
+};
+
 export const renderAllCasesCharts = (data) => {
   document.getElementById("chartRow1").innerHTML = "";
   document.getElementById("chartRow2").innerHTML = "";
@@ -400,10 +489,62 @@ const generateBarChart = (parameter, id, labelID, jsonData, chartRow) => {
     responsive: true,
     displayModeBar: false,
   });
+  var htmlTitle = document.getElementById(labelID);
+  console.log(htmlTitle);
+  for (let index in graphVariables) {
+    let defaultSelected = true ? index===parameter : false
+    console.log(defaultSelected);
+    htmlTitle.options[htmlTitle.options.length] = new Option(graphVariables[index].title, index, defaultSelected, defaultSelected);
+  }
+  // document.getElementById(
+  //   labelID
+  // ).innerHTML = `${graphVariables[parameter]["title"]}`;
+};
 
-  document.getElementById(
-    labelID
-  ).innerHTML = `${graphVariables[parameter]["title"]}`;
+const updateBarChart = (parameter, id, labelID, jsonData, chartRow) => {
+  let x = Object.values(graphVariables[parameter].values);
+  let y = Object.keys(graphVariables[parameter].values).map(key => mapReduce(jsonData, key));
+  const data = [
+    {
+      x: x,
+      y: y,
+      marker: {
+        color: Array(Math.ceil(x.length/2)).fill(["#8bc1e8","#319fbe"]).flat(),
+      },
+      type: "bar",
+    },
+  ];
+  const layout = {
+    xaxis: {
+      fixedrange: true,
+      automargin: true,
+      tickangle: 45,
+      tickfont: { size: plotTextSize },
+      type: 'category',
+    },
+    yaxis: {
+      title: `Count`,
+      fixedrange: true,
+      tickformat: ",d",
+      tickfont: { size: plotTextSize },
+    },
+    paper_bgcolor: "rgba(0,0,0,0)",
+    plot_bgcolor: "rgba(0,0,0,0)",
+  };
+  Plotly.newPlot(`${id}`, data, layout, {
+    responsive: true,
+    displayModeBar: false,
+  });
+  // var htmlTitle = document.getElementById(labelID);
+  // console.log(htmlTitle);
+  // for (let index in graphVariables) {
+  //   let defaultSelected = true ? index===parameter : false
+  //   console.log(defaultSelected);
+  //   htmlTitle.options[htmlTitle.options.length] = new Option(graphVariables[index].title, index, defaultSelected, defaultSelected);
+  // }
+  // document.getElementById(
+  //   labelID
+  // ).innerHTML = `${graphVariables[parameter]["title"]}`;
 };
 
 const generateAgeBarChart = (parameter, id, labelID, jsonData, chartRow) => {
@@ -1456,7 +1597,7 @@ const dataVisulizationCards = (obj) => `
             <div class="card-header">
                 ${
                   obj.cardHeaderId
-                    ? `<span class="data-summary-label-wrap"><label class="font-size-17 font-bold" id="${obj.cardHeaderId}"></label></span>`
+                    ? `<span class="data-summary-label-wrap"><select class="font-size-17 font-bold" id="${obj.cardHeaderId}"></select></span>`
                     : ``
                 }
             </div>
