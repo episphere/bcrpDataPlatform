@@ -1801,7 +1801,6 @@ export const handleRangeRequests = async () => {
   });
 };
 
-// Need to change to BCRPP urls
 export const applicationURLs = {
   dev: "https://episphere.github.io/bcrpDataPlatform",
   stage: "https://epidataplatforms-stage.cancer.gov",
