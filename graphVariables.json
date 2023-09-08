@@ -246,10 +246,10 @@
         "units" : "",
         "values" : 
             {
-            "meno_reason_1": "0",
-            "meno_reason_2": "1",
-            "meno_reason_3": "2",
-            "meno_reason_4": "3",
+            "meno_reason_1": "1",
+            "meno_reason_2": "2",
+            "meno_reason_3": "3",
+            "meno_reason_4": "4",
             "meno_reason_777": "777",
             "meno_reason_DK": "Unknown",
             "meno_reason_NA": "Not Applicable"
