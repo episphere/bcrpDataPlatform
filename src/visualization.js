@@ -12,9 +12,11 @@ import {
   csv2Json2
 } from "./shared.js";
 import { variables } from "./variables.js";
-import { graphVariables } from "./graphVariables.js";
+//import { graphVariables } from "./graphVariables.js";
+import graphVariables from "../graphVariables.json" assert { type: 'json' };
 import { addEventSummaryStatsFilterForm, filterData } from "./event.js";
 
+//console.log(data);
 const plotTextSize = 10.5;
 
 const chartLabels = {
@@ -470,6 +472,7 @@ const generateBarChart = (parameter, id, labelID, jsonData, chartRow) => {
   ];
   const layout = {
     xaxis: {
+      title: graphVariables[parameter].units,
       fixedrange: true,
       automargin: true,
       tickangle: 45,
@@ -516,6 +519,7 @@ const updateBarChart = (parameter, id, labelID, jsonData, chartRow) => {
   ];
   const layout = {
     xaxis: {
+      title: graphVariables[parameter].units,
       fixedrange: true,
       automargin: true,
       tickangle: 45,
