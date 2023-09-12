@@ -457,8 +457,7 @@ const generateBarChart = (parameter, id, labelID, jsonData, chartRow) => {
   });
   let x = Object.values(graphVariables[parameter].values);
   let y = Object.keys(graphVariables[parameter].values).map(key => mapReduce(jsonData, key));
-  console.log(x);
-  console.log(y);
+
   document.getElementById(chartRow).appendChild(div);
   const data = [
     {
@@ -485,23 +484,31 @@ const generateBarChart = (parameter, id, labelID, jsonData, chartRow) => {
       tickformat: ",d",
       tickfont: { size: plotTextSize },
     },
-    paper_bgcolor: "rgba(0,0,0,0)",
-    plot_bgcolor: "rgba(0,0,0,0)",
+    // paper_bgcolor: "rgba(0,0,0,0)",
+    // plot_bgcolor: "rgba(0,0,0,0)",
   };
-  Plotly.newPlot(`${id}`, data, layout, {
+
+  var config = {
     responsive: true,
-    displayModeBar: false,
-  });
+    modeBarButtonsToRemove: ['hoverClosestCartesian', 'hoverCompareCartesian','toggleHover','toggleSpikelines','zoom2d', 'pan2d', 'select2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'autoScale2d', 'resetScale2d'],
+    displaylogo: false,
+    toImageButtonOptions: {
+      format: 'png', // one of png, svg, jpeg, webp
+      filename: parameter,
+      height: 500,
+      width: 700,
+      scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
+    }
+  };
+
+  Plotly.newPlot(`${id}`, data, layout, config);
+
   var htmlTitle = document.getElementById(labelID);
-  console.log(htmlTitle);
   for (let index in graphVariables) {
     let defaultSelected = true ? index===parameter : false
     console.log(defaultSelected);
     htmlTitle.options[htmlTitle.options.length] = new Option(graphVariables[index].title, index, defaultSelected, defaultSelected);
   }
-  // document.getElementById(
-  //   labelID
-  // ).innerHTML = `${graphVariables[parameter]["title"]}`;
 };
 
 const updateBarChart = (parameter, id, labelID, jsonData, chartRow) => {
@@ -532,23 +539,24 @@ const updateBarChart = (parameter, id, labelID, jsonData, chartRow) => {
       tickformat: ",d",
       tickfont: { size: plotTextSize },
     },
-    paper_bgcolor: "rgba(0,0,0,0)",
-    plot_bgcolor: "rgba(0,0,0,0)",
+    // paper_bgcolor: "rgba(0,0,0,0)",
+    // plot_bgcolor: "rgba(0,0,0,0)",
   };
-  Plotly.newPlot(`${id}`, data, layout, {
+
+  var config = {
     responsive: true,
-    displayModeBar: false,
-  });
-  // var htmlTitle = document.getElementById(labelID);
-  // console.log(htmlTitle);
-  // for (let index in graphVariables) {
-  //   let defaultSelected = true ? index===parameter : false
-  //   console.log(defaultSelected);
-  //   htmlTitle.options[htmlTitle.options.length] = new Option(graphVariables[index].title, index, defaultSelected, defaultSelected);
-  // }
-  // document.getElementById(
-  //   labelID
-  // ).innerHTML = `${graphVariables[parameter]["title"]}`;
+    modeBarButtonsToRemove: ['hoverClosestCartesian', 'hoverCompareCartesian','toggleHover','toggleSpikelines','zoom2d', 'pan2d', 'select2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'autoScale2d', 'resetScale2d'],
+    displaylogo: false,
+    toImageButtonOptions: {
+      format: 'png', // one of png, svg, jpeg, webp
+      filename: parameter,
+      height: 500,
+      width: 700,
+      scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
+    }
+  };
+
+  Plotly.newPlot(`${id}`, data, layout, config);
 };
 
 const generateAgeBarChart = (parameter, id, labelID, jsonData, chartRow) => {
