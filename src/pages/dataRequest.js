@@ -661,10 +661,26 @@ export const formSection = async (activeTab, showDescripton) => {
               <br>
               <p><u><b>Authorship</b></u><span class='required-label'>*</span></p>
                 <div class="input-group">
-                  <label for="authconf"><input id="authconf" name="authconf" type="checkbox" value="Yes" required/> Please confirm that you acknowledge the intention to include representatives of the 
-                  contributing cohorts as co-authors and that you will provide contributing cohorts 30 days to review the draft manuscript 
-                  before submission (per section 3.4 of the BCRPP Recipient DTA). </label>
-                  
+                  <u id="tooltip1"><a><label><input id="authconf" name="authconf" type="checkbox" value="Yes" required/> 
+                  <b>Please confirm that you agree to comply with the BCRPP authorship and publication requirements.</b>
+                  <span>
+                  Recipient shall have the first right to publish on the Results of the Research Study. 
+                  It is the intention that the Recipient and Contributors shall be co-authors on initial 
+                  publications of the Results of the Research Study; however, authorship shall be determined 
+                  in accordance with academic custom. The Recipient agrees to send all publication manuscripts 
+                  to the Contributors for review thirty (30) days prior to publishing (“Review Period”). The 
+                  Contributors can submit comments to the Recipient during the Review Period and the Recipient 
+                  shall give due consideration to any recommendations made. The receiving party agrees not to 
+                  disclose any Confidential Information without seeking permission from the disclosing party, 
+                  prior to publishing.
+                  <br><br>
+                  The Recipient shall ensure the Results are published within one (1) year on completion of the 
+                  Research Study (“Publication Period”). If this is not possible, Recipient will consult with NCI, 
+                  who will liaise with the Contributors as soon as possible and in any case prior to lapse of the 
+                  Publication Period, with a view to resolve the issue(s) delaying publication. If the Contributors 
+                  and BCRPP DACC decide that the publication is being delayed unduly by the Recipient, the Recipient 
+                  shall lose its first right to publish.
+                  </span></a></u></label>
                   <label for="Authorship"><i>Please include any special considerations you would like to bring to the DACC’s attention.</i></label>
 
                   <textarea id="authorship" name="authorship" rows="4" cols="65"></textarea>
