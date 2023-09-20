@@ -605,7 +605,7 @@ const manageHash = async () => {
     //const fileInfo = await getFileInfo(904897189551);
     //console.log({ fileInfo });
     //aboutConfluence("contact", fileInfo ? true : false);
-    aboutConfluence("overview", false);
+    aboutConfluence("contact", true);
     confluenceContactPage();
     hideAnimation();
   } else if (hash === "#about/description") {
