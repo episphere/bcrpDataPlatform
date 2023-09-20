@@ -21,11 +21,11 @@ export const confluenceContactPage = () => {
                                     <tbody>
                                         <tr>
                                             <td>Pete Kraft</td>
-                                            <td>Harvard T.H. Chan School of Public Health</td>
+                                            <td>Division of Cancer Epidemiology and Genetics, USA</td>
                                         </tr>
                                         <tr>
                                             <td>Montserrat Garcia-Closas</td>
-                                            <td>Division of Cancer Epidemiology and Genetics, USA</td>
+                                            <td>The Institute of Cancer Research, London</td>
                                         </tr>
                                         <tr>
                                             <td>Nilanjan Chatterjee</td>
