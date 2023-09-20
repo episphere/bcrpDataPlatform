@@ -39,21 +39,21 @@
         "units" : "",
         "values" : 
             {
-            "AJAncestry_0": "0",
-            "AJAncestry_1": "1",
+            "AJAncestry_0": "No",
+            "AJAncestry_1": "Yes",
             "AJAncestry_DK": "Unknown"
             }
         },
     "alcohol_status" :
         {
-        "title" : "Alcolohol Drinking Status",
+        "title" : "Alcohol Drinking Status",
         "units" : "",
         "values" : 
             {
-            "alcohol_status_1": "1",
-            "alcohol_status_2": "2",
-            "alcohol_status_3": "3",
-            "alcohol_status_4": "4",
+            "alcohol_status_1": "Current",
+            "alcohol_status_2": "Former",
+            "alcohol_status_3": "Ever (unknown current or former)",
+            "alcohol_status_4": "Never",
             "alcohol_status_DK": "Unknown"
             }
         },
@@ -63,8 +63,8 @@
         "units" : "",
         "values" : 
             {
-            "BBD_history_0": "0",
-            "BBD_history_1": "1",
+            "BBD_history_0": "No",
+            "BBD_history_1": "Yes",
             "BBD_history_DK": "Unknown"
             }
         },
@@ -86,9 +86,9 @@
         "units" : "",
         "values" : 
             {
-            "BBD_type1_DK": "Type 1",
-            "BBD_type2_DK": "Type 2",
-            "BBD_type3_DK": "Type 3",
+            "BBD_type1_DK": "non-proliferative disease",
+            "BBD_type2_DK": "proliferative disease without atypia",
+            "BBD_type3_DK": "atypical hyperplasia",
             "BBD_type4_DK": "Type 4"
             }
         },
