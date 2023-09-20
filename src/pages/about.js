@@ -44,20 +44,29 @@ export const renderOverView = async () => {
                 <div class="col align-left">
                     </br>
                     <span>
-                    The BCRPP will develop a comprehensive tool that will predict breast cancer risk, overall and by sub-types, across racial/ethnic groups.
+                    The Breast Cancer Risk Prediction Project (BCRPP) is developing a comprehensive tool that will predict breast cancer risk – 
+                    overall breast cancer and tumor subtypes of the disease – across racial and ethnic groups.
                     </span>
                     </br></br>
                     <span>
-                    The BCRPP includes individual level data on over 1.5 million  women from the NCI Cohort Consortium Study and other large cohort studies 
-                    and is harmonizing information on family-history, polygenic risk-scores, anthropometric, life-style and reproductive factors, 
-                    hormonal biomarkers and mammographic density. The aims of the BCRP are:
+                    The BCRPP is an international collaborative effort that includes data on over 1.5 million women from the National Cancer Institutes’ 
+                    Cohort Consortium Study, and other large cohort studies. The project is harmonizing information on breast cancer risk factors including, 
+                    breast cancer family history, anthropometric, life-style and reproductive factors, hormonal biomarkers, mammographic density, and polygenic risk scores.
+                    </span>
+                    </br></br>
+                    <span>
+                    The broad scientific goals of the project:
                     </span>
                     </br></br>
                     <div style="margin-left: 40px"> <b>Aim 1:</b> <i>Develop a comprehensive and multi-ethnic model for estimating absolute risk of breast cancer by incorporating information on known breast cancer risk factors </i> </div>
                     </br>
-                    <div style="margin-left: 40px"> <b>Aim 2:</b> <i>Extend the multi-ethnic risk model for the risk prediction of estrogen receptor definced breast cancer </i> </div>
+                    <div style="margin-left: 40px"> <b>Aim 2:</b> <i>Extend the multi-ethnic risk model for the risk prediction of breast cancer defined by tumor estrogen receptor status </i> </div>
                     </br>
-                    <div style="margin-left: 40px"> <b>Aim 3:</b> <i>Evaluate the validity of the risk models developed in Aim 1 and Aim 2 in integrated health care systems, mammography, registries, and an ongoing risk-based mammographic screening trail in the US </i> </div>
+                    <div style="margin-left: 40px"> <b>Aim 3:</b> <i>Evaluate the validity of the risk models developed in Aim 1 and Aim 2 in integrated health care systems, mammography registries, and an ongoing risk-based mammographic screening trail in the US </i> </div>
+                    </br>
+                    <span>
+                    In addition to these broad scientific goals, this BCRPP will also allow researchers to address a broad range of scientific questions. A description of the process for requesting access to data shared with the BCRPP can be found on the <a href="#data_access/overview">Data Access</a> page.
+                    </span>
                     </br>
                 </div>
             </div>
