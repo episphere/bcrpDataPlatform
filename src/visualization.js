@@ -14,6 +14,7 @@ import {
 import { variables } from "./variables.js";
 //import { graphVariables } from "./graphVariables.js";
 import graphVariables from "../graphVariables.json" assert { type: 'json' };
+import graphVariablesCases from "../graphVariablesCases.json" assert { type: 'json' };
 import { addEventSummaryStatsFilterForm, filterData } from "./event.js";
 
 //console.log(data);
@@ -30,8 +31,6 @@ const chartLabels = {
 export const getFileContent = async () => {
   showAnimation();
   const { jsonData, headers } = csvJSON(await getFile(summaryStatsFileId)); // Get summary level data
-  //const testing = await (await fetch("./BCRP_Summary_Results_AllSubjects_TEST_SELECT_VAR - Copy.csv")).text();
-  let exists = Object.values(graphVariables)//.includes("age_at_record_date")
   const lastModified = (await getFileInfo(summaryStatsFileId)).modified_at;
   document.getElementById(
     "dataLastModified"
@@ -44,19 +43,11 @@ export const getFileContent = async () => {
     ).innerHTML = `You don't have access to summary level data, please contact NCI for the access.`;
     return;
   }
-  console.log(jsonData);
-  await renderAllCharts(jsonData, headers);
+  renderAllCharts(jsonData, headers);
 
   const graph1 = document.getElementById("dataSummaryVizLabel1");
     graph1.addEventListener("change", function (event) {
       filterData(jsonData, headers);
-      // updateBarChart(
-      //   event.target.value,
-      //   "dataSummaryVizChart1",
-      //   "dataSummaryVizLabel1",
-      //   jsonData,
-      //   "chartRow1"
-      // );
       });
 
   const graph2 = document.getElementById("dataSummaryVizLabel2");
@@ -104,6 +95,32 @@ export const getFileContentCases = async () => {
     return;
   }
   renderAllCasesCharts(jsonData, headers);
+
+  const graph1 = document.getElementById("dataSummaryVizLabel1");
+  graph1.addEventListener("change", function (event) {
+    filterData(jsonData, headers);
+    });
+
+  const graph2 = document.getElementById("dataSummaryVizLabel2");
+    graph2.addEventListener("change", function (event) {
+      filterData(jsonData, headers);
+      });
+
+  const graph3 = document.getElementById("dataSummaryVizLabel3");
+    graph3.addEventListener("change", function (event) {
+      filterData(jsonData, headers);
+      });
+
+  const graph4 = document.getElementById("dataSummaryVizLabel4");
+    graph4.addEventListener("change", function (event) {
+      filterData(jsonData, headers);
+      });
+
+  const graph5 = document.getElementById("dataSummaryVizLabel5");
+    graph5.addEventListener("change", function (event) {
+      filterData(jsonData, headers);
+      });
+
   allFilters(jsonData, headers, "cases");
   hideAnimation();
 };
@@ -276,42 +293,48 @@ export const renderAllCharts = (data) => {
     "dataSummaryVizChart1",
     "dataSummaryVizLabel1",
     finalData,
-    "chartRow1"
+    "chartRow1",
+    "Full Cohort"
   );
   generateBarChart(
     "age",
     "dataSummaryVizChart2",
     "dataSummaryVizLabel2",
     finalData,
-    "chartRow1"
+    "chartRow1",
+    "Full Cohort"
   );
   generateBarChart(
     "AJAncestry",
     "dataSummaryVizChart3",
     "dataSummaryVizLabel3",
     finalData,
-    "chartRow1"
+    "chartRow1",
+    "Full Cohort"
   );
   generateBarChart(
     "alcohol_status",
     "dataSummaryVizChart4",
     "dataSummaryVizLabel4",
     finalData,
-    "chartRow2"
+    "chartRow2",
+    "Full Cohort"
   );
   generateBarChart(
     "BBD_type",
     "dataSummaryVizChart5",
     "dataSummaryVizLabel5",
     finalData,
-    "chartRow2"
+    "chartRow2",
+    "Full Cohort"
   );
   generateBarChart(
     "BBD_number",
     "dataSummaryVizChart6",
     "dataSummaryVizLabel6",
     finalData,
-    "chartRow2"
+    "chartRow2",
+    "Full Cohort"
   );
 };
 
@@ -327,42 +350,48 @@ export const updateAllCharts = (data) => {
     "dataSummaryVizChart1",
     "dataSummaryVizLabel1",
     finalData,
-    "chartRow1"
+    "chartRow1",
+    "Full Cohort"
   );
   updateBarChart(
     document.getElementById("dataSummaryVizLabel2").value,
     "dataSummaryVizChart2",
     "dataSummaryVizLabel2",
     finalData,
-    "chartRow1"
+    "chartRow1",
+    "Full Cohort"
   );
   updateBarChart(
     document.getElementById("dataSummaryVizLabel3").value,
     "dataSummaryVizChart3",
     "dataSummaryVizLabel3",
     finalData,
-    "chartRow1"
+    "chartRow1",
+    "Full Cohort"
   );
   updateBarChart(
     document.getElementById("dataSummaryVizLabel4").value,
     "dataSummaryVizChart4",
     "dataSummaryVizLabel4",
     finalData,
-    "chartRow2"
+    "chartRow2",
+    "Full Cohort"
   );
   updateBarChart(
     document.getElementById("dataSummaryVizLabel5").value,
     "dataSummaryVizChart5",
     "dataSummaryVizLabel5",
     finalData,
-    "chartRow2"
+    "chartRow2",
+    "Full Cohort"
   );
   updateBarChart(
     document.getElementById("dataSummaryVizLabel6").value,
     "dataSummaryVizChart6",
     "dataSummaryVizLabel6",
     finalData,
-    "chartRow2"
+    "chartRow2",
+    "Full Cohort"
   );
 };
 
@@ -380,40 +409,102 @@ export const renderAllCasesCharts = (data) => {
 
   let finalData = {};
   finalData = data;
-  generateYearsDiagBarChart(
-    "dxdate_primary",
+  generateBarChart(
+    "dxdate_primary1",
     "dataSummaryVizChart1",
     "dataSummaryVizLabel1",
     finalData,
-    "chartRow1"
+    "chartRow1",
+    "Cases"
   );
-  generateCancerInvBarChart(
-    "invasive_primary",
+  generateBarChart(
+    "invasive_primary1",
     "dataSummaryVizChart2",
     "dataSummaryVizLabel2",
     finalData,
-    "chartRow1"
+    "chartRow1",
+    "Cases"
   );
-  generateDetectionPrimBarChart(
-    "Detection_screen",
+  generateBarChart(
+    "detection_primary1",
     "dataSummaryVizChart3",
     "dataSummaryVizLabel3",
     finalData,
-    "chartRow1"
+    "chartRow1",
+    "Cases"
   );
-  generateERTumorStatusBarChart(
-    "ER_statusIndex",
+  generateBarChart(
+    "er_primary1",
     "dataSummaryVizChart4",
     "dataSummaryVizLabel4",
     finalData,
-    "chartRow2"
+    "chartRow2",
+    "Cases"
   );
-  generateTumorGradeBarChart(
-    "Grade1",
+  generateBarChart(
+    "grade_primary1",
     "dataSummaryVizChart5",
     "dataSummaryVizLabel5",
     finalData,
-    "chartRow2"
+    "chartRow2",
+    "Cases"
+  );
+};
+
+export const updateAllCasesCharts = (data) => {
+  let finalData = {};
+  finalData = data;
+  let totalSubjects = 0;
+  data.forEach((value) => (totalSubjects += parseInt(value.TotalSubjects)));
+  document.getElementById("participantCount").innerHTML = `<b>No. of Participants:</b> ${totalSubjects.toLocaleString("en-US")}`;
+
+  updateBarChart(
+    document.getElementById("dataSummaryVizLabel1").value,
+    "dataSummaryVizChart1",
+    "dataSummaryVizLabel1",
+    finalData,
+    "chartRow1",
+    "Cases"
+  );
+  updateBarChart(
+    document.getElementById("dataSummaryVizLabel2").value,
+    "dataSummaryVizChart2",
+    "dataSummaryVizLabel2",
+    finalData,
+    "chartRow1",
+    "Cases"
+  );
+  updateBarChart(
+    document.getElementById("dataSummaryVizLabel3").value,
+    "dataSummaryVizChart3",
+    "dataSummaryVizLabel3",
+    finalData,
+    "chartRow1",
+    "Cases"
+  );
+  updateBarChart(
+    document.getElementById("dataSummaryVizLabel4").value,
+    "dataSummaryVizChart4",
+    "dataSummaryVizLabel4",
+    finalData,
+    "chartRow2",
+    "Cases"
+  );
+  updateBarChart(
+    document.getElementById("dataSummaryVizLabel5").value,
+    "dataSummaryVizChart5",
+    "dataSummaryVizLabel5",
+    finalData,
+    "chartRow2",
+    "Cases"
+  );
+  updateBarChart(
+    document.getElementById("dataSummaryVizLabel6").value,
+    "dataSummaryVizChart6",
+    "dataSummaryVizLabel6",
+    finalData,
+    "chartRow2",
+    "Cases"
   );
 };
 
@@ -448,15 +539,21 @@ export const getSelectedStudies = () => {
   return array;
 };
 
-const generateBarChart = (parameter, id, labelID, jsonData, chartRow) => {
+const generateBarChart = (parameter, id, labelID, jsonData, chartRow, population) => {
   const div = document.createElement("div");
   div.classList = ["col-xl-4 pl-2 padding-right-zero mb-3"];
+  const dataGraphs = population==="Full Cohort" ? graphVariables : graphVariablesCases;
   div.innerHTML = dataVisulizationCards({
     cardHeaderId: labelID,
     cardBodyId: id,
   });
-  let x = Object.values(graphVariables[parameter].values);
-  let y = Object.keys(graphVariables[parameter].values).map(key => mapReduce(jsonData, key));
+  let x = Object.values(dataGraphs[parameter].values);
+  let y = Object.keys(dataGraphs[parameter].values).map(key => mapReduce(jsonData, key));
+
+  let csvContent = '';
+  for (let i =0; i<x.length;i++) {
+    csvContent += x[i] + ',' + y[i] + '\n';
+  }
 
   document.getElementById(chartRow).appendChild(div);
   const data = [
@@ -471,7 +568,7 @@ const generateBarChart = (parameter, id, labelID, jsonData, chartRow) => {
   ];
   const layout = {
     xaxis: {
-      title: graphVariables[parameter].units,
+      title: dataGraphs[parameter].units,
       fixedrange: true,
       automargin: true,
       tickangle: 45,
@@ -493,27 +590,45 @@ const generateBarChart = (parameter, id, labelID, jsonData, chartRow) => {
     modeBarButtonsToRemove: ['hoverClosestCartesian', 'hoverCompareCartesian','toggleHover','toggleSpikelines','zoom2d', 'pan2d', 'select2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'autoScale2d', 'resetScale2d'],
     displaylogo: false,
     toImageButtonOptions: {
-      format: 'png', // one of png, svg, jpeg, webp
+      format: 'svg', // one of png, svg, jpeg, webp
       filename: parameter,
       height: 500,
       width: 700,
       scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
-    }
+    },
+    modeBarButtonsToAdd: [
+      {
+        name: 'Download Data',
+        icon: Plotly.Icons.disk,
+        direction: 'up',
+        click: function(gd) {
+          console.log(csvContent);
+          const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8,' });
+          const objUrl = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = objUrl;
+          link.download = `${parameter}.csv`;
+          link.click();
+      }}]
   };
 
   Plotly.newPlot(`${id}`, data, layout, config);
 
   var htmlTitle = document.getElementById(labelID);
-  for (let index in graphVariables) {
+  for (let index in dataGraphs) {
     let defaultSelected = true ? index===parameter : false
-    console.log(defaultSelected);
-    htmlTitle.options[htmlTitle.options.length] = new Option(graphVariables[index].title, index, defaultSelected, defaultSelected);
+    htmlTitle.options[htmlTitle.options.length] = new Option(dataGraphs[index].title, index, defaultSelected, defaultSelected);
   }
 };
 
-const updateBarChart = (parameter, id, labelID, jsonData, chartRow) => {
-  let x = Object.values(graphVariables[parameter].values);
-  let y = Object.keys(graphVariables[parameter].values).map(key => mapReduce(jsonData, key));
+const updateBarChart = (parameter, id, labelID, jsonData, chartRow, population) => {
+  const dataGraphs = population==="Full Cohort" ? graphVariables : graphVariablesCases;
+  let x = Object.values(dataGraphs[parameter].values);
+  let y = Object.keys(dataGraphs[parameter].values).map(key => mapReduce(jsonData, key));
+  let csvContent = '';
+  for (let i =0; i<x.length;i++) {
+    csvContent += x[i] + ',' + y[i] + '\n';
+  }
   const data = [
     {
       x: x,
@@ -526,7 +641,7 @@ const updateBarChart = (parameter, id, labelID, jsonData, chartRow) => {
   ];
   const layout = {
     xaxis: {
-      title: graphVariables[parameter].units,
+      title: dataGraphs[parameter].units,
       fixedrange: true,
       automargin: true,
       tickangle: 45,
@@ -553,7 +668,21 @@ const updateBarChart = (parameter, id, labelID, jsonData, chartRow) => {
       height: 500,
       width: 700,
       scale: 1 // Multiply title/legend/axis/canvas sizes by this factor
-    }
+    },
+    modeBarButtonsToAdd: [
+      {
+        name: 'Download Data',
+        icon: Plotly.Icons.disk,
+        direction: 'up',
+        click: function(gd) {
+          console.log(csvContent);
+          const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8,' });
+          const objUrl = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = objUrl;
+          link.download = `${parameter}.csv`;
+          link.click();
+      }}]
   };
 
   Plotly.newPlot(`${id}`, data, layout, config);

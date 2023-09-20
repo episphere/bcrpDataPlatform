@@ -44,6 +44,7 @@ import {
   renderAllCasesCharts,
   renderAllCharts,
   updateAllCharts,
+  updateAllCasesCharts,
   updateCounts,
   getFileContent,
   getFileContentCases,
@@ -1587,7 +1588,7 @@ export const filterData = (jsonData, headers) => {
   });
   if (subCases == "all") {
     updateAllCharts(finalData);
-  } else renderAllCasesCharts(finalData);
+  } else updateAllCasesCharts(finalData);
 };
 
 export const addEventConsortiaFilter = (d) => {
