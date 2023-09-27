@@ -1748,3 +1748,9 @@ const dataVisulizationCards = (obj) => `
             </div>
         </div>
     `;
+
+
+//Sample size based on filter selection (Population, Race, Ethnicity, and Cohort)
+//Number of cases according to Population, Race, Ethnicity, and Cohort
+
+//Sample size according to Variable Selection distribution

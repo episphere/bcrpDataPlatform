@@ -232,7 +232,7 @@ export const dataSummaryMissingTemplate = async (popVal) => {
     ethnicity[dataOption.ethnicity] =
       CONSTANTS.BCRPP.ethnicityClass[dataOption.ethnicity];
   });
-
+  console.log(variables);
   renderFilter(data,initialSelection,Object.keys(cohorts),variables,race,ethnicity,popVal);
   midset(data, initialSelection);
   addEventMissingnessFilterBarToggle();
@@ -574,55 +574,73 @@ const midset = (data, acceptedVariables) => {
     const headerCount = computeHeader(data, acceptedVariables);
     headerData = headerCount;
     const result = computeSets(data, acceptedVariables);
-    template += `<tr class="midset-header"><th class="missing-column"><p>Number of subjects with data based on the selection of variables</p>
-                <button class="info-btn variable-definition" aria-label="More info" data-keyboard="false" data-backdrop="static" data-toggle="modal" 
-                  data-target="#confluenceMainModal" data-variable='midsetTopBars'>
-                <i class="fas fa-question-circle cursor-pointer"></i></button></th><th class='bar-chart-cell' 
-                colspan="${Object.keys(headerCount).length}">
-                <div id="midsetHeader"></div></th><th class="missing-column"></th></tr>`;
+    // template += `<tr class="midset-header"><th class="missing-column"><p>Number of subjects with data based on the selection of variables</p>
+    //             <button class="info-btn variable-definition" aria-label="More info" data-keyboard="false" data-backdrop="static" data-toggle="modal" 
+    //               data-target="#confluenceMainModal" data-variable='midsetTopBars'>
+    //             <i class="fas fa-question-circle cursor-pointer"></i></button></th><th class='bar-chart-cell' 
+    //             colspan="${Object.keys(headerCount).length}">
+    //             <div id="midsetHeader"></div></th><th class="missing-column"></th></tr>`;
 
-    template += `<tr><th class="missing-column"></th>`;
+    // template += `<tr><th class="missing-column"></th>`;
+    // for (let variable in headerCount) {
+    //   template += `<th class="missing-column cell-equal-width">${numberWithCommas(
+    //     headerCount[variable]
+    //   )}</th>`;
+    // }
+    template += `<tr><th></th>`
+    // for (let variable in headerCount) {
+    //   template += `<th></th>`
+    // }
+    //template += `<th class="missing-column" colspan="2">Total patients based on Population, Race, Ethnicity, and Cohort</th></tr><tr><td class="missing-column"></td>`;
+    for (let variable in headerCount) {
+      template += `<th class="missing-column cell-equal-width rowspan="2">${variable
+        .replace("_Data available", "")
+        .replace(/_|-/g, " ")}</th>`;
+    }
+    template += `<th class="missing-column, align-top" colspan="2">Total patients based on Population, Race, Ethnicity, and Cohort <br> <p style="font-size:22px;">${numberWithCommas(data.length)}</p></th></tr>`;
+    // template += `<th class="missing-column, align-top" colspan="2">${numberWithCommas(data.length)}</th>
+    //             `
+    template += `<tr><th class="missing-column set-label">
+                  Patient Count 
+                  <button class="info-btn variable-definition" aria-label="More info" data-keyboard="false" data-backdrop="static" 
+                  data-toggle="modal" data-target="#confluenceMainModal" data-variable='midsetTopBars'><i class="fas fa-question-circle cursor-pointer"></i></button>
+                </th>`;
     for (let variable in headerCount) {
       template += `<th class="missing-column cell-equal-width">${numberWithCommas(
         headerCount[variable]
-      )}</th>`;
-    }
-    template += `<th class="missing-column"></th></tr><tr><td class="missing-column"></td>`;
-    for (let variable in headerCount) {
-      template += `<th class="missing-column cell-equal-width">${variable
-        .replace("_Data available", "")
-        .replace(/_|-/g, " ")}</th>`;
+      )}
+      </th>`;
     }
     template += `<th class="missing-column"></th>
                     <th class="missing-column"><button class="info-btn variable-definition" aria-label="More info" data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#confluenceMainModal"  data-variable='midsetSideBars'><i class="fas fa-question-circle cursor-pointer"></i></button></th>
                     </tr></thead><tbody>
-                    <tr>
+                    <!--<tr>
                         <td class="missing-column set-label">
-                            All subjects 
+                            All Patients 
                             <button class="info-btn variable-definition" aria-label="More info" data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#confluenceMainModal"  data-variable='allSubjects'><i class="fas fa-question-circle cursor-pointer"></i></button>
-                        </td>`;
+                        </td>-->`;
 
     const set0 = data.length;
-    acceptedVariables.forEach((variable, index) => {
-      template += `<td class="missing-column">&#9898</td>`;
-      if (index === acceptedVariables.length - 1)
-        template += `<td class="missing-column">${numberWithCommas(
-          set0
-        )}</td><td id="midsetChart" rowspan="${
-          Object.keys(result).length + 2
-        }"></td>`;
-    });
-    template += `</tr>
+    console.log(acceptedVariables);
+    console.log(Object.keys(result));
+    // acceptedVariables.forEach((variable, index) => {
+    //   template += `<td class="missing-column">-</td>`;
+    //   if (index === acceptedVariables.length - 1)
+    //     template += `<td class="missing-column">${numberWithCommas(set0)}</td>
+    //   <!--<td id="midsetChart" rowspan="${Object.keys(result).length + 2}"></td>-->`;
+    // });
+    template += `<!--</tr>-->
                     <tr>
                         <td class="missing-column set-label">
-                            Complete set 
+                            Complete Set 
                             <button class="info-btn variable-definition" aria-label="More info" data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#confluenceMainModal"  data-variable='completeSet'><i class="fas fa-question-circle cursor-pointer"></i></button>
                         </td>`;
     const set1 = setLengths(data, acceptedVariables);
     acceptedVariables.forEach((variable, index) => {
       template += `<td class="missing-column">&#9899</td>`;
       if (index === acceptedVariables.length - 1)
-        template += `<td class="missing-column">${numberWithCommas(set1)}</td>`;
+        template += `<td class="missing-column">${numberWithCommas(set1)}</td>
+        <td id="midsetChart" rowspan="${Object.keys(result).length + 2}"></td>`;
     });
     template += "</tr>";
     let ignore = "";
@@ -634,7 +652,7 @@ const midset = (data, acceptedVariables) => {
     delete result[ignore];
     plotData = Object.values(result);
     plotData.unshift(set1);
-    plotData.unshift(set0);
+    //plotData.unshift(set0);
 
     let variableDisplayed = {};
     for (let key in result) {
@@ -681,11 +699,11 @@ const midset = (data, acceptedVariables) => {
   addEventVariableDefinitions();
   //if (data.length > 0){
   renderMidsetPlot(plotData.reverse(), "midsetChart");
-  renderMidsetHeader(
-    acceptedVariables,
-    Object.values(headerData),
-    "midsetHeader"
-  );
+  // renderMidsetHeader(
+  //   acceptedVariables,
+  //   Object.values(headerData),
+  //   "midsetHeader"
+  // );
   //};
   reSizePlots();
 };
