@@ -138,6 +138,12 @@ body {
   padding: 0px !important;
 }
 
+.container2 {
+  max-width: 90% !important;
+  margin: 0 auto;
+  padding: 0px !important;
+}
+
 #pieChartLabel {
   /* margin-top: 1rem !important; */
   white-space: normal;

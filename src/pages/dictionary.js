@@ -18,7 +18,6 @@ let previousValue = "";
 export const dataDictionaryTemplate = async () => {
   const data = await (await fetch("./BCRP_DataDictionary.txt")).text();
   const tsvData = tsv2Json(data);
-  console.log(tsvData);
   tsvData.data.forEach(function(record) {
     record.Category = record.Category.replace('\n', '');
     if (record.Coding) {
@@ -26,7 +25,7 @@ export const dataDictionaryTemplate = async () => {
       };
     }
   );
-  console.log(tsvData);
+
   const dictionary = tsvData.data;
   const headers = tsvData.headers;
   let template = `
