@@ -1814,8 +1814,9 @@ form {
 #dataLastModified,
 .data-last-modified {
   font-style: italic;
+  font-weight: bold;
   color: #7e7e7e;
-  font-size: 12px;
+  font-size: 14px;
   margin-bottom: 15px;
 }
 

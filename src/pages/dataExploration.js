@@ -208,7 +208,7 @@ export const dataSummaryMissingTemplate = async (popVal) => {
     response = await getFile(missingnessStatsCasesFileId);
   }
   const lastModified = (await getFileInfo(missingnessStatsFileId)).modified_at;
-  document.getElementById("dataLastModified").innerHTML = `Data last modified at - ${new Date(lastModified).toLocaleString()}`;
+  document.getElementById("dataLastModified").innerHTML = `Data current as of - ${new Date(lastModified).toLocaleString()}`;
   const { data, headers } = csv2Json(response);
   const variables = headers.filter((dt) => !dt.match(/ethnicity|race|cohort/i));
   const initialSelection =

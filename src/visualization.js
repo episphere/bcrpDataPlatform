@@ -34,7 +34,7 @@ export const getFileContent = async () => {
   const lastModified = (await getFileInfo(summaryStatsFileId)).modified_at;
   document.getElementById(
     "dataLastModified"
-  ).innerHTML = `Data last modified at - ${new Date(
+  ).innerHTML = `Data current as of - ${new Date(
     lastModified
   ).toLocaleString()}`;
   if (jsonData.length === 0) {
@@ -85,7 +85,7 @@ export const getFileContentCases = async () => {
   const lastModified = (await getFileInfo(summaryStatsCasesFileId)).modified_at;
   document.getElementById(
     "dataLastModified"
-  ).innerHTML = `Data last modified at - ${new Date(
+  ).innerHTML = `Data current as of - ${new Date(
     lastModified
   ).toLocaleString()}`;
   if (jsonData.length === 0) {

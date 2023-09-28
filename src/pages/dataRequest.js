@@ -914,7 +914,7 @@ export const acceptedStudiesView = async () => {
         </div>
         <div class="main-summary-row">
             <div class="offset-xl-2 col data-last-modified align-left mt-3 mb-0 pl-4" id="dataLastModified">
-                Data last modified at - LAST MODIFIED DATE
+              Data current as of - LAST MODIFIED DATE
             </div>
         </div>`;
 
