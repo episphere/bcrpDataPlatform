@@ -49,7 +49,7 @@ export const renderOverView = async () => {
                     </span>
                     </br></br>
                     <span>
-                    The BCRPP is an international collaborative effort that includes data on over 1.5 million women from the National Cancer Institutes’ 
+                    The BCRPP is an international collaborative effort that includes data on over 1.5 million women from the National Cancer Institute's 
                     Cohort Consortium Study, and other large cohort studies. The project is harmonizing information on breast cancer risk factors including, 
                     breast cancer family history, anthropometric, life-style and reproductive factors, hormonal biomarkers, mammographic density, and polygenic risk scores.
                     </span>
