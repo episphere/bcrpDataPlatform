@@ -54,7 +54,7 @@ export const infoDeck = () => {
             <div class="font-size-28 font-bold font-family-helvetica our-goals mt-3 mb-2">OUR GOALS</div>
             <div class="row">
                 <div class="col-lg-3"></div>
-                <div class="col-lg-6 font-size-18 align-left">To build a large-scale collaborative research resource with data from over 1.5 million women of different race/ethnic backgrounds participating in prospective cohort studies or trials to:</div>
+                <div class="col-lg-6 font-size-18 align-left">To build a large-scale collaborative research resource with data from over 1.5 million women from diverse backgrounds participating in prospective cohort studies or trials to:</div>
                 <div class="col-lg-3"></div>
             </div>
             <br>
@@ -134,7 +134,7 @@ export const infoDeckAfterLoggedIn = async () => {
             <div class="font-size-28 font-bold font-family-montserrat our-goals mt-3 mb-2">OUR GOALS</div>
             <div class="row">
                 <div class="col-lg-3"></div>
-                <div class="col-lg-6 font-size-18 align-left">To build a large-scale collaborative research resource with data from over 1.5 million women of different race/ethnic backgrounds participating in prospective cohort studies or trials to:</div>
+                <div class="col-lg-6 font-size-18 align-left">To build a large-scale collaborative research resource with data from over 1.5 million women from diverse backgrounds participating in prospective cohort studies or trials to:</div>
                 <div class="col-lg-3"></div>
             </div>
             <br>
