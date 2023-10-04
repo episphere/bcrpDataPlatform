@@ -483,12 +483,6 @@ export const downloadFiles = (data, headers, fileName, studyDescription) => {
     a.removeAttribute('download');
   });
 
-  function delay(milliseconds){
-    return new Promise(resolve => {
-        setTimeout(resolve, milliseconds);
-    });
-}
-
   const downloadDictionaryTSV = document.getElementById(
     "downloadDictionaryTSV"
   );

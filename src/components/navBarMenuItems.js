@@ -118,7 +118,7 @@ export function pageNavBar(page, activeTab, ...pageHeaders) {
   outerDivEl.classList.add("main-summary-row", "white-bg", "div-border");
 
   const innerDivEl = document.createElement("div");
-  innerDivEl.classList.add("main-summary-row", "white-bg", "div-border");
+  innerDivEl.classList.add("main-summary-row", "white-bg");
 
   outerDivEl.appendChild(innerDivEl);
   containerEl.appendChild(outerDivEl);
