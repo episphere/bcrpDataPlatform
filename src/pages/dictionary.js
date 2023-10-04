@@ -462,37 +462,52 @@ export const downloadFiles = (data, headers, fileName, studyDescription) => {
     });
     data = flatArray;
   }
-  const downloadDictionaryCSV = document.getElementById(
-    "downloadDictionaryCSV"
-  );
-  downloadDictionaryCSV.addEventListener("click", (e) => {
+  const downloadDictionaryCSV = document.getElementById("downloadDictionaryCSV");
+  downloadDictionaryCSV.addEventListener("click", e => {
     e.stopPropagation();
-    const csvContent =
-      "data:text/csv;charset=utf-8," +
-      json2other(data, headers).replace(/(<b>)|(<\/b>)/g, "");
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `${fileName}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const csvContent = json2other(data, headers).replaceAll('<br>', '; ').replaceAll('&lt;', '<').replaceAll('&gt;', '>').replace(/(<b>)|(<\/b>)/g, '');
+    // const encodedUri = encodeURI(csvContent);
+    // console.log(encodedUri);
+    // const link = document.createElement("a");
+    // link.setAttribute("href", encodedUri);
+    // link.setAttribute("download", `${fileName}.csv`);
+    // document.body.appendChild(link);
+    // link.click();
+    // document.body.removeChild(link);
+    const blob = new Blob([csvContent], {type: 'text/csv'});
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.setAttribute('href', url);
+    a.setAttribute('download', 'dictionary.csv');
+    a.click();
+    a.removeAttribute('download');
   });
+
+  function delay(milliseconds){
+    return new Promise(resolve => {
+        setTimeout(resolve, milliseconds);
+    });
+}
 
   const downloadDictionaryTSV = document.getElementById(
     "downloadDictionaryTSV"
   );
   downloadDictionaryTSV.addEventListener("click", (e) => {
     e.stopPropagation();
-    let tsvContent =
-      "data:text/tsv;charset=utf-8," +
-      json2other(data, headers, true).replace(/(<b>)|(<\/b>)/g, "");
-    const encodedUri = encodeURI(tsvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `${fileName}.tsv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    let tsvContent = json2other(data, headers, true).replaceAll('<br>', '; ').replaceAll('&lt;', '<').replaceAll('&gt;', '>').replace(/(<b>)|(<\/b>)/g, "");
+    // const encodedUri = encodeURI(tsvContent);
+    // const link = document.createElement("a");
+    // link.setAttribute("href", encodedUri);
+    // link.setAttribute("download", `${fileName}.tsv`);
+    // document.body.appendChild(link);
+    // link.click();
+    // document.body.removeChild(link);
+    const blob = new Blob([tsvContent], {type: 'text/tsv'});
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.setAttribute('href', url);
+    a.setAttribute('download', 'dictionary.tsv');
+    a.click();
+    a.removeAttribute('download');
   });
 };
