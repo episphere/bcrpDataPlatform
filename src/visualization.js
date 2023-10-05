@@ -9,7 +9,8 @@ import {
   mapReduce,
   summaryStatsCasesFileId,
   reSizePlots,
-  csv2Json2
+  csv2Json2,
+  getMail
 } from "./shared.js";
 import { variables } from "./variables.js";
 //import { graphVariables } from "./graphVariables.js";

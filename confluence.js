@@ -36,6 +36,7 @@ import {
   loginAppEpisphere,
   logOut,
   loginAppProd,
+  //loginMail,
 } from "./src/manageAuthentication.js";
 import {
   storeAccessToken,
@@ -57,7 +58,7 @@ import {
   uploadFormFolder,
   uploadFile,
   uploadWordFile,
-  getFile,
+  getFile
 } from "./src/shared.js";
 import {
   addEventConsortiaSelect,
@@ -93,7 +94,7 @@ export const confluence = async () => {
   const navBarOptions = document.getElementById("navBarOptions");
   document
     .getElementById("loginBoxAppDev")
-    .addEventListener("click", loginAppDev);
+    .addEventListener("click", loginAppDev);//loginAppDev);
   document
     .getElementById("loginBoxAppStage")
     .addEventListener("click", loginObs);

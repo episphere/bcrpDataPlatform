@@ -96,7 +96,7 @@ export const dataAccess = (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions",
       "Chair Menu",
       "DACC Menu"
@@ -106,7 +106,7 @@ export const dataAccess = (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions",
       "Chair Menu"
     );
@@ -115,7 +115,7 @@ export const dataAccess = (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions",
       "DACC Menu"
     );
@@ -124,7 +124,7 @@ export const dataAccess = (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions"
     );
   }
@@ -181,7 +181,7 @@ export const formSectionOther = async (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions",
       "Chair Menu",
       "DACC Menu"
@@ -191,7 +191,7 @@ export const formSectionOther = async (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions",
       "Chair Menu"
     );
@@ -200,7 +200,7 @@ export const formSectionOther = async (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions",
       "DACC Menu"
     );
@@ -209,7 +209,7 @@ export const formSectionOther = async (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions"
     );
   }
@@ -254,7 +254,7 @@ export const formSection = async (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions",
       "Chair Menu",
       "DACC Menu"
@@ -264,7 +264,7 @@ export const formSection = async (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions",
       "Chair Menu"
     );
@@ -273,7 +273,7 @@ export const formSection = async (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions",
       "DACC Menu"
     );
@@ -282,7 +282,7 @@ export const formSection = async (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions"
     );
   }
@@ -302,6 +302,9 @@ export const formSection = async (activeTab, showDescripton) => {
     ("0" + date.getDate()).slice(-2);
 
   const dictionaryVars = localStorage.getItem("dictionaryVars");
+
+  
+
   template += ` 
     <div class="general-bg padding-bottom-1rem">
       <div class="container body-min-height">
@@ -372,8 +375,13 @@ export const formSection = async (activeTab, showDescripton) => {
               </div>
 
               <div class="input-group">
-                <label for="acro"><b>BCRPP Study Acronym(s) for the Contact Investigator</b></span></label>
+                <label for="acro"><b>BCRPP Study Acronym(s) for the Contact Investigator</b><span class='required-label'>*</span></label>
                 <textarea id="acro" name="acro" rows="2" cols="65"></textarea>
+              </div>
+
+              <div class="input-group">
+                <label for="otherinvest"><b>OTHER Investigators and their institutions</b><span class='required-label'>*</span></label>
+                <textarea id="otherinvest" name="otherinvest" rows="2" cols="65" required></textarea>
               </div>
 
               <div class="input-group">
@@ -394,17 +402,17 @@ export const formSection = async (activeTab, showDescripton) => {
             </div>
 
               <div class="input-group">
-                <label for="background"><b>Background</b><span class='required-label'>*</span></label>
+                <label for="background"><b>Background</b> <i> Please provide a concise description of Background</i><span class='required-label'>*</span></label>
                 <textarea id="background" name="background" rows="4" cols="65" required></textarea>
               </div>
 
               <div class="input-group">
-                <label for="aims"><b>Aims</b><span class='required-label'>*</span></label>
+                <label for="aims"><b>Aims</b><i> Please provide a concise description of Aims</i><span class='required-label'>*</span></label>
                 <textarea id="aims" name="aims" rows="4" cols="65" required> </textarea>
               </div>
 
               <div class="input-group">
-                <label for="analyplan"><b>Analysis Plan</b><span class='required-label'>*</span></label>
+                <label for="analyplan"><b>Analysis Plan</b><i> Please provide a concise description of your Analysis Plan</i><span class='required-label'>*</span></label>
                 <textarea id="analyplan" name="analyplan" rows="4" cols="65" required> </textarea>
               </div>
 
@@ -661,7 +669,7 @@ export const formSection = async (activeTab, showDescripton) => {
               <br>
               <p><u><b>Authorship</b></u><span class='required-label'>*</span></p>
                 <div class="input-group">
-                  <u id="tooltip1"><a><label><input id="authconf" name="authconf" type="checkbox" value="Yes" required/> 
+                  <u id="tooltip1"><a><label for="Authorship"><input id="authconf" name="authconf" type="checkbox" value="Yes" required/> 
                   <b>Please confirm that you agree to comply with the BCRPP authorship and publication requirements.</b>
                   <span>
                   Recipient shall have the first right to publish on the Results of the Research Study. 
@@ -681,17 +689,17 @@ export const formSection = async (activeTab, showDescripton) => {
                   and BCRPP DACC decide that the publication is being delayed unduly by the Recipient, the Recipient 
                   shall lose its first right to publish.
                   </span></a></u></label>
-                  <label for="Authorship"><i>Please include any special considerations you would like to bring to the DACC’s attention.</i></label>
-
-                  <textarea id="authorship" name="authorship" rows="4" cols="65"></textarea>
+                  <br>
+                  <i>Please include any special considerations you would like to bring to the DACC’s attention.</i>
+                  <textarea id="anyoth" name="anyoth" rows="4" cols="65"></textarea>
                 </div>
                 
                 <button type="submit" id="submitFormButton" class="buttonsubmit"> 
                   <span class="buttonsubmit__text"> Send Form </span>
                 </button>
-                <button type="button" id="downloadJSON" class="buttonsubmit"> 
+                <!--<button type="button" id="downloadJSON" class="buttonsubmit"> 
                   <span class="buttonsubmit__text"> Download JSON </span>
-                </button>
+                </button>-->
                 <!--button type="button" id="downloadWord" class="buttonsubmit d-none"> 
                   <span class="buttonsubmit__text"> Download Word </span>
                 </button>
@@ -720,10 +728,10 @@ export const formSection = async (activeTab, showDescripton) => {
               </div>
             </div>
           </div>
-            <div class="results">
+            <!--<div class="results">
             <h2>Form Data</h2>
             <pre></pre>
-            </div>
+            </div>-->
           </div>
         </div>
       </div>`;
@@ -822,7 +830,7 @@ export const acceptedStudiesSection = (activeTab) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions",
       "Chair Menu",
       "DACC Menu"
@@ -832,7 +840,7 @@ export const acceptedStudiesSection = (activeTab) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions",
       "Chair Menu"
     );
@@ -841,7 +849,7 @@ export const acceptedStudiesSection = (activeTab) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions",
       "DACC Menu"
     );
@@ -850,7 +858,7 @@ export const acceptedStudiesSection = (activeTab) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions"
     );
   }
@@ -932,7 +940,7 @@ export const chairSection = (activeTab) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions",
       "Chair Menu",
       "DACC Menu"
@@ -942,7 +950,7 @@ export const chairSection = (activeTab) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions",
       "Chair Menu"
     );
@@ -951,7 +959,7 @@ export const chairSection = (activeTab) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions",
       "DACC Menu"
     );
@@ -960,7 +968,7 @@ export const chairSection = (activeTab) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions"
     );
   }
@@ -1451,7 +1459,7 @@ export const daccSection = (activeTab) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions",
       "Chair Menu",
       "DACC Menu"
@@ -1461,7 +1469,7 @@ export const daccSection = (activeTab) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions",
       "Chair Menu"
     );
@@ -1470,7 +1478,7 @@ export const daccSection = (activeTab) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions",
       "DACC Menu"
     );
@@ -1479,7 +1487,7 @@ export const daccSection = (activeTab) => {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions"
     );
   }
@@ -2237,11 +2245,11 @@ export const dataForm = async () => {
       blob = docx.Packer.toBlob(doc);
     }
 
-    if (parentEl.id === "downloadJSON") {
-      blob = new Blob([JSON.stringify(jsondata)], {
-        type: "application/json",
-      });
-    }
+    // if (parentEl.id === "downloadJSON") {
+    //   blob = new Blob([JSON.stringify(jsondata)], {
+    //     type: "application/json",
+    //   });
+    // }
     const downloadLink = URL.createObjectURL(blob);
     let filename = jsondata.projname;
 
@@ -2258,16 +2266,25 @@ export const dataForm = async () => {
     btn.classList.toggle("buttonsubmit--loading");
     btn.disabled = true;
     eventtest.preventDefault();
+    const form = document.querySelector(".contact-form form")
     const data = new FormData(eventtest.target);
+    const jsondata = Object.fromEntries(data.entries());
+    jsondata.basevar = data.getAll("basevar");
+    jsondata.ibcvar = data.getAll("ibcvar");
+    jsondata.reqcoh = data.getAll("reqcoh");
+    jsondata.acrosplit = jsondata.acro.split('\n');
+    jsondata.otherinvestsplit = jsondata.otherinvest.split('\n');
+    jsondata.allinvestsplit = jsondata.allinvest.split('\n');
+    jsondata.backgroundsplit = jsondata.background.split('\n');
+    jsondata.aimssplit = jsondata.aims.split('\n');
+    jsondata.analyplansplit = jsondata.analyplan.split('\n');
+    jsondata.timesplit = jsondata.timeline.split('\n');
+    jsondata.anyothsplit = jsondata.anyoth.split('\n');
 
-    const formJSON = Object.fromEntries(data.entries());
-    formJSON.basevar = data.getAll("basevar");
-    formJSON.ibcvar = data.getAll("ibcvar");
-    formJSON.reqcoh = data.getAll("reqcoh");
-    const results = document.querySelector(".results pre");
-    results.innerText = JSON.stringify(formJSON, null, 2);
+    // const results = document.querySelector(".results pre");
+    // results.innerText = JSON.stringify(formJSON, null, 2);
     // fs.wrtieFile('test.json', formJSON);
-    await generateWord(formJSON);
+    await generateWord(jsondata);
     btn.classList.toggle("buttonsubmit--loading");
     btn.disabled = false;
   }
@@ -2286,6 +2303,15 @@ export const dataForm = async () => {
   }
 
   async function generateWord(jsondata) {
+    const acroRun = jsondata.acrosplit.map(line=>new docx.TextRun({break:1,text:line}));
+    const otherinvestRun = jsondata.otherinvestsplit.map(line=>new docx.TextRun({break:1,text:line}));
+    const allinvestRun = jsondata.allinvestsplit.map(line=>new docx.TextRun({break:1,text:line}));
+    const backgroundRun = jsondata.backgroundsplit.map(line=>new docx.TextRun({break:1,text:line}));
+    const aimsRun = jsondata.aimssplit.map(line=>new docx.TextRun({break:1,text:line}));
+    const analyplanRun = jsondata.analyplansplit.map(line=>new docx.TextRun({break:1,text:line}));
+    const timeRun = jsondata.timesplit.map(line=>new docx.TextRun({break:1,text:line}));
+    const anyothRun = jsondata.anyothsplit.map(line=>new docx.TextRun({break:1,text:line}));
+
     const doc = new docx.Document({
       styles: {
         default: {
@@ -2306,6 +2332,21 @@ export const dataForm = async () => {
             },
           },
         },
+        paragraphStyles: [ 
+          {
+            id: "longinput",
+            name: "Long Input",
+            basedOn: "Normal",
+            paragraph: {
+              font: "Verdana",
+              size: 18,
+            },
+            run: {
+              font: "Verdana",
+              size: 18,
+          },
+          },
+        ],
       },
       sections: [
         {
@@ -2450,6 +2491,7 @@ export const dataForm = async () => {
                 after: 150,
               },
             }),
+
             new docx.Paragraph({
               heading: docx.HeadingLevel.HEADING_2,
               alignment: docx.AlignmentType.START,
@@ -2457,31 +2499,56 @@ export const dataForm = async () => {
                 new docx.TextRun({
                   text: "BCRPP Study Acronym(s) for the Contact Investigator: ",
                 }),
-                new docx.TextRun({
-                  text: jsondata.acro,
-                  bold: false,
-                }),
               ],
               spacing: {
-                after: 150,
+                after: 0,
               },
             }),
+            new docx.Paragraph({
+              style: "longinput",
+              children: acroRun,
+              spacing: {
+                after: 150,
+              }}),
+
             new docx.Paragraph({
               heading: docx.HeadingLevel.HEADING_2,
               alignment: docx.AlignmentType.START,
               children: [
                 new docx.TextRun({
-                  text: "All Investigators (and Institutions) who require access: ",
-                }),
-                new docx.TextRun({
-                  text: jsondata.investigators,
-                  bold: false,
+                  text: "OTHER Investigators and their institutions: ",
                 }),
               ],
               spacing: {
-                after: 150,
+                after: 0,
               },
             }),
+            new docx.Paragraph({
+              style: "longinput",
+              children: otherinvestRun,
+              spacing: {
+                after: 150,
+              }}),
+
+            new docx.Paragraph({
+              heading: docx.HeadingLevel.HEADING_2,
+              alignment: docx.AlignmentType.START,
+              children: [
+                new docx.TextRun({
+                  text: "ALL Investigators (and their institutions) who will require access to the data requested: ",
+                }),
+              ],
+              spacing: {
+                after: 0,
+              },
+            }),
+            new docx.Paragraph({
+              style: "longinput",
+              children: allinvestRun,
+              spacing: {
+                after: 150,
+              }}),
+
             new docx.Paragraph({
               heading: docx.HeadingLevel.HEADING_2,
               alignment: docx.AlignmentType.START,
@@ -2489,15 +2556,18 @@ export const dataForm = async () => {
                 new docx.TextRun({
                   text: "Background: ",
                 }),
-                new docx.TextRun({
-                  text: jsondata.background,
-                  bold: false,
-                }),
               ],
               spacing: {
-                after: 150,
+                after: 0,
               },
             }),
+            new docx.Paragraph({
+              style: "longinput",
+              children: backgroundRun,
+              spacing: {
+                after: 150,
+              }}),
+
             new docx.Paragraph({
               heading: docx.HeadingLevel.HEADING_2,
               alignment: docx.AlignmentType.START,
@@ -2505,15 +2575,18 @@ export const dataForm = async () => {
                 new docx.TextRun({
                   text: "Aims: ",
                 }),
-                new docx.TextRun({
-                  text: jsondata.aims,
-                  bold: false,
-                }),
               ],
               spacing: {
-                after: 150,
+                after: 0,
               },
             }),
+            new docx.Paragraph({
+              style: "longinput",
+              children: aimsRun,
+              spacing: {
+                after: 150,
+              }}),
+
             new docx.Paragraph({
               heading: docx.HeadingLevel.HEADING_2,
               alignment: docx.AlignmentType.START,
@@ -2521,15 +2594,18 @@ export const dataForm = async () => {
                 new docx.TextRun({
                   text: "Analysis Plan: ",
                 }),
-                new docx.TextRun({
-                  text: jsondata.analyplan,
-                  bold: false,
-                }),
               ],
               spacing: {
-                after: 150,
+                after: 0,
               },
             }),
+            new docx.Paragraph({
+              style: "longinput",
+              children: analyplanRun,
+              spacing: {
+                after: 150,
+              }}),
+
             new docx.Paragraph({
               heading: docx.HeadingLevel.HEADING_2,
               alignment: docx.AlignmentType.START,
@@ -2600,6 +2676,7 @@ export const dataForm = async () => {
                 after: 150,
               },
             }),
+
             new docx.Paragraph({
               heading: docx.HeadingLevel.HEADING_2,
               alignment: docx.AlignmentType.START,
@@ -2607,88 +2684,133 @@ export const dataForm = async () => {
                 new docx.TextRun({
                   text: "Timeline: ",
                 }),
-                new docx.TextRun({
-                  text: jsondata.timeline,
-                  bold: false,
-                }),
               ],
               spacing: {
-                after: 150,
+                after: 0,
               },
             }),
+            new docx.Paragraph({
+              style: "longinput",
+              children: timeRun,
+              spacing: {
+                after: 150,
+              }}),
+
             new docx.Paragraph({
               heading: docx.HeadingLevel.HEADING_2,
               alignment: docx.AlignmentType.START,
               children: [
                 new docx.TextRun({
-                  text: "Authorship: ",
-                }),
-                new docx.TextRun({
-                  text: jsondata.authorship,
-                  bold: false,
+                  text: "Special Considerations: ",
                 }),
               ],
               spacing: {
-                after: 150,
+                after: 0,
               },
             }),
+            new docx.Paragraph({
+              style: "longinput",
+              children: anyothRun,
+              spacing: {
+                after: 150,
+              }}),
           ],
         },
       ],
     });
 
-    filename = jsondata.projname.substring(0, 10) + "_" + filename;
-    let files = await getFolderItems(uploadFormFolder);
-    const filesinfoldernames = [];
-    const filesinfolderids = [];
-    for (let i = 0; i < files.entries.length; i++) {
-      filesinfoldernames.push(files.entries[i].name);
-      filesinfolderids.push(files.entries[i].id);
-    }
+    // filename = jsondata.projname.substring(0, 10) + "_" + filename;
+    // let files = await getFolderItems(uploadFormFolder);
+    // const filesinfoldernames = [];
+    // const filesinfolderids = [];
+    // for (let i = 0; i < files.entries.length; i++) {
+    //   filesinfoldernames.push(files.entries[i].name);
+    //   filesinfolderids.push(files.entries[i].id);
+    // }
 
-    await docx.Packer.toBlob(doc).then(async (blob) => {
-      if (filesinfoldernames.includes(filename)) {
-        const [name, extension] = filename.split(".");
-        let i = 1;
-        while (filesinfoldernames.includes(filename)) {
-          if (filename.includes(")")) {
-            const [name, version] = filename.split("(");
-            filename = name + `(${i})` + version.substring(2);
-          } else {
-            filename = name + `(${i}).` + extension;
-          }
-          i++;
-        }
-        let response = await uploadWordFile(blob, filename, uploadFormFolder);
-        await assigntasktochair();
-        let fileid = response.entries[0].id;
-        //Modal code here
+    let user = JSON.parse(localStorage.parms).login.split('@')[0];
+    const date = new Date();
+    const today = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+    let filename = jsondata.projname + '_' + user + '_' + today + '_' + Date.now() + '.docx';
+    await docx.Packer.toBlob(doc).then(async (blob, btn) => {
+      let response = await uploadWordFile(blob, filename, uploadFormFolder);
+      // let response = {'status': 201};
+      console.log(response);
+      if (response.status === 401) {
+        btn.classList.toggle("buttonsubmit--loading");
+        btn.disabled = false;
         document.getElementById("modalBody").innerHTML = `
-          <p>File was successfully uploaded.</p>
-          <p>Document ID: ${fileid}</p>`;
+            <p>Error detected, please upload again.</p>`;
         $("#popUpModal").modal("show");
+      } else if (response.status === 409){
+        document.getElementById("modalBody").innerHTML = `
+        <p>Conflict detected, please upload again.</p>`;
+        $("#popUpModal").modal("show");
+        btn.classList.toggle("buttonsubmit--loading");
+        btn.disabled = false;
       } else {
-        // Adding keywords
-        let response = await uploadWordFile(blob, filename, uploadFormFolder);
-        if (response.status === 201) {
-          await assigntasktochair();
-          let fileid = response.entries[0].id;
-          //Modal code here
-          document.getElementById("modalBody").innerHTML = `
-        <p>File was successfully uploaded.</p>
-        <p>Document ID: ${fileid}</p>`;
-          $("#popUpModal").modal("show");
-        } else {
+      let fileid = response.entries[0].id;
+      //let fileid = "testing";
+      //let metaData = addMetaData(fileid, jsondata.datacon);
+      const downloadLink = URL.createObjectURL(blob);
+      let a = document.createElement("a");
+      a.href = downloadLink;
+      a.download = filename;
+      document.getElementById("modalBody").innerHTML = `
+            <p>File was successfully uploaded.</p>
+            <p>Document ID: ${fileid}</p>`;
+      $("#popUpModal").modal("show");
+      a.click();
+      let popup = document.getElementById('popUpModal');
+      let btns = popup.querySelectorAll('button');
+      for (let button of btns) {
+        button.addEventListener('click', function () {
+          location.reload();
+          })
         }
       }
+      // if (filesinfoldernames.includes(filename)) {
+      //   const [name, extension] = filename.split(".");
+      //   let i = 1;
+      //   while (filesinfoldernames.includes(filename)) {
+      //     if (filename.includes(")")) {
+      //       const [name, version] = filename.split("(");
+      //       filename = name + `(${i})` + version.substring(2);
+      //     } else {
+      //       filename = name + `(${i}).` + extension;
+      //     }
+      //     i++;
+      //   }
+      //   let response = await uploadWordFile(blob, filename, uploadFormFolder);
+      //   await assigntasktochair();
+      //   let fileid = response.entries[0].id;
+      //   //Modal code here
+      //   document.getElementById("modalBody").innerHTML = `
+      //     <p>File was successfully uploaded.</p>
+      //     <p>Document ID: ${fileid}</p>`;
+      //   $("#popUpModal").modal("show");
+      // } else {
+      //   // Adding keywords
+      //   let response = await uploadWordFile(blob, filename, uploadFormFolder);
+      //   if (response.status === 201) {
+      //     await assigntasktochair();
+      //     let fileid = response.entries[0].id;
+      //     //Modal code here
+      //     document.getElementById("modalBody").innerHTML = `
+      //   <p>File was successfully uploaded.</p>
+      //   <p>Document ID: ${fileid}</p>`;
+      //     $("#popUpModal").modal("show");
+      //   } else {
+      //   }
+      // }
     });
   }
 
   const form = await document.querySelector(".contact-form");
   form.addEventListener("submit", handleFormSubmit);
 
-  const downloadJSON = document.getElementById("downloadJSON");
-  downloadJSON.addEventListener("click", handleFormDownload);
+  // const downloadJSON = document.getElementById("downloadJSON");
+  // downloadJSON.addEventListener("click", handleFormDownload);
 };
 
 const viewFiles = async (files) => {

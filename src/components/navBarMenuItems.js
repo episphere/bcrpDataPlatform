@@ -53,7 +53,7 @@ export const navBarMenutemplate = () => {
                     <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="#data_access/overview" title="Data Access" id="dataRequest"> Overview </a>
                     ${
                       showProjectConceptForm
-                        ? `<a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="#data_access/form" title="Data Form" id="dataForm"> Project Concept Forms </a>
+                        ? `<a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="#data_access/form" title="Data Form" id="dataForm"> Submit Concept Form </a>
                     `
                         : ""
                     }
@@ -141,7 +141,7 @@ export function pageNavBar(page, activeTab, ...pageHeaders) {
     }
     
     // keeping this part for future use to get "Project Concept Form" and "View Submissions" back.
-    if (header === "Project Concept Form") {
+    if (header === "Submit Concept Form") {
       link.href = `#${page}/form`;
       if (activeTab === "form") link.classList.add("active");
     }

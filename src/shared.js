@@ -192,6 +192,19 @@ export const getFileVersions = async (id) => {
   }
 };
 
+export const getMail = async () => {
+
+  let r = await fetch('https://graph.microsoft.com/v1.0/me/messages?$select=sender,subject', {
+    method: "GET",
+    headers: {
+      Accept: 'application/json',
+      Authorization: "Bearer " + 'd4510a7c-acc6-4db4-9572-acffb25e95d7',
+    }
+  })
+  console.log(r);
+  return r.json();
+}
+
 export const storeAccessToken = async () => {
   let parms = searchParms();
   if (parms.code) {

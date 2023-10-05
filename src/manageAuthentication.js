@@ -25,6 +25,10 @@ export const checkAccessTokenValidity = async () => {
   }
 };
 
+// export const loginMail = () => {
+//   location.href = `https://login.microsoftonline.com/14b77578-9773-42d5-8507-251ca2dc2b06/oauth2/v2.0/authorize?response_type=code&client_id=f0555410-abd7-4fc6-8487-5cbfedd2bac4&redirect_uri=http://localhost&state=T2j8Q~tLwYx1SDlViJ7J6BLvIkaLEK9ifV25wc-o&scope=User.Read`;
+// }
+
 export const loginObs = () => {
   location.href = `https://account.box.com/api/oauth2/authorize?response_type=code&client_id=${config.iniAppStage.client_id}&redirect_uri=${applicationURLs.stage}&state=${config.iniAppStage.stateIni}`;
 };
@@ -32,13 +36,9 @@ export const loginObs = () => {
 export const loginAppDev = () => {
   location.href = `https://account.box.com/api/oauth2/authorize?response_type=code&client_id=${config.iniAppLocal.client_id}&redirect_uri=${location.href}&state=${config.iniAppLocal.stateIni}`;
 };
-//location.origin + location.pathname
+
 export const loginAppEpisphere = () => {
-  location.href = `https://account.box.com/api/oauth2/authorize?response_type=code&client_id=${
-    config.iniAppDev.client_id
-  }&redirect_uri=${location.origin + location.pathname}&state=${
-    config.iniAppDev.stateIni
-  }`;
+  location.href = `https://account.box.com/api/oauth2/authorize?response_type=code&client_id=${config.iniAppDev.client_id}&redirect_uri=${location.origin + location.pathname}&state=${config.iniAppDev.stateIni}`;
 };
 
 export const loginAppProd = () => {
