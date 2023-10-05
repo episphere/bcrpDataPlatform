@@ -6,14 +6,10 @@ Core	Identification/Dates	record_date	Date of data/sample collection	Date	"dd/mm
 Core	Identification/Dates	qcycle	Questionnaire cycle (repeated measures)	Categorical	"0 - Baseline
 1 + - Follow up cycle #
 888 - Missing"
-Core	Identification/Dates	baseline	Baseline record indicator	Categorical	"0 - Record taken subsequent to baseline
-1 - Record taken at baseline"
-Core	Identification/Dates	lastfollowup	Last follow up indicator	Categorical	"0 - Record date is prior to last follow up
-1 - Record date is date of last follow up"
-Core	Demographics	birth_year	Birth year	Date (yyyy)	"yyyy
-8888- Missing/Unknown"
-Core	Demographics	sex	Sex	Categorical	"0 - Female
-1 - Male"
+Core	Identification/Dates	baseline	Baseline record indicator	Categorical	"0 - Record taken subsequent to baseline, 1 - Record taken at baseline"
+Core	Identification/Dates	lastfollowup	Last follow up indicator	Categorical	"0 - Record date is prior to last follow up, 1 - Record date is date of last follow up"
+Core	Demographics	birth_year	Birth year	Date (yyyy)	"yyyy, 888- Missing/Unknown"
+Core	Demographics	sex	Sex	Categorical	"0 - Female, 1 - Male"
 Core	Demographics	age	Age at record_date	Integer	Age in years
 Core	Demographics	race	Race (US OMB categories)	Categorical	"1 - White
 2 - Black/African American
@@ -259,30 +255,30 @@ Core	Reproductive History	meno_reason	Reason for menopause	Categorical	"1 - Natu
 5 - Artificial/Induced (no detail)
 777 - NA (premenopausal)
 888 - Missing/Unknown"
-Core	Reproductive History	hrtuse	Use of any hormone replacement therapy	Categorical	"0 - Never used hormonal replacement therapy
+Core	Hormone Replacement Therapy	hrtuse	Use of any hormone replacement therapy	Categorical	"0 - Never used hormonal replacement therapy
 1 - Current use
 2 - Former use
 3 - Ever used (unknown current or former) 
 888 - Missing/Unknown"
-Core	Reproductive History	hrt_dur	Lifetime duration of hormonal replacement therapy in months	Decimal	"Time in months
+Core	Hormone Replacement Therapy	hrt_dur	Lifetime duration of hormonal replacement therapy in months	Decimal	"Time in months
 666 - NA (premenopausal)
 777 - Never user
 888 - Missing/Unknown"
-Core	Reproductive History	hrtuse_ep	Use of E+P hormone replacement therapy	Categorical	"0 - Never used hormonal replacement therapy
+Core	Hormone Replacement Therapy	hrtuse_ep	Use of E+P hormone replacement therapy	Categorical	"0 - Never used hormonal replacement therapy
 1 - Current use
 2 - Former use
 3 - Ever used (unknown current or former) 
 888 - Missing/Unknown"
-Core	Reproductive History	hrtep_dur	Lifetime duration of E+P hormonal replacement therapy in months	Decimal	"Time in months
+Core	Hormone Replacement Therapy	hrtep_dur	Lifetime duration of E+P hormonal replacement therapy in months	Decimal	"Time in months
 666 - NA (premenopausal)
 777 - Never user
 888 - Missing/Unknown"
-Core	Reproductive History	hrtuse_eonly	Use of E only hormone replacement therapy	Categorical	"0 - Never used hormonal replacement therapy
+Core	Hormone Replacement Therapy	hrtuse_eonly	Use of E only hormone replacement therapy	Categorical	"0 - Never used hormonal replacement therapy
 1 - Current use
 2 - Former use
 3 - Ever used (unknown current or former) 
 888 - Missing/Unknown"
-Core	Reproductive History	hrteonly_dur	Lifetime duration of E only hormonal replacement therapy in months	Decimal	"Time in months
+Core	Hormone Replacement Therapy	hrteonly_dur	Lifetime duration of E only hormonal replacement therapy in months	Decimal	"Time in months
 666 - NA (premenopausal)
 777 - Never user
 888 - Missing/Unknown"
@@ -343,6 +339,9 @@ Mammographic density	Mammographic density	MamDensity	BIRADS density category (le
 3 - Heterogenously dense
 4 - Extremely dense
 888 - Missing/Unknown"
+Incident Breast Cancer	Censoring	lastfup	Year od last follow up	Integer	"yyyy	
+7777- NA	
+8888 - Missing/Unknown"
 Incident Breast Cancer 	Diagnostic	dxdate_primary1	Year of diagnosis of 1st primary breast cancer	Integer	"yyyy
 7777- NA
 8888 - Missing/Unknown"
