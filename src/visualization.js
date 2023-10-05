@@ -588,6 +588,7 @@ const generateBarChart = (parameter, id, labelID, jsonData, chartRow, population
 
   var config = {
     responsive: true,
+    displayModeBar: true,
     modeBarButtonsToRemove: ['hoverClosestCartesian', 'hoverCompareCartesian','toggleHover','toggleSpikelines','zoom2d', 'pan2d', 'select2d', 'lasso2d', 'zoomIn2d', 'zoomOut2d', 'autoScale2d', 'resetScale2d'],
     displaylogo: false,
     toImageButtonOptions: {
