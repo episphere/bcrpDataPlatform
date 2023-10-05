@@ -317,7 +317,7 @@ export const formSection = async (activeTab, showDescripton) => {
         <div class="data-submission div-border font-size-18" style="padding-left: 1rem; padding-right: 1rem;">             
           <section class="contact-form">
             <p>Please fill out the form below. This will be reviewed by the BCRPP Data Access Coordination Committee (DACC) 
-            to ensure that proposal is consistent with BCRPP goals and individual cohorts’ consents. The DACC consists of 
+            to ensure that the proposal is consistent with BCRPP goals and individual cohorts’ consents. The DACC consists of 
             representatives from the BCRPP Steering Committee and representatives of individual cohorts. Proposals will be reviewed 
             once every four months. Data for approved concepts will be sent only to the Investigators listed below, 
             each of whose Institutions will need to sign the BCRPP DTA.</p>
@@ -373,7 +373,7 @@ export const formSection = async (activeTab, showDescripton) => {
               </div>
 
               <div class="input-group">
-                <label for="acro"><b>BCRPP Study Acronym(s) for the Contact Investigator</b><span class='required-label'>*</span></label>
+                <label for="acro"><b>If yes, BCRPP Study Acronym(s) for the Contact Investigator</b></label>
                 <textarea id="acro" name="acro" rows="2" cols="65"></textarea>
               </div>
 
