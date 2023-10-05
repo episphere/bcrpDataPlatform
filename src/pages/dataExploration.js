@@ -663,7 +663,7 @@ const midset = (data, acceptedVariables) => {
     // template += `<th class="missing-column, align-top" colspan="2">${numberWithCommas(data.length)}</th>
     //             `
     template += `<tr><th class="missing-column set-label">
-                  Patient Count 
+                  Participant Count 
                   <button class="info-btn variable-definition" aria-label="More info" data-keyboard="false" data-backdrop="static" 
                   data-toggle="modal" data-target="#confluenceMainModal" data-variable='midsetTopBars'><i class="fas fa-question-circle cursor-pointer"></i></button>
                 </th>`;

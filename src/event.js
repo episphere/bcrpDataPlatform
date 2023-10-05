@@ -1224,7 +1224,7 @@ export const addEventVariableDefinitions = () => {
         definition = "Number of subjects with data on all selected variables.";
       }
       if (variable === "midsetTopBars") {
-        variableName = "Patient Count";
+        variableName = "Participant Count";
         definition =
           "Number of subjects with data on each of the selected variable (irrespective of the others).";
       }
