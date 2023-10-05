@@ -62,7 +62,7 @@ export const renderOverView = async () => {
                     </br>
                     <div style="margin-left: 40px"> <b>Aim 2:</b> <i>Extend the multi-ethnic risk model for the risk prediction of breast cancer defined by tumor estrogen receptor status </i> </div>
                     </br>
-                    <div style="margin-left: 40px"> <b>Aim 3:</b> <i>Evaluate the validity of the risk models developed in Aim 1 and Aim 2 in integrated health care systems, mammography registries, and an ongoing risk-based mammographic screening trail in the US </i> </div>
+                    <div style="margin-left: 40px"> <b>Aim 3:</b> <i>Evaluate the validity of the risk models developed in Aim 1 and Aim 2 in integrated health care systems, mammography registries, and an ongoing risk-based mammographic screening trial in the US </i> </div>
                     </br>
                     <span>
                     In addition to these broad scientific goals, this BCRPP will also allow researchers to address a broad range of scientific questions. A description of the process for requesting access to data shared with the BCRPP can be found on the <a href="#data_access/overview">Data Access</a> page.
