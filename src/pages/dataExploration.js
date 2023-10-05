@@ -206,7 +206,7 @@ export const dataSummaryMissingTemplate = async (popVal) => {
   showAnimation();
   let response = "";
   if (popVal == "Full Cohort"){
-    response = await getFile(missingnessStatsFileId);
+    response = await getFile(1326638151823);//missingnessStatsFileId);
   } else {
     response = await getFile(missingnessStatsCasesFileId);
   }
