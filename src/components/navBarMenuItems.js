@@ -15,7 +15,7 @@ export const navBarMenutemplate = () => {
             <div class="dropdown-menu navbar-dropdown" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="#about/overview" id="aboutBCRPP">Overview</a>
                 <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="#about/description" id="resourcesBCRPP">Description of Studies</a>
-                <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="#about/contact" id="contactBCRPP">Scientific Committee</a>
+                <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="#about/contact" id="contactBCRPP">DACC Members</a>
             </div>
         </div>
         <div class="grid-elements dropdown">
@@ -171,7 +171,7 @@ export function pageNavBar(page, activeTab, ...pageHeaders) {
       link.href = `#${page}/description`;
       if (activeTab === "description") link.classList.add("active");
     }
-    if (header === "Scientific Committee") {
+    if (header === "DACC Members") {
       link.href = `#${page}/contact`;
       if (activeTab === "contact") link.classList.add("active");
     }

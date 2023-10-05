@@ -606,7 +606,7 @@ const manageHash = async () => {
     if (!element) return;
     if (element.classList.contains("navbar-active")) return;
     assignNavbarActive(element, 1);
-    document.title = "BCRP - Scientific Committee";
+    document.title = "BCRPP - DACC Members";
     //const fileInfo = await getFileInfo(904897189551);
     //console.log({ fileInfo });
     //aboutConfluence("contact", fileInfo ? true : false);

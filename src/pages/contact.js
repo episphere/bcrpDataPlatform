@@ -4,13 +4,13 @@ export const confluenceContactPage = () => {
             <div class="body-min-height">
                 <div class="main-summary-row">
                     <div class="align-left">
-                         <h1 class="page-header">Scientific Committee</h1>
+                         <h1 class="page-header">DACC Members</h1>
                     </div>
                 </div>
                 <div class="main-summary-row confluence-resources white-bg div-border font-size-18">
                     <div class="col">
                         <span>For questions about the Breast Cancer Risk Prediction Project</span></br>
-                        <span>send mail to: Pete Kraft at </strong> <a href="">pkraft@hsph.harvard.edu</a></span></br>
+                        <span>send mail to: Pete Kraft at </strong> <a href="">kraftp2@nih.gov</a></span></br>
                         </br>
                         <div class="row">
                             <div class="col">

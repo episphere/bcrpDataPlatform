@@ -17,7 +17,7 @@ export const aboutConfluence = (activeTab, showDescription) => {
 
         "Description of Studies",
 
-        "Scientific Committee"
+        "DACC Members"
       )
     : `<div id='overview'></div>`;
   console.log({ navBarItems });
