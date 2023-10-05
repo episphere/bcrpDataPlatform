@@ -67,6 +67,7 @@ import {
   addEventDataGovernanceNavBar,
   addEventMyProjects,
   addEventUpdateSummaryStatsData,
+  addEventcreateaccessStats,
 } from "./src/event.js";
 import { dataAnalysisTemplate } from "./src/pages/dataAnalysis.js";
 import { getFileContent, getFileContentCases } from "./src/visualization.js";
@@ -168,6 +169,7 @@ export const confluence = async () => {
       document.title = "BCRPP - Summary Statistics";
       confluenceDiv.innerHTML = dataSummary("Summary Statistics", false, true, true);
       addEventUpdateSummaryStatsData();
+      addEventcreateaccessStats();
       dataSummaryStatisticsTemplate();
       await getFileContent();
       const subcasesSelection = document.getElementById("subcasesSelection");
@@ -185,6 +187,7 @@ export const confluence = async () => {
         document.title = "BCRPP - Subset Statistics";
         confluenceDiv.innerHTML = dataSummary("Subset Statistics", false, true, true);
         addEventUpdateSummaryStatsData();
+        addEventcreateaccessStats();
         removeActiveClass("nav-link", "active");
         document.querySelectorAll('[href="#data_exploration/subset"]')[1].classList.add("active");
         dataSummaryMissingTopBarTemplate();
@@ -228,6 +231,7 @@ export const confluence = async () => {
           false
         );
         addEventUpdateSummaryStatsData();
+        addEventcreateaccessStats();
         removeActiveClass("nav-link", "active");
         document
           .querySelectorAll('[href="#data_exploration/dictionary"]')[1]

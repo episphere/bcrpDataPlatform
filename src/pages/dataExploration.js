@@ -84,6 +84,7 @@ export const dataSummary = (
                   ) !== -1
                     ? `
                     <div class="main-summary-row"><button id="updateSummaryStatsData" class="btn btn-outline-dark" aria-label="Update summary stats data" data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#confluenceMainModal">Update data</button></div>
+                    <div class="main-summary-row"><button id="createaccessStats" class="btn btn-outline-dark" aria-label="Create access stats CSV" data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#confluenceMainModal">Create Access Stats</button></div>
                 `
                     : ``
                 }

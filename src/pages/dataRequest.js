@@ -303,8 +303,6 @@ export const formSection = async (activeTab, showDescripton) => {
 
   const dictionaryVars = localStorage.getItem("dictionaryVars");
 
-  
-
   template += ` 
     <div class="general-bg padding-bottom-1rem">
       <div class="container body-min-height">
