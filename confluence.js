@@ -408,7 +408,7 @@ const manageRouter = async () => {
     console.log("about overview clicked");
     document.title = "BCRPP - Overview";
     assignNavbarActive(element, 1);
-    aboutConfluence("overview");
+    aboutConfluence("overview", true);
     renderOverView();
   } else if (hash === "#about/contact") {
     const element = document.getElementById("contactBCRPP");
@@ -416,7 +416,7 @@ const manageRouter = async () => {
     if (element.classList.contains("navbar-active")) return;
     document.title = "BCRPP - DACC Members";
     assignNavbarActive(element, 1);
-    aboutConfluence("overview");
+    aboutConfluence("contact", true);
     confluenceContactPage();
     hideAnimation();
   } else if (hash === "#about/description") {
@@ -428,7 +428,7 @@ const manageRouter = async () => {
     document.title = "BCRP - Study Description";
     showAnimation();
     // const fileInfo = await getFileInfo(904897189551); //new: 904897189551; original: 881144462693
-    aboutConfluence("description", false);
+    aboutConfluence("description", true);
     renderDescriptionNotSignedIn('test');
     hideAnimation();
   } else if (hash === "#join") {
