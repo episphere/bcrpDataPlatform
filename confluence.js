@@ -344,7 +344,7 @@ export const confluence = async () => {
                 ${
                   getMyPermissionLevel
                     ? `
-                    <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links navbar-active" href="#data_governance" title="Data Governance" id="dataGovernance">
+                    <a hidden class="dropdown-item nav-link nav-menu-links dropdown-menu-links navbar-active" href="#data_governance" title="Data Governance" id="dataGovernance">
                         Data Governance
                     </a>
                 `
@@ -352,7 +352,7 @@ export const confluence = async () => {
                 }
             `;
       document.getElementById("myProjectsNav").innerHTML = `
-                <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links" href="#my_projects" title="My Projects" id="myProjects">
+                <a hidden class="dropdown-item nav-link nav-menu-links dropdown-menu-links" href="#my_projects" title="My Projects" id="myProjects">
                     My Projects
                 </a>
             `;
@@ -360,21 +360,21 @@ export const confluence = async () => {
       addEventMyProjects();
     } else if (array.length > 0 && getMyPermissionLevel) {
       document.getElementById("governanceNav").innerHTML = `
-                <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links navbar-active" href="#data_governance" title="Data Governance" id="dataGovernance">
+                <a hidden class="dropdown-item nav-link nav-menu-links dropdown-menu-links navbar-active" href="#data_governance" title="Data Governance" id="dataGovernance">
                     Data Governance
                 </a>
             `;
       addEventDataGovernanceNavBar(true);
     } else if (projectArray.length > 0 && showProjects === true) {
       document.getElementById("myProjectsNav").innerHTML = `
-                <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links" href="#my_projects" title="My Projects" id="myProjects">
+                <a hidden class="dropdown-item nav-link nav-menu-links dropdown-menu-links" href="#my_projects" title="My Projects" id="myProjects">
                     My Projects
                 </a>
             `;
       addEventMyProjects();
     } else if (getMyPermissionLevel) {
       document.getElementById("governanceNav").innerHTML = `
-                <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links navbar-active" href="#data_governance" title="Data Governance" id="dataGovernance">
+                <a hidden class="dropdown-item nav-link nav-menu-links dropdown-menu-links navbar-active" href="#data_governance" title="Data Governance" id="dataGovernance">
                     Data Governance
                 </a>
             `;
