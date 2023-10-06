@@ -53,13 +53,13 @@ export const renderDescriptionNotSignedIn = (modified_at) => {
                 </div>
             </div>
         </div>
-        <div class="main-summary-row">
+        <!--<div class="main-summary-row">
             <div class="offset-xl-2 col data-last-modified align-left mt-3 mb-0 pl-4" id="dataLastModified">
                 Data current as of - ${new Date(
                   modified_at
                 ).toLocaleString()}
             </div>
-        </div>
+        </div>-->
     `;
   document.getElementById("overview").innerHTML = template;
   getDescriptionNotSignedIn();
