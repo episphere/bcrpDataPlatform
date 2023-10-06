@@ -478,7 +478,7 @@ export const downloadFiles = (data, headers, fileName, studyDescription) => {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.setAttribute('href', url);
-    a.setAttribute('download', 'dictionary.csv');
+    a.setAttribute('download', `${fileName}.csv`);
     a.click();
     a.removeAttribute('download');
   });
@@ -500,7 +500,7 @@ export const downloadFiles = (data, headers, fileName, studyDescription) => {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.setAttribute('href', url);
-    a.setAttribute('download', 'dictionary.tsv');
+    a.setAttribute('download', `${fileName}.tsv`);
     a.click();
     a.removeAttribute('download');
   });

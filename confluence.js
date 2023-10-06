@@ -75,7 +75,7 @@ import { aboutConfluence, renderOverView } from "./src/pages/about.js";
 import { confluenceResources } from "./src/pages/join.js";
 import { confluenceContactPage } from "./src/pages/contact.js";
 import { footerTemplate } from "./src/components/footer.js";
-import { renderDescription } from "./src/pages/description.js";
+import { renderDescription, renderDescriptionNotSignedIn } from "./src/pages/description.js";
 import { dataDictionaryTemplate } from "./src/pages/dictionary.js";
 import { showPreview } from "./src/components/boxPreview.js";
 
@@ -414,10 +414,21 @@ const manageRouter = async () => {
     const element = document.getElementById("contactBCRPP");
     if (!element) return;
     if (element.classList.contains("navbar-active")) return;
-    document.title = "BCRP - Scientific Committe";
+    document.title = "BCRPP - DACC Members";
     assignNavbarActive(element, 1);
     aboutConfluence("overview");
     confluenceContactPage();
+    hideAnimation();
+  } else if (hash === "#about/description") {
+    const element = document.getElementById("aboutBCRPP");
+    if (!element) return;
+    //if (element.classList.contains("navbar-active")) return;
+    assignNavbarActive(element, 1);
+    document.title = "BCRP - Study Description";
+    showAnimation();
+    // const fileInfo = await getFileInfo(904897189551); //new: 904897189551; original: 881144462693
+    aboutConfluence("description", false);
+    renderDescriptionNotSignedIn('test');
     hideAnimation();
   } else if (hash === "#join") {
     const element = document.getElementById("resourcesBCRPP");
