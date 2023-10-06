@@ -72,7 +72,7 @@ export const confluenceContactPage = () => {
                                         <tr>
                                             <td>Rudolf Kaaks</td>
                                             <td>European Prospective Investigation of Cancer and Nutrition</td>
-                                            <td>German Cancer Research Center, Germanyh</td>
+                                            <td>German Cancer Research Center, Germany</td>
                                         </tr>
                                         <tr>
                                             <td>Archie Campbell</td>
