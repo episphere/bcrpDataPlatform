@@ -21,122 +21,122 @@ export const confluenceContactPage = () => {
                                     <tbody>
                                         <tr>
                                             <td>Pete Kraft</td>
-                                            <td>PLCO</td>
+                                            <td>Prostate, Lung, Colorectal and Ovarian Cancer Screening Trial</td>
                                             <td>Division of Cancer Epidemiology and Genetics, USA</td>
                                         </tr>
                                         <tr>
                                             <td>Montserrat Garcia-Closas</td>
-                                            <td>BGS</td>
+                                            <td>Generations Study</td>
                                             <td>The Institute of Cancer Research, London</td>
                                         </tr>
                                         <tr>
                                             <td>Jeanine Genkinger</td>
-                                            <td>BCFR</td>
+                                            <td>Breast Cancer Family Registry </td>
                                             <td>Columbia University, USA</td>
                                         </tr>
                                         <tr>
                                             <td>Julie Palmer</td>
-                                            <td>BWHS</td>
+                                            <td>Black Women's Health Study</td>
                                             <td>Boston University, USA</td>
                                         </tr>
                                         <tr>
                                             <td>Matt Barnet</td>
-                                            <td>CARET</td>
+                                            <td>Carotene and Retinol Efficacy Trial</td>
                                             <td>Fred Hutch, USA</td>
                                         </tr>
                                         <tr>
                                             <td>Kala Visvanathan</td>
-                                            <td>CLUE-II</td>
+                                            <td>Clue Cohort Study-II</td>
                                             <td>Johns Hopkins University, USA</td>
                                         </tr>
                                         <tr>
                                             <td>Mia Gaudet</td>
-                                            <td>Connect</td>
+                                            <td>Connect for Cancer Prevention Cohort Study</td>
                                             <td>Division of Cancer Epidemiology and Genetics, USA</td>
                                         </tr>
                                         <tr>
                                             <td>Lauren Teras</td>
-                                            <td>CPS-3</td>
+                                            <td>Cancer Prevention Study 2</td>
                                             <td>American Cancer Society, USA</td>
                                         </tr>
                                         <tr>
                                             <td>Thomas Rohan</td>
-                                            <td>CSDLH</td>
+                                            <td>Canadian Study of Diet, Lifestyle and Health</td>
                                             <td>Albert Eisten College of Medicine, USA</td>
                                         </tr>
                                         <tr>
                                             <td>Jim Lacey</td>
-                                            <td>CTS</td>
+                                            <td>California Teachers Study</td>
                                             <td>City of Hope, USA</td>
                                         </tr>
                                         <tr>
                                             <td>Rudolf Kaaks</td>
-                                            <td>EPIC</td>
+                                            <td>European Prospective Investigation of Cancer and Nutrition</td>
                                             <td>German Cancer Research Center, Germanyh</td>
                                         </tr>
                                         <tr>
                                             <td>Archie Campbell</td>
-                                            <td>GS</td>
+                                            <td>Generation Scotland</td>
                                             <td>University of Edinburgh, UK</td>
                                         </tr>
                                         <tr>
                                             <td>Renee Fortner</td>
-                                            <td>JANUS</td>
+                                            <td>Janus Serum Bank Cohort</td>
                                             <td>German Cancer Research Center, Germany</td>
                                         </tr>
                                         <tr>
                                             <td>Roger Milne</td>
-                                            <td>MCCS</td>
+                                            <td>Melbourne Collaborative Cohort Study </td>
                                             <td>Cancer Council Victoria, USA</td>
                                         </tr>
                                         <tr>
                                             <td>Chris Haiman</td>
-                                            <td>MEC</td>
+                                            <td>Multiethnic Cohort</td>
                                             <td>University of South California, USA</td>
                                         </tr>
                                         <tr>
                                             <td>Celine Vachon</td>
-                                            <td>MMHS</td>
+                                            <td>Mayo Mammography Health Study</td>
                                             <td>Mayo Clinic, USA</td>
                                         </tr>
                                         <tr>
                                             <td>Heather Eliasson</td>
-                                            <td>NHS, NHS2</td>
+                                            <td>Nurses Health Study</td>
                                             <td>Harvard T.H. Chan School of Public Health, USA</td>
                                         </tr>
                                         <tr>
                                             <td>Yu Chen</td>
-                                            <td>NYUWHS</td>
+                                            <td>New York University Women s Health Study </td>
                                             <td>NYU Langone Health, USA</td>
                                         </tr>
                                         <tr>
                                             <td>Katie O'Brien</td>
-                                            <td>SISTER</td>
+                                            <td>Sister Study</td>
                                             <td>National Institute of Environmental Health Sciences, USA</td>
                                         </tr>
                                         <tr>
                                             <td>Ylva Lagerros</td>
-                                            <td>SNM</td>
+                                            <td>Swedish National March Cohort</td>
                                             <td>Karolinska Institutet, Sweden</td>
                                         </tr>
                                         <tr>
                                             <td>Emily White</td>
-                                            <td>VITAL</td>
+                                            <td>VITamins And Lifestyle Cohort</td>
                                             <td>Fred Hutchinson Cancer Research Center, USA</td>
                                         </tr>
                                         <tr>
                                             <td>Garnet Anderson</td>
-                                            <td>WHI</td>
+                                            <td>Women's Health Initiatve</td>
                                             <td>Fred Hutchinson Cancer Research Center, USA</td>
                                         </tr>
                                         <tr>
                                             <td>I-min Lee</td>
-                                            <td>WHS</td>
+                                            <td>Women's Health Study</td>
                                             <td>Harvard T.H. Chan School of Public Health, USA</td>
                                         </tr>
                                         <tr>
                                             <td>Sven Sandin</td>
-                                            <td>WLH</td>
+                                            <td>Women's Lifestyle and Health</td>
                                             <td>Karolinska Institutet, Sweden</td>
                                         </tr>
                                     </tbody>
