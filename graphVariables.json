@@ -158,9 +158,9 @@
         "units" : "",
         "values" : 
             {
-            "breastfeed_0": "0",
-            "breastfeed_1": "1",
-            "breastfeed_777": "777",
+            "breastfeed_0": "Never Breastfed",
+            "breastfeed_1": "Ever Breastfed",
+            "breastfeed_777": "Nonparous",
             "breastfeed_NA": "NA",
             "breastfeed_DK": "Unknown"
             }
@@ -171,11 +171,11 @@
         "units" : "",
         "values" : 
             {
-            "education_1": "1",
-            "education_2": "2",
-            "education_3": "3",
-            "education_4": "4",
-            "education_5": "5",
+            "education_1": "Less than high school",
+            "education_2": "High School",
+            "education_3": "Some college education",
+            "education_4": "University (degree)",
+            "education_5": "Graduate school (some or degree)",
             "education_DK": "Unknown" 
             }
         },
@@ -196,8 +196,8 @@
         "units" : "",
         "values" : 
             {
-            "fhx_fdr_brca_0": "0",
-            "fhx_fdr_brca_1": "1",
+            "fhx_fdr_brca_0": "No",
+            "fhx_fdr_brca_1": "Yes",
             "fhx_fdr_brca_DK": "Unknown"
             }
         },
@@ -207,10 +207,10 @@
         "units" : "",
         "values" : 
             {
-            "hrtuse_0": "0",
-            "hrtuse_1": "1",
-            "hrtuse_2": "2",
-            "hrtuse_3": "3",
+            "hrtuse_0": "Never used hormonal replacement therapy",
+            "hrtuse_1": "Current use",
+            "hrtuse_2": "Former use",
+            "hrtuse_3": "Ever used (unknown current or former)",
             "hrtuse_DK": "Unknown"
             }
         },
@@ -220,10 +220,10 @@
         "units" : "",
         "values" : 
             {
-            "hrtuse_eonly_0": "0",
-            "hrtuse_eonly_1": "1",
-            "hrtuse_eonly_2": "2",
-            "hrtuse_eonly_3": "3",
+            "hrtuse_eonly_0": "Never used hormonal replacement therapy",
+            "hrtuse_eonly_1": "Current use",
+            "hrtuse_eonly_2": "Former use",
+            "hrtuse_eonly_3": "Ever used (unknown current or former)",
             "hrtuse_eonly_DK": "Unknown"
             }
         },
@@ -233,10 +233,10 @@
         "units" : "",
         "values" : 
             {
-            "hrtuse_ep_0": "0",
-            "hrtuse_ep_1": "1",
-            "hrtuse_ep_2": "2",
-            "hrtuse_ep_3": "3",
+            "hrtuse_ep_0": "Never used hormonal replacement therapy",
+            "hrtuse_ep_1": "Current use",
+            "hrtuse_ep_2": "Former use",
+            "hrtuse_ep_3": "Ever used (unknown current or former) ",
             "hrtuse_ep_DK": "Unknown"
             }
         },
@@ -246,10 +246,10 @@
         "units" : "",
         "values" : 
             {
-            "meno_reason_1": "1",
-            "meno_reason_2": "2",
-            "meno_reason_3": "3",
-            "meno_reason_4": "4",
+            "meno_reason_1": "Natural",
+            "meno_reason_2": "Surgical",
+            "meno_reason_3": "Radiation/Chemotherapy induced",
+            "meno_reason_4": "Medication",
             "meno_reason_777": "777",
             "meno_reason_DK": "Unknown",
             "meno_reason_NA": "Not Applicable"
@@ -261,9 +261,9 @@
         "units" : "",
         "values" : 
             {
-            "meno_status_1": "0",
-            "meno_status_2": "1",
-            "meno_status_3": "2",
+            "meno_status_1": "Postmenopausal",
+            "meno_status_2": "Premenopuasal",
+            "meno_status_3": "Perimenopausal/other",
             "meno_status_DK": "Unknown"
             }
         },
@@ -273,8 +273,8 @@
         "units" : "",
         "values" : 
             {
-            "ocuse_current_0": "0",
-            "ocuse_current_1": "1",
+            "ocuse_current_0": "No",
+            "ocuse_current_1": "Yes",
             "ocuse_current_DK": "Unknown"
             }
         },
@@ -284,8 +284,8 @@
         "units" : "",
         "values" : 
             {
-            "ocuse_ever_0": "0",
-            "ocuse_ever_1": "1",
+            "ocuse_ever_0": "Never used oral contraceptives",
+            "ocuse_ever_1": "Ever used oral contraceptives",
             "ocuse_ever_DK": "Unknown"
             }
         },
@@ -321,8 +321,8 @@
         "units" : "",
         "values" : 
             {
-            "parous_0": "0",
-            "parous_1": "1",
+            "parous_0": "Non-parous",
+            "parous_1": "Parous",
             "parous_DK": "Unknown"
             }
         },
