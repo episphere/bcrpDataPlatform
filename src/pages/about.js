@@ -20,7 +20,6 @@ export const aboutConfluence = (activeTab, showDescription) => {
         "DACC Members"
       )
     : `<div id='overview'></div>`;
-  console.log({ navBarItems });
   let template = `
         <div class="general-bg body-min-height padding-bottom-1rem">
             <div class="container">

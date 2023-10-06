@@ -420,8 +420,9 @@ const manageRouter = async () => {
     confluenceContactPage();
     hideAnimation();
   } else if (hash === "#about/description") {
-    const element = document.getElementById("aboutBCRPP");
+    const element = document.getElementById("studydescBCRPP");
     if (!element) return;
+    console.log("test");
     //if (element.classList.contains("navbar-active")) return;
     assignNavbarActive(element, 1);
     document.title = "BCRP - Study Description";
@@ -625,7 +626,7 @@ const manageHash = async () => {
     confluenceContactPage();
     hideAnimation();
   } else if (hash === "#about/description") {
-    const element = document.getElementById("aboutBCRPP");
+    const element = document.getElementById("studydescBCRPP");
     if (!element) return;
     //if (element.classList.contains("navbar-active")) return;
     assignNavbarActive(element, 1);
