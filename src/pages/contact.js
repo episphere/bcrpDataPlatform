@@ -16,60 +16,128 @@ export const confluenceContactPage = () => {
                             <div class="col">
                                 <table class="table table-bordered table-responsive w-100 d-block d-md-table">
                                     <thead>
-                                        <tr><th>Member</th><th>Affiliation</th></tr>
+                                        <tr><th>Member</th><th>Cohort</th><th>Affiliation</th></tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>Pete Kraft</td>
+                                            <td>PLCO</td>
                                             <td>Division of Cancer Epidemiology and Genetics, USA</td>
                                         </tr>
                                         <tr>
                                             <td>Montserrat Garcia-Closas</td>
+                                            <td>BGS</td>
                                             <td>The Institute of Cancer Research, London</td>
                                         </tr>
                                         <tr>
-                                            <td>Nilanjan Chatterjee</td>
-                                            <td>Johns Hopkins University</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Lauren Teras</td>
-                                            <td>American Cancer Society</td>
-                                        </tr>
-                                        <tr>
-                                            <td>James Lacey</td>
-                                            <td>City of Hope</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Mia Gaudet</td>
-                                            <td>Division of Cancer Epidemiology and Genetics</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Chris Haiman</td>
-                                            <td>University of South California</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Diana Buist</td>
-                                            <td>Kaiser Pemanente Washington Health Research Institute</td>
+                                            <td>Jeanine Genkinger</td>
+                                            <td>BCFR</td>
+                                            <td>Columbia University, USA</td>
                                         </tr>
                                         <tr>
                                             <td>Julie Palmer</td>
-                                            <td>Boston University</td>
+                                            <td>BWHS</td>
+                                            <td>Boston University, USA</td>
                                         </tr>
                                         <tr>
-                                            <td>Mary Beth Terry</td>
-                                            <td>Columbia University Mailman School of Public Health</td>
+                                            <td>Matt Barnet</td>
+                                            <td>CARET</td>
+                                            <td>Fred Hutch, USA</td>
                                         </tr>
                                         <tr>
-                                            <td>Stephanie Smith-Warner</td>
-                                            <td>Harvard T.H. Chan School of Public Health</td>
+                                            <td>Kala Visvanathan</td>
+                                            <td>CLUE-II</td>
+                                            <td>Johns Hopkins University, USA</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mia Gaudet</td>
+                                            <td>Connect</td>
+                                            <td>Division of Cancer Epidemiology and Genetics, USA</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lauren Teras</td>
+                                            <td>CPS-3</td>
+                                            <td>American Cancer Society, USA</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Thomas Rohan</td>
+                                            <td>CSDLH</td>
+                                            <td>Albert Eisten College of Medicine, USA</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jim Lacey</td>
+                                            <td>CTS</td>
+                                            <td>City of Hope, USA</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Rudolf Kaaks</td>
+                                            <td>EPIC</td>
+                                            <td>German Cancer Research Center, Germanyh</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Archie Campbell</td>
+                                            <td>GS</td>
+                                            <td>University of Edinburgh, UK</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Renee Fortner</td>
+                                            <td>JANUS</td>
+                                            <td>German Cancer Research Center, Germany</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Roger Milne</td>
+                                            <td>MCCS</td>
+                                            <td>Cancer Council Victoria, USA</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Chris Haiman</td>
+                                            <td>MEC</td>
+                                            <td>University of South California, USA</td>
                                         </tr>
                                         <tr>
                                             <td>Celine Vachon</td>
-                                            <td>Mayo Clinic</td>
+                                            <td>MMHS</td>
+                                            <td>Mayo Clinic, USA</td>
                                         </tr>
                                         <tr>
-                                            <td>Lisa Gallicchio</td>
-                                            <td>Division of Cancer Control and Population Sciences</td>
+                                            <td>Heather Eliasson</td>
+                                            <td>NHS, NHS2</td>
+                                            <td>Harvard T.H. Chan School of Public Health, USA</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Yu Chen</td>
+                                            <td>NYUWHS</td>
+                                            <td>NYU Langone Health, USA</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Katie O'Brien</td>
+                                            <td>SISTER</td>
+                                            <td>National Institute of Environmental Health Sciences, USA</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ylva Lagerros</td>
+                                            <td>SNM</td>
+                                            <td>Karolinska Institutet, Sweden</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Emily White</td>
+                                            <td>VITAL</td>
+                                            <td>Fred Hutchinson Cancer Research Center, USA</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Garnet Anderson</td>
+                                            <td>WHI</td>
+                                            <td>Fred Hutchinson Cancer Research Center, USA</td>
+                                        </tr>
+                                        <tr>
+                                            <td>I-min Lee</td>
+                                            <td>WHS</td>
+                                            <td>Harvard T.H. Chan School of Public Health, USA</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sven Sandin</td>
+                                            <td>WLH</td>
+                                            <td>Karolinska Institutet, Sweden</td>
                                         </tr>
                                     </tbody>
                                 </table>
