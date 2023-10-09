@@ -91,6 +91,9 @@ export const confluence = async () => {
       navigator.serviceWorker.register("./serviceWorker.js");
     } catch (error) {}
   }
+  if (window.location.href.includes("index.html")){
+    location.href = location.href.replace("index.html", "");
+  };
   const confluenceDiv = document.getElementById("confluenceDiv");
   const navBarOptions = document.getElementById("navBarOptions");
   document
