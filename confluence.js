@@ -86,10 +86,19 @@ import { showPreview } from "./src/components/boxPreview.js";
  */
 
 export const confluence = async () => {
-  if ("serviceWorker" in navigator) {
-    try {
-      navigator.serviceWorker.register("./serviceWorker.js");
-    } catch (error) {}
+  // if ("serviceWorker" in navigator) {
+  //   try {
+  //     navigator.serviceWorker.register("./serviceWorker.js");
+  //   } catch (error) {}
+  // }
+  if(window.navigator && navigator.serviceWorker) {
+    navigator.serviceWorker.getRegistrations()
+    .then(function(registrations) {
+      for(let registration of registrations) {
+        registration.unregister();
+        console.log("Service worker removed.")
+      }
+    });
   }
   if (window.location.href.includes("index.html")){
     location.href = location.href.replace("index.html", "");
