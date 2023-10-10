@@ -339,7 +339,7 @@ Mammographic density	Mammographic density	MamDensity	BIRADS density category (le
 3 - Heterogenously dense
 4 - Extremely dense
 888 - Missing/Unknown"
-Incident Breast Cancer	Censoring	lastfup	Year od last follow up	Integer	"yyyy	
+Incident Breast Cancer	Censoring	lastfup	Year of last follow up	Integer	"yyyy	
 7777- NA	
 8888 - Missing/Unknown"
 Incident Breast Cancer 	Diagnostic	dxdate_primary1	Year of diagnosis of 1st primary breast cancer	Integer	"yyyy
