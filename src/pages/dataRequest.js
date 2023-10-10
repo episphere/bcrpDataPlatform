@@ -512,7 +512,7 @@ export const formSection = async (activeTab, showDescripton) => {
                 <p>Select cohorts from which data is being requested. Proposals only requesting data from a single cohort will not be approved. If you are interested in only analyzing data from a particular cohort, please contact that cohort directly. Information on cohorts can be found <a href="#about/description">here</a>.</p>
                 <label for="reqcoh"><b>Requested Cohorts</b><span class='required-label'>*</span></label>
                 <label>
-                  <input id="reqcohv" name="reqcohv" type="checkbox" value="reqcohv"/>
+                  <input id="reqcohv" name="reqcohv" type="checkbox" value="reqcohv" checked/>
                   Check All
                 </label>
               </div>
@@ -520,137 +520,137 @@ export const formSection = async (activeTab, showDescripton) => {
               <div class="input-group">
                 <ul class="form" id='reqcohlist'>
                   <div class="inline-field">
-                    <input id="CSDLH" name="reqcoh" type="checkbox" value="CSDLH"/>
+                    <input id="CSDLH" name="reqcoh" type="checkbox" value="CSDLH" checked/>
                     <label class="container-ul" for="CSDLH">CSDLH</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="BCFR" name="reqcoh" type="checkbox" value="BCFR"/>
+                    <input id="BCFR" name="reqcoh" type="checkbox" value="BCFR" checked/>
                     <label class="container-ul" for="BCFR">BCFR</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="BWHS" name="reqcoh" type="checkbox" value="BWHS"/>
+                    <input id="BWHS" name="reqcoh" type="checkbox" value="BWHS" checked/>
                     <label class="container-ul" for="BWHS">BWHS</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="CARET" name="reqcoh" type="checkbox" value="CARET"/>
+                    <input id="CARET" name="reqcoh" type="checkbox" value="CARET" checked/>
                     <label class="container-ul" for="CARET">CARET</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="CLUE-II" name="reqcoh" type="checkbox" value="CLUE-II"/>
+                    <input id="CLUE-II" name="reqcoh" type="checkbox" value="CLUE-II" checked/>
                     <label class="container-ul" for="CLUE-II">CLUE-II</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="Connect" name="reqcoh" type="checkbox" value="Connect"/>
+                    <input id="Connect" name="reqcoh" type="checkbox" value="Connect" checked/>
                     <label class="container-ul" for="Connect">Connect</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="CPS-2" name="reqcoh" type="checkbox" value="CPS-2"/>
+                    <input id="CPS-2" name="reqcoh" type="checkbox" value="CPS-2" checked/>
                     <label class="container-ul" for="CPS-2">CPS-2</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="CPS-3" name="reqcoh" type="checkbox" value="CPS-3"/>
+                    <input id="CPS-3" name="reqcoh" type="checkbox" value="CPS-3" checked/>
                     <label class="container-ul" for="CPS-3">CPS-3</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="CTS" name="reqcoh" type="checkbox" value="CTS"/>
+                    <input id="CTS" name="reqcoh" type="checkbox" value="CTS" checked/>
                     <label class="container-ul" for="CTS">CTS</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="EPIC" name="reqcoh" type="checkbox" value="EPIC"/>
+                    <input id="EPIC" name="reqcoh" type="checkbox" value="EPIC" checked/>
                     <label class="container-ul" for="EPIC">EPIC</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="GS" name="reqcoh" type="checkbox" value="GS"/>
+                    <input id="GS" name="reqcoh" type="checkbox" value="GS" checked/>
                     <label class="container-ul" for="GS">GS</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="JANUS" name="reqcoh" type="checkbox" value="JANUS"/>
+                    <input id="JANUS" name="reqcoh" type="checkbox" value="JANUS" checked/>
                     <label class="container-ul" for="JANUS">JANUS</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="MAC" name="reqcoh" type="checkbox" value="MAC"/>
+                    <input id="MAC" name="reqcoh" type="checkbox" value="MAC" checked/>
                     <label class="container-ul" for="MAC">MAC</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="MCCS" name="reqcoh" type="checkbox" value="MCCS"/>
+                    <input id="MCCS" name="reqcoh" type="checkbox" value="MCCS" checked/>
                     <label class="container-ul" for="MCCS">MCCS</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="MEC" name="reqcoh" type="checkbox" value="MEC"/>
+                    <input id="MEC" name="reqcoh" type="checkbox" value="MEC" checked/>
                     <label class="container-ul" for="MEC">MEC</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="MMHS" name="reqcoh" type="checkbox" value="MMHS"/>
+                    <input id="MMHS" name="reqcoh" type="checkbox" value="MMHS" checked/>
                     <label class="container-ul" for="MMHS">MMHS</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="NHS" name="reqcoh" type="checkbox" value="NHS"/>
+                    <input id="NHS" name="reqcoh" type="checkbox" value="NHS" checked/>
                     <label class="container-ul" for="NHS">NHS</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="NHS-2" name="reqcoh" type="checkbox" value="NHS-2"/>
+                    <input id="NHS-2" name="reqcoh" type="checkbox" value="NHS-2" checked/>
                     <label class="container-ul" for="NHS-2">NHS-2</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="NYUWHS" name="reqcoh" type="checkbox" value="NYUWHS"/>
+                    <input id="NYUWHS" name="reqcoh" type="checkbox" value="NYUWHS" checked/>
                     <label class="container-ul" for="NYUWHS">NYUWHS</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="PLCO" name="reqcoh" type="checkbox" value="PLCO"/>
+                    <input id="PLCO" name="reqcoh" type="checkbox" value="PLCO" checked/>
                     <label class="container-ul" for="PLCO">PLCO</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="SISTER" name="reqcoh" type="checkbox" value="SISTER"/>
+                    <input id="SISTER" name="reqcoh" type="checkbox" value="SISTER" checked/>
                     <label class="container-ul" for="SISTER">SISTER</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="SNM" name="reqcoh" type="checkbox" value="SNM"/>
+                    <input id="SNM" name="reqcoh" type="checkbox" value="SNM" checked/>
                     <label class="container-ul" for="SNM">SNM</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="VITAL" name="reqcoh" type="checkbox" value="VITAL"/>
+                    <input id="VITAL" name="reqcoh" type="checkbox" value="VITAL" checked/>
                     <label class="container-ul" for="VITAL">VITAL</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="WHI" name="reqcoh" type="checkbox" value="WHI"/>
+                    <input id="WHI" name="reqcoh" type="checkbox" value="WHI" checked/>
                     <label class="container-ul" for="WHI">WHI</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="WHS" name="reqcoh" type="checkbox" value="WHS"/>
+                    <input id="WHS" name="reqcoh" type="checkbox" value="WHS" checked/>
                     <label class="container-ul" for="WHS">WHS</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="WISDOM" name="reqcoh" type="checkbox" value="WISDOM"/>
+                    <input id="WISDOM" name="reqcoh" type="checkbox" value="WISDOM" checked/>
                     <label class="container-ul" for="WISDOM">WISDOM</label>
                   </div>
 
                   <div class="inline-field">
-                    <input id="WLH" name="reqcoh" type="checkbox" value="WLH"/>
+                    <input id="WLH" name="reqcoh" type="checkbox" value="WLH" checked/>
                     <label class="container-ul" for="WLH">WLH</label>
                   </div>
                 </ul>
