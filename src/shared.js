@@ -246,6 +246,7 @@ export const storeAccessToken = async (urltest) => {
 
     if (response.status === 400) {
       window.history.replaceState({}, "", "./#home");
+      console.log(response);
     }
     if (response.status && response.status === 200) {
       localStorage.parms = JSON.stringify(await response.json());
