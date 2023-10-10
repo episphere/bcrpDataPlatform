@@ -30,7 +30,7 @@ export const checkAccessTokenValidity = async () => {
 // }
 
 export const loginObs = () => {
-  location.href = `https://account.box.com/api/oauth2/authorize?response_type=code&client_id=${config.iniAppStage.client_id}&redirect_uri=${applicationURLs.stage}&state=${config.iniAppStage.stateIni}`;
+  location.href = `https://account.box.com/api/oauth2/authorize?response_type=code&client_id=${config.iniAppStage.client_id}&redirect_uri=${applicationURLs.stage + location.pathname}&state=${location.pathname + config.iniAppStage.stateIni}`;
 };
 
 export const loginAppDev = () => {
