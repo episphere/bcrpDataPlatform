@@ -256,12 +256,14 @@ export const confluence = async () => {
           uploadFormFolder,
           "folders"
         ); //144028521583, 155292358576
+        console.log(getCollaborators);
         let getMyPermissionLevel = false;
         if (getCollaborators)
           getMyPermissionLevel = checkDataSubmissionPermissionLevel(
             getCollaborators,
             JSON.parse(localStorage.parms).login
           );
+        console.log(getMyPermissionLevel);
         if (getMyPermissionLevel) {
           confluenceDiv.innerHTML = await formSection("form");
           populateAmendSelect();
@@ -633,7 +635,7 @@ const manageHash = async () => {
     if (!element) return;
     //if (element.classList.contains("navbar-active")) return;
     assignNavbarActive(element, 1);
-    document.title = "BCRP - Study Description";
+    document.title = "BCRPP - Study Description";
     showAnimation();
     const fileInfo = await getFileInfo(904897189551); //new: 904897189551; original: 881144462693
     aboutConfluence("description", fileInfo ? true : false);

@@ -3,7 +3,8 @@ import { logOut } from "./manageAuthentication.js";
 import { confluence } from "../confluence.js";
 
 export const emailsAllowedToUpdateData = [
-  "ahearntu@nih.gov", "kopchickbp@nih.gov"
+  "kopchickbp@nih.gov",
+  "ahearntu@nih.gov",
 ];
 
 export const emailforChair = ['kraftp2@nih.gov','Roger.Milne@cancervic.org.au','ahearntu@nih.gov', 'garciacm@nih.gov', 'sbehpour@deloitte.com','kopchickbp@nih.gov'];
@@ -13,6 +14,7 @@ export const emailforChair = ['kraftp2@nih.gov','Roger.Milne@cancervic.org.au','
 // "garciacm@nih.gov",
 // "wraynr@nih.gov",
 // "kopchickbp@nih.gov",
+//sbehpour@deloitte.com
 // ];
 
 export const emailforDACC = ['kraftp2@nih.gov', 'kopchickbp@nih.gov','pkraft@hsph.harvard.edu', 'garciacm@nih.gov', 'ahearntu@nih.gov',  'mukopadhyays2@nih.gov'];;
@@ -35,6 +37,8 @@ export const missingnessStatsFileId = 1277209005113;//1276945367872;//1043323929
 export const missingnessStatsCasesFileId = 1276917853820;
 
 export const cps2StatsFileId = 908522264695;
+
+export const summaryStatsFolder = 145995372820;
 
 export const uploadFormFolder = 155292358576;
 
@@ -1034,8 +1038,7 @@ export async function showComments(id) {
           template += `
                 <div class='col-4'>
                     <input type='checkbox' name='comments' id='${comment.id}' class='mb-0'>
-                </div>
-                
+                </div>   
                 `;
         }
       }
@@ -1078,8 +1081,7 @@ export async function showComments(id) {
             template += `
                 <div class='col-4'>
                     <input type='checkbox' name='comments' id='${comment.id}' class='mb-0'>
-                </div>
-                
+                </div>   
                 `;
           }
         }
@@ -1193,7 +1195,6 @@ export async function showCommentsDropDown(id) {
                     <p class='text-primary small mb-0 align-left'>${comment.created_by.name}</p>
                 </div>
             `;
-
         template += `    
             </div>
             <div class='row'>
@@ -1212,10 +1213,8 @@ export async function showCommentsDropDown(id) {
   // template += '</div>'
 
   commentSection.innerHTML = template;
-
   return;
 }
-
 export const listComments = async (id) => {
   try {
     const access_token = JSON.parse(localStorage.parms).access_token;
@@ -1223,17 +1222,13 @@ export const listComments = async (id) => {
       `https://api.box.com/2.0/files/${id}/comments`,
       {
         method: "GET",
-
         headers: {
           Authorization: "Bearer " + access_token,
-
           "Content-Type": "application/json",
         },
-
         redirect: "follow",
       }
     );
-
     if (response.status === 401) {
       if ((await refreshToken()) === true) return await listComments(id);
     } else {
@@ -1676,12 +1671,67 @@ export const tsv2Json = (tsv) => {
     headers,
   };
 };
-
-export const tsv2Json2 = (tsv) => {
+export const tsv2JsonDic = (tsv) => {
   const lines = tsv
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "")
+    .replace(/m2/g, "m<sup>2</sup>")
+    .split(/[\r]+/g);
+  const result = [];
+  const headers = lines[0].replace(/"/g, "").split(/[\t]/g);
+  for (let i = 1; i < lines.length; i++) {
+    const obj = {};
+    const currentline = lines[i].split(/[\t]/g);
+    for (let j = 0; j < headers.length; j++) {
+      if (currentline[j]) {
+        let value = headers[j];
+        if (value.toLowerCase() === 'coding') {
+          obj[value] = currentline[j].replace(/\n/g, "<br/>").replace("kg/m2", "kg/m<sup>2</sup>");
+        } else {
+          obj[value] = currentline[j].replace(/\n/g, "");
+        }
+        if (value.toLowerCase() === 'category') {
+          if (currentline[j].trim().toLowerCase() === 'mammographic density') {
+            obj[value] = currentline[j].trim().toLowerCase().replace('mammographic density', "Mammographic Density")
+          }
+          if (currentline[j].trim().toLowerCase() === 'identification/dates') {
+            obj[value] = currentline[j].trim().toLowerCase().replace('identification/dates', "IDs/Dates")
+          }
+          if (currentline[j].trim().toLowerCase() === 'personal and family health history') {
+            obj[value] = currentline[j].trim().toLowerCase().replace('personal and family health history', "Personal/Family History")
+          }
+        }
+        if (value.toLowerCase() === 'sub-category') {
+          if (currentline[j].trim().toLowerCase() === 'mammographic density') {
+            obj[value] = currentline[j].trim().toLowerCase().replace('mammographic density', "Mammographic Density")
+            console.log(obj[value]);
+          }
+          console.log(currentline[j].trim().toLowerCase())
+          if (currentline[j].trim().toLowerCase() === 'identification/dates') {
+            obj[value] = currentline[j].trim().toLowerCase().replace('identification/dates', "IDs/Dates")
+            console.log(obj[value]);
+          }
+          if (currentline[j].trim().toLowerCase() === 'personal and family health history') {
+            obj[value] = currentline[j].trim().toLowerCase().replace('personal and family health history',"Personal/Family History")
+            console.log(obj[value]);
+          }
+        }
+      }
+    }
+    if (Object.keys(obj).length > 1) result.push(obj);
+  }
+  console.log('tsv2JsonDic', result);
+  return {
+    data: result,
+    headers,
+  };
+};
+export const tsv2Json2 = (tsv) => {
+  const lines = tsv
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "|")
     .split(/\r?\n/);
   const result = [];
   const headers = lines[0].replace(/"/g, "").split(/[\t]/g);
@@ -1763,10 +1813,14 @@ export const json2other = (json, fields, tsv) => {
   let csv = json.map((row) => {
     return fields
       .map((fieldName) => {
+        if (fieldName.toLowerCase() === 'coding') {
+          return JSON.stringify(row[fieldName]?.replaceAll('<br/>', ' | '), replacer);
+        } 
         return JSON.stringify(row[fieldName], replacer);
       })
       .join(`${tsv ? "\t" : ","}`); // \t for tsv
   });
+  csv = csv.map(i => i.replaceAll('#', ''))
   csv.unshift(fields.join(`${tsv ? "\t" : ","}`)); // add header column  \t for tsv
   csv = csv.join("\r\n");
   return csv;

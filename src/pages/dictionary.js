@@ -4,7 +4,7 @@ import {
   getFile,
   hideAnimation,
   shortenText,
-  tsv2Json,
+  tsv2JsonDic, tsv2Json,
   json2other,
 } from "./../shared.js";
 import {
@@ -131,16 +131,16 @@ const addEventPageBtns = (pageSize, data, headers) => {
           .querySelector(`button[data-page="${pageNumber}"]`)
           .classList.add("active-page");
       }
-    });
+    })
   });
-};
+}
 
 const renderDataDictionaryFilters = (dictionary, headers) => {
   var coreArray = Object.values(dictionary).filter(function (el) {
     return el.Category === "Core";
   });
   var mamArray = Object.values(dictionary).filter(function (el) {
-    return el.Category === "Mammographic density";
+    return el.Category === "Mammographic Density";
   });
   var incArray = Object.values(dictionary).filter(function (el) {
     return el.Category.trim() === "Incident Breast Cancer";
@@ -256,11 +256,6 @@ const addEventFilterDataDictionary = (dictionary, headers) => {
 
 const filterDataBasedOnSelection = (dictionary, headers) => {
   const highlightData = filterDataHandler(dictionary);
-  renderDataDictionary(
-    highlightData,
-    document.getElementById("pageSizeSelector").value,
-    headers
-  );
   const pageSize =
     highlightData.length < 60
       ? Math.floor(highlightData.length / 10) * 10 === 0
@@ -272,6 +267,7 @@ const filterDataBasedOnSelection = (dictionary, headers) => {
     highlightData,
     pageSize
   );
+  renderDataDictionary(highlightData, document.getElementById("pageSizeSelector").value, headers);
   addEventPageSizeSelection(highlightData);
   console.log(highlightData);
   console.log(pageSize);
@@ -287,7 +283,7 @@ const filterDataHandler = (dictionary) => {
   let filteredData = dictionary;
   if (variableTypeSelection.length > 0) {
     filteredData = filteredData.filter(
-      (dt) => variableTypeSelection.indexOf(dt["Sub-Category"]) !== -1
+      dt => variableTypeSelection.indexOf(dt["Sub-Category"]) !== -1
     );
   }
   if (variableTypeSelection.length === 0) filteredData = dictionary;
@@ -320,6 +316,7 @@ const filterDataHandler = (dictionary) => {
   previousValue = currentValue;
   let searchedData = JSON.parse(JSON.stringify(filteredData));
   searchedData = searchedData.filter((dt) => {
+    console.log(dt["Variable Name"]);
     let found = false;
     if (dt["Variable Name"].toLowerCase().includes(currentValue)) found = true;
     if (dt["Label"].toLowerCase().includes(currentValue)) found = true;

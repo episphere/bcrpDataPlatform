@@ -12,7 +12,7 @@ export const infoDeck = () => {
                     <div class="col-xl-12">
                         <h1 class="banner-overlay-h1">The Breast Cancer Risk Prediction Project (BCRPP)</h1>
                         <div class="banner-overlay-line"></div>
-                        <h2 class="banner-overlay-h3" style="font-size:1.7vw;"> Building an integrated, multi-ethnic breast cancer risk prediction model</h2>
+                        <h2 class="banner-overlay-h3" style="font-size:1.7vw;"> Building an integrated multi-ethnic breast cancer risk prediction model</h2>
                     </div>
                 </div>
             </div>
@@ -91,7 +91,7 @@ export const infoDeckAfterLoggedIn = async () => {
                     <div class="col-md-12">
                         <h1 class="banner-overlay-h1">The Breast Cancer Risk Prediction Project (BCRPP)</h1>
                         <div class="banner-overlay-line"></div>
-                        <h2 class="banner-overlay-h3" style="font-size:1.7vw;"> Building an integrated, multi-ethnic breast cancer risk prediction model</h2>
+                        <h2 class="banner-overlay-h3" style="font-size:1.7vw;"> Building an integrated multi-ethnic breast cancer risk prediction model</h2>
                     </div>
                 </div>
             </div>
