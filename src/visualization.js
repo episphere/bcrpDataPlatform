@@ -455,12 +455,12 @@ export const renderAllCasesCharts = (data) => {
 export const updateAllCasesCharts = (data) => {
   let finalData = {};
   finalData = data;
-  let totalSubjects = 0;
-  data.forEach((value) => (totalSubjects += parseInt(value.TotalSubjects)));
-  document.getElementById("participantCount").innerHTML = `<b>No. of Participants:</b> ${totalSubjects.toLocaleString("en-US")}`;
+  let totalCases = 0;
+  data.forEach((value) => (totalCases += parseInt(value.TotalCases)));
+  document.getElementById("participantCount").innerHTML = `<b>No. of Participants:</b> ${totalCases.toLocaleString("en-US")}`;
 
   updateBarChart(
-    document.getElementById("dataSummaryVizLabel1").value,
+    "dxdate_primary1",//document.getElementById("dataSummaryVizLabel1").value,
     "dataSummaryVizChart1",
     "dataSummaryVizLabel1",
     finalData,
@@ -468,7 +468,7 @@ export const updateAllCasesCharts = (data) => {
     "Cases"
   );
   updateBarChart(
-    document.getElementById("dataSummaryVizLabel2").value,
+    "invasive_primary1",//document.getElementById("dataSummaryVizLabel2").value,
     "dataSummaryVizChart2",
     "dataSummaryVizLabel2",
     finalData,
@@ -476,7 +476,7 @@ export const updateAllCasesCharts = (data) => {
     "Cases"
   );
   updateBarChart(
-    document.getElementById("dataSummaryVizLabel3").value,
+    "detection_primary1",//document.getElementById("dataSummaryVizLabel3").value,
     "dataSummaryVizChart3",
     "dataSummaryVizLabel3",
     finalData,
@@ -484,7 +484,7 @@ export const updateAllCasesCharts = (data) => {
     "Cases"
   );
   updateBarChart(
-    document.getElementById("dataSummaryVizLabel4").value,
+    "er_primary1",//document.getElementById("dataSummaryVizLabel4").value,
     "dataSummaryVizChart4",
     "dataSummaryVizLabel4",
     finalData,
@@ -492,21 +492,21 @@ export const updateAllCasesCharts = (data) => {
     "Cases"
   );
   updateBarChart(
-    document.getElementById("dataSummaryVizLabel5").value,
+    "grade_primary1",//document.getElementById("dataSummaryVizLabel5").value,
     "dataSummaryVizChart5",
     "dataSummaryVizLabel5",
     finalData,
     "chartRow2",
     "Cases"
   );
-  updateBarChart(
-    document.getElementById("dataSummaryVizLabel6").value,
-    "dataSummaryVizChart6",
-    "dataSummaryVizLabel6",
-    finalData,
-    "chartRow2",
-    "Cases"
-  );
+  // updateBarChart(
+  //   document.getElementById("dataSummaryVizLabel6").value,
+  //   "dataSummaryVizChart6",
+  //   "dataSummaryVizLabel6",
+  //   finalData,
+  //   "chartRow2",
+  //   "Cases"
+  // );
 };
 
 export const updateCounts = (data) => {
