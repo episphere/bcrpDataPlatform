@@ -209,7 +209,7 @@ export const getMail = async () => {
   return r.json();
 }
 
-export const storeAccessToken = async () => {
+export const storeAccessToken = async (urltest) => {
   let parms = searchParms();
   if (parms.code) {
     //exchange code for authorization token
@@ -217,9 +217,9 @@ export const storeAccessToken = async () => {
     if (location.origin.indexOf("episphere") !== -1) clt = config.iniAppDev;
     else if (location.origin.indexOf("localhost") !== -1)
       clt = config.iniAppLocal;
-    else if (location.origin.indexOf(applicationURLs.stage) !== -1)
+    else if (urltest.indexOf(applicationURLs.stage) !== -1)
       clt = config.iniAppStage;
-    else if (location.origin.indexOf(applicationURLs.prod) !== -1)
+    else if (urltest.indexOf(applicationURLs.prod) !== -1)
       clt = config.iniAppProd;
     document.getElementById("confluenceDiv").innerHTML = "";
 
