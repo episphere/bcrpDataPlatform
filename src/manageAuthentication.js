@@ -47,6 +47,7 @@ export const loginAppEpisphere = () => {
 
 export const loginAppProd = () => {
   sessionStorage.setItem("page", "bcrp");
+  console.log("Prod Login");
   location.href = `https://account.box.com/api/oauth2/authorize?response_type=code&client_id=${config.iniAppProd.client_id}&redirect_uri=${applicationURLs.prod}&state=${config.iniAppProd.stateIni}`;
 };
 
