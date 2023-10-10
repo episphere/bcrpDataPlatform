@@ -69,10 +69,10 @@ export const dataAccessNotSignedIn = () => {
                   </div>
                   <div class="row m-0">
                       <ul>
-                          <li>Researcher submits a study concept describing the project, including variables of interest, via the BCRPP Data Platform. This request will be sent via the platform to the relevant BCRPP data access coordinating committee (DACC) which governs the requested data.</li>
-                          <li>After approval by the DACC, individual studies contributing data are notified and given a time period to opt-out their study from the approved project.</li>
-                          <li>After the opt-out period has elapsed, the researcher's institution signs a data transfer agreement (DTA) for the study concept with the BCRPP DCC.</li>
-                          <li>Upon DTA signatures, the DCC will provide access of the approved data to researchers. </li>
+                          <li style=" margin-bottom: 10px;">Researcher submits a study concept describing the project, including variables of interest, via the BCRPP Data Platform. This request will be sent via the platform to the relevant BCRPP data access coordinating committee (DACC) which governs the requested data.</li>
+                          <li style=" margin-bottom: 10px;">After approval by the DACC, individual studies contributing data are notified and given a time period to opt-out their study from the approved project.</li>
+                          <li style=" margin-bottom: 10px;">After the opt-out period has elapsed, the researcher's institution signs a data transfer agreement (DTA) for the study concept with the BCRPP DCC.</li>
+                          <li style=" margin-bottom: 10px;">Upon DTA signatures, the DCC will provide access of the approved data to researchers. </li>
                       </ul>
                   </div>
                 </div>
