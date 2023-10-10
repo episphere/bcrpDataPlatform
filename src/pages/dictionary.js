@@ -140,7 +140,7 @@ const renderDataDictionaryFilters = (dictionary, headers) => {
     return el.Category === "Core";
   });
   var mamArray = Object.values(dictionary).filter(function (el) {
-    return el.Category === "Mammographic Density";
+    return el.Category === "Mammographic density";
   });
   var incArray = Object.values(dictionary).filter(function (el) {
     return el.Category.trim() === "Incident Breast Cancer";
@@ -191,7 +191,7 @@ const renderDataDictionaryFilters = (dictionary, headers) => {
   });
   template += `
                 </ul>
-                <label class="filter-label font-size-13" for="variableTypeList">Mammographic density</label>
+                <label class="filter-label font-size-13" for="variableTypeList">Mammographic Density</label>
                 <ul class="remove-padding-left font-size-15 allow-overflow" id="variableTypeList">
                 `;
   mamuniqueType.forEach((vt) => {
