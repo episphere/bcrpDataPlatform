@@ -659,7 +659,7 @@ const midset = (data, acceptedVariables) => {
         .replace("_Data available", "")
         .replace(/_|-/g, " ")}</th>`;
     }
-    template += `<th class="missing-column, align-top" colspan="2">Total participants based on Population, Race, Ethnicity, and Cohort <br> <p style="font-size:22px;">${numberWithCommas(data.length)}</p></th></tr>`;
+    template += `<th class="missing-column align-top" colspan="2">Total participants based on Population, Race, Ethnicity, and Cohort <br> <p style="font-size:22px;">${numberWithCommas(data.length)}</p></th></tr>`;
     // template += `<th class="missing-column, align-top" colspan="2">${numberWithCommas(data.length)}</th>
     //             `
     template += `<tr><th class="missing-column set-label">

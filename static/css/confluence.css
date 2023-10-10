@@ -1673,6 +1673,7 @@ form {
 }
 
 .missing-column {
+  font-size: large !important;
   padding: 2px 2px 2px 2px !important;
 }
 
