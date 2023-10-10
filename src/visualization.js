@@ -347,7 +347,7 @@ export const updateAllCharts = (data) => {
   document.getElementById("participantCount").innerHTML = `<b>No. of Participants:</b> ${totalSubjects.toLocaleString("en-US")}`;
 
   updateBarChart(
-    document.getElementById("dataSummaryVizLabel1").value,
+    "birth_year",//document.getElementById("dataSummaryVizLabel1").value,
     "dataSummaryVizChart1",
     "dataSummaryVizLabel1",
     finalData,
@@ -355,7 +355,7 @@ export const updateAllCharts = (data) => {
     "Full Cohort"
   );
   updateBarChart(
-    document.getElementById("dataSummaryVizLabel2").value,
+    "age",//document.getElementById("dataSummaryVizLabel2").value,
     "dataSummaryVizChart2",
     "dataSummaryVizLabel2",
     finalData,
@@ -363,7 +363,7 @@ export const updateAllCharts = (data) => {
     "Full Cohort"
   );
   updateBarChart(
-    document.getElementById("dataSummaryVizLabel3").value,
+    "ageMenarche",//document.getElementById("dataSummaryVizLabel3").value,
     "dataSummaryVizChart3",
     "dataSummaryVizLabel3",
     finalData,
@@ -371,7 +371,7 @@ export const updateAllCharts = (data) => {
     "Full Cohort"
   );
   updateBarChart(
-    document.getElementById("dataSummaryVizLabel4").value,
+    "parous",//document.getElementById("dataSummaryVizLabel4").value,
     "dataSummaryVizChart4",
     "dataSummaryVizLabel4",
     finalData,
@@ -379,7 +379,7 @@ export const updateAllCharts = (data) => {
     "Full Cohort"
   );
   updateBarChart(
-    document.getElementById("dataSummaryVizLabel5").value,
+    "parity",//document.getElementById("dataSummaryVizLabel5").value,
     "dataSummaryVizChart5",
     "dataSummaryVizLabel5",
     finalData,
@@ -387,7 +387,7 @@ export const updateAllCharts = (data) => {
     "Full Cohort"
   );
   updateBarChart(
-    document.getElementById("dataSummaryVizLabel6").value,
+    "bmi",//document.getElementById("dataSummaryVizLabel6").value,
     "dataSummaryVizChart6",
     "dataSummaryVizLabel6",
     finalData,
