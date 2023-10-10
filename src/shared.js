@@ -1362,9 +1362,10 @@ export const sessionExpired = () => {
   location.reload();
 };
 
-export const showAnimation = () => {
+export const showAnimation = async () => {
   if (document.getElementById("loadingAnimation"))
     document.getElementById("loadingAnimation").style.display = "block";
+  console.log("showAnimation");
 };
 
 export const hideAnimation = () => {

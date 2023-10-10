@@ -189,7 +189,7 @@ export const dataSummaryMissingTopBarTemplate = () => {
                 <span style="padding-left: 5px; padding-right: 5px">|</span>
                 ${filterItemTemplate("Cohort", ["All"])}
                 <span style="padding-left: 5px; padding-right: 5px">|</span>
-                ${filterItemTemplate("Variable", ["All"])}
+                ${filterItemTemplate("Variable", ["height, weight, bmi, bmi earlyadult"])}
             </div>
         </div>
         `;
@@ -205,12 +205,15 @@ export const dataSummaryMissingTopBarTemplate = () => {
 export const dataSummaryMissingTemplate = async (popVal) => {
   showAnimation();
   let response = "";
+  let lastModified = "";
   if (popVal == "Full Cohort"){
-    response = await getFile(1326638151823);//missingnessStatsFileId);
+    response = await getFile(missingnessStatsFileId);//missingnessStatsFileId);
+    lastModified = (await getFileInfo(missingnessStatsFileId)).modified_at;
   } else {
     response = await getFile(missingnessStatsCasesFileId);
+    lastModified = (await getFileInfo(missingnessStatsCasesFileId)).modified_at;
   }
-  const lastModified = (await getFileInfo(missingnessStatsFileId)).modified_at;
+  //const lastModified = (await getFileInfo(missingnessStatsFileId)).modified_at;
   document.getElementById("dataLastModified").innerHTML = `Data current as of - ${new Date(lastModified).toLocaleString()}`;
   const { data, headers } = csv2Json(response);
   const variables = headers.filter((dt) => !dt.match(/ethnicity|race|cohort/i));
@@ -395,28 +398,27 @@ const renderMidsetFilterData = (
         .filter(
             (value, index, current_value) => current_value.indexOf(value) === index
         );
-  console.log(unique_cat);
   unique_cat.forEach((cat) => {
+    let catnospace = cat.replace(/ /g,"");
     template += `<ul class="remove-padding-left">
-                  <li class="custom-borders filter-list-item consortia-study-list" data-variable="${cat}">
-                    <!--<input type="checkbox" data-variable="${cat}" id="label${cat}" class="select-variable-type"/>-->
-                    <label for="label${cat}" class="variable-name" title="${cat}">${cat}</label>`
+                  <li class="custom-borders filter-list-item consortia-study-list" data-variable="${catnospace}">
+                    <label for="label${catnospace}" class="variable-name" title="${catnospace}">${cat}</label>`
     template += unique_cat.indexOf(cat) === 0 ?
                     `<div class="ml-auto">
-                      <button type="button" class="consortium-selection consortium-selection-btn" data-toggle="collapse" href="#toggle${cat}">
+                      <button type="button" class="consortium-selection consortium-selection-btn" data-toggle="collapse" href="#toggle${catnospace}">
                         <i class="fas fa-caret-up"></i>
                       </button>
                     </div>
                   </li>
-                  <ul class="collapse show no-list-style custom-padding allow-overflow max-height-study-list" aria-expanded="true" id="toggle${cat}">
+                  <ul class="collapse show no-list-style custom-padding allow-overflow max-height-study-list" aria-expanded="true" id="toggle${catnospace}">
                   ` :
                   `<div class="ml-auto">
-                  <button type="button" class="consortium-selection consortium-selection-btn" data-toggle="collapse" href="#toggle${cat}">
+                  <button type="button" class="consortium-selection consortium-selection-btn" data-toggle="collapse" href="#toggle${catnospace}">
                     <i class="fas fa-caret-down"></i>
                   </button>
                 </div>
               </li>
-              <ul class="collapse no-list-style custom-padding allow-overflow max-height-study-list" aria-expanded="false" id="toggle${cat}">
+              <ul class="collapse no-list-style custom-padding allow-overflow max-height-study-list" aria-expanded="false" id="toggle${catnospace}">
                   `;
     let variables = varselect.filter(dt => dt.subcategory === cat);
     variables.forEach((variable) => {
@@ -424,7 +426,7 @@ const renderMidsetFilterData = (
                           <input type="checkbox" ${acceptedVariables.indexOf(variable.variable) !== -1 ? "checked": ""} 
                             data-variable="${variable.variable}" data-variable-type="${cat}" id="label${variable.variable}" class="select-variable"/>
                           <label for="label${variable.variable}" class="variable-name" title="${variable.variable}">
-                            ${variable.variable.replace("_Data available", "").replace(/_|-/g, " ")}
+                            ${variable.variable.replace(/_|-/g, " ")}
                           </label>
                         </li>
                           `
@@ -456,9 +458,9 @@ const generateFilterSummary = () => {
   // Total variables
   // total: 4
   // selected: 2
-  const selectedVariables = getSelectedVariables2();
-  const totalVariables = getAllVariables2();
-  const isAllVariablesSelected = selectedVariables.length === totalVariables;
+  const selectedVariables = getSelectedVariables2().map((dt) => dt.split("@#$")[1]);
+  //const totalVariables = getAllVariables2();
+  //const isAllVariablesSelected = selectedVariables.length === totalVariables;
   // Total Cohort
   const selectedCohorts = getSelectedVariables("midsetCohorts");
   const totalCohorts = getAllVariables("midsetCohorts");
@@ -484,21 +486,14 @@ const generateFilterSummary = () => {
     ${filterItemTemplate("Ethnicity", [ethnicityText])}
     <span style="padding-left: 5px; padding-right: 5px">|</span>
     ${filterItemTemplate(
-      "Variable",
-      isAllVariablesSelected
-        ? ["All"]
-        : selectedVariables.filter((cohort) => {
+      "Variable", 
+      selectedVariables.filter((cohort) => {
             return cohort !== undefined;
           })
     )}
   `;
-
-  /**
-   * 1. getElementByID(listFilters)
-   * 2. set innerHtml
-   * 3.
-   */
 };
+
 const addEventMidsetFilterForm = (data) => {
   const race = document.getElementById("raceSelection");
   race.addEventListener("change", () => {
@@ -506,14 +501,16 @@ const addEventMidsetFilterForm = (data) => {
     generateFilterSummary();
   });
   const ethnicity = document.getElementById("ethnicitySelection");
-  ethnicity.addEventListener("change", () => {
+  ethnicity.addEventListener("change", async () => {
+    await showAnimation();
     generateFilterSummary();
     filterMidsetData(data);
   });
 
   const variableTypes = document.getElementsByClassName("select-variable-type");
   Array.from(variableTypes).forEach((ele) => {
-    ele.addEventListener("click", () => {
+    ele.addEventListener("click", async () => {
+      await showAnimation();
       generateFilterSummary();
       filterMidsetData(data);
     });
@@ -521,7 +518,8 @@ const addEventMidsetFilterForm = (data) => {
 
   const variables = document.getElementsByClassName("select-variable");
   Array.from(variables).forEach((ele) => {
-    ele.addEventListener("click", () => {
+    ele.addEventListener("click", async () => {
+      await showAnimation();
       generateFilterSummary();
       filterMidsetData(data);
     });
@@ -560,7 +558,8 @@ const addEventMidsetFilterForm = (data) => {
   });
 };
 
-const filterMidsetData = (data) => {
+const filterMidsetData = async (data) => {
+  showAnimation();
   const population = document.getElementById("populationSelection").value
   const race = document.getElementById("raceSelection").value;
   const ethnicity = document.getElementById("ethnicitySelection").value;
@@ -584,7 +583,9 @@ const filterMidsetData = (data) => {
   if (race !== "all") {
     newData = newData.filter((dt) => dt.race === race);
   }
+  console.log(selectedVariables);
   midset(newData, selectedVariables);
+  //hideAnimation();
 };
 
 const getSelectedVariables = (parentId) => {
@@ -601,7 +602,7 @@ const getSelectedVariables2 = () => {
   Array.from(elements).forEach(element => {
       const variabletype = element.dataset.variableType;
       const variable = element.dataset.variable;
-      const value = `${variabletype}@#$${variable}`
+      const value = `${variabletype}@#$${variable}` 
       if(array.indexOf(value) === -1) array.push(value);
   })
   return array;
@@ -619,7 +620,6 @@ const getAllVariables2 = () => {
 };
 
 const midset = (data, acceptedVariables) => {
-  console.log(acceptedVariables);
   let template = "";
   let plotData = [];
   let headerData = "";
@@ -756,7 +756,6 @@ const midset = (data, acceptedVariables) => {
     template += "</tbody></table>";
   } else template += "Data not found";
 
-  hideAnimation();
   document.getElementById("missingnessTable").innerHTML = template;
   addEventVariableDefinitions();
   //if (data.length > 0){
@@ -768,6 +767,7 @@ const midset = (data, acceptedVariables) => {
   // );
   //};
   reSizePlots();
+  hideAnimation();
 };
 
 const renderMidsetHeader = (x, y, id) => {

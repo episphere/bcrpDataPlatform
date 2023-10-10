@@ -306,7 +306,7 @@ export const renderAllCharts = (data) => {
     "Full Cohort"
   );
   generateBarChart(
-    "AJAncestry",
+    "ageMenarche",
     "dataSummaryVizChart3",
     "dataSummaryVizLabel3",
     finalData,
@@ -314,7 +314,7 @@ export const renderAllCharts = (data) => {
     "Full Cohort"
   );
   generateBarChart(
-    "alcohol_status",
+    "parous",
     "dataSummaryVizChart4",
     "dataSummaryVizLabel4",
     finalData,
@@ -322,7 +322,7 @@ export const renderAllCharts = (data) => {
     "Full Cohort"
   );
   generateBarChart(
-    "BBD_type",
+    "parity",
     "dataSummaryVizChart5",
     "dataSummaryVizLabel5",
     finalData,
@@ -330,7 +330,7 @@ export const renderAllCharts = (data) => {
     "Full Cohort"
   );
   generateBarChart(
-    "BBD_number",
+    "bmi",
     "dataSummaryVizChart6",
     "dataSummaryVizLabel6",
     finalData,
@@ -617,10 +617,11 @@ const generateBarChart = (parameter, id, labelID, jsonData, chartRow, population
   Plotly.newPlot(`${id}`, data, layout, config);
 
   var htmlTitle = document.getElementById(labelID);
-  for (let index in dataGraphs) {
-    let defaultSelected = true ? index===parameter : false
-    htmlTitle.options[htmlTitle.options.length] = new Option(dataGraphs[index].title, index, defaultSelected, defaultSelected);
-  }
+  htmlTitle.options[htmlTitle.options.length] = new Option(dataGraphs[parameter].title, id, true, true);
+  // for (let index in dataGraphs) {
+  //   let defaultSelected = true ? index===parameter : false
+  //   htmlTitle.options[htmlTitle.options.length] = new Option(dataGraphs[index].title, index, defaultSelected, defaultSelected);
+  // }
 };
 
 const updateBarChart = (parameter, id, labelID, jsonData, chartRow, population) => {
