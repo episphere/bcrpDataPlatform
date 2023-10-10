@@ -226,8 +226,6 @@ export const storeAccessToken = async (urltest) => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
-    console.log(clt);
-
     var urlencoded = new URLSearchParams();
     urlencoded.append("grant_type", "authorization_code");
     urlencoded.append("client_id", clt.client_id);
@@ -241,12 +239,11 @@ export const storeAccessToken = async (urltest) => {
       redirect: "follow",
     };
 
-    console.log(requestOptions);
     const response = await fetch(
       "https://api.box.com/oauth2/token",
       requestOptions
     );
-    console.log(response);
+
     if (response.status === 400) {
       window.history.replaceState({}, "", "./#home");
     }
@@ -1369,7 +1366,6 @@ export const sessionExpired = () => {
 export const showAnimation = async () => {
   if (document.getElementById("loadingAnimation"))
     document.getElementById("loadingAnimation").style.display = "block";
-  console.log("showAnimation");
 };
 
 export const hideAnimation = () => {
@@ -1634,7 +1630,6 @@ export const csv2Json2 = (csv) => {
   const lines = csv.replace(/"/g, "").split(/[\r\n]+/g);
   const result = [];
   const topline = lines[0].replace(/"/g, "").split(/[,\t]/g);
-  console.log(topline);
   const headers = lines[1].replace(/"/g, "").split(/[,\t]/g);
   for (let i = 2; i < lines.length; i++) {
     const obj = {};
@@ -1714,23 +1709,18 @@ export const tsv2JsonDic = (tsv) => {
         if (value.toLowerCase() === 'sub-category') {
           if (currentline[j].trim().toLowerCase() === 'mammographic density') {
             obj[value] = currentline[j].trim().toLowerCase().replace('mammographic density', "Mammographic Density")
-            console.log(obj[value]);
           }
-          console.log(currentline[j].trim().toLowerCase())
           if (currentline[j].trim().toLowerCase() === 'identification/dates') {
             obj[value] = currentline[j].trim().toLowerCase().replace('identification/dates', "IDs/Dates")
-            console.log(obj[value]);
           }
           if (currentline[j].trim().toLowerCase() === 'personal and family health history') {
             obj[value] = currentline[j].trim().toLowerCase().replace('personal and family health history',"Personal/Family History")
-            console.log(obj[value]);
           }
         }
       }
     }
     if (Object.keys(obj).length > 1) result.push(obj);
   }
-  console.log('tsv2JsonDic', result);
   return {
     data: result,
     headers,

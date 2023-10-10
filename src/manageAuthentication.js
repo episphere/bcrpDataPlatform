@@ -31,7 +31,6 @@ export const checkAccessTokenValidity = async () => {
 
 export const loginObs = () => {
   sessionStorage.setItem("page", "bcrp");
-  console.log("stage login")
   location.href = `https://account.box.com/api/oauth2/authorize?response_type=code&client_id=${config.iniAppStage.client_id}&redirect_uri=${applicationURLs.stage}&state=${config.iniAppStage.stateIni}`;
 };
 
@@ -47,7 +46,6 @@ export const loginAppEpisphere = () => {
 
 export const loginAppProd = () => {
   sessionStorage.setItem("page", "bcrp");
-  console.log("Prod Login");
   location.href = `https://account.box.com/api/oauth2/authorize?response_type=code&client_id=${config.iniAppProd.client_id}&redirect_uri=${applicationURLs.prod}&state=${config.iniAppProd.stateIni}`;
 };
 
