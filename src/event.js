@@ -28,6 +28,7 @@ import {
   assignNavbarActive,
   reSizePlots,
   showComments,
+  summaryStatsFolder,
 } from "./shared.js";
 import { renderDataSummary } from "./pages/about.js";
 import { variables } from "./variables.js";
@@ -73,7 +74,7 @@ export const addEventStudyRadioBtn = () => {
                             <select class="form-control" id="selectStudyUIS" name="selectedStudy" required></select>
                         </div>
                         <div class="form-group">
-                            <label for="uploadDataUIS">Submit data</label> <span class="required">*</span>
+                            <label for="uploadDataUIS">Submit data</label> <span class="required"></span>
                             <input type="file" class="form-control-file" id="uploadDataUIS" name="dataFile" required>
                         </div>
                     `;
@@ -1276,7 +1277,10 @@ export const addEventUpdateSummaryStatsData = () => {
                             </button>`;
 
     let template = '<form id="updateSummaryStatsForm">';
-    template += `<label>Select data type</label></br> <div style="padding-left:40px"><input type="radio" required value="summary" name="summarydataType"> Summary data</div><div style="padding-left:40px"><input value="missingness" required type="radio" name="summarydataType"> Missingness data</div>`;
+    template += `<label>Select data type</label></br> 
+                <div style="padding-left:40px"><input type="radio" required value="summaryCohort" name="summarydataType"> Summary data - Full Cohort </div>
+                <div style="padding-left:40px"><input type="radio" required value="summaryCases" name="summarydataType"> Summary data - Cases </div>
+                <div style="padding-left:40px"><input value="missingness" required type="radio" name="summarydataType"> Missingness data </div>`;
     template += '</br><div id="summaryDataFolderList"></div>';
 
     template +=

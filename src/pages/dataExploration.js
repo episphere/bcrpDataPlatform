@@ -624,8 +624,8 @@ const midset = (data, acceptedVariables) => {
   let plotData = [];
   let headerData = "";
 
-  if (acceptedVariables.length === 0) {
-    template += "No variable selected.";
+  if (acceptedVariables.length === 0 ||acceptedCohorts.length===0 ) {
+    template += "No variable or cohort selected. Please, select at least one variable and one cohort.";
     hideAnimation();
     document.getElementById("missingnessTable").innerHTML = template;
     return;

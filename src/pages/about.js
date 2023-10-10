@@ -33,7 +33,7 @@ export const aboutConfluence = (activeTab, showDescription) => {
 // Changes needed here for definitions
 export const renderOverView = async () => {
   let template = `
-      <div class="main-summary-row">
+    <div class="main-summary-row">
       <div class="align-left">
            <h1 class="page-header">BCRPP Overview</h1>
       </div>
@@ -71,7 +71,9 @@ export const renderOverView = async () => {
             </div>
             <div class="align-left" id="confluenceDataSummary"></div>
         </div>
+          <div class="align-left" id="confluenceDataSummary"></div>
     `;
+    
   document.getElementById("overview").innerHTML = template;
   const response = await fetch("./publicDataSet.json");
   countPublicStatistics(await response.json(), true);
@@ -89,7 +91,7 @@ const countPublicStatistics = (d, caseControl) => {
             <div class="main-summary-row" style="margin: 0px 15px;margin-bottom:10px">
                 <div class="col-md-3" style="padding: 0px">
                     <div class="custom-border allow-overflow align-left" style="height:100%; padding-left: 5px !important; margin-right: 15px;">
-                    <span class="font-size-17 font-bold">Cohort:</span></br>
+                    <span class="font-size-17 font-bold"> <span class="required">*</span>Cohort:</span></br>
                     <!---<span class="font-size-15">Cohort:</span></br>--->
                     <ul class="about-consortia" id='about-consortia-check'>
     `;
@@ -120,7 +122,10 @@ const countPublicStatistics = (d, caseControl) => {
   }
   summary += `</ul></div></div>
                 <div class="col-md-9 align-center" style="padding: 0px">
+                
                     <div class="custom-border" style="margin-right: 15px; height: 100%;" id="renderDataSummaryCounts"></div>
+                    
+                    
                 </div></div>
                 <div class="col data-last-modified align-left">Data current as of - ${new Date(
                   data["dataModifiedAt"]
@@ -148,6 +153,7 @@ export const renderDataSummary = (obj, caseControl) => {
                 <span class="font-size-32">${numberWithCommas(
                   obj.totalConsortia
                 )}</span>
+                <br><br>     
             </div>
             <div class="col">
                 <span class="font-size-22">Study Participants</span></br>
@@ -159,7 +165,7 @@ export const renderDataSummary = (obj, caseControl) => {
                 <span class="font-size-22">Breast Cancer Cases</span></br>
                 <span class="font-size-32">${numberWithCommas(
                   obj.totalPatients
-                )}</span>
+                )}</span><br>               
             </div>
         </div>
     `;
