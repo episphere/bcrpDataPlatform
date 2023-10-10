@@ -127,6 +127,7 @@ export const confluence = async () => {
     manageRouter();
   }
   if (localStorage.parms && JSON.parse(localStorage.parms).access_token) {
+    console.log("Getting User info from box");
     const response = await getCurrentUser();
     showAnimation();
     if (response) {
