@@ -670,6 +670,10 @@ export const getCurrentUser = async () => {
     if (response.status === 401) {
       if ((await refreshToken()) === true) return await getCurrentUser();
     }
+    if (response.status === 403) {
+      console.log(response);
+      return null;
+    }
     if (response.status === 200) {
       return response.json();
     } else {
