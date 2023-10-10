@@ -226,6 +226,8 @@ export const storeAccessToken = async () => {
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
+    console.log(clt);
+
     var urlencoded = new URLSearchParams();
     urlencoded.append("grant_type", "authorization_code");
     urlencoded.append("client_id", clt.client_id);
@@ -238,6 +240,8 @@ export const storeAccessToken = async () => {
       body: urlencoded,
       redirect: "follow",
     };
+
+    console.log(requestOptions);
     const response = await fetch(
       "https://api.box.com/oauth2/token",
       requestOptions

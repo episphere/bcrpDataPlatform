@@ -39,7 +39,7 @@ registerRoute(
 );
 
 workbox.precaching.precacheAndRoute([
-        {url: 'index.html', revision: 'v1.2'},
-        {url: 'src/pages/dataRequest.js', revision: 'v1.2'},
+        {url: 'index.html', revision: 'v1.3'},
+        {url: 'src/pages/dataRequest.js', revision: 'v1.3'},
     ]
 );
