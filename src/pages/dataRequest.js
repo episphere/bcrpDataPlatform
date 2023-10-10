@@ -64,7 +64,7 @@ export const dataAccessNotSignedIn = () => {
                   <div class="row m-0">
                       The Breast Cancer Risk Prediction Project is currently generating genotyping data and harmonizing risk factor and clinical data. Data is expected to be available for request by the end of 2023. Data access will be facilitated through this platform, in accordance to the data transfer agreements signed between participating studies (originator) and the BCRPP Data Coordinating Center (DCC) at the Division of Cancer Epidemiology and Genetics at the National Cancer Institute.
                   </div></br>
-                  <!---<div class="row m-0">
+                  <div class="row m-0">
                       The following data access procedures are planned:
                   </div>
                   <div class="row m-0">
@@ -72,7 +72,7 @@ export const dataAccessNotSignedIn = () => {
                           <li>Researcher submits a study concept describing the project, including variables of interest, via the BCRPP Data Platform. This request will be sent via the platform to the relevant BCRPP data access coordinating committee (DACC) which governs the requested data.</li>
                           <li>After approval by the DACC, individual studies contributing data are notified and given a time period to opt-out their study from the approved project.</li>
                           <li>After the opt-out period has elapsed, the researcher's institution signs a data transfer agreement (DTA) for the study concept with the BCRPP DCC.</li>
-                          <li>Upon DTA signatures, the DCC will provide access of the approved data to researchers. </li>-->
+                          <li>Upon DTA signatures, the DCC will provide access of the approved data to researchers. </li>
                       </ul>
                   </div>
                 </div>
@@ -151,15 +151,15 @@ export const dataAccess = (activeTab, showDescripton) => {
                         The Breast Cancer Risk Prediction Project is currently harmonizing risk factor and clinical data from participating cohorts. Data is expected to be available for request in mid 2023. Data access will be facilitated through this platform, in accordance to the data transfer agreements signed between participating studies (originator) and the BCRPP Data Coordinating Center (DCC) at the Division of Cancer Epidemiology and Genetics at the National Cancer Institute.
 
                     </div></br>
-                    <!---<div class="row m-0">
+                    <div class="row m-0">
                         The following data access procedures are planned:
                     </div>
                     <div class="row m-0">
                         <ul>
-                            <li>Researcher submits a study concept describing the project, including variables of interest, via the BCRPP Data Platform. This request will be sent via the platform to the BCRPP data access coordinating committee (DACC), which governs the requested data.</li>
-                            <li>After approval by the DACC, individual studies contributing data are notified and given a time period to opt-out their study from the approved project.</li>
-                            <li>After the opt-out period has elapsed, the researcher's institution signs a data transfer agreement (DTA) for the study concept with the BCRPP DCC.</li>
-                            <li>Upon DTA signatures, the DCC will provide access of the approved data to researchers.</li>-->
+                            <li style=" margin-bottom: 10px;">Researcher submits a study concept describing the project, including variables of interest, via the BCRPP Data Platform. This request will be sent via the platform to the BCRPP data access coordinating committee (DACC), which governs the requested data.</li>
+                            <li style=" margin-bottom: 10px;">After approval by the DACC, individual studies contributing data are notified and given a time period to opt-out their study from the approved project.</li>
+                            <li style=" margin-bottom: 10px;">After the opt-out period has elapsed, the researcher's institution signs a data transfer agreement (DTA) for the study concept with the BCRPP DCC.</li>
+                            <li style=" margin-bottom: 10px;">Upon DTA signatures, the DCC will provide access of the approved data to researchers.</li>
                         </ul>
                     </div> `;
   template += `</div>
