@@ -667,7 +667,7 @@ export const formSection = async (activeTab, showDescripton) => {
               <br>
               <p><u><b>Authorship</b></u><span class='required-label'>*</span></p>
                 <div class="input-group">
-                  <u id="tooltip1"><a><label for="Authorship"><input id="authconf" name="authconf" type="checkbox" value="Yes" required/> 
+                  <u id="tooltip1"><a><label for="authconf"><input id="authconf" name="authconf" type="checkbox" value="Yes" required/> 
                   <b>Please confirm that you agree to comply with the BCRPP authorship and publication requirements.</b>
                   <span>
                   Recipient shall have the first right to publish on the Results of the Research Study. 
@@ -690,6 +690,16 @@ export const formSection = async (activeTab, showDescripton) => {
                   <br>
                   <i>Please include any special considerations you would like to bring to the DACC’s attention.</i>
                   <textarea id="anyoth" name="anyoth" rows="4" cols="65"></textarea>
+                </div>
+
+                <br>
+              <p><u><b>Data Access</b></u><span class='required-label'>*</span></p>
+                <div class="input-group">
+                  <u id="tooltip2"><a><label for="dataaccess"><input id="dataaccess" name="dataaccess" type="checkbox" value="Yes" required/> 
+                  <b>Please confirm that you agree to comply with the BCRPP data access and storage requirements.</b>
+                  <span>
+                    Users granted access to BCRPP data agree to only access data for the purposes outlined in this proposal, and will not save any individual participant's data (i.e., make permanent copies) on local computers or any persistent storage device other than the controlled-access workspace provided by the BCRPP designated for this project.
+                  </span></a></u></label>
                 </div>
                 
                 <button type="submit" id="submitFormButton" class="buttonsubmit"> 

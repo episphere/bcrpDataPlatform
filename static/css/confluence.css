@@ -2233,3 +2233,7 @@ select { width: 100%; text-align-last:center; overflow-wrap: break-word; white-s
 #tooltip1 { position: relative; }
 #tooltip1 a span { display: none; color: #FFFFFF; }
 #tooltip1 a:hover span { display: inline-block; position: absolute; width: auto; background: #ffffff; height: auto; left: 10px; top: -275px; color: #000000; padding: 0 5px; z-index: 1; border-style: groove;}
+
+#tooltip2 { position: relative; }
+#tooltip2 a span { display: none; color: #FFFFFF; }
+#tooltip2 a:hover span { display: inline-block; position: absolute; width: auto; background: #ffffff; height: auto; left: 10px; top: -75px; color: #000000; padding: 0 5px; z-index: 1; border-style: groove;}
