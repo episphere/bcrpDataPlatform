@@ -72,6 +72,7 @@ export const logOut = async () => {
       "Content-Type": "application/x-www-form-urlencoded",
     },
   });
+  console.log(reponse);
   //delete localStorage.parms;
   //location.reload();
 };
