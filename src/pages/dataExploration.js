@@ -1,14 +1,16 @@
 import {
   getFile,
+  showAnimation,
   hideAnimation,
   csv2Json,
   numberWithCommas,
   emailsAllowedToUpdateData,
   getFileInfo,
   missingnessStatsFileId,
+  missingnessStatsCasesFileId,
   reSizePlots,
   applicationURLs,
-  consortiumSelection,
+  tsv2Json
 } from "../shared.js";
 import {
   addEventConsortiumSelect,
@@ -20,6 +22,7 @@ import {
   addEventMissingnessFilterBarToggle,
 } from "../event.js";
 import { variables as CONSTANTS } from "../variables.js";
+import {graphVariables} from "../graphVariables.js";
 
 import { pageNavBar } from "../components/navBarMenuItems.js";
 
@@ -32,10 +35,7 @@ export const dataSummary = (
 ) => {
   return `
         <div class="general-bg">
-            <div class="container body-min-height">
-        
-            
-                
+            <div class="container2 body-min-height">
                 ${
                   publicAccess
                     ? pageNavBar("data_exploration", "dictionary", "Dictionary")
@@ -83,7 +83,10 @@ export const dataSummary = (
                     JSON.parse(localStorage.parms).login
                   ) !== -1
                     ? `
-                    <div class="main-summary-row"><button id="updateSummaryStatsData" class="btn btn-outline-dark" aria-label="Update summary stats data" data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#confluenceMainModal">Update data</button></div>
+                    <div class="main-summary-row">
+                      <button id="updateSummaryStatsData" class="btn btn-outline-dark" aria-label="Update summary stats data" data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#confluenceMainModal">Update data</button>
+                      <button id="createaccessStats" class="btn btn-outline-dark" aria-label="Create access stats CSV" data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#confluenceMainModal">Create Access Stats</button>
+                    </div>
                 `
                     : ``
                 }
@@ -108,7 +111,6 @@ export const dataSummaryStatisticsTemplate = () => {
             </div>
             <div id="cardContent" class="card-body">
                 <div id="allFilters" class="align-left"></div>
-                <!---<p id='participantCount'></p>--->
             </div>
         </div>
     </div>
@@ -162,14 +164,57 @@ const filterItemTemplate = (title, values) => {
   `;
 };
 
-export const dataSummaryMissingTemplate = async () => {
-  const response = await getFile(missingnessStatsFileId);
-  const lastModified = (await getFileInfo(missingnessStatsFileId)).modified_at;
-  document.getElementById(
-    "dataLastModified"
-  ).innerHTML = `Data last modified at - ${new Date(
-    lastModified
-  ).toLocaleString()}`;
+export const dataSummaryMissingTopBarTemplate = () => {
+  const div1 = document.createElement("div");
+  div1.classList = ["col-xl-2 filter-column"];
+  div1.id = "missingnessFilter";
+
+  const div2 = document.createElement("div");
+
+  /**
+   
+   * 2. Create a function to make one filter item
+   */
+
+  div2.classList = ["col-xl-10"];
+  div2.innerHTML = `
+        <button id="filterBarToggle">
+            <i class="fas fa-lg fa-caret-left"></i>
+        </button>
+        <div class="main-summary-row" style="min-height: 10px;margin-bottom: 1rem;margin-left: 1rem;">
+            <div class="col white-bg div-border align-left font-size-17" style="padding: 0.5rem;" id="listFilters">
+                ${filterItemTemplate("Race", ["All"])}
+                <span style="padding-left: 5px; padding-right: 5px">|</span>
+                ${filterItemTemplate("Ethnicity", ["All"])}
+                <span style="padding-left: 5px; padding-right: 5px">|</span>
+                ${filterItemTemplate("Cohort", ["All"])}
+                <span style="padding-left: 5px; padding-right: 5px">|</span>
+                ${filterItemTemplate("Variable", ["height, weight, bmi, bmi earlyadult"])}
+            </div>
+        </div>
+        `;
+  const row = document.createElement("div");
+  row.classList = ["main-summary-row div-border overflow-x mb-2"];
+  row.id = "missingnessTable";
+
+  div2.appendChild(row);
+  document.getElementById("dataSummaryStatistics").appendChild(div1);
+  document.getElementById("dataSummaryStatistics").appendChild(div2);
+}
+
+export const dataSummaryMissingTemplate = async (popVal) => {
+  showAnimation();
+  let response = "";
+  let lastModified = "";
+  if (popVal == "Full Cohort"){
+    response = await getFile(missingnessStatsFileId);//missingnessStatsFileId);
+    lastModified = (await getFileInfo(missingnessStatsFileId)).modified_at;
+  } else {
+    response = await getFile(missingnessStatsCasesFileId);
+    lastModified = (await getFileInfo(missingnessStatsCasesFileId)).modified_at;
+  }
+  //const lastModified = (await getFileInfo(missingnessStatsFileId)).modified_at;
+  document.getElementById("dataLastModified").innerHTML = `Data current as of - ${new Date(lastModified).toLocaleString()}`;
   const { data, headers } = csv2Json(response);
   const variables = headers.filter((dt) => !dt.match(/ethnicity|race|cohort/i));
   const initialSelection =
@@ -191,56 +236,21 @@ export const dataSummaryMissingTemplate = async () => {
     ethnicity[dataOption.ethnicity] =
       CONSTANTS.BCRPP.ethnicityClass[dataOption.ethnicity];
   });
+  const data2 = await (await fetch("./BCRP_DataDictionary.txt")).text();
+  const tsvData = tsv2Json(data2);
+  const dictionary = tsvData.data;
+  const varselect = [];
+  variables.forEach(option => {
+    //console.log(option);
+    if(varselect[option]) return;
+    let varSelectValue = dictionary.find(o => o['Variable Name'] === option) ? {variable: option, subcategory: dictionary.find(o => o['Variable Name'] === option)['Sub-Category']} : {variable: option, subcategory: 'other'};
+    varselect.push(varSelectValue);
+  })
 
-  const div1 = document.createElement("div");
-  div1.classList = ["col-xl-3 filter-column"];
-  div1.id = "missingnessFilter";
-
-  const div2 = document.createElement("div");
-
-  /**
-   
-   * 2. Create a function to make one filter item
-   */
-
-  div2.classList = ["col-xl-9"];
-  div2.innerHTML = `
-        <button id="filterBarToggle">
-            <i class="fas fa-lg fa-caret-left"></i>
-        </button>
-        <div class="main-summary-row" style="min-height: 10px;margin-bottom: 1rem;margin-left: 1rem;">
-            <div class="col white-bg div-border align-left font-size-17" style="padding: 0.5rem;" id="listFilters">
-                <!---<span class="font-bold">Status:</span> All<span class="vertical-line"></span>--->
-                ${filterItemTemplate("Race", ["All"])}
-                <span style="padding-left: 5px; padding-right: 5px">|</span>
-                ${filterItemTemplate("Ethnicity", ["All"])}
-                <span style="padding-left: 5px; padding-right: 5px">|</span>
-                ${filterItemTemplate("Cohort", ["All"])}
-                <span style="padding-left: 5px; padding-right: 5px">|</span>
-                ${filterItemTemplate("Variable", ["All"])}
-            </div>
-        </div>
-        `;
-  const row = document.createElement("div");
-  row.classList = ["main-summary-row div-border overflow-x mb-2"];
-  row.id = "missingnessTable";
-
-  div2.appendChild(row);
-  document.getElementById("dataSummaryStatistics").appendChild(div1);
-  document.getElementById("dataSummaryStatistics").appendChild(div2);
-
-  renderFilter(
-    data,
-    initialSelection,
-    Object.keys(cohorts),
-    variables,
-    race,
-    ethnicity
-  );
-  console.log(initialSelection);
-  console.log(cohorts);
-  midset(data, initialSelection, cohorts);
+  renderFilter(data,initialSelection,Object.keys(cohorts),variables,race,ethnicity,popVal, varselect);
+  midset(data, initialSelection);
   addEventMissingnessFilterBarToggle();
+  hideAnimation();
 };
 
 const renderFilter = (
@@ -249,7 +259,9 @@ const renderFilter = (
   acceptedCohorts,
   headers,
   race,
-  ethnicity
+  ethnicity,
+  popVal,
+  varselect
 ) => {
   let template = "";
   template += `
@@ -270,7 +282,9 @@ const renderFilter = (
     acceptedCohorts,
     headers,
     race,
-    ethnicity
+    ethnicity,
+    popVal,
+    varselect
   );
 };
 
@@ -280,7 +294,9 @@ const renderMidsetFilterData = (
   acceptedCohorts,
   headers,
   race,
-  ethnicity
+  ethnicity,
+  popVal,
+  varselect
 ) => {
   let template = "";
 
@@ -292,6 +308,27 @@ const renderMidsetFilterData = (
   template += `
         <div style="width:100%;">
             `;
+  //console.log(popVal);
+  if (popVal == "Full Cohort") {
+  template += `
+        <div class="form-group" id="population">
+        <label class="filter-label font-size-13" for="populationSelection">Population</label>
+        <select class="form-control font-size-15" id="populationSelection">
+          <option value="Full Cohort" selected>Full Cohort</option>
+          <option value="Cases">Cases</option>
+        </select>
+  `
+  };
+  if (popVal == "Cases") {
+    template += `
+          <div class="form-group" id="population">
+          <label class="filter-label font-size-13" for="populationSelection">Population</label>
+          <select class="form-control font-size-15" id="populationSelection">
+            <option value="Full Cohort">Full Cohort</option>
+            <option value="Cases" selected>Cases</option>
+          </select>
+    `
+    };
   template += `
             <div class="form-group" id="raceList">
             <label class="filter-label font-size-13" for="raceSelection">Race</label>
@@ -318,7 +355,7 @@ const renderMidsetFilterData = (
   template += `
         <div class="form-group" id='midsetCohorts'>
           <li class="filter-list-item">
-            <label class="filter-label font-size-13" for="studiesList">Cohort<span class='required-label'>*&nbsp;</span></label>
+            <label class="filter-label font-size-13" for="studiesList">Cohort<span class='required-label'>&nbsp;</span></label>
             <label>
               <input
                 id="cohortallcheckbox"
@@ -351,33 +388,52 @@ const renderMidsetFilterData = (
   template += `${cohortsTemplate}
 
             </div>
-            <div class="form-group" id="midsetVariables">
-                <label class="filter-label font-size-13" for="variableSelectionList">Variable Selection </label>
-                <ul class="remove-padding-left font-size-15" id="variableSelectionList">
+            <div class="form-group">
+                <label class="filter-label font-size-13" for="variableSelectionList">Variable Selection</label>
+                <div id="variableSelectionList" class="font-size-15">
             `;
-  headers.forEach((variable) => {
-    template += `<li class="filter-list-item">
-                        <input type="checkbox" ${
-                          acceptedVariables.indexOf(variable) !== -1
-                            ? "checked"
-                            : ""
-                        } data-variable="${variable}" id="label${variable}" class="select-variable"/>
-                        <label for="label${variable}" class="variable-name" title="${variable}">
-                        ${variable
-                          .replace("_Data available", "")
-                          .replace(/_|-/g, " ")}`;
-    if (
-      variable === "Reproductive_History1" ||
-      variable === "Reproductive_History2"
-    ) {
-      template += `<button class="info-btn variable-definition" aria-label="More info" data-keyboard="false" data-backdrop="static" data-toggle="modal" 
-                    data-target="#confluenceMainModal"  data-variable='${variable}'>
-                    <i class="fas fa-question-circle cursor-pointer"></i></button>`;
-    }
-    template += `</label>
-                    </li>`;
-  });
-  template += `</ul></div></br>
+  //console.log(varselect);
+  let unique_cat = varselect
+        .map((item) => item.subcategory)
+        .filter(
+            (value, index, current_value) => current_value.indexOf(value) === index
+        );
+  unique_cat.forEach((cat) => {
+    let catnospace = cat.replace(/ /g,"");
+    template += `<ul class="remove-padding-left">
+                  <li class="custom-borders filter-list-item consortia-study-list" data-variable="${catnospace}">
+                    <label for="label${catnospace}" class="variable-name" title="${catnospace}">${cat}</label>`
+    template += unique_cat.indexOf(cat) === 0 ?
+                    `<div class="ml-auto">
+                      <button type="button" class="consortium-selection consortium-selection-btn" data-toggle="collapse" href="#toggle${catnospace}">
+                        <i class="fas fa-caret-up"></i>
+                      </button>
+                    </div>
+                  </li>
+                  <ul class="collapse show no-list-style custom-padding allow-overflow max-height-study-list" aria-expanded="true" id="toggle${catnospace}">
+                  ` :
+                  `<div class="ml-auto">
+                  <button type="button" class="consortium-selection consortium-selection-btn" data-toggle="collapse" href="#toggle${catnospace}">
+                    <i class="fas fa-caret-down"></i>
+                  </button>
+                </div>
+              </li>
+              <ul class="collapse no-list-style custom-padding allow-overflow max-height-study-list" aria-expanded="false" id="toggle${catnospace}">
+                  `;
+    let variables = varselect.filter(dt => dt.subcategory === cat);
+    variables.forEach((variable) => {
+      template += `<li class="filter-list-item">
+                          <input type="checkbox" ${acceptedVariables.indexOf(variable.variable) !== -1 ? "checked": ""} 
+                            data-variable="${variable.variable}" data-variable-type="${cat}" id="label${variable.variable}" class="select-variable"/>
+                          <label for="label${variable.variable}" class="variable-name" title="${variable.variable}">
+                            ${variable.variable.replace(/_|-/g, " ")}
+                          </label>
+                        </li>
+                          `
+      })
+      template += `</ul></ul>`;
+    });
+  template += `</div></div>
         </div>
     `;
   document.getElementById("midsetFilterData").innerHTML = template;
@@ -385,7 +441,9 @@ const renderMidsetFilterData = (
   addEventMidsetFilterForm(data);
 };
 
-const generateFilterSummery = () => {
+const generateFilterSummary = () => {
+  const popEl = document.getElementById("populationSelection");
+  const popValue = popEl.value;
   const raceEl = document.getElementById("raceSelection");
   const raceValue = raceEl.value;
   const raceText = Array.from(raceEl.options).find(
@@ -400,9 +458,9 @@ const generateFilterSummery = () => {
   // Total variables
   // total: 4
   // selected: 2
-  const selectedVariables = getSelectedVariables("midsetVariables");
-  const totalVariables = getAllVariables("midsetVariables");
-  const isAllVariablesSelected = selectedVariables.length === totalVariables;
+  const selectedVariables = getSelectedVariables2().map((dt) => dt.split("@#$")[1]);
+  //const totalVariables = getAllVariables2();
+  //const isAllVariablesSelected = selectedVariables.length === totalVariables;
   // Total Cohort
   const selectedCohorts = getSelectedVariables("midsetCohorts");
   const totalCohorts = getAllVariables("midsetCohorts");
@@ -428,40 +486,51 @@ const generateFilterSummery = () => {
     ${filterItemTemplate("Ethnicity", [ethnicityText])}
     <span style="padding-left: 5px; padding-right: 5px">|</span>
     ${filterItemTemplate(
-      "Variable",
-      isAllVariablesSelected
-        ? ["All"]
-        : selectedVariables.filter((cohort) => {
+      "Variable", 
+      selectedVariables.filter((cohort) => {
             return cohort !== undefined;
           })
     )}
   `;
-
-  /**
-   * 1. getElementByID(listFilters)
-   * 2. set innerHtml
-   * 3.
-   */
 };
+
 const addEventMidsetFilterForm = (data) => {
   const race = document.getElementById("raceSelection");
   race.addEventListener("change", () => {
     filterMidsetData(data);
-    generateFilterSummery();
+    generateFilterSummary();
   });
   const ethnicity = document.getElementById("ethnicitySelection");
-  ethnicity.addEventListener("change", () => {
-    generateFilterSummery();
+  ethnicity.addEventListener("change", async () => {
+    await showAnimation();
+    generateFilterSummary();
     filterMidsetData(data);
+  });
+
+  const variableTypes = document.getElementsByClassName("select-variable-type");
+  Array.from(variableTypes).forEach((ele) => {
+    ele.addEventListener("click", async () => {
+      await showAnimation();
+      generateFilterSummary();
+      filterMidsetData(data);
+    });
   });
 
   const variables = document.getElementsByClassName("select-variable");
   Array.from(variables).forEach((ele) => {
-    ele.addEventListener("click", () => {
-      generateFilterSummery();
+    ele.addEventListener("click", async () => {
+      await showAnimation();
+      generateFilterSummary();
       filterMidsetData(data);
     });
   });
+
+  const popSelection = document.getElementById("populationSelection");
+  popSelection.addEventListener("change", function (event) {
+    if (event.target.value == "Full Cohort") dataSummaryMissingTemplate("Full Cohort");
+    if (event.target.value == "Cases") dataSummaryMissingTemplate("Cases");
+  });
+
   const cohortsAllCheckbox = document.getElementById("cohortallcheckbox");
   const cohorts = document.getElementsByClassName("select-cohort");
 
@@ -475,7 +544,7 @@ const addEventMidsetFilterForm = (data) => {
       if (selectedCohorts.length < cohorts.length) {
         cohortsAllCheckbox.checked = false;
       }
-      generateFilterSummery();
+      generateFilterSummary();
       filterMidsetData(data);
     });
   });
@@ -484,19 +553,22 @@ const addEventMidsetFilterForm = (data) => {
     Array.from(cohorts).forEach((input) => {
       input.checked = e.target.checked;
     });
-    generateFilterSummery();
+    generateFilterSummary();
     filterMidsetData(data);
   });
 };
 
-const filterMidsetData = (data) => {
+const filterMidsetData = async (data) => {
+  showAnimation();
+  const population = document.getElementById("populationSelection").value
   const race = document.getElementById("raceSelection").value;
   const ethnicity = document.getElementById("ethnicitySelection").value;
-  const selectedVariables = getSelectedVariables("midsetVariables");
+  const selectedVariables = getSelectedVariables2().map((dt) => dt.split("@#$")[1]);
   const selectedCohorts = getSelectedVariables("midsetCohorts");
+  const selectedVariableTypes = Array.from(document.querySelectorAll('input:checked.select-variable-type')).map((dt) => dt.dataset.variable);
 
   let newData = data;
-  if (selectedCohorts.length > 0) {
+  if (selectedCohorts.length > 0 || selectedVariableTypes.length > 0) {
     newData = newData.filter((filterItem) => {
       if (filterItem) {
         return selectedCohorts.indexOf(filterItem.Cohort) > -1;
@@ -511,9 +583,11 @@ const filterMidsetData = (data) => {
   if (race !== "all") {
     newData = newData.filter((dt) => dt.race === race);
   }
-  console.log(selectedCohorts)
-  midset(newData, selectedVariables, selectedCohorts);
+  console.log(selectedVariables);
+  midset(newData, selectedVariables);
+  //hideAnimation();
 };
+
 const getSelectedVariables = (parentId) => {
   const selections = [];
   let cardBody = document.getElementById(parentId);
@@ -522,12 +596,30 @@ const getSelectedVariables = (parentId) => {
   return selections;
 };
 
+const getSelectedVariables2 = () => {
+  const elements = document.querySelectorAll(`input:checked.select-variable`);
+  const array = [];
+  Array.from(elements).forEach(element => {
+      const variabletype = element.dataset.variableType;
+      const variable = element.dataset.variable;
+      const value = `${variabletype}@#$${variable}` 
+      if(array.indexOf(value) === -1) array.push(value);
+  })
+  return array;
+};
+
 const getAllVariables = (parentId) => {
   let cardBody = document.getElementById(parentId);
   const variables = cardBody.querySelectorAll("input:not(.select-all)");
   return variables.length;
 };
-const midset = (data, acceptedVariables, acceptedCohorts) => {
+
+const getAllVariables2 = () => {
+  const variables = document.getElementsByClassName('select-variable');
+  return variables.length;
+};
+
+const midset = (data, acceptedVariables) => {
   let template = "";
   let plotData = [];
   let headerData = "";
@@ -544,55 +636,73 @@ const midset = (data, acceptedVariables, acceptedCohorts) => {
     const headerCount = computeHeader(data, acceptedVariables);
     headerData = headerCount;
     const result = computeSets(data, acceptedVariables);
-    template += `<tr class="midset-header"><th class="missing-column"><p>Number of subjects with data based on the selection of variables</p>
-                <button class="info-btn variable-definition" aria-label="More info" data-keyboard="false" data-backdrop="static" data-toggle="modal" 
-                  data-target="#confluenceMainModal" data-variable='midsetTopBars'>
-                <i class="fas fa-question-circle cursor-pointer"></i></button></th><th class='bar-chart-cell' 
-                colspan="${Object.keys(headerCount).length}">
-                <div id="midsetHeader"></div></th><th class="missing-column"></th></tr>`;
+    // template += `<tr class="midset-header"><th class="missing-column"><p>Number of subjects with data based on the selection of variables</p>
+    //             <button class="info-btn variable-definition" aria-label="More info" data-keyboard="false" data-backdrop="static" data-toggle="modal" 
+    //               data-target="#confluenceMainModal" data-variable='midsetTopBars'>
+    //             <i class="fas fa-question-circle cursor-pointer"></i></button></th><th class='bar-chart-cell' 
+    //             colspan="${Object.keys(headerCount).length}">
+    //             <div id="midsetHeader"></div></th><th class="missing-column"></th></tr>`;
 
-    template += `<tr><th class="missing-column"></th>`;
+    // template += `<tr><th class="missing-column"></th>`;
+    // for (let variable in headerCount) {
+    //   template += `<th class="missing-column cell-equal-width">${numberWithCommas(
+    //     headerCount[variable]
+    //   )}</th>`;
+    // }
+    template += `<tr><th></th>`
+    // for (let variable in headerCount) {
+    //   template += `<th></th>`
+    // }
+    //template += `<th class="missing-column" colspan="2">Total patients based on Population, Race, Ethnicity, and Cohort</th></tr><tr><td class="missing-column"></td>`;
+    for (let variable in headerCount) {
+      template += `<th class="missing-column cell-equal-width rowspan="2">${variable
+        .replace("_Data available", "")
+        .replace(/_|-/g, " ")}</th>`;
+    }
+    template += `<th class="missing-column, align-top" colspan="2">Total participants based on Population, Race, Ethnicity, and Cohort <br> <p style="font-size:22px;">${numberWithCommas(data.length)}</p></th></tr>`;
+    // template += `<th class="missing-column, align-top" colspan="2">${numberWithCommas(data.length)}</th>
+    //             `
+    template += `<tr><th class="missing-column set-label">
+                  Participant Count 
+                  <button class="info-btn variable-definition" aria-label="More info" data-keyboard="false" data-backdrop="static" 
+                  data-toggle="modal" data-target="#confluenceMainModal" data-variable='midsetTopBars'><i class="fas fa-question-circle cursor-pointer"></i></button>
+                </th>`;
     for (let variable in headerCount) {
       template += `<th class="missing-column cell-equal-width">${numberWithCommas(
         headerCount[variable]
-      )}</th>`;
-    }
-    template += `<th class="missing-column"></th></tr><tr><td class="missing-column"></td>`;
-    for (let variable in headerCount) {
-      template += `<th class="missing-column cell-equal-width">${variable
-        .replace("_Data available", "")
-        .replace(/_|-/g, " ")}</th>`;
+      )}
+      </th>`;
     }
     template += `<th class="missing-column"></th>
                     <th class="missing-column"><button class="info-btn variable-definition" aria-label="More info" data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#confluenceMainModal"  data-variable='midsetSideBars'><i class="fas fa-question-circle cursor-pointer"></i></button></th>
                     </tr></thead><tbody>
-                    <tr>
+                    <!--<tr>
                         <td class="missing-column set-label">
-                            All subjects 
+                            All Patients 
                             <button class="info-btn variable-definition" aria-label="More info" data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#confluenceMainModal"  data-variable='allSubjects'><i class="fas fa-question-circle cursor-pointer"></i></button>
-                        </td>`;
+                        </td>-->`;
 
     const set0 = data.length;
-    acceptedVariables.forEach((variable, index) => {
-      template += `<td class="missing-column">&#9898</td>`;
-      if (index === acceptedVariables.length - 1)
-        template += `<td class="missing-column">${numberWithCommas(
-          set0
-        )}</td><td id="midsetChart" rowspan="${
-          Object.keys(result).length + 2
-        }"></td>`;
-    });
-    template += `</tr>
+    //console.log(acceptedVariables);
+    //console.log(Object.keys(result));
+    // acceptedVariables.forEach((variable, index) => {
+    //   template += `<td class="missing-column">-</td>`;
+    //   if (index === acceptedVariables.length - 1)
+    //     template += `<td class="missing-column">${numberWithCommas(set0)}</td>
+    //   <!--<td id="midsetChart" rowspan="${Object.keys(result).length + 2}"></td>-->`;
+    // });
+    template += `<!--</tr>-->
                     <tr>
                         <td class="missing-column set-label">
-                            Complete set 
+                            Complete Set 
                             <button class="info-btn variable-definition" aria-label="More info" data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#confluenceMainModal"  data-variable='completeSet'><i class="fas fa-question-circle cursor-pointer"></i></button>
                         </td>`;
     const set1 = setLengths(data, acceptedVariables);
     acceptedVariables.forEach((variable, index) => {
       template += `<td class="missing-column">&#9899</td>`;
       if (index === acceptedVariables.length - 1)
-        template += `<td class="missing-column">${numberWithCommas(set1)}</td>`;
+        template += `<td class="missing-column">${numberWithCommas(set1)}</td>
+        <td id="midsetChart" rowspan="${Object.keys(result).length + 2}"></td>`;
     });
     template += "</tr>";
     let ignore = "";
@@ -604,7 +714,7 @@ const midset = (data, acceptedVariables, acceptedCohorts) => {
     delete result[ignore];
     plotData = Object.values(result);
     plotData.unshift(set1);
-    plotData.unshift(set0);
+    //plotData.unshift(set0);
 
     let variableDisplayed = {};
     for (let key in result) {
@@ -646,18 +756,18 @@ const midset = (data, acceptedVariables, acceptedCohorts) => {
     template += "</tbody></table>";
   } else template += "Data not found";
 
-  hideAnimation();
   document.getElementById("missingnessTable").innerHTML = template;
   addEventVariableDefinitions();
   //if (data.length > 0){
   renderMidsetPlot(plotData.reverse(), "midsetChart");
-  renderMidsetHeader(
-    acceptedVariables,
-    Object.values(headerData),
-    "midsetHeader"
-  );
+  // renderMidsetHeader(
+  //   acceptedVariables,
+  //   Object.values(headerData),
+  //   "midsetHeader"
+  // );
   //};
   reSizePlots();
+  hideAnimation();
 };
 
 const renderMidsetHeader = (x, y, id) => {

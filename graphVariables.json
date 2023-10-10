@@ -1,0 +1,363 @@
+{
+    "age" : 
+        {
+        "title" : "Age at Record Date",
+        "units" : "Years",
+        "values" : 
+            {
+            "age_LT20": "<20",
+            "age_20_29": "20 to 29",
+            "age_30_39": "30 to 39",
+            "age_40_49": "40 to 49",
+            "age_50_59": "50 to 59",
+            "age_60_69": "60 to 69",
+            "age_70_79": "70 to 79",
+            "age_80_89": "80 to 89",
+            "age_90_99": "90 to 99",
+            "age_GE100": ">100",
+            "age_DK": "Unknown"
+            }
+        },
+    "ageMenarche" :
+        {
+        "title" : "Age at Menarche",
+        "units" : "Years",
+        "values" : 
+            {
+            "agemenarche_LE12": "<=12",
+            "agemenarche_13": "13",
+            "agemenarche_14": "14",
+            "agemenarche_15": "15",
+            "agemenarche_GT15": ">15",
+            "agemenarche_777": "Not Applicable",
+            "agemenarche_DK": "Unknown"
+            }
+        },
+    "AJAncestry" :
+        {
+        "title" : "Ashkenazi Jewish Ancestry",
+        "units" : "",
+        "values" : 
+            {
+            "AJAncestry_0": "No",
+            "AJAncestry_1": "Yes",
+            "AJAncestry_DK": "Unknown"
+            }
+        },
+    "alcohol_status" :
+        {
+        "title" : "Alcohol Drinking Status",
+        "units" : "",
+        "values" : 
+            {
+            "alcohol_status_1": "Current",
+            "alcohol_status_2": "Former",
+            "alcohol_status_3": "Ever (unknown current or former)",
+            "alcohol_status_4": "Never",
+            "alcohol_status_DK": "Unknown"
+            }
+        },
+    "BBD_history" :
+        {
+        "title" : "History of Benign Breast Disease",
+        "units" : "",
+        "values" : 
+            {
+            "BBD_history_0": "No",
+            "BBD_history_1": "Yes",
+            "BBD_history_DK": "Unknown"
+            }
+        },
+    "BBD_number" :
+        {
+        "title" : "Number of benign breast disease diagnoses",
+        "units" : "Number",
+        "values" : 
+            {
+            "BBD_number_0": "0",
+            "BBD_number_1": "1",
+            "BBD_number_2": "2",
+            "BBD_number_DK": "Unknown"
+            }
+        },
+    "BBD_type" :
+        {
+        "title": "Type of benign breast disease for first BBD diagnosis",
+        "units" : "",
+        "values" : 
+            {
+            "BBD_type1_DK": "non-proliferative disease",
+            "BBD_type2_DK": "proliferative disease without atypia",
+            "BBD_type3_DK": "atypical hyperplasia",
+            "BBD_type4_DK": "Type 4"
+            }
+        },
+    "Biopsies_number" :
+        {
+        "title" : "Number of benign breast disease diagnoses",
+        "units" : "Number",
+        "values" : 
+            {
+            "Biopsies_number_1": "1",
+            "Biopsies_number_2": "2",
+            "Biopsies_number_3": "3",
+            "Biopsies_number_4": "4",
+            "Biopsies_number_DK": "Unknown"
+            }
+        },
+    "Biopsies_yesno" :
+        {
+        "title" : "Ever had a breast biopsy, excluding dx biopsies",
+        "units" : "",
+        "values" : 
+            {
+            "Biopsies_yesno_0": "0",
+            "Biopsies_yesno_1": "1",
+            "Biopsies_yesno_DK": "Unknown"
+            }
+        },
+    "birth_year" :
+        {
+        "title" : "Birth Year",
+        "units" : "Year Range",
+        "values" : 
+            {
+            "birth_year_LT1900": "<1900",
+            "birth_year_1900_1909": "1900-1909",
+            "birth_year_1910_1919": "1910-1919",
+            "birth_year_1920_1929": "1920-1929",
+            "birth_year_1930_1939": "1930-1939",
+            "birth_year_1940_1949": "1940-1949",
+            "birth_year_1950_1959": "1950-1959",
+            "birth_year_1960_1969": "1960-1969",
+            "birth_year_1970_1979": "1970-1979",
+            "birth_year_1980_1989": "1980-1989",
+            "birth_year_1990_1999": "1990-1999",
+            "birth_year_GE2000": ">=2000",
+            "birth_year_DK": "Unknown"
+            }
+        },
+    "bmi" :
+        {
+        "title": "BMI at Enrollment",
+        "units" : "kg/m2",
+        "values": 
+            {
+            "bmi_LT18.5": "<18.5",
+            "bmi_18_5_24_9": "18.5-24.9",
+            "bmi_25_0_29_9": "25.0-29.9",
+            "bmi_30_0_34_9": "30.0-34.9",
+            "bmi_35_0_39_9": "35.0-39.9",
+            "bmi_GE40": ">40",
+            "bmi_DK": "Unknown"   
+            }
+        },
+    "ever_breastfeed" :
+        {
+        "title" : "Ever Breastfeed",
+        "units" : "",
+        "values" : 
+            {
+            "breastfeed_0": "Never Breastfed",
+            "breastfeed_1": "Ever Breastfed",
+            "breastfeed_777": "Nonparous",
+            "breastfeed_NA": "NA",
+            "breastfeed_DK": "Unknown"
+            }
+        },
+    "education" :
+        {
+        "title" : "Education",
+        "units" : "",
+        "values" : 
+            {
+            "education_1": "Less than high school",
+            "education_2": "High School",
+            "education_3": "Some college education",
+            "education_4": "University (degree)",
+            "education_5": "Graduate school (some or degree)",
+            "education_DK": "Unknown" 
+            }
+        },
+    "fh_breast_canc" :
+        {
+        "title" : "Family history of breast cancer (first degree relative)",
+        "units" : "",
+        "values" : 
+            {
+            "fhx_fdr_brca_0": "0",
+            "fhx_fdr_brca_1": "1",
+            "fhx_fdr_brca_DK": "Unknown"
+            }
+        },
+    "fhx_fdr_brca" :
+        {
+        "title" : "Family history of breast cancer (first degree relative)",
+        "units" : "",
+        "values" : 
+            {
+            "fhx_fdr_brca_0": "No",
+            "fhx_fdr_brca_1": "Yes",
+            "fhx_fdr_brca_DK": "Unknown"
+            }
+        },
+    "hrt_use" :
+        {
+        "title" : "Use of any hormone replacement therapy",
+        "units" : "",
+        "values" : 
+            {
+            "hrtuse_0": "Never used hormonal replacement therapy",
+            "hrtuse_1": "Current use",
+            "hrtuse_2": "Former use",
+            "hrtuse_3": "Ever used (unknown current or former)",
+            "hrtuse_DK": "Unknown"
+            }
+        },
+    "hrtuse_eonly" :
+        {
+        "title" : "Use of E only hormone replacement therapy",
+        "units" : "",
+        "values" : 
+            {
+            "hrtuse_eonly_0": "Never used hormonal replacement therapy",
+            "hrtuse_eonly_1": "Current use",
+            "hrtuse_eonly_2": "Former use",
+            "hrtuse_eonly_3": "Ever used (unknown current or former)",
+            "hrtuse_eonly_DK": "Unknown"
+            }
+        },
+    "hrtuse_ep" :
+        {
+        "title" : "Use of E+P hormone replacement therapy",
+        "units" : "",
+        "values" : 
+            {
+            "hrtuse_ep_0": "Never used hormonal replacement therapy",
+            "hrtuse_ep_1": "Current use",
+            "hrtuse_ep_2": "Former use",
+            "hrtuse_ep_3": "Ever used (unknown current or former) ",
+            "hrtuse_ep_DK": "Unknown"
+            }
+        },
+    "meno_reason" :
+        {
+        "title" : "Reason for menopause",
+        "units" : "",
+        "values" : 
+            {
+            "meno_reason_1": "Natural",
+            "meno_reason_2": "Surgical",
+            "meno_reason_3": "Radiation/Chemotherapy induced",
+            "meno_reason_4": "Medication",
+            "meno_reason_777": "777",
+            "meno_reason_DK": "Unknown",
+            "meno_reason_NA": "Not Applicable"
+            }
+        },
+    "meno_status" :
+        {
+        "title" : "Menopausal status",
+        "units" : "",
+        "values" : 
+            {
+            "meno_status_1": "Postmenopausal",
+            "meno_status_2": "Premenopuasal",
+            "meno_status_3": "Perimenopausal/other",
+            "meno_status_DK": "Unknown"
+            }
+        },
+    "ocuse_current" :
+        {
+        "title" : "Current OC use (at record_date)",
+        "units" : "",
+        "values" : 
+            {
+            "ocuse_current_0": "No",
+            "ocuse_current_1": "Yes",
+            "ocuse_current_DK": "Unknown"
+            }
+        },
+    "ocuse_ever" :
+        {
+        "title" : "Ever use of oral contraceptives",
+        "units" : "",
+        "values" : 
+            {
+            "ocuse_ever_0": "Never used oral contraceptives",
+            "ocuse_ever_1": "Ever used oral contraceptives",
+            "ocuse_ever_DK": "Unknown"
+            }
+        },
+    "parity" :
+        {
+        "title" : "Number of pregnancies (full-term)",
+        "units" : "Number",
+        "values" : 
+            {
+            "parity_0": "0",
+            "parity_1": "1",
+            "parity_2": "2",
+            "parity_3": "3",
+            "parity_4": "4",
+            "parity_5": "5",
+            "parity_6": "6",
+            "parity_7": "7",
+            "parity_8": "8",
+            "parity_9": "9",
+            "parity_10": "10",
+            "parity_11": "11",
+            "parity_12": "12",
+            "parity_13": "13",
+            "parity_14": "14",
+            "parity_15": "15",
+            "parity_16": "16",
+            "parity_DK": "Unknown"
+            }
+        },
+    "parous" :
+        {
+        "title" : "Parous",
+        "units" : "",
+        "values" : 
+            {
+            "parous_0": "Non-parous",
+            "parous_1": "Parous",
+            "parous_DK": "Unknown"
+            }
+        },
+    "screen_ever" :
+        {
+        "title" : "Ever had a screening mammogram",
+        "units" : "",
+        "values" : 
+            {
+            "screen_ever_0": "0",
+            "screen_ever_1": "1",
+            "screen_ever_DK": "Unknown"
+            }
+        },
+    "sex" :
+        {
+        "title" : "Sex",
+        "units" : "",
+        "values" : 
+            {
+            "sex_0": "0",
+            "sex_1": "1"
+            }
+        },
+    "smoking_status" :
+        {
+        "title" : "Smoking Status",
+        "units" : "",
+        "values" : 
+            {
+            "smoking_status_1": "1",
+            "smoking_status_2": "2",
+            "smoking_status_3": "3",
+            "smoking_status_4": "4",
+            "smoking_status_DK": "Unknown"
+            }
+        }
+}

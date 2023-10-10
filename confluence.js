@@ -10,6 +10,7 @@ import {
   dataSummary,
   dataSummaryMissingTemplate,
   dataSummaryStatisticsTemplate,
+  dataSummaryMissingTopBarTemplate,
 } from "./src/pages/dataExploration.js";
 import {
   dataAccess as dataRequestTemplate,
@@ -35,6 +36,7 @@ import {
   loginAppEpisphere,
   logOut,
   loginAppProd,
+  //loginMail,
 } from "./src/manageAuthentication.js";
 import {
   storeAccessToken,
@@ -56,7 +58,7 @@ import {
   uploadFormFolder,
   uploadFile,
   uploadWordFile,
-  getFile,
+  getFile
 } from "./src/shared.js";
 import {
   addEventConsortiaSelect,
@@ -65,6 +67,7 @@ import {
   addEventDataGovernanceNavBar,
   addEventMyProjects,
   addEventUpdateSummaryStatsData,
+  addEventcreateaccessStats,
 } from "./src/event.js";
 import { dataAnalysisTemplate } from "./src/pages/dataAnalysis.js";
 import { getFileContent, getFileContentCases } from "./src/visualization.js";
@@ -72,7 +75,7 @@ import { aboutConfluence, renderOverView } from "./src/pages/about.js";
 import { confluenceResources } from "./src/pages/join.js";
 import { confluenceContactPage } from "./src/pages/contact.js";
 import { footerTemplate } from "./src/components/footer.js";
-import { renderDescription } from "./src/pages/description.js";
+import { renderDescription, renderDescriptionNotSignedIn } from "./src/pages/description.js";
 import { dataDictionaryTemplate } from "./src/pages/dictionary.js";
 import { showPreview } from "./src/components/boxPreview.js";
 
@@ -88,11 +91,14 @@ export const confluence = async () => {
       navigator.serviceWorker.register("./serviceWorker.js");
     } catch (error) {}
   }
+  if (window.location.href.includes("index.html")){
+    location.href = location.href.replace("index.html", "");
+  };
   const confluenceDiv = document.getElementById("confluenceDiv");
   const navBarOptions = document.getElementById("navBarOptions");
   document
     .getElementById("loginBoxAppDev")
-    .addEventListener("click", loginAppDev);
+    .addEventListener("click", loginAppDev);//loginAppDev);
   document
     .getElementById("loginBoxAppStage")
     .addEventListener("click", loginObs);
@@ -159,29 +165,15 @@ export const confluence = async () => {
       addEventUploadStudyForm();
       hideAnimation();
     });
+
     dataSummaryElement.addEventListener("click", async () => {
       if (dataSummaryElement.classList.contains("navbar-active")) return;
-      showAnimation();
       assignNavbarActive(dataSummaryElement, 1);
       document.title = "BCRPP - Summary Statistics";
-      confluenceDiv.innerHTML = dataSummary(
-        "Summary Statistics",
-        false,
-        true,
-        true
-      );
-      await addEventUpdateSummaryStatsData();
-      await dataSummaryStatisticsTemplate();
-      // if(document.getElementById('dataSummaryFilter')) document.getElementById('dataSummaryFilter').addEventListener('click', e => {
-      //     e.preventDefault();
-      //     const header = document.getElementById('confluenceModalHeader');
-      //     const body = document.getElementById('confluenceModalBody');
-      //     header.innerHTML = `<h5 class="modal-title">Filter summary data</h5>
-      //                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      //                             <span aria-hidden="true">&times;</span>
-      //                         </button>`;
-      //     body.innerHTML = `<span>Select Consortia or Studies to Display</span>`;
-      // })
+      confluenceDiv.innerHTML = dataSummary("Summary Statistics", false, true, true);
+      addEventUpdateSummaryStatsData();
+      addEventcreateaccessStats();
+      dataSummaryStatisticsTemplate();
       await getFileContent();
       const subcasesSelection = document.getElementById("subcasesSelection");
       subcasesSelection.addEventListener("change", function (event) {
@@ -191,26 +183,30 @@ export const confluence = async () => {
     });
 
     if (dataSummarySubsetElement) {
-      dataSummarySubsetElement.addEventListener("click", () => {
-        if (dataSummarySubsetElement.classList.contains("navbar-active"))
-          return;
+      dataSummarySubsetElement.addEventListener("click", async () => {
+        if (dataSummarySubsetElement.classList.contains("navbar-active")) return;
         const confluenceDiv = document.getElementById("confluenceDiv");
-        showAnimation();
         assignNavbarActive(dataSummarySubsetElement, 1);
         document.title = "BCRPP - Subset Statistics";
-        confluenceDiv.innerHTML = dataSummary(
-          "Subset Statistics",
-          false,
-          true,
-          true
-        );
+        confluenceDiv.innerHTML = dataSummary("Subset Statistics", false, true, true);
         addEventUpdateSummaryStatsData();
+        addEventcreateaccessStats();
         removeActiveClass("nav-link", "active");
-        document
-          .querySelectorAll('[href="#data_exploration/subset"]')[1]
-          .classList.add("active");
-        dataSummaryMissingTemplate();
-        hideAnimation();
+        document.querySelectorAll('[href="#data_exploration/subset"]')[1].classList.add("active");
+        dataSummaryMissingTopBarTemplate();
+        await dataSummaryMissingTemplate("Full Cohort");
+        
+        const popSelection = document.getElementById("populationSelection");
+        popSelection.addEventListener("change", function (event) {
+          console.log("popSelection Changed");
+          if (event.target.value == "Full Cohort") {
+            dataSummaryMissingTemplate("Full Cohort");
+          }
+          if (event.target.value == "Cases") {
+            console.log("Cases");
+            dataSummaryMissingTemplate("Cases");
+          }
+        })
       });
     }
     if (viewUserSubmissionElement) {
@@ -238,6 +234,7 @@ export const confluence = async () => {
           false
         );
         addEventUpdateSummaryStatsData();
+        addEventcreateaccessStats();
         removeActiveClass("nav-link", "active");
         document
           .querySelectorAll('[href="#data_exploration/dictionary"]')[1]
@@ -352,7 +349,7 @@ export const confluence = async () => {
                 ${
                   getMyPermissionLevel
                     ? `
-                    <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links navbar-active" href="#data_governance" title="Data Governance" id="dataGovernance">
+                    <a hidden class="dropdown-item nav-link nav-menu-links dropdown-menu-links navbar-active" href="#data_governance" title="Data Governance" id="dataGovernance">
                         Data Governance
                     </a>
                 `
@@ -360,7 +357,7 @@ export const confluence = async () => {
                 }
             `;
       document.getElementById("myProjectsNav").innerHTML = `
-                <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links" href="#my_projects" title="My Projects" id="myProjects">
+                <a hidden class="dropdown-item nav-link nav-menu-links dropdown-menu-links" href="#my_projects" title="My Projects" id="myProjects">
                     My Projects
                 </a>
             `;
@@ -368,21 +365,21 @@ export const confluence = async () => {
       addEventMyProjects();
     } else if (array.length > 0 && getMyPermissionLevel) {
       document.getElementById("governanceNav").innerHTML = `
-                <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links navbar-active" href="#data_governance" title="Data Governance" id="dataGovernance">
+                <a hidden class="dropdown-item nav-link nav-menu-links dropdown-menu-links navbar-active" href="#data_governance" title="Data Governance" id="dataGovernance">
                     Data Governance
                 </a>
             `;
       addEventDataGovernanceNavBar(true);
     } else if (projectArray.length > 0 && showProjects === true) {
       document.getElementById("myProjectsNav").innerHTML = `
-                <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links" href="#my_projects" title="My Projects" id="myProjects">
+                <a hidden class="dropdown-item nav-link nav-menu-links dropdown-menu-links" href="#my_projects" title="My Projects" id="myProjects">
                     My Projects
                 </a>
             `;
       addEventMyProjects();
     } else if (getMyPermissionLevel) {
       document.getElementById("governanceNav").innerHTML = `
-                <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links navbar-active" href="#data_governance" title="Data Governance" id="dataGovernance">
+                <a hidden class="dropdown-item nav-link nav-menu-links dropdown-menu-links navbar-active" href="#data_governance" title="Data Governance" id="dataGovernance">
                     Data Governance
                 </a>
             `;
@@ -416,16 +413,28 @@ const manageRouter = async () => {
     console.log("about overview clicked");
     document.title = "BCRPP - Overview";
     assignNavbarActive(element, 1);
-    aboutConfluence("overview");
+    aboutConfluence("overview", true);
     renderOverView();
   } else if (hash === "#about/contact") {
     const element = document.getElementById("contactBCRPP");
     if (!element) return;
     if (element.classList.contains("navbar-active")) return;
-    document.title = "BCRP - Scientific Committe";
+    document.title = "BCRPP - DACC Members";
     assignNavbarActive(element, 1);
-    aboutConfluence("overview");
+    aboutConfluence("contact", true);
     confluenceContactPage();
+    hideAnimation();
+  } else if (hash === "#about/description") {
+    const element = document.getElementById("studydescBCRPP");
+    if (!element) return;
+    console.log("test");
+    //if (element.classList.contains("navbar-active")) return;
+    assignNavbarActive(element, 1);
+    document.title = "BCRP - Study Description";
+    showAnimation();
+    // const fileInfo = await getFileInfo(904897189551); //new: 904897189551; original: 881144462693
+    aboutConfluence("description", true);
+    renderDescriptionNotSignedIn('test');
     hideAnimation();
   } else if (hash === "#join") {
     const element = document.getElementById("resourcesBCRPP");
@@ -614,7 +623,7 @@ const manageHash = async () => {
     if (!element) return;
     if (element.classList.contains("navbar-active")) return;
     assignNavbarActive(element, 1);
-    document.title = "BCRPP - Scientific Committe";
+    document.title = "BCRPP - DACC Members";
     //const fileInfo = await getFileInfo(904897189551);
     //console.log({ fileInfo });
     //aboutConfluence("contact", fileInfo ? true : false);
@@ -622,7 +631,7 @@ const manageHash = async () => {
     confluenceContactPage();
     hideAnimation();
   } else if (hash === "#about/description") {
-    const element = document.getElementById("resourcesBCRPP");
+    const element = document.getElementById("studydescBCRPP");
     if (!element) return;
     //if (element.classList.contains("navbar-active")) return;
     assignNavbarActive(element, 1);

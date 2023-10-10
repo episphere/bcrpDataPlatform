@@ -20,6 +20,7 @@ import {
   getFile,
   csv2Json,
   json2csv,
+  json2csv2,
   publicDataFileId,
   summaryStatsFileId,
   getFileInfo,
@@ -44,6 +45,8 @@ import {
   getSelectedStudies,
   renderAllCasesCharts,
   renderAllCharts,
+  updateAllCharts,
+  updateAllCasesCharts,
   updateCounts,
   getFileContent,
   getFileContentCases,
@@ -1222,7 +1225,7 @@ export const addEventVariableDefinitions = () => {
         definition = "Number of subjects with data on all selected variables.";
       }
       if (variable === "midsetTopBars") {
-        variableName = "Top bars";
+        variableName = "Participant Count";
         definition =
           "Number of subjects with data on each of the selected variable (irrespective of the others).";
       }
@@ -1289,6 +1292,29 @@ export const addEventUpdateSummaryStatsData = () => {
   });
 };
 
+export const addEventcreateaccessStats = () => {
+  const btn = document.getElementById("createaccessStats");
+  if (!btn) return;
+  btn.addEventListener("click", async () => {
+    const header = document.getElementById("confluenceModalHeader");
+    const body = document.getElementById("confluenceModalBody");
+
+    header.innerHTML = `<h5 class="modal-title">Create Access Stats CSV</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>`;
+
+    let template = '<form id="createaccessStatsForm">';
+    template += '<div id="createAccessList"></div>';
+    template +=
+      '<div class="modal-footer"><button type="submit" class="btn btn-outline-primary">Create CSV</button></div>';
+    template += "</form>";
+    body.innerHTML = template;
+    addEventAccessStatsRadio();
+    addEventUpdateAccessStatsForm();
+  });
+};
+
 const addEventDataTypeRadio = () => {
   const radios = document.getElementsByName("summarydataType");
   Array.from(radios).forEach((radio) => {
@@ -1297,13 +1323,13 @@ const addEventDataTypeRadio = () => {
         document.getElementsByName("summarydataType")
       ).filter((ele) => ele.checked === true)[0].value;
       let template = "";
-      const response = await getFolderItems(summaryStatsFolder);
+      const response = await getFolderItems(162298847509);
       let summaryFolder = [];
       if (dataType === "summary") {
         summaryFolder = response.entries.filter(
           (dt) =>
             dt.type === "folder" &&
-            /_summary_statistics/i.test(dt.name) === true
+            /summary results/i.test(dt.name) === true
         );
       } else {
         summaryFolder = response.entries.filter(
@@ -1328,6 +1354,26 @@ const addEventDataTypeRadio = () => {
     });
   });
 };
+
+const addEventAccessStatsRadio = async () => {
+  const response = await getFolderItems(171750396639);
+  let summaryFolder = response.entries;
+  console.log(summaryFolder);
+  let template = "";
+  template += `Select data file(s)`;
+  template += `<ul>`;
+  summaryFolder.forEach((folder) => {
+  template += `<li class="filter-list-item">
+                <button type="button" class="filter-btn collapsible-items update-summary-stats-btn filter-midset-data-btn" data-folder-id="${folder.id}">
+                <div class="variable-name">${folder.name}</div>
+                </button>
+                </li>`;
+      });
+      template += `</ul>`;
+
+      document.getElementById("createAccessList").innerHTML = template;
+      addEventSummaryFolderSelection();
+    }
 
 const addEventSummaryFolderSelection = () => {
   const elements = document.getElementsByClassName("update-summary-stats-btn");
@@ -1431,6 +1477,124 @@ const addEventUpdateSummaryStatsForm = () => {
   });
 };
 
+const addEventUpdateAccessStatsForm = async () => {
+  const form = document.getElementById("createaccessStatsForm");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    // const dataType = Array.from(
+    //   document.getElementsByName("summarydataType")
+    // ).filter((ele) => ele.checked === true)[0].value;
+    form.querySelectorAll('[type="submit"]')[0].classList.add("disabled");
+    // form.querySelectorAll('[type="submit"]')[0].innerHTML = "Updating...";
+    const selectedBtn = form.querySelectorAll(".active-filter");
+    const folderIds = Array.from(selectedBtn).map((btn) =>
+      parseInt(btn.dataset.folderId)
+    );
+    if (folderIds.length === 0) return;
+    for (let id of folderIds) {
+      let stats = await getFileAccessStats(id);
+      console.log(stats);
+      let statsArray = [{"download count": stats.download_count,
+                        "preview count": stats.preview_count,
+                        "comment count": stats.comment_count,
+                        "edit count": stats.edit_count
+                        }];
+      let headers = ["download count", "preview count", "comment count", "edit count"]
+      console.log(statsArray);
+      let csv = json2csv2(statsArray, headers);
+      console.log(csv);
+      const blob = new Blob([csv], {type: 'text/csv'});
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.setAttribute('href', url);
+      a.setAttribute('download', `${id}.csv`);
+      a.click();
+      a.removeAttribute('download');
+      await sleep(1000);
+    }
+    form.querySelectorAll('[type="submit"]')[0].classList.remove("disabled");
+    //console.log(folderIds);
+  //   let masterArray = [];
+  //   let publicDataObj = {};
+  //   let allHeaders = [];
+  //   for (let id of folderIds) {
+  //     const response = await getFolderItems(id);
+  //     let file = [];
+  //     if (dataType === "summary")
+  //       file = response.entries.filter(
+  //         (dt) =>
+  //           dt.type === "file" &&
+  //           /_summary_statistics.csv/i.test(dt.name) === true
+  //       );
+  //     else
+  //       file = response.entries.filter(
+  //         (dt) =>
+  //           dt.type === "file" &&
+  //           /_missingness_statistics.csv/i.test(dt.name) === true
+  //       );
+  //     if (file.length === 0) return;
+  //     form.querySelectorAll(
+  //       '[type="submit"]'
+  //     )[0].innerHTML = `Processing ${file[0].name}...`;
+  //     const csv = await getFile(file[0].id);
+  //     const responseData = csv2Json(csv);
+  //     const jsonArray = responseData.data;
+  //     allHeaders = allHeaders.concat(responseData.headers);
+  //     if (dataType === "summary") {
+  //       const uniqueStudies = [];
+  //       jsonArray.forEach((obj) => {
+  //         const consortium =
+  //           obj.consortium === "NCI" ? "NCI-DCEG" : obj.consortium;
+  //         if (publicDataObj[consortium] === undefined) {
+  //           publicDataObj[consortium] = {};
+  //           publicDataObj[consortium].name = consortium;
+  //           publicDataObj[consortium].studies = 0;
+  //           publicDataObj[consortium].cases = 0;
+  //           publicDataObj[consortium].controls = 0;
+  //         }
+  //         if (uniqueStudies.indexOf(obj.study) === -1) {
+  //           uniqueStudies.push(obj.study);
+  //           publicDataObj[consortium].studies += 1;
+  //         }
+  //         if (obj.status === "case")
+  //           publicDataObj[consortium].cases += parseInt(obj.statusTotal);
+  //         if (obj.status === "control")
+  //           publicDataObj[consortium].controls += parseInt(obj.statusTotal);
+  //       });
+  //     }
+  //     masterArray = masterArray.concat(jsonArray);
+  //   }
+  //   const finalHeaders = allHeaders.filter(
+  //     (item, pos) => allHeaders.indexOf(item) === pos
+  //   );
+  //   const masterCSV = json2csv(masterArray, finalHeaders);
+  //   if (dataType === "summary") {
+  //     publicDataObj["dataModifiedAt"] = new Date().toISOString();
+  //     await uploadFileVersion(masterCSV, summaryStatsFileId, "text/csv");
+  //     form.innerHTML = JSON.stringify(publicDataObj, null, 2);
+  //     await getFile(summaryStatsFileId);
+  //     await getFileInfo(summaryStatsFileId);
+  //   } else {
+  //     await uploadFileVersion(masterCSV, missingnessStatsFileId, "text/csv");
+  //     form.querySelectorAll('[type="submit"]')[0].classList.remove("disabled");
+  //     await getFile(missingnessStatsFileId);
+  //     await getFileInfo(missingnessStatsFileId);
+  //   }
+  //   removeActiveClass("update-summary-stats-btn", "active-filter");
+  //   let template = notificationTemplate(
+  //     top,
+  //     `<span class="successMsg">Data updated</span>`,
+  //     `Data successfully updated, please reload to see updated data.`
+  //   );
+  //   document.getElementById("showNotification").innerHTML = template;
+  //   addEventHideNotification();
+   });
+};
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export const addEventFilterBarToggle = () => {
   const button = document.getElementById("filterBarToggle");
   button.addEventListener("click", () => {
@@ -1439,38 +1603,22 @@ export const addEventFilterBarToggle = () => {
       reSizePlots();
       child.classList.remove("fa-caret-left");
       child.classList.add("fa-caret-right");
-      document
-        .getElementById("summaryFilterSiderBar")
-        .classList.remove("col-xl-2");
+      document.getElementById("summaryFilterSiderBar").classList.remove("col-xl-2");
       document.getElementById("summaryFilterSiderBar").classList.add("d-none");
-      document
-        .getElementById("summaryStatsCharts")
-        .classList.remove("col-xl-10");
+      document.getElementById("summaryStatsCharts").classList.remove("col-xl-10");
       document.getElementById("summaryStatsCharts").classList.add("col-xl-12");
-      document
-        .getElementById("dataLastModified")
-        .classList.remove("offset-xl-2");
-      document
-        .getElementById("dataLastModified")
-        .classList.remove("padding-left-20");
+      document.getElementById("dataLastModified").classList.remove("offset-xl-2");
+      document.getElementById("dataLastModified").classList.remove("padding-left-20");
     } else {
       reSizePlots();
       child.classList.remove("fa-caret-right");
       child.classList.add("fa-caret-left");
-      document
-        .getElementById("summaryFilterSiderBar")
-        .classList.add("col-xl-2");
-      document
-        .getElementById("summaryFilterSiderBar")
-        .classList.remove("d-none");
+      document.getElementById("summaryFilterSiderBar").classList.add("col-xl-2");
+      document.getElementById("summaryFilterSiderBar").classList.remove("d-none");
       document.getElementById("summaryStatsCharts").classList.add("col-xl-10");
-      document
-        .getElementById("summaryStatsCharts")
-        .classList.remove("col-xl-12");
+      document.getElementById("summaryStatsCharts").classList.remove("col-xl-12");
       document.getElementById("dataLastModified").classList.add("offset-xl-2");
-      document
-        .getElementById("dataLastModified")
-        .classList.add("padding-left-20");
+      document.getElementById("dataLastModified").classList.add("padding-left-20");
     }
   });
 };
@@ -1478,6 +1626,7 @@ export const addEventFilterBarToggle = () => {
 export const addEventMissingnessFilterBarToggle = () => {
   const button = document.getElementById("filterBarToggle");
   button.addEventListener("click", () => {
+    console.log("Button Clicked");
     const child = button.querySelector(".fas");
     if (child.classList.contains("fa-caret-left")) {
       reSizePlots();
@@ -1553,7 +1702,7 @@ export const addEventSummaryStatsFilterForm = (jsonData, headers) => {
   });
 };
 
-const filterData = (jsonData, headers) => {
+export const filterData = (jsonData, headers) => {
   const ethnicity = document.getElementById("ethnicitySelection").value;
   const study = document.getElementById("studySelection").value;
   const race = document.getElementById("raceSelection").value;
@@ -1604,8 +1753,8 @@ const filterData = (jsonData, headers) => {
     totalSubjects += value.TotalSubjects;
   });
   if (subCases == "all") {
-    renderAllCharts(finalData);
-  } else renderAllCasesCharts(finalData);
+    updateAllCharts(finalData);
+  } else updateAllCasesCharts(finalData);
 };
 
 export const addEventConsortiaFilter = (d) => {

@@ -82,6 +82,10 @@ body {
   margin: 0 0 1rem 0 !important;
 }
 
+#createaccessStats {
+  margin: 0 0 1rem 0 !important;
+}
+
 #missingnessTable {
   margin-left: 1rem;
   margin-bottom: 1rem;
@@ -134,6 +138,12 @@ body {
 
 .container {
   max-width: 85% !important;
+  margin: 0 auto;
+  padding: 0px !important;
+}
+
+.container2 {
+  max-width: 90% !important;
   margin: 0 auto;
   padding: 0px !important;
 }
@@ -1808,8 +1818,9 @@ form {
 #dataLastModified,
 .data-last-modified {
   font-style: italic;
+  font-weight: bold;
   color: #7e7e7e;
-  font-size: 12px;
+  font-size: 14px;
   margin-bottom: 15px;
 }
 
@@ -2215,3 +2226,9 @@ th {
   text-align: left;
   padding: 8px;
 }
+
+select { width: 100%; text-align-last:center; overflow-wrap: break-word; white-space: nowrap; text-overflow: ellipsis;}
+
+#tooltip1 { position: relative; }
+#tooltip1 a span { display: none; color: #FFFFFF; }
+#tooltip1 a:hover span { display: inline-block; position: absolute; width: auto; background: #ffffff; height: auto; left: 10px; top: -275px; color: #000000; padding: 0 5px; z-index: 1; border-style: groove;}

@@ -17,7 +17,15 @@ let previousValue = "";
 
 export const dataDictionaryTemplate = async () => {
   const data = await (await fetch("./BCRP_DataDictionary.txt")).text();
-  const tsvData = tsv2JsonDic(data);
+  const tsvData = tsv2Json(data);
+  tsvData.data.forEach(function(record) {
+    record.Category = record.Category.replace('\n', '');
+    if (record.Coding) {
+      record.Coding = record.Coding.replaceAll('\n', '<br>');
+      };
+    }
+  );
+
   const dictionary = tsvData.data;
   const headers = tsvData.headers;
   let template = `
@@ -135,7 +143,7 @@ const renderDataDictionaryFilters = (dictionary, headers) => {
     return el.Category === "Mammographic Density";
   });
   var incArray = Object.values(dictionary).filter(function (el) {
-    return el.Category === "Incident Breast Cancer ";
+    return el.Category.trim() === "Incident Breast Cancer";
   });
 
   const coreVariableType = coreArray.map((dt) => dt["Sub-Category"]);
@@ -144,14 +152,14 @@ const renderDataDictionaryFilters = (dictionary, headers) => {
   //const allVariableType = Object.values(dictionary).map(dt => dt['Sub-Category']);
   //const uniqueType = allVariableType.filter((d,i) => allVariableType.indexOf(d) === i).sort();
   const coreuniqueType = coreVariableType
-    .filter((d, i) => coreVariableType.indexOf(d) === i)
-    .sort();
+    .filter((d, i) => coreVariableType.indexOf(d) === i);
+    // .sort();
   const mamuniqueType = mamVariableType
-    .filter((d, i) => mamVariableType.indexOf(d) === i)
-    .sort();
+    .filter((d, i) => mamVariableType.indexOf(d) === i);
+    // .sort();
   const incuniqueType = incVariableType
-    .filter((d, i) => incVariableType.indexOf(d) === i)
-    .sort();
+    .filter((d, i) => incVariableType.indexOf(d) === i);
+    // .sort();
 
   let template = "";
   template += `
@@ -183,7 +191,7 @@ const renderDataDictionaryFilters = (dictionary, headers) => {
   });
   template += `
                 </ul>
-                <label class="filter-label font-size-13" for="variableTypeList">Mammographic Density</label>
+                <label class="filter-label font-size-13" for="variableTypeList">Mammographic density</label>
                 <ul class="remove-padding-left font-size-15 allow-overflow" id="variableTypeList">
                 `;
   mamuniqueType.forEach((vt) => {
@@ -199,6 +207,7 @@ const renderDataDictionaryFilters = (dictionary, headers) => {
                 <label class="filter-label font-size-13" for="variableTypeList">Incident Breast Cancer</label>
                 <ul class="remove-padding-left font-size-15 allow-overflow" id="variableTypeList">
                 `;
+
   incuniqueType.forEach((vt) => {
     template += `
                         <li class="filter-list-item">
@@ -209,7 +218,6 @@ const renderDataDictionaryFilters = (dictionary, headers) => {
   });
   template += `
                 </ul>
-
             </div>
         </div>
     </div>
@@ -261,6 +269,8 @@ const filterDataBasedOnSelection = (dictionary, headers) => {
   );
   renderDataDictionary(highlightData, document.getElementById("pageSizeSelector").value, headers);
   addEventPageSizeSelection(highlightData);
+  console.log(highlightData);
+  console.log(pageSize);
 };
 
 const filterDataHandler = (dictionary) => {
@@ -372,12 +382,11 @@ const renderDataDictionary = (dictionary, pageSize, headers) => {
         <div class="row m-0 align-left allow-overflow w-100">
         `;
   dictionary.forEach((desc, index) => {
+    //console.log(desc.Coding);
     if (index > pageSize) return;
     template += `
         <div class="card border-0 mt-1 mb-1 align-left w-100 pt-md-1 dictionaryData">
-            <div class="pl-3 pt-1 pr-3 pb-1" aria-expanded="false" id="heading${
-              desc["Variable Name"]
-            }">
+            <div class="pl-3 pt-1 pr-3 pb-1" aria-expanded="false" id="heading${desc["Variable Name"]}">
                 <div class="row">
                     <div class="col-md-11">
                         <div class="row">
@@ -393,21 +402,12 @@ const renderDataDictionary = (dictionary, pageSize, headers) => {
                         </div>
                     </div>
                     <div class="ml-auto">
-                        <div class="col-md-12"><button title="Expand/Collapse" class="transparent-btn collapse-panel-btn" data-toggle="collapse" data-target="#study${desc[
-                          "Variable Name"
-                        ].replace(
-                          /(<b>)|(<\/b>)/g,
-                          ""
-                        )}"><i class="fas fa-caret-down fa-2x"></i></button></div>
+                        <div class="col-md-12"><button title="Expand/Collapse" class="transparent-btn collapse-panel-btn" data-toggle="collapse" 
+                        data-target="#study${desc["Variable Name"] ? desc["Variable Name"].replace(/(<b>)|(<\/b>)/g,"") : ""}"><i class="fas fa-caret-down fa-2x"></i></button></div>
                     </div>
                 </div>
             </div>
-            <div id="study${desc["Variable Name"].replace(
-              /(<b>)|(<\/b>)/g,
-              ""
-            )}" class="collapse" aria-labelledby="heading${
-      desc["Variable Name"]
-    }">
+            <div id="study${desc["Variable Name"] ? desc["Variable Name"].replace(/(<b>)|(<\/b>)/g,"") : ""}" class="collapse" aria-labelledby="heading${desc["Variable Name"]}">
                 <div class="card-body" style="padding-left: 10px;background-color:#f6f6f6;">
                     <!---${
                       desc["Category"]
@@ -460,21 +460,25 @@ export const downloadFiles = (data, headers, fileName, studyDescription) => {
     });
     data = flatArray;
   }
-  const downloadDictionaryCSV = document.getElementById(
-    "downloadDictionaryCSV"
-  );
-  downloadDictionaryCSV.addEventListener("click", (e) => {
+  const downloadDictionaryCSV = document.getElementById("downloadDictionaryCSV");
+  downloadDictionaryCSV.addEventListener("click", e => {
     e.stopPropagation();
-    const csvContent =
-      "data:text/csv;charset=utf-8," +
-      json2other(data, headers).replace(/(<b>)|(<\/b>)/g, "").replace(/(m<sup>2<\/sup>)/g, "m2");
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `${fileName}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    const csvContent = json2other(data, headers).replaceAll('<br>', '; ').replaceAll('&lt;', '<').replaceAll('&gt;', '>').replace(/(<b>)|(<\/b>)/g, '');
+    // const encodedUri = encodeURI(csvContent);
+    // console.log(encodedUri);
+    // const link = document.createElement("a");
+    // link.setAttribute("href", encodedUri);
+    // link.setAttribute("download", `${fileName}.csv`);
+    // document.body.appendChild(link);
+    // link.click();
+    // document.body.removeChild(link);
+    const blob = new Blob([csvContent], {type: 'text/csv'});
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.setAttribute('href', url);
+    a.setAttribute('download', `${fileName}.csv`);
+    a.click();
+    a.removeAttribute('download');
   });
 
   const downloadDictionaryTSV = document.getElementById(
@@ -482,15 +486,20 @@ export const downloadFiles = (data, headers, fileName, studyDescription) => {
   );
   downloadDictionaryTSV.addEventListener("click", (e) => {
     e.stopPropagation();
-    let tsvContent =
-      "data:text/tsv;charset=utf-8," +
-      json2other(data, headers, true).replace(/(<b>)|(<\/b>)/g, "").replace(/(m<sup>2<\/sup>)/g, "m2");
-    const encodedUri = encodeURI(tsvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `${fileName}.tsv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    let tsvContent = json2other(data, headers, true).replaceAll('<br>', '; ').replaceAll('&lt;', '<').replaceAll('&gt;', '>').replace(/(<b>)|(<\/b>)/g, "");
+    // const encodedUri = encodeURI(tsvContent);
+    // const link = document.createElement("a");
+    // link.setAttribute("href", encodedUri);
+    // link.setAttribute("download", `${fileName}.tsv`);
+    // document.body.appendChild(link);
+    // link.click();
+    // document.body.removeChild(link);
+    const blob = new Blob([tsvContent], {type: 'text/tsv'});
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.setAttribute('href', url);
+    a.setAttribute('download', `${fileName}.tsv`);
+    a.click();
+    a.removeAttribute('download');
   });
 };

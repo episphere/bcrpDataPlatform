@@ -310,7 +310,7 @@ export async function userSubmissionTemplate(pageHeader, activeTab) {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions",
       "Chair Menu",
       "DACC Menu"
@@ -321,7 +321,7 @@ export async function userSubmissionTemplate(pageHeader, activeTab) {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions",
       "Chair Menu"
     );
@@ -331,7 +331,7 @@ export async function userSubmissionTemplate(pageHeader, activeTab) {
       "data_access",
       activeTab,
       "Overview",
-      "Project Concept Form",
+      "Submit Concept Form",
       "View Submissions",
       "DACC Menu"
     );
@@ -341,7 +341,7 @@ export async function userSubmissionTemplate(pageHeader, activeTab) {
       "data_access",
       activeTab,
       "Overview",
-       "Project Concept Form",
+       "Submit Concept Form",
       "View Submissions"
     );
     // navBarItems = pageNavBar('data_access', activeTab, 'Overview', 'Project Concept Form', 'Accepted');

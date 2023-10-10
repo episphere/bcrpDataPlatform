@@ -14,8 +14,8 @@ export const navBarMenutemplate = () => {
             </button>
             <div class="dropdown-menu navbar-dropdown" aria-labelledby="navbarDropdown">
                 <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="#about/overview" id="aboutBCRPP">Overview</a>
-                <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="#about/description" id="resourcesBCRPP">Description of Studies</a>
-                <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="#about/contact" id="contactBCRPP">Scientific Committee</a>
+                <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="#about/description" id="studydescBCRPP">Description of Studies</a>
+                <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="#about/contact" id="contactBCRPP">DACC Members</a>
             </div>
         </div>
         <div class="grid-elements dropdown">
@@ -53,7 +53,7 @@ export const navBarMenutemplate = () => {
                     <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="#data_access/overview" title="Data Access" id="dataRequest"> Overview </a>
                     ${
                       showProjectConceptForm
-                        ? `<a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="#data_access/form" title="Data Form" id="dataForm"> Project Concept Forms </a>
+                        ? `<a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="#data_access/form" title="Data Form" id="dataForm"> Submit Concept Form </a>
                     `
                         : ""
                     }
@@ -118,7 +118,7 @@ export function pageNavBar(page, activeTab, ...pageHeaders) {
   outerDivEl.classList.add("main-summary-row", "white-bg", "div-border");
 
   const innerDivEl = document.createElement("div");
-  innerDivEl.classList.add("main-summary-row", "white-bg", "div-border");
+  innerDivEl.classList.add("main-summary-row", "white-bg");
 
   outerDivEl.appendChild(innerDivEl);
   containerEl.appendChild(outerDivEl);
@@ -141,7 +141,7 @@ export function pageNavBar(page, activeTab, ...pageHeaders) {
     }
     
     // keeping this part for future use to get "Project Concept Form" and "View Submissions" back.
-    if (header === "Project Concept Form") {
+    if (header === "Submit Concept Form") {
       link.href = `#${page}/form`;
       if (activeTab === "form") link.classList.add("active");
     }
@@ -171,7 +171,7 @@ export function pageNavBar(page, activeTab, ...pageHeaders) {
       link.href = `#${page}/description`;
       if (activeTab === "description") link.classList.add("active");
     }
-    if (header === "Scientific Committee") {
+    if (header === "DACC Members") {
       link.href = `#${page}/contact`;
       if (activeTab === "contact") link.classList.add("active");
     }

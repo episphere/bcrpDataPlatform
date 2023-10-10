@@ -6,7 +6,8 @@ export const emailsAllowedToUpdateData = [
   "kopchickbp@nih.gov",
   "ahearntu@nih.gov",
 ];
-export const emailforChair = ["kopchickbp@nih.gov"];
+
+export const emailforChair = ['kraftp2@nih.gov','Roger.Milne@cancervic.org.au','ahearntu@nih.gov', 'garciacm@nih.gov', 'sbehpour@deloitte.com','kopchickbp@nih.gov'];
 //  [
 // "Roger.Milne@cancervic.org.au",
 // "ahearntu@nih.gov",
@@ -16,8 +17,7 @@ export const emailforChair = ["kopchickbp@nih.gov"];
 //sbehpour@deloitte.com
 // ];
 
-
-export const emailforDACC = ['kopchickbp@nih.gov'];
+export const emailforDACC = ['kraftp2@nih.gov', 'kopchickbp@nih.gov','pkraft@hsph.harvard.edu', 'garciacm@nih.gov', 'ahearntu@nih.gov',  'mukopadhyays2@nih.gov'];;
 
 // [
 //   "pkraft@hsph.harvard.edu",
@@ -32,8 +32,10 @@ export const summaryStatsFileId = 956943662666; //861342561526;//908600664259; /
 
 export const summaryStatsCasesFileId = 862065772362; //862065772362; //958869203942; //927803436743; //862065772362; //cases => Pilot - BCRP_Summary_Results_Cases.csv
 
-export const missingnessStatsFileId = 1043323929905; //653087731560; //Unknown, TUA Commented out July 21, file needs to be updated to missingness stats using BCRPP data, not confluence data
+export const missingnessStatsFileId = 1277209005113;//1276945367872;//1043323929905; //653087731560; //Unknown, TUA Commented out July 21, file needs to be updated to missingness stats using BCRPP data, not confluence data
 // export const missingnessStatsFileId = 653087731560;
+export const missingnessStatsCasesFileId = 1276917853820;
+
 export const cps2StatsFileId = 908522264695;
 
 export const summaryStatsFolder = 145995372820;
@@ -193,6 +195,20 @@ export const getFileVersions = async (id) => {
     if ((await refreshToken()) === true) return await getFileVersions(id);
   }
 };
+
+export const getMail = async () => {
+
+  let r = await fetch('https://graph.microsoft.com/v1.0/me/messages?$select=sender,subject', {
+    method: "GET",
+    headers: {
+      Accept: 'application/json',
+      Authorization: "Bearer " + 'd4510a7c-acc6-4db4-9572-acffb25e95d7',
+    }
+  })
+  console.log(r);
+  return r.json();
+}
+
 export const storeAccessToken = async () => {
   let parms = searchParms();
   if (parms.code) {
@@ -1341,9 +1357,10 @@ export const sessionExpired = () => {
   location.reload();
 };
 
-export const showAnimation = () => {
+export const showAnimation = async () => {
   if (document.getElementById("loadingAnimation"))
     document.getElementById("loadingAnimation").style.display = "block";
+  console.log("showAnimation");
 };
 
 export const hideAnimation = () => {
@@ -1569,26 +1586,26 @@ export const csvJSON = (csv) => {
     const currentline = lines[i].split(/[,\t]/g);
     for (let j = 0; j < headers.length; j++) {
       let value = headers[j];
-      if (value === "age_LT20") value = "<20";
-      if (value === "age_20_29") value = "20 to 29";
-      if (value === "age_30_39") value = "30 to 39";
-      if (value === "age_40_49") value = "40 to 49";
-      if (value === "age_50_59") value = "50 to 59";
-      if (value === "age_60_69") value = "60 to 69";
-      if (value === "age_70_79") value = "70 to 79";
-      if (value === "age_80_89") value = "80 to 89";
-      if (value === "age_90_99") value = "90 to 99";
-      if (value === "age_GE100") value = ">99";
-      if (value === "birth_year_1900_1909") value = "1900-1909";
-      if (value === "birth_year_1910_1919") value = "1910-1919";
-      if (value === "birth_year_1920_1929") value = "1920-1929";
-      if (value === "birth_year_1930_1939") value = "1930-1939";
-      if (value === "birth_year_1940_1949") value = "1940-1949";
-      if (value === "birth_year_1950_1959") value = "1950-1959";
-      if (value === "birth_year_1960_1969") value = "1960-1969";
-      if (value === "birth_year_1970_1979") value = "1970-1979";
-      if (value === "birth_year_1980_1989") value = "1980-1989";
-      if (value === "birth_year_1990_1999") value = "1990-1999";
+      // if (value === "age_LT20") value = "<20";
+      // if (value === "age_20_29") value = "20 to 29";
+      // if (value === "age_30_39") value = "30 to 39";
+      // if (value === "age_40_49") value = "40 to 49";
+      // if (value === "age_50_59") value = "50 to 59";
+      // if (value === "age_60_69") value = "60 to 69";
+      // if (value === "age_70_79") value = "70 to 79";
+      // if (value === "age_80_89") value = "80 to 89";
+      // if (value === "age_90_99") value = "90 to 99";
+      // if (value === "age_GE100") value = ">99";
+      // if (value === "birth_year_1900_1909") value = "1900-1909";
+      // if (value === "birth_year_1910_1919") value = "1910-1919";
+      // if (value === "birth_year_1920_1929") value = "1920-1929";
+      // if (value === "birth_year_1930_1939") value = "1930-1939";
+      // if (value === "birth_year_1940_1949") value = "1940-1949";
+      // if (value === "birth_year_1950_1959") value = "1950-1959";
+      // if (value === "birth_year_1960_1969") value = "1960-1969";
+      // if (value === "birth_year_1970_1979") value = "1970-1979";
+      // if (value === "birth_year_1980_1989") value = "1980-1989";
+      // if (value === "birth_year_1990_1999") value = "1990-1999";
       obj[value] = currentline[j];
     }
     if (obj.study !== undefined) {
@@ -1604,12 +1621,37 @@ export const csvJSON = (csv) => {
   };
 };
 
+export const csv2Json2 = (csv) => {
+  const lines = csv.replace(/"/g, "").split(/[\r\n]+/g);
+  const result = [];
+  const topline = lines[0].replace(/"/g, "").split(/[,\t]/g);
+  console.log(topline);
+  const headers = lines[1].replace(/"/g, "").split(/[,\t]/g);
+  for (let i = 2; i < lines.length; i++) {
+    const obj = {};
+    const currentline = lines[i].split(/[,\t]/g);
+    //console.log(currentline);
+    for (let j = 0; j < headers.length; j++) {
+      if (topline[j].length > 0 && currentline[j]) {
+        //console.log(currentline[j]);
+        let value = headers[j];
+        obj[value] = currentline[j];
+      }
+    }
+    if (Object.keys(obj).length > 0) result.push(obj);
+  }
+  return {
+    data: result,
+    headers,
+  };
+};
+
 export const tsv2Json = (tsv) => {
   const lines = tsv
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
     .replace(/"/g, "")
-    .replace(/\n/g, "")
+    //.replace(/\n/g, "")
     .split(/[\r]+/g);
   const result = [];
   const headers = lines[0].replace(/"/g, "").split(/[\t]/g);
@@ -1622,7 +1664,7 @@ export const tsv2Json = (tsv) => {
         obj[value] = currentline[j];
       }
     }
-    if (Object.keys(obj).length > 0) result.push(obj);
+    if (Object.keys(obj).length > 1) result.push(obj);
   }
   return {
     data: result,
@@ -1748,6 +1790,22 @@ export const json2csv = (json, fields) => {
   return csv;
 };
 
+export const json2csv2 = (json, fields) => {
+  const replacer = (key, value) => {
+    return value === null ? "" : value;
+  };
+  let csv = json.map((row) => {
+    return fields
+      .map((fieldName) => {
+        return JSON.stringify(row[fieldName], replacer);
+      })
+      .join(","); // \t for tsv
+  });
+  csv.unshift(fields.join(",")); // add header column  \t for tsv
+  csv = csv.join("\r\n");
+  return csv;
+};
+
 export const json2other = (json, fields, tsv) => {
   const replacer = (key, value) => {
     return value === null ? "" : value;
@@ -1827,9 +1885,8 @@ export const handleRangeRequests = async () => {
   });
 };
 
-// Need to change to BCRPP urls
 export const applicationURLs = {
   dev: "https://episphere.github.io/bcrpDataPlatform",
   stage: "https://epidataplatforms-stage.cancer.gov/bcrp",
-  prod: "https://confluence.cancer.gov",
+  prod: "https://epidataplatforms.cancer.gov/bcrpp",
 };

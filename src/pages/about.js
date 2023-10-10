@@ -6,8 +6,8 @@ import {
 } from "./../shared.js";
 import { pageNavBar } from "../components/navBarMenuItems.js";
 
-export const aboutConfluence = (activeTab, showDescripton) => {
-  let navBarItems = showDescripton
+export const aboutConfluence = (activeTab, showDescription) => {
+  let navBarItems = showDescription
     ? pageNavBar(
         "about",
 
@@ -17,18 +17,13 @@ export const aboutConfluence = (activeTab, showDescripton) => {
 
         "Description of Studies",
 
-        "Scientific Committee"
+        "DACC Members"
       )
     : `<div id='overview'></div>`;
-  console.log({ navBarItems });
   let template = `
         <div class="general-bg body-min-height padding-bottom-1rem">
             <div class="container">
                 ${navBarItems}
-                    <button class="sub-menu-btn"><a class="nav-link ${
-                      activeTab === "contact" ? "active" : ""
-                    } black-font font-size-14" href="#about/contact"> <strong> </strong></a></button>
-               
             </div>
         </div>
     `;
@@ -43,27 +38,38 @@ export const renderOverView = async () => {
            <h1 class="page-header">BCRPP Overview</h1>
       </div>
    </div>
-      <div class="home-page-stats font-size-18">
-        <div class="main-summary-row">
-          <div class="col align-left">
-                        </br>
-                      <span>
-                      Breast cancer is the most diagnosed non-skin cancer and the second most common cause of cancer death among U.S. women. Breast cancer is a complex disease influenced by inherited genetic factors, behaviors, and extrinsic exposures.  Breast cancer is also a heterogeneous disease: survival rates and treatments vary across biologically distinct tumor subtypes, and incidence and survival rates vary across racial and ethnic groups and internationally. 
-                      </span>
-                      </br></br>
-                      <span>
-                      The Breast Cancer Risk Prediction Project will bring together data on over 1.5 million women from the NCI Cohort Consortium Study and other large cohort studies to develop an integrated model that will predict breast cancer risk, overall and by sub-types, across racial and ethnic groups. This model will include data on family history; common genetic variation (polygenic risk scores); anthropometric, lifestyle and reproductive factors; and mammographic density. The aims of the BCRP are:
-                      </span><br></br>
-                      <div style="margin-left: 40px"> <b></b><ul><li> Develop a comprehensive and multi-ethnic model for estimating absolute risk of breast cancer by incorporating information on known breast cancer risk factors </li><ul></div>
-                    
-                      <div style="margin-left: 40px"> <b></b><ul> <li>Extend the multi-ethnic risk model for the risk prediction of estrogen receptor definced breast cancer </li> <ul></div>
-                    
-                      <div style="margin-left: 40px"> <b></b><ul> <li>Evaluate the validity of the risk models developed in the first and second steps in integrated health care systems, mammography, registries, and an ongoing risk-based mammographic screening trail in the US </li></div>
-                      </br>
-                
-                      <div class="align-left">Explore the number of study participants and breast cancer cases for each cohort checked:</div>
-                
-          </div>
+        <div class="home-page-stats font-size-18">
+            <div class="main-summary-row">
+                <div class="col align-left">
+                    </br>
+                    <span>
+                    The Breast Cancer Risk Prediction Project (BCRPP) is developing a comprehensive tool that will predict breast cancer risk – 
+                    overall breast cancer and tumor subtypes of the disease – across racial and ethnic groups.
+                    </span>
+                    </br></br>
+                    <span>
+                    The BCRPP is an international collaborative effort that includes data on over 1.5 million women from the National Cancer Institute's 
+                    Cohort Consortium Study, and other large cohort studies. The project is harmonizing information on breast cancer risk factors including, 
+                    breast cancer family history, anthropometric, life-style and reproductive factors, hormonal biomarkers, mammographic density, and polygenic risk scores.
+                    </span>
+                    </br></br>
+                    <span>
+                    The broad scientific goals of the project:
+                    </span>
+                    </br></br>
+                    <div style="margin-left: 40px"> <b>Aim 1:</b> <i>Develop a comprehensive and multi-ethnic model for estimating absolute risk of breast cancer by incorporating information on known breast cancer risk factors </i> </div>
+                    </br>
+                    <div style="margin-left: 40px"> <b>Aim 2:</b> <i>Extend the multi-ethnic risk model for the risk prediction of breast cancer defined by tumor estrogen receptor status </i> </div>
+                    </br>
+                    <div style="margin-left: 40px"> <b>Aim 3:</b> <i>Evaluate the validity of the risk models developed in Aim 1 and Aim 2 in integrated health care systems, mammography registries, and an ongoing risk-based mammographic screening trial in the US </i> </div>
+                    </br>
+                    <span>
+                    In addition to these broad scientific goals, this BCRPP will also allow researchers to address a broad range of scientific questions. A description of the process for requesting access to data shared with the BCRPP can be found on the <a href="#data_access/overview">Data Access</a> page.
+                    </span>
+                    </br>
+                </div>
+            </div>
+            <div class="align-left" id="confluenceDataSummary"></div>
         </div>
           <div class="align-left" id="confluenceDataSummary"></div>
     `;
@@ -121,10 +127,7 @@ const countPublicStatistics = (d, caseControl) => {
                     
                     
                 </div></div>
-                <div class="col align-left">
-                  <span class="required">*</span><span>If no boxes are checked, the data is for all cohorts combined.
-                </div>
-                <div class="col data-last-modified align-left">Data last modified at - ${new Date(
+                <div class="col data-last-modified align-left">Data current as of - ${new Date(
                   data["dataModifiedAt"]
                 ).toLocaleString()}</div></div>
                 `;
