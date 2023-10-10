@@ -116,8 +116,9 @@ export const confluence = async () => {
     );
     const loginBoxAppProd = document.getElementById("loginBoxAppProd");
     const loginBoxAppStage = document.getElementById("loginBoxAppStage");
+    let urltest = location.origin + location.pathname;
     if (location.origin.match("localhost")) loginBoxAppDev.hidden = false;
-    if (location.origin.match(applicationURLs.stage))
+    if (urltest.match(applicationURLs.stage))
       loginBoxAppStage.hidden = false;
     if (location.origin.match(applicationURLs.prod))
       loginBoxAppProd.hidden = false;
