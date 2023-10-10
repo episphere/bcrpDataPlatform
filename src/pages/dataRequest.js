@@ -73,6 +73,7 @@ export const dataAccessNotSignedIn = () => {
                           <li style=" margin-bottom: 10px;">After approval by the DACC, individual studies contributing data are notified and given a time period to opt-out their study from the approved project.</li>
                           <li style=" margin-bottom: 10px;">After the opt-out period has elapsed, the researcher's institution signs a data transfer agreement (DTA) for the study concept with the BCRPP DCC.</li>
                           <li style=" margin-bottom: 10px;">Upon DTA signatures, the DCC will provide access of the approved data to researchers. </li>
+                          <li style=" margin-bottom: 10px;">Users granted access to BCRPP data agree to only access data for the purposes outlined their approved proposal. Users will not save any individual participant's data (i.e., make permanent copies) on local computers or any persistent storage device other than the controlled-access workspace provided by the BCRPP designated for the project.</li>
                       </ul>
                   </div>
                 </div>
