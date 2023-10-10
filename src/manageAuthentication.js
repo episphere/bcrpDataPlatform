@@ -32,7 +32,7 @@ export const checkAccessTokenValidity = async () => {
 export const loginObs = () => {
   sessionStorage.setItem("page", "bcrp");
   console.log("stage login")
-  location.href = `https://account.box.com/api/oauth2/authorize?response_type=code&client_id=${config.iniAppStage.client_id}&redirect_uri=${applicationURLs.stage + location.pathname}&state=${config.iniAppStage.stateIni}`;
+  location.href = `https://account.box.com/api/oauth2/authorize?response_type=code&client_id=${config.iniAppStage.client_id}&redirect_uri=${applicationURLs.stage}&state=${config.iniAppStage.stateIni}`;
 };
 
 export const loginAppDev = () => {
