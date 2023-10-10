@@ -212,6 +212,7 @@ export const getMail = async () => {
 export const storeAccessToken = async (urltest) => {
   let parms = searchParms();
   if (parms.code) {
+    console.log(parms);
     //exchange code for authorization token
     let clt = {};
     if (location.origin.indexOf("episphere") !== -1) clt = config.iniAppDev;
@@ -246,7 +247,7 @@ export const storeAccessToken = async (urltest) => {
 
     if (response.status === 400) {
       window.history.replaceState({}, "", "./#home");
-      console.log(response);
+      console.log(response.json());
     }
     if (response.status && response.status === 200) {
       localStorage.parms = JSON.stringify(await response.json());
@@ -311,6 +312,7 @@ const searchParms = () => {
         parms[pp[0]] = pp[1];
       });
   }
+  console.log(parms);
   return parms;
 };
 
