@@ -246,6 +246,7 @@ export const storeAccessToken = async (urltest) => {
       "https://api.box.com/oauth2/token",
       requestOptions
     );
+    console.log(response);
     if (response.status === 400) {
       window.history.replaceState({}, "", "./#home");
     }
