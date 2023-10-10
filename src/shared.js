@@ -1833,6 +1833,6 @@ export const handleRangeRequests = async () => {
 
 export const applicationURLs = {
   dev: "https://episphere.github.io/bcrpDataPlatform",
-  stage: "https://epidataplatforms-stage.cancer.gov",
-  prod: "https://confluence.cancer.gov",
+  stage: "https://epidataplatforms-stage.cancer.gov/bcrp",
+  prod: "https://epidataplatforms.cancer.gov/bcrpp",
 };
