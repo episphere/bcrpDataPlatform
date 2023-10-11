@@ -1741,7 +1741,7 @@ const dataVisulizationCards = (obj) => `
             <div class="card-header">
                 ${
                   obj.cardHeaderId
-                    ? `<span class="data-summary-label-wrap"><select class="font-size-17 font-bold" id="${obj.cardHeaderId}"></select></span>`
+                    ? `<span class="data-summary-label-wrap"><select class="sumstats font-size-17 font-bold" id="${obj.cardHeaderId}"></select></span>`
                     : ``
                 }
             </div>

@@ -2228,7 +2228,7 @@ th {
   padding: 8px;
 }
 
-select { width: 100%; text-align-last:center; overflow-wrap: break-word; white-space: nowrap; text-overflow: ellipsis;}
+.sumstats { width: 100%; text-align-last:center; overflow-wrap: break-word; white-space: nowrap; text-overflow: ellipsis;}
 
 #tooltip1 { position: relative; }
 #tooltip1 a span { display: none; color: #FFFFFF; }
