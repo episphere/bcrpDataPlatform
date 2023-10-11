@@ -224,6 +224,7 @@ export const storeAccessToken = async (urltest) => {
       clt = config.iniAppProd;
     document.getElementById("confluenceDiv").innerHTML = "";
 
+    console.log(clt);
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
@@ -239,6 +240,8 @@ export const storeAccessToken = async (urltest) => {
       body: urlencoded,
       redirect: "follow",
     };
+
+    console.log(requestOptions);
 
     const response = await fetch(
       "https://api.box.com/oauth2/token",

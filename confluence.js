@@ -132,7 +132,9 @@ export const confluence = async () => {
     if (urltest.match(applicationURLs.prod))
       loginBoxAppProd.hidden = false;
     if (location.origin.match("episphere")) loginBoxAppEpisphere.hidden = false;
+
     await storeAccessToken(urltest);
+    
     manageRouter();
   }
   if (localStorage.parms && JSON.parse(localStorage.parms).access_token) {
