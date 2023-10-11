@@ -473,7 +473,7 @@ function userSubmissionHeaders() {
 function userSubmissionFiles(files) {
   let template = "";
   for (const element of files) {
-    let filename = element.file.name.split("_").slice(0, -4).join(" "); // fileInfo.name.split('_')[0];
+    let filename = element.file.name.slice(0, -4).split("_").join(" "); // fileInfo.name.split('_')[0];
     const shortfilename =
       filename.length > 21 ? filename.substring(0, 20) + "..." : filename;
 

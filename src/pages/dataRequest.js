@@ -2976,6 +2976,7 @@ export async function viewFinalDecisionFilesTemplate(files) {
   document.getElementById("decided").innerHTML = template;
 
   if (filesInfo.length !== 0) {
+    console.log(filesInfo);
     await viewFinalDecisionFiles(filesInfo);
     for (const file of filesInfo) {
       document
@@ -3041,10 +3042,12 @@ export async function viewFinalDecisionFiles(files) {
   let template = "";
 
   for (const fileInfo of files) {
+    console.log(fileInfo);
     const fileId = fileInfo.id;
-    let filename = fileInfo.name.split("_").slice(0, -4).join(" ");
+    let filename = fileInfo.name.slice(0, -4).split("_").join(" ");
+    console.log(filename);
     const shortfilename =
-      filename.length > 21 ? filename.substring(0, 20) + "..." : filename;
+      filename.length > 30 ? filename.substring(0, 29) + "..." : filename;
 
     let completion_date = await getChairApprovalDate(fileId);
     template += `
