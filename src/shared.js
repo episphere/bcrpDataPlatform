@@ -212,7 +212,6 @@ export const getMail = async () => {
 export const storeAccessToken = async () => {
   let parms = searchParms();
   if (parms.code) {
-    console.log(parms);
     //exchange code for authorization token
     let clt = {};
     if (location.origin.indexOf("episphere") !== -1) clt = config.iniAppDev;
@@ -224,7 +223,6 @@ export const storeAccessToken = async () => {
       clt = config.iniAppDev;
     document.getElementById("confluenceDiv").innerHTML = "";
 
-    console.log(clt);
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
@@ -241,14 +239,10 @@ export const storeAccessToken = async () => {
       redirect: "follow",
     };
 
-    console.log(requestOptions);
-
     const response = await fetch(
       "https://api.box.com/oauth2/token",
       requestOptions
     );
-
-    console.log(response);
 
     if (response.status === 400) {
       window.history.replaceState({}, "", "./#home");
@@ -315,7 +309,6 @@ const searchParms = () => {
         parms[pp[0]] = pp[1];
       });
   }
-  console.log(parms);
   return parms;
 };
 

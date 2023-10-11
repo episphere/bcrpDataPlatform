@@ -30,22 +30,18 @@ export const checkAccessTokenValidity = async () => {
 // }
 
 export const loginObs = () => {
-  sessionStorage.setItem("page", "bcrp");
   location.href = `https://account.box.com/api/oauth2/authorize?response_type=code&client_id=${config.iniAppStage.client_id}&redirect_uri=${applicationURLs.stage}&state=${config.iniAppStage.stateIni}`;
 };
 
 export const loginAppDev = () => {
-  sessionStorage.setItem("page", "bcrp");
   location.href = `https://account.box.com/api/oauth2/authorize?response_type=code&client_id=${config.iniAppLocal.client_id}&redirect_uri=${location.href}&state=${config.iniAppLocal.stateIni}`;
 };
 
 export const loginAppEpisphere = () => {
-  sessionStorage.setItem("page", "bcrp");
   location.href = `https://account.box.com/api/oauth2/authorize?response_type=code&client_id=${config.iniAppDev.client_id}&redirect_uri=${location.origin + location.pathname}&state=${config.iniAppDev.stateIni}`;
 };
 
 export const loginAppProd = () => {
-  sessionStorage.setItem("page", "bcrp");
   location.href = `https://account.box.com/api/oauth2/authorize?response_type=code&client_id=${config.iniAppDev.client_id}&redirect_uri=${location.origin + location.pathname}&state=${config.iniAppDev.stateIni}`;
 };
 
@@ -72,7 +68,6 @@ export const logOut = async () => {
       "Content-Type": "application/x-www-form-urlencoded",
     },
   });
-  console.log(response);
   delete localStorage.parms;
   location.reload();
 };
