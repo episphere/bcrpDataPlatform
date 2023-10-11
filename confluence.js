@@ -125,16 +125,16 @@ export const confluence = async () => {
     );
     const loginBoxAppProd = document.getElementById("loginBoxAppProd");
     const loginBoxAppStage = document.getElementById("loginBoxAppStage");
-    let urltest = location.origin + location.pathname;
+    //let urltest = location.origin + location.pathname;
     if (location.origin.match("localhost")) loginBoxAppDev.hidden = false;
-    if (urltest.match(applicationURLs.stage))
+    if (location.origin.match("epidataplatforms-stage"))
       loginBoxAppStage.hidden = false;
-    if (urltest.match(applicationURLs.prod))
+    if (location.origin.match("epidataplatforms"))
       loginBoxAppProd.hidden = false;
     if (location.origin.match("episphere")) loginBoxAppEpisphere.hidden = false;
 
-    await storeAccessToken(urltest);
-    
+    await storeAccessToken();
+
     manageRouter();
   }
   if (localStorage.parms && JSON.parse(localStorage.parms).access_token) {

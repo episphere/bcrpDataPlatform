@@ -209,7 +209,7 @@ export const getMail = async () => {
   return r.json();
 }
 
-export const storeAccessToken = async (urltest) => {
+export const storeAccessToken = async () => {
   let parms = searchParms();
   if (parms.code) {
     console.log(parms);
@@ -218,9 +218,9 @@ export const storeAccessToken = async (urltest) => {
     if (location.origin.indexOf("episphere") !== -1) clt = config.iniAppDev;
     else if (location.origin.indexOf("localhost") !== -1)
       clt = config.iniAppLocal;
-    else if (urltest.indexOf(applicationURLs.stage) !== -1)
+    else if (location.origin.indexOf("epidataplatforms-stage") !== -1)
       clt = config.iniAppStage;
-    else if (urltest.indexOf(applicationURLs.prod) !== -1)
+    else if (location.origin.indexOf("epidataplatforms") !== -1)
       clt = config.iniAppProd;
     document.getElementById("confluenceDiv").innerHTML = "";
 
@@ -277,13 +277,11 @@ export const refreshToken = async () => {
   if (!localStorage.parms) return;
   const parms = JSON.parse(localStorage.parms);
   let clt = {};
-  let urltest = location.origin + location.pathname;
+  //let urltest = location.origin + location.pathname;
   if (location.origin.indexOf("localhost") !== -1) clt = config.iniAppLocal;
   else if (location.origin.indexOf("episphere") !== -1) clt = config.iniAppDev;
-  else if (location.origin.indexOf(applicationURLs.stage) !== -1)
-    clt = config.iniAppStage;
-  else if (urltest.indexOf(applicationURLs.prod) !== -1)
-    clt = config.iniAppProd;
+  else if (location.origin.indexOf("epidataplatforms-stage") !== -1) clt = config.iniAppStage;
+  else if (location.origin.indexOf("epidataplatforms") !== -1) clt = config.iniAppProd;
 
   const response = await fetch(`https://api.box.com/oauth2/token`, {
     headers: {
@@ -1367,6 +1365,7 @@ export const removeActiveClass = (className, activeClass) => {
   });
 };
 export const sessionExpired = () => {
+  console.log("session Expired");
   delete localStorage.parms;
   location.reload();
 };
