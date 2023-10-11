@@ -15,8 +15,8 @@ export const config = {
         stateIni: Math.random().toString().slice(2)
     },
     iniAppProd: {
-        client_id: 'dbi2dzxqknj4542pzfq3ovzjt954zfhp',
-        server_id: 'H4yhcDkwBPQSyeAFTuKfv92gzSqXpWYO',
+        client_id: '52zad6jrv5v52mn1hfy1vsjtr9jn5o1w',//'dbi2dzxqknj4542pzfq3ovzjt954zfhp',
+        server_id: '2rHTqzJumz8s9bAjmKMV83WHX1ooN4kT',//'H4yhcDkwBPQSyeAFTuKfv92gzSqXpWYO',
         stateIni: Math.random().toString().slice(2)
     },
     EpiBoxFolderId: 6454654365,
