@@ -237,7 +237,7 @@ export const formSectionOther = async (activeTab, showDescripton) => {
                               <div class="main-summary-row confluence-resources white-bg div-border font-size-18">
                                 <div class="col">
                                   <span>You currently do not have access to submit a data request form.</span></br>
-                                  <span>For access, please contact <a href="mailto:thomas.ahearn@nih.gov">Thomas Ahearn</a></span>
+                                  <span>For access, please contact <a href="mailto:bcrpp@mail.nih.gov">Thomas Ahearn</a></span>
                           </div>
                   </div>
                 `;

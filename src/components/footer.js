@@ -11,7 +11,7 @@ export const footerTemplate = () => {
                 <div class="row align-left">
                     <div class="col-md-4 zero-padding">
                         <div class="footer-heading">CONTACT INFORMATION</div>
-                        <div class="footer-body"><a class="footer-links" href="mailto:confluenceproject@nih.gov">Contact Us</a></div>
+                        <div class="footer-body"><a class="footer-links" href="mailto:bcrpp@mail.nih.gov">Contact Us</a></div>
                     </div>
                     <div class="col-md-4 zero-padding">
                         <div class="footer-heading">POLICIES</div>

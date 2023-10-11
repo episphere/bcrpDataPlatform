@@ -47,7 +47,7 @@ export const confluenceResources = () => {
                         <!---<div class="consortia-desc">
                             For more information:</br>
                             Visit: <a href="https://dceg.cancer.gov/research/cancer-types/breast-cancer/confluence-project" target="__blank">https://dceg.cancer.gov/research/cancer-types/breast-cancer/confluence-project</a></br>
-                            Email: <a href="mailto:ConfluenceProject@nih.gov">ConfluenceProject@nih.gov</a>--->
+                            Email: <a href="mailto:bcrpp@mail.nih.gov">bcrpp@mail.nih.gov</a>--->
                         </div>
                     <div>
                 <div>
