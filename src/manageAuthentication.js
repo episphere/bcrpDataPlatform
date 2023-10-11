@@ -46,7 +46,7 @@ export const loginAppEpisphere = () => {
 
 export const loginAppProd = () => {
   sessionStorage.setItem("page", "bcrp");
-  location.href = `https://account.box.com/api/oauth2/authorize?response_type=code&client_id=${config.iniAppProd.client_id}&redirect_uri=${applicationURLs.prod}&state=${config.iniAppProd.stateIni}`;
+  location.href = `https://account.box.com/api/oauth2/authorize?response_type=code&client_id=${config.iniAppDev.client_id}&redirect_uri=${location.origin + location.pathname}&state=${config.iniAppDev.stateIni}`;
 };
 
 export const logOut = async () => {
@@ -61,7 +61,7 @@ export const logOut = async () => {
     } else if (location.origin.indexOf("epidataplatforms-stage") !== -1){
       clt = config.iniAppStage;
     } else if (location.origin.indexOf("epidataplatforms") !== -1){
-      clt = config.iniAppProd;
+      clt = config.iniAppDev;
       console.log(clt);
     }
   const response = await fetch(`https://api.box.com/oauth2/revoke`, {
@@ -73,6 +73,6 @@ export const logOut = async () => {
     },
   });
   console.log(response);
-  //delete localStorage.parms;
-  //location.reload();
+  delete localStorage.parms;
+  location.reload();
 };

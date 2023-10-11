@@ -221,7 +221,7 @@ export const storeAccessToken = async () => {
     else if (location.origin.indexOf("epidataplatforms-stage") !== -1)
       clt = config.iniAppStage;
     else if (location.origin.indexOf("epidataplatforms") !== -1)
-      clt = config.iniAppProd;
+      clt = config.iniAppDev;
     document.getElementById("confluenceDiv").innerHTML = "";
 
     console.log(clt);
@@ -281,7 +281,7 @@ export const refreshToken = async () => {
   if (location.origin.indexOf("localhost") !== -1) clt = config.iniAppLocal;
   else if (location.origin.indexOf("episphere") !== -1) clt = config.iniAppDev;
   else if (location.origin.indexOf("epidataplatforms-stage") !== -1) clt = config.iniAppStage;
-  else if (location.origin.indexOf("epidataplatforms") !== -1) clt = config.iniAppProd;
+  else if (location.origin.indexOf("epidataplatforms") !== -1) clt = config.iniAppDev;
 
   const response = await fetch(`https://api.box.com/oauth2/token`, {
     headers: {
