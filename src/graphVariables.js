@@ -115,8 +115,8 @@ export const graphVariables = {
             "bmi_30_0_34_9": "30.0-34.9",
             "bmi_35_0_39_9": "35.0-39.9",
             "bmi_DK": "Unknown",
-            "bmi_GE40": ">40",
-            "bmi_LT18.5": "<18.5"   
+            "bmi_GE40_0": ">40",
+            "bmi_LT18_5": "<18.5"   
         }
     },
     ever_breastfeed : {

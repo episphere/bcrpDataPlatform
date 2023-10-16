@@ -10,13 +10,17 @@ export const confluenceContactPage = () => {
                 <div class="main-summary-row confluence-resources white-bg div-border font-size-18">
                     <div class="col">
                         <span>For questions about the Breast Cancer Risk Prediction Project</span></br>
-                        <span>send mail to: Pete Kraft at </strong> <a href="">kraftp2@nih.gov</a></span></br>
+                        <span>Send email to: BCRPP at </strong> <a href="bcrpp@mail.nih.gov">bcrpp@mail.nih.gov</a></span></br>
                         </br>
                         <div class="row">
                             <div class="col">
                                 <table class="table table-bordered table-responsive w-100 d-block d-md-table">
                                     <thead>
-                                        <tr><th>Member</th><th>Cohort</th><th>Affiliation</th></tr>
+                                        <tr>
+                                            <th scope="col">Member</th>
+                                            <th scope="col">Cohort</th>
+                                            <th scope="col">Affiliation</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
