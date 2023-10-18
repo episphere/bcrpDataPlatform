@@ -17,7 +17,9 @@ let previousValue = "";
 
 export const dataDictionaryTemplate = async () => {
   const data = await (await fetch("./BCRP_DataDictionary.txt")).text();
+  console.log(data);
   const tsvData = tsv2Json(data);
+  console.log(tsvData);
   tsvData.data.forEach(function(record) {
     record.Category = record.Category.replace('\n', '');
     if (record.Coding) {
@@ -27,6 +29,7 @@ export const dataDictionaryTemplate = async () => {
   );
 
   const dictionary = tsvData.data;
+  console.log(dictionary);
   const headers = tsvData.headers;
   let template = `
     <div class="col-xl-2 filter-column" id="summaryFilterSiderBar">
@@ -382,7 +385,7 @@ const renderDataDictionary = (dictionary, pageSize, headers) => {
         <div class="row m-0 align-left allow-overflow w-100">
         `;
   dictionary.forEach((desc, index) => {
-    //console.log(desc.Coding);
+    console.log(desc.Coding);
     if (index > pageSize) return;
     template += `
         <div class="card border-0 mt-1 mb-1 align-left w-100 pt-md-1 dictionaryData">
