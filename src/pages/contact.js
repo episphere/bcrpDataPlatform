@@ -86,7 +86,7 @@ export const confluenceContactPage = () => {
                                         <tr>
                                             <td>Renee Fortner</td>
                                             <td>Janus Serum Bank Cohort</td>
-                                            <td>German Cancer Research Center, Germany</td>
+                                            <td>Cancer Registry of Norway, Norway</td>
                                         </tr>
                                         <tr>
                                             <td>Roger Milne</td>
