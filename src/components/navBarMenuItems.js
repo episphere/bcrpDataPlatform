@@ -16,6 +16,7 @@ export const navBarMenutemplate = () => {
                 <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="#about/overview" id="aboutBCRPP">Overview</a>
                 <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="#about/description" id="studydescBCRPP">Description of Studies</a>
                 <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="#about/contact" id="contactBCRPP">DACC Members</a>
+                <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="https://github.com/Breast-Cancer-Risk-Prediction-Project" target="_blank" id="BCRPP_github">BCRPP GitHub</a>
             </div>
         </div>
         <div class="grid-elements dropdown">
