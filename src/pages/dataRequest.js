@@ -83,7 +83,7 @@ export const dataAccessNotSignedIn = () => {
 
   return template;
 };
-//All the "Project Concept Form" and "View Submissions" that are commented out in this code can be used if we want to add them to the top bar in the data access page
+//All the "Project Concept Form" and //"View Submissions" that are commented out in this code can be used if we want to add them to the top bar in the data access page
 export const dataAccess = (activeTab, showDescripton) => {
   let authChair =
     emailforChair.indexOf(JSON.parse(localStorage.parms).login) !== -1;
@@ -97,8 +97,8 @@ export const dataAccess = (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Submit Concept Form",
-      "View Submissions",
+      //"Submit Concept Form",
+      //"View Submissions",
       "Chair Menu",
       "DACC Menu"
     );
@@ -107,8 +107,8 @@ export const dataAccess = (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Submit Concept Form",
-      "View Submissions",
+      //"Submit Concept Form",
+      //"View Submissions",
       "Chair Menu"
     );
   } else if (authDacc) {
@@ -116,8 +116,8 @@ export const dataAccess = (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Submit Concept Form",
-      "View Submissions",
+      //"Submit Concept Form",
+      //"View Submissions",
       "DACC Menu"
     );
   } else {
@@ -125,8 +125,8 @@ export const dataAccess = (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Submit Concept Form",
-      "View Submissions"
+      //"Submit Concept Form",
+      //"View Submissions"
     );
   }
   let template = `
@@ -183,8 +183,8 @@ export const formSectionOther = async (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Submit Concept Form",
-      "View Submissions",
+      //"Submit Concept Form",
+      //"View Submissions",
       "Chair Menu",
       "DACC Menu"
     );
@@ -193,8 +193,8 @@ export const formSectionOther = async (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Submit Concept Form",
-      "View Submissions",
+      //"Submit Concept Form",
+      //"View Submissions",
       "Chair Menu"
     );
   } else if (authDacc) {
@@ -202,8 +202,8 @@ export const formSectionOther = async (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Submit Concept Form",
-      "View Submissions",
+      //"Submit Concept Form",
+      //"View Submissions",
       "DACC Menu"
     );
   } else {
@@ -211,8 +211,8 @@ export const formSectionOther = async (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Submit Concept Form",
-      "View Submissions"
+      //"Submit Concept Form",
+      //"View Submissions"
     );
   }
 
@@ -256,8 +256,8 @@ export const formSection = async (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Submit Concept Form",
-      "View Submissions",
+      //"Submit Concept Form",
+      //"View Submissions",
       "Chair Menu",
       "DACC Menu"
     );
@@ -266,8 +266,8 @@ export const formSection = async (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Submit Concept Form",
-      "View Submissions",
+      //"Submit Concept Form",
+      //"View Submissions",
       "Chair Menu"
     );
   } else if (authDacc) {
@@ -275,8 +275,8 @@ export const formSection = async (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Submit Concept Form",
-      "View Submissions",
+      //"Submit Concept Form",
+      //"View Submissions",
       "DACC Menu"
     );
   } else {
@@ -284,8 +284,8 @@ export const formSection = async (activeTab, showDescripton) => {
       "data_access",
       activeTab,
       "Overview",
-      "Submit Concept Form",
-      "View Submissions"
+      //"Submit Concept Form",
+      //"View Submissions"
     );
   }
   let template = `
@@ -840,8 +840,8 @@ export const acceptedStudiesSection = (activeTab) => {
       "data_access",
       activeTab,
       "Overview",
-      "Submit Concept Form",
-      "View Submissions",
+      //"Submit Concept Form",
+      //"View Submissions",
       "Chair Menu",
       "DACC Menu"
     );
@@ -850,8 +850,8 @@ export const acceptedStudiesSection = (activeTab) => {
       "data_access",
       activeTab,
       "Overview",
-      "Submit Concept Form",
-      "View Submissions",
+      //"Submit Concept Form",
+      //"View Submissions",
       "Chair Menu"
     );
   } else if (authDacc) {
@@ -859,8 +859,8 @@ export const acceptedStudiesSection = (activeTab) => {
       "data_access",
       activeTab,
       "Overview",
-      "Submit Concept Form",
-      "View Submissions",
+      //"Submit Concept Form",
+      //"View Submissions",
       "DACC Menu"
     );
   } else {
@@ -868,8 +868,8 @@ export const acceptedStudiesSection = (activeTab) => {
       "data_access",
       activeTab,
       "Overview",
-      "Submit Concept Form",
-      "View Submissions"
+      //"Submit Concept Form",
+      //"View Submissions"
     );
   }
   let template = `
@@ -950,8 +950,8 @@ export const chairSection = (activeTab) => {
       "data_access",
       activeTab,
       "Overview",
-      "Submit Concept Form",
-      "View Submissions",
+      //"Submit Concept Form",
+      //"View Submissions",
       "Chair Menu",
       "DACC Menu"
     );
@@ -960,8 +960,8 @@ export const chairSection = (activeTab) => {
       "data_access",
       activeTab,
       "Overview",
-      "Submit Concept Form",
-      "View Submissions",
+      //"Submit Concept Form",
+      //"View Submissions",
       "Chair Menu"
     );
   } else if (authDacc) {
@@ -969,8 +969,8 @@ export const chairSection = (activeTab) => {
       "data_access",
       activeTab,
       "Overview",
-      "Submit Concept Form",
-      "View Submissions",
+      //"Submit Concept Form",
+      //"View Submissions",
       "DACC Menu"
     );
   } else {
@@ -978,8 +978,8 @@ export const chairSection = (activeTab) => {
       "data_access",
       activeTab,
       "Overview",
-      "Submit Concept Form",
-      "View Submissions"
+      //"Submit Concept Form",
+      //"View Submissions"
     );
   }
   let template = `
@@ -1469,8 +1469,8 @@ export const daccSection = (activeTab) => {
       "data_access",
       activeTab,
       "Overview",
-      "Submit Concept Form",
-      "View Submissions",
+      //"Submit Concept Form",
+      //"View Submissions",
       "Chair Menu",
       "DACC Menu"
     );
@@ -1479,8 +1479,8 @@ export const daccSection = (activeTab) => {
       "data_access",
       activeTab,
       "Overview",
-      "Submit Concept Form",
-      "View Submissions",
+      //"Submit Concept Form",
+      //"View Submissions",
       "Chair Menu"
     );
   } else if (authDacc) {
@@ -1488,8 +1488,8 @@ export const daccSection = (activeTab) => {
       "data_access",
       activeTab,
       "Overview",
-      "Submit Concept Form",
-      "View Submissions",
+      //"Submit Concept Form",
+      //"View Submissions",
       "DACC Menu"
     );
   } else {
@@ -1497,8 +1497,8 @@ export const daccSection = (activeTab) => {
       "data_access",
       activeTab,
       "Overview",
-      "Submit Concept Form",
-      "View Submissions"
+      //"Submit Concept Form",
+      //"View Submissions"
     );
   }
   let template = `
