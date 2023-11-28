@@ -78,6 +78,7 @@ import { footerTemplate } from "./src/components/footer.js";
 import { renderDescription, renderDescriptionNotSignedIn } from "./src/pages/description.js";
 import { dataDictionaryTemplate } from "./src/pages/dictionary.js";
 import { showPreview } from "./src/components/boxPreview.js";
+import { confluenceEventsPage, eventsBody } from './src/pages/events.js';
 
 /**
  * 1. add Scientifix comitte to menu
@@ -662,6 +663,17 @@ const manageHash = async () => {
     confluenceResources();
     hideAnimation();
   }
+  else if(hash === '#events/meetings') {
+    const element = document.getElementById('events');
+    if(!element) return;
+    if(element.classList.contains('navbar-active')) return;
+    assignNavbarActive(element, 1);
+    document.title = 'Confluence - Events';
+    showAnimation();
+    confluenceDiv.innerHTML = confluenceEventsPage();
+    await eventsBody();
+    hideAnimation();
+}
   // else if (hash === "#contact") {
   //   const element = document.getElementById("contactBCRPP");
   //   if (!element) return;

@@ -1884,6 +1884,15 @@ export const handleRangeRequests = async () => {
   });
 };
 
+export const filePreviewer = (fileId, divId) => {
+  const access_token = JSON.parse(localStorage.parms).access_token;
+  const preview = new Box.Preview();
+  preview.show(fileId, access_token, {
+      container: divId
+  });
+
+}
+
 export const applicationURLs = {
   dev: "https://episphere.github.io/bcrpDataPlatform",
   stage: "https://epidataplatforms-stage.cancer.gov/bcrp",

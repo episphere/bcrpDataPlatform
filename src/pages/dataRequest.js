@@ -38,6 +38,7 @@ import {
   showCommentsDropDown,
   getChairApprovalDate,
   uploadFile,
+  filePreviewer
 } from "../shared.js";
 import { addEventToggleCollapsePanelBtn } from "./description.js";
 import { showPreview } from "../components/boxPreview.js";
@@ -1447,14 +1448,6 @@ const addEventPreviewFile = () => {
       const fileId = btn.dataset.fileId;
       filePreviewer(fileId, "#confluencePreviewerModalBody");
     });
-  });
-};
-
-export const filePreviewer = (fileId, divId) => {
-  const access_token = JSON.parse(localStorage.parms).access_token;
-  const preview = new Box.Preview();
-  preview.show(fileId, access_token, {
-    container: divId,
   });
 };
 
