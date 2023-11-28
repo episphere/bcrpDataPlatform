@@ -42,9 +42,9 @@ export const dataSummary = (
                     : pageNavBar(
                         "data_exploration",
                         "summary",
+                        "Dictionary",
                         "Summary Statistics",
-                        "Subset Statistics",
-                        "Dictionary"
+                        "Subset Statistics"
                       )
                 } 
                 
