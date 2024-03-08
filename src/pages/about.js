@@ -129,7 +129,10 @@ const countPublicStatistics = (d, caseControl) => {
                 </div></div>
                 <div class="col data-last-modified align-left">Data current as of - ${new Date(
                   data["dataModifiedAt"]
-                ).toLocaleString()}</div></div>
+                ).toLocaleString()} 
+                <br>
+                Table will be updated as information from cohorts becomes available to the BCRPP.</div>
+                </div>
                 `;
   element.innerHTML = summary;
   addEventOverviewConsortiumSelection(d);
