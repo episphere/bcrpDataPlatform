@@ -63,7 +63,14 @@ export const dataAccessNotSignedIn = () => {
               </div>
               <div class="data-submission div-border font-size-18" style="padding-left: 1rem; padding-right: 1rem;">
                   <div class="row m-0">
-                      The Breast Cancer Risk Prediction Project is currently generating genotyping data and harmonizing risk factor and clinical data. Data is expected to be available for request in 2024. Data access will be facilitated through this platform, in accordance to the data transfer agreements signed between participating studies (originator) and the BCRPP Data Coordinating Center (DCC) at the Division of Cancer Epidemiology and Genetics at the National Cancer Institute.
+                      The Breast Cancer Risk Prediction Project is currently generating genotyping data and harmonizing 
+                      risk factor and clinical data. Data is expected to be available for request in 2024. Data access 
+                      will be facilitated through this platform, in accordance to the data transfer agreements signed 
+                      between participating studies (originator) and the 
+                        <a href="/BCRP-DACC-Policies-Procedures-2023-01-16.docx" download>
+                          policies and procedures of the BCRPP Data Coordinating Center (DCC)
+                        </a>
+                      at the Division of Cancer Epidemiology and Genetics at the National Cancer Institute.
                   </div></br>
                   <div class="row m-0">
                       The following data access procedures are planned:
@@ -76,6 +83,8 @@ export const dataAccessNotSignedIn = () => {
                           <li style=" margin-bottom: 10px;">Upon DTA signatures, the DCC will provide access of the approved data to researchers. </li>
                           <li style=" margin-bottom: 10px;">Users granted access to BCRPP data agree to only access data for the purposes outlined their approved proposal. Users will not save any individual participant's data (i.e., make permanent copies) on local computers or any persistent storage device other than the controlled-access workspace provided by the BCRPP designated for the project.</li>
                       </ul>
+
+                      To request permission to be able to submit study proposals to the BCRPP DACC for requesting access to data shared with the BCRPP, please send an email to <a href = "mailto: bcrpp@mail.nih.gov">bcrpp@mail.nih.gov</a>. Please directly contact cohorts if you are interested in requesting access to data from only a small subset of cohorts that are participating in the BCRPP.
                   </div>
                 </div>
             </div>
@@ -150,7 +159,13 @@ export const dataAccess = (activeTab, showDescripton) => {
                 <div class="data-submission div-border font-size-18" style="padding-left: 1rem; padding-right: 1rem;">
                     <div class="row m-0">
 
-                        The Breast Cancer Risk Prediction Project is currently harmonizing risk factor and clinical data from participating cohorts. Data is expected to be available for request in 2024. Data access will be facilitated through this platform, in accordance to the data transfer agreements signed between participating studies (originator) and the BCRPP Data Coordinating Center (DCC) at the Division of Cancer Epidemiology and Genetics at the National Cancer Institute.
+                        The Breast Cancer Risk Prediction Project is currently harmonizing risk factor and clinical data from participating cohorts. 
+                        Data is expected to be available for request in 2024. Data access will be facilitated through this platform, 
+                        in accordance to the data transfer agreements signed between participating studies (originator) and the 
+                          <a href="/BCRP-DACC-Policies-Procedures-2023-01-16.docx" download>
+                          policies and procedures of the BCRPP Data Coordinating Center (DCC)
+                          </a>
+                         at the Division of Cancer Epidemiology and Genetics at the National Cancer Institute.
 
                     </div></br>
                     <div class="row m-0">

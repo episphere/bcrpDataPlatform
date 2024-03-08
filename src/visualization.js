@@ -31,8 +31,6 @@ const chartLabels = {
 
 export const getFileContent = async () => {
   showAnimation();
-  const { jsonData, headers } = csvJSON(await getFile(summaryStatsFileId)); // Get summary level data
-  const lastModified = (await getFileInfo(summaryStatsFileId)).modified_at;
   document.getElementById(
     "dataLastModified"
   ).innerHTML = `Data current as of - ${new Date(
