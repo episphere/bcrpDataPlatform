@@ -131,7 +131,7 @@ const countPublicStatistics = (d, caseControl) => {
                   data["dataModifiedAt"]
                 ).toLocaleString()} 
                 <br>
-                Table will be updated as information from cohorts becomes available to the BCRPP.</div>
+                Table is updated when data from cohorts is shared with the BCRPP.</div>
                 </div>
                 `;
   element.innerHTML = summary;

@@ -84,10 +84,9 @@ export const dataAccessNotSignedIn = () => {
                           <li style=" margin-bottom: 10px;">Users granted access to BCRPP data agree to only access data for the purposes outlined their approved proposal. Users will not save any individual participant's data (i.e., make permanent copies) on local computers or any persistent storage device other than the controlled-access workspace provided by the BCRPP designated for the project.</li>
                       </ul>
                   </div>
-                      To request permission to be able to submit study proposals to the BCRPP DACC for requesting 
-                      access to data shared with the BCRPP, please send an email to 
-                      <a href = "mailto:bcrpp@mail.nih.gov">bcrpp@mail.nih.gov</a>. 
-                      Please directly contact cohorts if you are interested in requesting access to data from only a small subset of cohorts that are participating in the BCRPP.
+                    To request the ability to submit study concepts to the BCRPP DACC, please email
+                    <a href = "mailto:bcrpp@mail.nih.gov">bcrpp@mail.nih.gov</a>. 
+                    Note that study concepts submitted to the BCRPP DACC should not request access to data from only a few cohorts that are participating in the BCRPP. In such situations, please directly contact the cohorts you are interested in requesting data from.
                 </div>
             </div>
         </div>
