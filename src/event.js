@@ -29,6 +29,7 @@ import {
   reSizePlots,
   showComments,
   summaryStatsFolder,
+  summaryStatsFolderId
 } from "./shared.js";
 import { renderDataSummary } from "./pages/about.js";
 import { variables } from "./variables.js";
@@ -1284,7 +1285,7 @@ export const addEventUpdateSummaryStatsData = () => {
     template += '</br><div id="summaryDataFolderList"></div>';
 
     template +=
-      '<div class="modal-footer"><button type="submit" class="btn btn-outline-primary" disabled>Update data</button></div>';
+      '<div class="modal-footer"><button type="submit" class="btn btn-outline-primary">Update data</button></div>';
     template += "</form>";
     body.innerHTML = template;
     addEventDataTypeRadio();
@@ -1323,26 +1324,28 @@ const addEventDataTypeRadio = () => {
         document.getElementsByName("summarydataType")
       ).filter((ele) => ele.checked === true)[0].value;
       let template = "";
-      const response = await getFolderItems(162298847509);
+      const response = await getFolderItems(summaryStatsFolderId);
+      console.log(response);
       let summaryFolder = [];
-      if (dataType === "summary") {
+      if (dataType === "missingness") {
         summaryFolder = response.entries.filter(
           (dt) =>
             dt.type === "folder" &&
-            /summary results/i.test(dt.name) === true
+            /Subset Stats generate by NCI/i.test(dt.name) === true
         );
       } else {
         summaryFolder = response.entries.filter(
           (dt) =>
             dt.type === "folder" &&
-            /_missingness_statistics/i.test(dt.name) === true
+            /Results/i.test(dt.name) === true
         );
       }
       template += `Select data folder(s)`;
       template += `<ul>`;
       summaryFolder.forEach((folder) => {
+        
         template += `<li class="filter-list-item">
-                <button type="button" class="filter-btn collapsible-items update-summary-stats-btn filter-midset-data-btn" data-folder-id="${folder.id}">
+                <button type="button" class="filter-btn collapsible-items update-summary-stats-btn filter-midset-data-btn active-filter" data-folder-id="${folder.id}">
                 <div class="variable-name">${folder.name}</div>
                 </button>
                 </li>`;
@@ -1356,7 +1359,7 @@ const addEventDataTypeRadio = () => {
 };
 
 const addEventAccessStatsRadio = async () => {
-  const response = await getFolderItems(171750396639);
+  const response = await getFolderItems(summaryStatsFolderId); //171750396639
   let summaryFolder = response.entries;
   console.log(summaryFolder);
   let template = "";

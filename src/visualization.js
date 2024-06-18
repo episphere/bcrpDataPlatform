@@ -31,11 +31,9 @@ const chartLabels = {
 
 export const getFileContent = async () => {
   showAnimation();
-  document.getElementById(
-    "dataLastModified"
-  ).innerHTML = `Data current as of - ${new Date(
-    lastModified
-  ).toLocaleString()}`;
+  const { jsonData, headers } = csvJSON(await getFile(summaryStatsFileId));
+  const lastModified = (await getFileInfo(summaryStatsFileId)).modified_at;
+  document.getElementById("dataLastModified").innerHTML = `Data current as of - ${new Date(lastModified).toLocaleString()}`;
   if (jsonData.length === 0) {
     document.getElementById(
       "confluenceDiv"
