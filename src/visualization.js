@@ -14,8 +14,8 @@ import {
 } from "./shared.js";
 import { variables } from "./variables.js";
 //import { graphVariables } from "./graphVariables.js";
-import graphVariables from "../graphVariables.json" assert { type: 'json' };
-import graphVariablesCases from "../graphVariablesCases.json" assert { type: 'json' };
+import graphVariables from "../graphVariables.json" with { type: 'json' };
+import graphVariablesCases from "../graphVariablesCases.json" with { type: 'json' };
 import { addEventSummaryStatsFilterForm, filterData } from "./event.js";
 
 //console.log(data);
