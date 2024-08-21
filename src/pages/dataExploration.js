@@ -38,7 +38,7 @@ export const dataSummary = (
             <div class="container2 body-min-height">
                 ${
                   publicAccess
-                    ? pageNavBar("data_exploration", "dictionary", "Dictionary")
+                    ? pageNavBar("data_exploration", "summary", "Dictionary", "Summary Statistics")
                     : pageNavBar(
                         "data_exploration",
                         "summary",

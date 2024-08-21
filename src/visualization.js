@@ -76,6 +76,55 @@ export const getFileContent = async () => {
   hideAnimation();
 };
 
+export const getFileContentNL = async () => {
+  showAnimation();
+  const response = await fetch("src/data/BCRP_PUBLIC_Summary_Results_All.csv");
+  const csvData = await response.text();
+  const { jsonData, headers } = await csvJSON(csvData);
+
+  if (jsonData.length === 0) {
+    document.getElementById("confluenceDiv").innerHTML = `You don't have access to summary level data, please contact NCI for the access.`;
+    return;
+  }
+  renderAllCharts(jsonData, headers);
+
+  const graph1 = document.getElementById("dataSummaryVizLabel1");
+    graph1.addEventListener("change", function (event) {
+      filterData(jsonData, headers);
+      });
+
+  const graph2 = document.getElementById("dataSummaryVizLabel2");
+    graph2.addEventListener("change", function (event) {
+      filterData(jsonData, headers);
+      });
+
+  const graph3 = document.getElementById("dataSummaryVizLabel3");
+    graph3.addEventListener("change", function (event) {
+      filterData(jsonData, headers);
+      });
+
+  const graph4 = document.getElementById("dataSummaryVizLabel4");
+    graph4.addEventListener("change", function (event) {
+      filterData(jsonData, headers);
+      });
+
+  const graph5 = document.getElementById("dataSummaryVizLabel5");
+    graph5.addEventListener("change", function (event) {
+      filterData(jsonData, headers);
+      });
+
+  const graph6 = document.getElementById("dataSummaryVizLabel6");
+    graph6.addEventListener("change", function (event) {
+      filterData(jsonData, headers);
+      });
+
+  allFilters(jsonData, headers, "all");
+  document.getElementById("studySelection").parentElement.style.display = 'none';
+  //document.querySelector('select[data-variable="subcases"] option[value="cases"]').style.display = 'none';
+  //console.log(document.getElementById("subcasesSelection"));
+  hideAnimation();
+};
+
 export const getFileContentCases = async () => {
   showAnimation();
   const { jsonData, headers } = csvJSON(await getFile(summaryStatsCasesFileId)); // Get summary level data
@@ -119,6 +168,49 @@ export const getFileContentCases = async () => {
       });
 
   allFilters(jsonData, headers, "cases");
+  hideAnimation();
+};
+
+export const getFileContentCasesNL = async () => {
+  showAnimation();
+  const response = await fetch("src/data/BCRP_PUBLIC_Summary_Results_Cases.csv");
+  const csvData = await response.text();
+  const { jsonData, headers } = await csvJSON(csvData);
+  if (jsonData.length === 0) {
+    document.getElementById(
+      "confluenceDiv"
+    ).innerHTML = `You don't have access to summary level data, please contact NCI for the access.`;
+    return;
+  }
+  renderAllCasesCharts(jsonData, headers);
+
+  const graph1 = document.getElementById("dataSummaryVizLabel1");
+  graph1.addEventListener("change", function (event) {
+    filterData(jsonData, headers);
+    });
+
+  const graph2 = document.getElementById("dataSummaryVizLabel2");
+    graph2.addEventListener("change", function (event) {
+      filterData(jsonData, headers);
+      });
+
+  const graph3 = document.getElementById("dataSummaryVizLabel3");
+    graph3.addEventListener("change", function (event) {
+      filterData(jsonData, headers);
+      });
+
+  const graph4 = document.getElementById("dataSummaryVizLabel4");
+    graph4.addEventListener("change", function (event) {
+      filterData(jsonData, headers);
+      });
+
+  const graph5 = document.getElementById("dataSummaryVizLabel5");
+    graph5.addEventListener("change", function (event) {
+      filterData(jsonData, headers);
+      });
+
+  allFilters(jsonData, headers, "cases");
+  document.getElementById("studySelection").parentElement.style.display = 'none';
   hideAnimation();
 };
 

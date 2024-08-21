@@ -70,7 +70,7 @@ import {
   addEventcreateaccessStats,
 } from "./src/event.js";
 import { dataAnalysisTemplate } from "./src/pages/dataAnalysis.js";
-import { getFileContent, getFileContentCases } from "./src/visualization.js";
+import { getFileContent, getFileContentCases, getFileContentNL, getFileContentCasesNL } from "./src/visualization.js";
 import { aboutConfluence, renderOverView } from "./src/pages/about.js";
 import { confluenceResources } from "./src/pages/join.js";
 import { confluenceContactPage } from "./src/pages/contact.js";
@@ -423,7 +423,6 @@ const manageRouter = async () => {
     const element = document.getElementById("aboutBCRPP");
     if (!element) return;
     if (element.classList.contains("navbar-active")) return;
-    console.log("about overview clicked");
     document.title = "BCRPP - Overview";
     assignNavbarActive(element, 1);
     aboutConfluence("overview", true);
@@ -546,6 +545,20 @@ const manageRouter = async () => {
     document.title = "BCRPP - Your Submissions";
     userSubmissionTemplate("Your Submissions", "User Submissions");
     hideAnimation();
+  } else if (hash ==="#data_exploration/summary"){
+    const dataSummaryElement = document.getElementById("dataSummary");
+    assignNavbarActive(dataSummaryElement, 1);
+    document.title = "BCRPP - Summary Statistics";
+    confluenceDiv.innerHTML = dataSummary("Summary Statistics", false, false, false, true);
+    addEventUpdateSummaryStatsData();
+    addEventcreateaccessStats();
+    dataSummaryStatisticsTemplate();
+    await getFileContentNL();
+    const subcasesSelection = document.getElementById("subcasesSelection");
+    subcasesSelection.addEventListener("change", function (event) {
+      if (event.target.value == "all") getFileContentNL();
+      if (event.target.value == "cases") getFileContentCasesNL();
+    });
   } else window.location.hash = "#home";
 };
 
