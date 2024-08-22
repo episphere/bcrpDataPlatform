@@ -51,6 +51,8 @@ import {
   updateCounts,
   getFileContent,
   getFileContentCases,
+  getFileContentNL,
+  getFileContentCasesNL,
 } from "./visualization.js";
 
 import { showPreview } from "./components/boxPreview.js";
@@ -1677,8 +1679,20 @@ export const addEventSummaryStatsFilterForm = (jsonData, headers) => {
 
   const subcasesSelection = document.getElementById("subcasesSelection");
   subcasesSelection.addEventListener("change", function (event) {
-    if (event.target.value == "all") getFileContent();
-    if (event.target.value == "cases") getFileContentCases();
+    if (event.target.value == "all"){ 
+      if (localStorage.parms === undefined) {
+        getFileContentNL();  
+      } else {
+        getFileContent();
+      }
+    }
+    if (event.target.value == "cases") {
+      if (localStorage.parms === undefined) {
+        getFileContentCasesNL();
+      } else {
+        getFileContentCases();
+      }
+    }
   });
 
   const elements = document.getElementsByClassName("select-consortium");

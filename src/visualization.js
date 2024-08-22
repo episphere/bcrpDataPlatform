@@ -120,8 +120,6 @@ export const getFileContentNL = async () => {
 
   allFilters(jsonData, headers, "all");
   document.getElementById("studySelection").parentElement.style.display = 'none';
-  //document.querySelector('select[data-variable="subcases"] option[value="cases"]').style.display = 'none';
-  //console.log(document.getElementById("subcasesSelection"));
   hideAnimation();
 };
 
