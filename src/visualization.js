@@ -433,7 +433,7 @@ export const updateAllCharts = (data) => {
   document.getElementById("participantCount").innerHTML = `<b>No. of Participants:</b> ${totalSubjects.toLocaleString("en-US")}`;
 
   updateBarChart(
-    "birth_year",//document.getElementById("dataSummaryVizLabel1").value,
+    document.getElementById("dataSummaryVizLabel1").value,
     "dataSummaryVizChart1",
     "dataSummaryVizLabel1",
     finalData,
