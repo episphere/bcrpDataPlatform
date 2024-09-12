@@ -56,18 +56,6 @@
             "BBD_history_DK": "Unknown"
             }
         },
-    "BBD_type" :
-        {
-        "title": "Type of benign breast disease for first BBD diagnosis",
-        "units" : "",
-        "values" : 
-            {
-            "BBD_type1_DK": "non-proliferative disease",
-            "BBD_type2_DK": "proliferative disease without atypia",
-            "BBD_type3_DK": "atypical hyperplasia",
-            "BBD_type4_DK": "Type 4"
-            }
-        },
     "Biopsies_yesno" :
         {
         "title" : "Ever had a breast biopsy, excluding dx biopsies",
