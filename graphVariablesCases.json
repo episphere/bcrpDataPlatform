@@ -38,16 +38,6 @@
             "er_primary1_DK": "Unknown"
             }
         },
-    "famHist" : 
-        {
-        "title" : "Family history of breast cancer",
-        "units" : "",
-        "values" : 
-            {
-            "famHist_yes": "Yes",
-            "famHist_DK": "Unknown"
-            }
-        },
     "grade_primary1" : 
         {
         "title" : "Histopathological grade for first primary tumor",

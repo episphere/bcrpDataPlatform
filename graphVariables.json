@@ -178,17 +178,6 @@
             "education_DK": "Unknown" 
             }
         },
-    "fh_breast_canc" :
-        {
-        "title" : "Family history of breast cancer (first degree relative)",
-        "units" : "",
-        "values" : 
-            {
-            "fhx_fdr_brca_0": "0",
-            "fhx_fdr_brca_1": "1",
-            "fhx_fdr_brca_DK": "Unknown"
-            }
-        },
     "fhx_fdr_brca" :
         {
         "title" : "Family history of breast cancer (first degree relative)",
