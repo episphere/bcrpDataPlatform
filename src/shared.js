@@ -1604,7 +1604,7 @@ export const csvJSON = (csv) => {
     }
     if (obj.ethnicity !== undefined){
       result.push(obj);
-      console.log(result);
+      //console.log(result);
     }
     // if (obj.study !== undefined) {
     //   result.push(obj);
@@ -1614,7 +1614,7 @@ export const csvJSON = (csv) => {
   for (let obj of result) {
     obj.total = parseInt(obj["statusTotal"]);
   }
-  console.log(result);
+  //console.log(result);
   return {
     jsonData: result,
     headers: headers,

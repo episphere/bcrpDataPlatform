@@ -441,7 +441,7 @@ export const updateAllCharts = (data) => {
     "Full Cohort"
   );
   updateBarChart(
-    "age",//document.getElementById("dataSummaryVizLabel2").value,
+    document.getElementById("dataSummaryVizLabel2").value,
     "dataSummaryVizChart2",
     "dataSummaryVizLabel2",
     finalData,
@@ -449,7 +449,7 @@ export const updateAllCharts = (data) => {
     "Full Cohort"
   );
   updateBarChart(
-    "ageMenarche",//document.getElementById("dataSummaryVizLabel3").value,
+    document.getElementById("dataSummaryVizLabel3").value,
     "dataSummaryVizChart3",
     "dataSummaryVizLabel3",
     finalData,
@@ -457,7 +457,7 @@ export const updateAllCharts = (data) => {
     "Full Cohort"
   );
   updateBarChart(
-    "parous",//document.getElementById("dataSummaryVizLabel4").value,
+    document.getElementById("dataSummaryVizLabel4").value,
     "dataSummaryVizChart4",
     "dataSummaryVizLabel4",
     finalData,
@@ -465,7 +465,7 @@ export const updateAllCharts = (data) => {
     "Full Cohort"
   );
   updateBarChart(
-    "parity",//document.getElementById("dataSummaryVizLabel5").value,
+    document.getElementById("dataSummaryVizLabel5").value,
     "dataSummaryVizChart5",
     "dataSummaryVizLabel5",
     finalData,
@@ -473,7 +473,7 @@ export const updateAllCharts = (data) => {
     "Full Cohort"
   );
   updateBarChart(
-    "bmi",//document.getElementById("dataSummaryVizLabel6").value,
+    document.getElementById("dataSummaryVizLabel6").value,
     "dataSummaryVizChart6",
     "dataSummaryVizLabel6",
     finalData,
@@ -546,7 +546,7 @@ export const updateAllCasesCharts = (data) => {
   document.getElementById("participantCount").innerHTML = `<b>No. of Participants:</b> ${totalCases.toLocaleString("en-US")}`;
 
   updateBarChart(
-    "dxdate_primary1",//document.getElementById("dataSummaryVizLabel1").value,
+    document.getElementById("dataSummaryVizLabel1").value,
     "dataSummaryVizChart1",
     "dataSummaryVizLabel1",
     finalData,
@@ -554,7 +554,7 @@ export const updateAllCasesCharts = (data) => {
     "Cases"
   );
   updateBarChart(
-    "invasive_primary1",//document.getElementById("dataSummaryVizLabel2").value,
+    document.getElementById("dataSummaryVizLabel2").value,
     "dataSummaryVizChart2",
     "dataSummaryVizLabel2",
     finalData,
@@ -562,7 +562,7 @@ export const updateAllCasesCharts = (data) => {
     "Cases"
   );
   updateBarChart(
-    "detection_primary1",//document.getElementById("dataSummaryVizLabel3").value,
+    document.getElementById("dataSummaryVizLabel3").value,
     "dataSummaryVizChart3",
     "dataSummaryVizLabel3",
     finalData,
@@ -570,7 +570,7 @@ export const updateAllCasesCharts = (data) => {
     "Cases"
   );
   updateBarChart(
-    "er_primary1",//document.getElementById("dataSummaryVizLabel4").value,
+    document.getElementById("dataSummaryVizLabel4").value,
     "dataSummaryVizChart4",
     "dataSummaryVizLabel4",
     finalData,
@@ -578,7 +578,7 @@ export const updateAllCasesCharts = (data) => {
     "Cases"
   );
   updateBarChart(
-    "grade_primary1",//document.getElementById("dataSummaryVizLabel5").value,
+    document.getElementById("dataSummaryVizLabel5").value,
     "dataSummaryVizChart5",
     "dataSummaryVizLabel5",
     finalData,
@@ -703,11 +703,13 @@ const generateBarChart = (parameter, id, labelID, jsonData, chartRow, population
   Plotly.newPlot(`${id}`, data, layout, config);
 
   var htmlTitle = document.getElementById(labelID);
-  htmlTitle.options[htmlTitle.options.length] = new Option(dataGraphs[parameter].title, id, true, true);
-  // for (let index in dataGraphs) {
-  //   let defaultSelected = true ? index===parameter : false
-  //   htmlTitle.options[htmlTitle.options.length] = new Option(dataGraphs[index].title, index, defaultSelected, defaultSelected);
-  // }
+  //htmlTitle.options[htmlTitle.options.length] = new Option(dataGraphs[parameter].title, id, true, true);
+  // let selectedValues = [document.getElementById("dataSummaryVizLabel1").value, document.getElementById("dataSummaryVizLabel2").value, document.getElementById("dataSummaryVizLabel3").value, document.getElementById("dataSummaryVizLabel4").value, document.getElementById("dataSummaryVizLabel5").value, document.getElementById("dataSummaryVizLabel6").value]
+  // console.log(selectedValues);
+  for (let index in dataGraphs) {
+    let defaultSelected = true ? index===parameter : false
+    htmlTitle.options[htmlTitle.options.length] = new Option(dataGraphs[index].title, index, defaultSelected, defaultSelected);
+  }
 };
 
 const updateBarChart = (parameter, id, labelID, jsonData, chartRow, population) => {
@@ -1827,7 +1829,7 @@ const dataVisulizationCards = (obj) => `
             <div class="card-header">
                 ${
                   obj.cardHeaderId
-                    ? `<span class="data-summary-label-wrap"><select class="sumstats font-size-17 font-bold" id="${obj.cardHeaderId}"></select></span>`
+                    ? `<span class="data-summary-label-wrap"><select class="sumstats font-size-17 font-bold" id="${obj.cardHeaderId}"> </select></span>`
                     : ``
                 }
             </div>
