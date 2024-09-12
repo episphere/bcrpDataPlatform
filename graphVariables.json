@@ -258,8 +258,8 @@
         "units" : "",
         "values" : 
             {
-            "screen_ever_0": "0",
-            "screen_ever_1": "1",
+            "screen_ever_0": "Never",
+            "screen_ever_1": "Ever",
             "screen_ever_DK": "Unknown"
             }
         },
@@ -269,8 +269,8 @@
         "units" : "",
         "values" : 
             {
-            "sex_0": "0",
-            "sex_1": "1"
+            "sex_0": "Female",
+            "sex_1": "Male"
             }
         },
     "smoking_status" :
