@@ -263,16 +263,6 @@
             "screen_ever_DK": "Unknown"
             }
         },
-    "sex" :
-        {
-        "title" : "Sex",
-        "units" : "",
-        "values" : 
-            {
-            "sex_0": "Female",
-            "sex_1": "Male"
-            }
-        },
     "smoking_status" :
         {
         "title" : "Smoking Status",
