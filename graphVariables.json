@@ -32,17 +32,6 @@
             "agemenarche_DK": "Unknown"
             }
         },
-    "AJAncestry" :
-        {
-        "title" : "Ashkenazi Jewish Ancestry",
-        "units" : "",
-        "values" : 
-            {
-            "AJAncestry_0": "No",
-            "AJAncestry_1": "Yes",
-            "AJAncestry_DK": "Unknown"
-            }
-        },
     "alcohol_status" :
         {
         "title" : "Alcohol Drinking Status",
@@ -65,43 +54,6 @@
             "BBD_history_0": "No",
             "BBD_history_1": "Yes",
             "BBD_history_DK": "Unknown"
-            }
-        },
-    "BBD_number" :
-        {
-        "title" : "Number of benign breast disease diagnoses",
-        "units" : "Number",
-        "values" : 
-            {
-            "BBD_number_0": "0",
-            "BBD_number_1": "1",
-            "BBD_number_2": "2",
-            "BBD_number_DK": "Unknown"
-            }
-        },
-    "BBD_type" :
-        {
-        "title": "Type of benign breast disease for first BBD diagnosis",
-        "units" : "",
-        "values" : 
-            {
-            "BBD_type1_DK": "non-proliferative disease",
-            "BBD_type2_DK": "proliferative disease without atypia",
-            "BBD_type3_DK": "atypical hyperplasia",
-            "BBD_type4_DK": "Type 4"
-            }
-        },
-    "Biopsies_number" :
-        {
-        "title" : "Number of benign breast disease diagnoses",
-        "units" : "Number",
-        "values" : 
-            {
-            "Biopsies_number_1": "1",
-            "Biopsies_number_2": "2",
-            "Biopsies_number_3": "3",
-            "Biopsies_number_4": "4",
-            "Biopsies_number_DK": "Unknown"
             }
         },
     "Biopsies_yesno" :
@@ -162,20 +114,6 @@
             "breastfeed_777": "Nonparous",
             "breastfeed_NA": "NA",
             "breastfeed_DK": "Unknown"
-            }
-        },
-    "education" :
-        {
-        "title" : "Education",
-        "units" : "",
-        "values" : 
-            {
-            "education_1": "Less than high school",
-            "education_2": "High School",
-            "education_3": "Some college education",
-            "education_4": "University (degree)",
-            "education_5": "Graduate school (some or degree)",
-            "education_DK": "Unknown" 
             }
         },
     "fhx_fdr_brca" :
@@ -320,19 +258,9 @@
         "units" : "",
         "values" : 
             {
-            "screen_ever_0": "0",
-            "screen_ever_1": "1",
+            "screen_ever_0": "Never",
+            "screen_ever_1": "Ever",
             "screen_ever_DK": "Unknown"
-            }
-        },
-    "sex" :
-        {
-        "title" : "Sex",
-        "units" : "",
-        "values" : 
-            {
-            "sex_0": "0",
-            "sex_1": "1"
             }
         },
     "smoking_status" :
@@ -341,10 +269,10 @@
         "units" : "",
         "values" : 
             {
-            "smoking_status_1": "1",
-            "smoking_status_2": "2",
-            "smoking_status_3": "3",
-            "smoking_status_4": "4",
+            "smoking_status_1": "Current",
+            "smoking_status_2": "Former",
+            "smoking_status_3": "Ever (unknown current or former)",
+            "smoking_status_4": "Never",
             "smoking_status_DK": "Unknown"
             }
         }
