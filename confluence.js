@@ -28,6 +28,8 @@ import {
   importDictVars,
   amendFormSelect,
   populateAmendSelect,
+  acceptedStudiesSection,
+  acceptedStudiesView,
 } from "./src/pages/dataRequest.js";
 import {
   checkAccessTokenValidity,
@@ -79,6 +81,7 @@ import { renderDescription, renderDescriptionNotSignedIn } from "./src/pages/des
 import { dataDictionaryTemplate } from "./src/pages/dictionary.js";
 import { showPreview } from "./src/components/boxPreview.js";
 import { confluenceEventsPage, eventsBody } from './src/pages/events.js';
+import { acceptedDocs, acceptedDocsView } from './src/pages/accepteddocs.js';
 
 /**
  * 1. add Scientifix comitte to menu
@@ -163,6 +166,8 @@ export const confluence = async () => {
     const studyAcceptedElement = document.getElementById("studyAccepted");
     const chairViewElement = document.getElementById("chairView");
     const daccViewElement = document.getElementById("daccView");
+    const acceptedFormsElement = document.getElementById('acceptedForms');
+    const acceptedStudiesElement = document.getElementById('acceptedStudiesViewnav')
     // const platformTutorialElement = document.getElementById('platformTutorial');
     // const dataAnalysisElement = document.getElementById('dataAnalysis');
 
@@ -295,10 +300,10 @@ export const confluence = async () => {
         hideAnimation();
       });
     }
-    if (studyAcceptedElement) {
-      studyAcceptedElement.addEventListener("click", () => {
-        if (studyAcceptedElement.classList.contains("navbar-active")) return;
-        const element = document.getElementById("acceptedStudiesView");
+    if (acceptedStudiesElement) {
+      acceptedStudiesElement.addEventListener("click", () => {
+        if (acceptedStudiesElement.classList.contains("navbar-active")) return;
+        const element = document.getElementById("acceptedStudiesViewnav");
         showAnimation();
         if (!element) return;
         if (element.classList.contains("navbar-active")) return;
@@ -335,17 +340,32 @@ export const confluence = async () => {
         daccFileView();
       });
     }
+    if (dataRequestElement) {
+      dataRequestElement.addEventListener("click", () => {
+        if (dataRequestElement.classList.contains("navbar-active")) return;
+        const element = document.getElementById("dataRequest");
+        if (!element) return;
+        if (element.classList.contains("navbar-active")) return;
+        document.title = "BCRPP - Data Access";
+        assignNavbarActive(element, 1);
+        confluenceDiv.innerHTML = dataRequestTemplate("overview");
+        hideAnimation();
+      });
+    }
+    if(acceptedFormsElement) {
+      acceptedFormsElement.addEventListener('click', () => {
+          if (acceptedFormsElement.classList.contains('navbar-active')) return;
+          const element = document.getElementById("acceptedForms")
+          showAnimation();
+          assignNavbarActive(element, 2);
+          document.title = 'BCRPP - Accepted Data Requests';
+          //confluenceDiv.innerHTML = authTableTemplate();
+          console.log("accepted forms");
+          confluenceDiv.innerHTML = acceptedDocs();
+          acceptedDocsView();
+      });
+   }
 
-    dataRequestElement.addEventListener("click", () => {
-      if (dataRequestElement.classList.contains("navbar-active")) return;
-      const element = document.getElementById("dataRequest");
-      if (!element) return;
-      if (element.classList.contains("navbar-active")) return;
-      document.title = "BCRPP - Data Access";
-      assignNavbarActive(element, 1);
-      confluenceDiv.innerHTML = dataRequestTemplate("overview");
-      hideAnimation();
-    });
     const folders = await getFolderItems(0);
     const array = filterConsortiums(folders.entries);
     const projectArray = filterProjects(folders.entries);
@@ -510,7 +530,19 @@ const manageRouter = async () => {
     document.title = "BCRPP - DACC View";
     confluenceDiv.innerHTML = daccSection();
     removeActiveClass("nav-link", "active");
-  } else if (hash === "#data_exploration/dictionary") {
+  } 
+  else if (hash === '#accepted_forms') {
+    const element = document.getElementById('acceptedForms');
+    if (!element) return;
+    if (element.classList.contains('navbar-active')) return;
+    document.title = 'BCRPP - Accepted Data Requests';
+    assignNavbarActive(element, 2);
+    //confluenceDiv.innerHTML = AuthTableTemplate();
+    console.log("accepted forms");
+    confluenceDiv.innerHTML = acceptedDocs();
+    acceptedDocsView();
+  }
+  else if (hash === "#data_exploration/dictionary") {
     const dataDictionaryElement = document.getElementById("dataDictionary");
     if (
       !dataDictionaryElement ||
@@ -617,6 +649,12 @@ const manageHash = async () => {
     if (element) {
       element.click();
     } else window.location.hash = "#";
+  } else if (hash === '#accepted_forms') {
+    const element = document.getElementById('acceptedForms');
+    element.click();
+  } else if (hash === '#accepted_forms') {
+  const element = document.getElementById('acceptedForms');
+  element.click();
   } else if (hash === "#my_projects") {
     const element = document.getElementById("myProjects");
     if (element) {

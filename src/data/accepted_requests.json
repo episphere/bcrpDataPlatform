@@ -1,0 +1,24 @@
+{
+    "name": "Accepted Data Requests",
+    "last_update": "8/13/2024",
+    "files": [
+        {
+            "title": "Development and validation of a comprehensive and multi-ancestry breast cancer risk prediction model for the US population using data from the NCI cohort consortium",
+            "contact": "Emily Norton, Thomas Ahearn, Kristen Brantley, Peter Kraft, Montserrat Garcia-Closas, Nilanjan Chatterjee",
+            "box_id": "1558424735868",
+            "accepted_group": "Main Concept"
+        },
+        {
+            "title": "Breast Cancer Risk Prediction Project--Data Management, QC & Pipeline Development Team",
+            "contact": "Peter Kraft, Nilanjan Chatterjee, Montserrat Garcia-Closas",
+            "box_id": "1422820941001",
+            "accepted_group": "Main Concept"
+        },
+        {
+            "title": "Validating existing breast cancer risk prediction models for the general population using self-reported or clinical data across diverse prospective cohorts",
+            "contact": "Peter Kraft, Nilanjan Chatterjee, Montserrat Garcia-Closas",
+            "box_id": "1422837565506",
+            "accepted_group": "Main Concept"
+        }
+    ]
+}

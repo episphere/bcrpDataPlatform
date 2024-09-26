@@ -71,7 +71,8 @@ export const navBarMenutemplate = () => {
                         ? `<a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="#userSubmissions" title='View Your Submissions' id="userSubmissions">View Submissions</a>`
                         : ""
                     }
-                    <!--a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="#data_access/accepted" title="Accepted Studies" id="dataAccepted"> Accepted </a-->
+                    <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="#accepted_forms" title="Accepted Projects" id="acceptedForms"> Approved BCRPP Concepts </a>
+                    <!--<a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="#data_access/accepted" title="Accepted Studies" id="acceptedStudiesViewnav"> Accepted </a>-->
                     ${
                       emailforChair.indexOf(
                         JSON.parse(localStorage.parms).login
