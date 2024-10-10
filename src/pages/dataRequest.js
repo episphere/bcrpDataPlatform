@@ -67,7 +67,7 @@ export const dataAccessNotSignedIn = () => {
                       risk factor and clinical data. Data is expected to be available for request in 2024. Data access 
                       will be facilitated through this platform, in accordance to the data transfer agreements signed 
                       between participating studies (originator) and the 
-                        <a href="/BCRP-DACC-Policies-Procedures-2023-01-16.docx" download>
+                        <a href="BCRP-DACC-Policies-Procedures-2023-01-16.docx" download="download">
                           policies and procedures of the BCRPP Data Coordinating Center (DCC)
                         </a>
                       at the Division of Cancer Epidemiology and Genetics at the National Cancer Institute.
