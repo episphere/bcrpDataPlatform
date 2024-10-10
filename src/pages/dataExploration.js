@@ -43,8 +43,8 @@ export const dataSummary = (
                         "data_exploration",
                         "summary",
                         "Dictionary",
-                        "Summary Statistics",
-                        "Subset Statistics"
+                        "Summary Statistics"//,
+                        // "Subset Statistics"
                       )
                 } 
                 

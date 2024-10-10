@@ -539,6 +539,11 @@ export const formSection = async (activeTab, showDescripton) => {
               <div class="input-group">
                 <ul class="form" id='reqcohlist'>
                   <div class="inline-field">
+                    <input id="AHS" name="reqcoh" type="checkbox" value="AHS" checked/>
+                    <label class="container-ul" for="AHS">AHS</label>
+                  </div>
+
+                  <div class="inline-field">
                     <input id="CSDLH" name="reqcoh" type="checkbox" value="CSDLH" checked/>
                     <label class="container-ul" for="CSDLH">CSDLH</label>
                   </div>
@@ -561,11 +566,6 @@ export const formSection = async (activeTab, showDescripton) => {
                   <div class="inline-field">
                     <input id="CLUE-II" name="reqcoh" type="checkbox" value="CLUE-II" checked/>
                     <label class="container-ul" for="CLUE-II">CLUE-II</label>
-                  </div>
-
-                  <div class="inline-field">
-                    <input id="Connect" name="reqcoh" type="checkbox" value="Connect" checked/>
-                    <label class="container-ul" for="Connect">Connect</label>
                   </div>
 
                   <div class="inline-field">
@@ -646,6 +646,11 @@ export const formSection = async (activeTab, showDescripton) => {
                   <div class="inline-field">
                     <input id="SNM" name="reqcoh" type="checkbox" value="SNM" checked/>
                     <label class="container-ul" for="SNM">SNM</label>
+                  </div>
+
+                  <div class="inline-field">
+                    <input id="USRT" name="reqcoh" type="checkbox" value="USRT" checked/>
+                    <label class="container-ul" for="USRT">USRT</label>
                   </div>
 
                   <div class="inline-field">

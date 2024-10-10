@@ -536,7 +536,7 @@ const manageRouter = async () => {
     if (!element) return;
     if (element.classList.contains('navbar-active')) return;
     document.title = 'BCRPP - Accepted Data Requests';
-    assignNavbarActive(element, 2);
+    assignNavbarActive(element, 1);
     //confluenceDiv.innerHTML = AuthTableTemplate();
     console.log("accepted forms");
     confluenceDiv.innerHTML = acceptedDocs();

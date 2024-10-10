@@ -43,12 +43,12 @@ export const navBarMenutemplate = () => {
                   location.origin.match(applicationURLs.dev)
                     ? ``
                     : `
-                        <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="#data_exploration/subset" title="Subset Statistics" id="dataSummarySubset">
+                        <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links pl-4" href="#data_exploration/subset" title="Subset Statistics" id="dataSummarySubset" hidden>
                             Subset Statistics
                         </a>
                     `
                 }
-                <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links" href="#data_submission" title="Data Submitted" id="dataSubmission"> 
+                <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links" href="#data_submission" title="Data Submitted" id="dataSubmission">
                 </a>
                 <div id="governanceNav" class="grid-elements"></div>
                 <div id="myProjectsNav" class="grid-elements"></div>
