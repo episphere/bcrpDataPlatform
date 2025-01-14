@@ -84,14 +84,16 @@ export async function viewAcceptedFilesTemplate(filesInfo) {
       let btns = Array.from(document.querySelectorAll(".preview-file"));
       btns.forEach((btn) => {
         btn.addEventListener("click", (e) => {
-          btn.dataset.target = "#confluencePreviewerModal";
-          const header = document.getElementById("confluencePreviewerModalHeader");
-          const body = document.getElementById("confluencePreviewerModalBody");
+          btn.dataset.target = "#bcrppPreviewerModal";
+          const header = document.getElementById("bcrppPreviewerModalHeader");
+          const body = document.getElementById("bcrppPreviewerModalBody");
           header.innerHTML = `<h5 class="modal-title">File preview</h5>
-                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>`;
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>`;
           const fileId = btn.dataset.fileId;
-          $("#confluencePreviewerModal").modal("show");
-          showPreview(fileId, "confluencePreviewerModalBody");
+          $("#bcrppPreviewerModal").modal("show");
+          showPreview(fileId, "bcrppPreviewerModalBody");
         });
       });
 
@@ -193,7 +195,7 @@ export async function viewAcceptedFiles(files) {
             <div class="card-body" style="padding-left: 10px;background-color:#f6f6f6;">
               ${
                 filename
-                  ? `<div class="row mb-1 m-0"><div class="col-md-2 pl-2 font-bold">Full Concept</div><div class="col"> ${filename} <button class="btn btn-lg custom-btn preview-file" title='Preview File' data-file-id="${fileId}" aria-label="Preview File"  data-keyboard="false" data-backdrop="static" data-bs-toggle="modal" data-bs-target="#bcrppPreviewerModal"><i class="fas fa-external-link-alt"></i></button></div></div>`
+                  ? `<div class="row mb-1 m-0"><div class="col-md-2 pl-2 font-bold">Full Concept</div><div class="col"> ${filename} <button class="btn btn-lg custom-btn preview-file" title='Preview File' data-file-id="${fileId}" aria-label="Preview File"  data-keyboard="false" data-backdrop="static" data-toggle="modal" data-target="#bcrppPreviewerModal"><i class="fas fa-external-link-alt"></i></button></div></div>`
                   : ``
               }
               ${
