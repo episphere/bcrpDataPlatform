@@ -2,29 +2,6 @@
 <html lang="en-US">
     <!-- Changes needed host url, checking changes made -->
     <head>
-        <!--<script>
-            const host = location.host;
-            
-            let measurementID = "";
-            if (host === "confluence.cancer.gov") measurementID = "G-GY2GCE9J90";
-            else if (host === "confluence-stage.cancer.gov")
-                measurementID = "G-YDFPQ7WTY0";
-            else measurementID = "G-TC3QCC08H4";
-            
-            const gtagSrc = `https://www.googletagmanager.com/gtag/js?id=${measurementID}`;
-            const gtagScript = document.createElement("script");
-            gtagScript.src = gtagSrc;
-            document.head.appendChild(gtagScript);
-        </script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag("js", new Date());
-            gtag("config", measurementID);
-        </script>-->
-
         <meta charset="UTF-8" />
         <!-- Need to Change Description Here -->
         <meta name="Description" content="View main goals and collaborating institutions." />
@@ -36,30 +13,32 @@
         <link rel="apple-touch-icon" href="./static/images/icons/icon-144x144.png" />
         <link type="image/x-icon" rel="shortcut icon" href="./static/images/favicon.ico" />
         <link crossorigin="anonymous" type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" defer />
-        <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous" defer />-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <link rel="preconnect" href="https://fonts.gstatic.com/" />
         <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" defer />
         <link href="./static/css/helvetica.css" rel="stylesheet" defer />
+        <link href="./static/css/montserrat.css" rel="stylesheet" defer />
+        <link href="./static/css/notosans.css" rel="stylesheet" defer />
         <link href="https://cdn01.boxcdn.net/platform/preview/2.83.0/en-US/preview.css" rel="stylesheet" defer />
         <link type="text/css" rel="stylesheet" href="./static/css/confluence.css" />
-
-        <!-- Remaining links compared to Confluence links - JD -->
-        <!-- <link href="./static/css/montserrat.css" rel="stylesheet" defer />
-        <link href="./static/css/notosans.css" rel="stylesheet" defer /> -->
-
-        <!-- Do we need these? Polyfill and the preview SDK? - JD -->
         <!-- polyfill.io only loads a Promise polyfill if your browser needs one -->
         <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Promise"></script>
-
         <!-- Latest version of Preview SDK for your locale -->
         <script src="https://cdn01.boxcdn.net/platform/preview/2.83.0/en-US/preview.js"></script>
         <link rel="stylesheet" href="https://cdn01.boxcdn.net/platform/preview/2.83.0/en-US/preview.css" />
     </head>
     <body>
         <ul class="skip-links">
-            <li><a href="#confluenceNav">Skip to navigation</a></li>
-            <li><a href="#confluenceMain">Skip to main content</a></li>
+            <li>
+                <a href="#bcrpNav">
+                    Skip to navigation
+                </a>
+            </li>
+            <li>
+                <a href="#bcrpMain">
+                    Skip to main content
+                </a>
+            </li>
         </ul>
         <header role="banner">
             <div id="header" class="header">
@@ -75,7 +54,7 @@
                 </div>
             </div>
             <!-- Is "role='navigation'" necessary? And id needs to be updated - JD -->
-            <nav class="navbar navbar-expand-xl navbar-dark" role="navigation" id="confluenceNav">
+            <nav class="navbar navbar-expand-xl navbar-dark" role="navigation" id="bcrpNav">
                 <div class="container">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" id="navBarBtn" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -92,8 +71,16 @@
                                     About BCRPP
                                 </a>
                                 <ul class="dropdown-menu navbar-dropdown" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item nav-link nav-menu-links dropdown-menu-links" href="#about/overview" id="aboutBCRPP">Learn about BCRPP</a></li>
-                                    <li><a class="dropdown-item nav-link nav-menu-links dropdown-menu-links" href="#contact" id="contactBCRPP">Scientific Committee</a></li>
+                                    <li>
+                                        <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links" href="#about/overview" id="aboutBCRPP">
+                                            Learn about BCRPP
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links" href="#contact" id="contactBCRPP">
+                                            Scientific Committee
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown grid-elements">
@@ -101,8 +88,16 @@
                                     About the Data
                                 </a>
                                 <ul class="dropdown-menu navbar-dropdown">
-                                    <li><a class="dropdown-item nav-link nav-menu-links dropdown-menu-links" href="#data_access/overview" id="dataRequest">Data Access</a></li>
-                                    <li><a class="dropdown-item nav-link nav-menu-links dropdown-menu-links" href="#data_exploration/dictionary" id="dataDictionary">Data Dictionary</a></li>
+                                    <li>
+                                        <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links" href="#data_access/overview" id="dataRequest">
+                                            Data Access
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item nav-link nav-menu-links dropdown-menu-links" href="#data_exploration/dictionary" id="dataDictionary">
+                                            Data Dictionary
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="grid-elements">
@@ -113,23 +108,31 @@
                         </ul>
                         <div class="navbar-nav ml-auto">
                             <div class="grid-elements">
-                                <button hidden class="nav-link nav-menu-links white-font custom-btn" title="Login Dev" id="loginBoxAppDev">Login Dev</button>
-                                <button hidden class="nav-link nav-menu-links white-font custom-btn" title="Login Stage" id="loginBoxAppStage">Login Stage</button>
-                                <button hidden class="nav-link nav-menu-links white-font custom-btn" title="Login" id="loginBoxAppEpisphere">Log in</button>
-                                <button hidden class="nav-link nav-menu-links white-font custom-btn" title="Login" id="loginBoxAppProd">Log in</button>
+                                <button hidden class="nav-link nav-menu-links white-font custom-btn" title="Login Dev" id="loginBoxAppDev">
+                                    Login Dev
+                                </button>
+                                <button hidden class="nav-link nav-menu-links white-font custom-btn" title="Login Stage" id="loginBoxAppStage">
+                                    Login Stage
+                                </button>
+                                <button hidden class="nav-link nav-menu-links white-font custom-btn" title="Login" id="loginBoxAppEpisphere">
+                                    Log in
+                                </button>
+                                <button hidden class="nav-link nav-menu-links white-font custom-btn" title="Login" id="loginBoxAppProd">
+                                    Log in
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </nav>
         </header>
-        <main role="main" id="confluenceMain">
+        <main role="main" id="bcrpMain">
             <div class="main-summary-row" id="loadingAnimation" role="status" style="display: none;"></div>
             <div class="container">
                 <div aria-live="polite" aria-atomic="true" class="row confluence-notification">
                     <div id="showNotification"></div>
                 </div>
-                <div class="modal fade" id="confluenceMainModal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal fade" id="bcrpMainModal" data-keyboard="false" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header" id="confluenceModalHeader"></div>
@@ -195,13 +198,13 @@
         <script crossorigin="anonymous" src="https://episphere.github.io/qaqc/lorena.js" defer></script>
         <script crossorigin="anonymous" src="https://cdn01.boxcdn.net/platform/preview/2.81.0/en-US/preview.js" defer></script>
         <script type="module" src="./confluence.js"></script>
-        <!-- <script type="module" src="./dist/bundle.js"></script> -->
+        <!--<script type="module" src="./dist/bundle.js"></script>-->
 
         <!-- Remaining links compared to Confluence links - JD -->
-        <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" defer crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" defer crossorigin="anonymous"></script>
         <script crossorigin="anonymous" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.min.js" defer></script>
         <script crossorigin="anonymous" src="https://cdn.plot.ly/plotly-latest.min.js" defer></script>
         <script crossorigin="anonymous" src="https://unpkg.com/docx@7.1.0/build/index.js"></script>
-        <script crossorigin="anonymous" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.min.js" defer></script> -->
+        <script crossorigin="anonymous" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.min.js" defer></script>
     </body>
 </html>
