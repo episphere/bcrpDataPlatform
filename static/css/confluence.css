@@ -2215,3 +2215,11 @@ th {
   text-align: left;
   padding: 8px;
 }
+
+.label-ellipsis {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
