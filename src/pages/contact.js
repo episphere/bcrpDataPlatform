@@ -1,7 +1,7 @@
 export const confluenceContactPage = () => {
-  const template = `
-        <div class="general-bg padding-bottom-1rem">
-            <div class="body-min-height">
+    const template = `
+        <div class="general-bg body-min-height padding-bottom-1rem">
+            <div class="container">
                 <div class="main-summary-row">
                     <div class="align-left">
                          <h1 class="page-header">Scientific Committee</h1>
@@ -9,14 +9,23 @@ export const confluenceContactPage = () => {
                 </div>
                 <div class="main-summary-row confluence-resources white-bg div-border font-size-18">
                     <div class="col">
-                        <span>For questions about the Breast Cancer Risk Prediction Project</span></br>
-                        <span>send mail to: Pete Kraft at </strong> <a href="">pkraft@hsph.harvard.edu</a></span></br>
-                        </br></br>
+                        <span class="text-bold">
+                            For questions about the Breast Cancer Risk Prediction Project
+                        </span>
+                        </br>
+                        <span>
+                            <strong>Send mail to:</strong> <a href="mailto:pkraft@hsph.harvard.edu">Pete Kraft</a>
+                        </span>
+                        </br>
+                        </br>
                         <div class="row">
                             <div class="col">
                                 <table class="table table-bordered table-responsive w-100 d-block d-md-table">
                                     <thead>
-                                        <tr><th>Member</th><th>Affiliation</th></tr>
+                                        <tr>
+                                            <th>Member</th>
+                                            <th>Affiliation</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
@@ -80,5 +89,6 @@ export const confluenceContactPage = () => {
             </div>
         </div>
     `;
-  document.getElementById("overview").innerHTML = template;
+    
+    document.getElementById("overview").innerHTML = template;
 };
