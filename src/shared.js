@@ -7,7 +7,7 @@ export const emailsAllowedToUpdateData = [
   "ahearntu@nih.gov",
 ];
 
-export const emailforChair = ['kraftp2@nih.gov','Roger.Milne@cancervic.org.au','ahearntu@nih.gov', 'garciacm@nih.gov', 'sbehpour@deloitte.com','kopchickbp@nih.gov'];
+export const emailforChair = ['ahearntu@nih.gov', 'kopchickbp@nih.gov'];
 //  [
 // "Roger.Milne@cancervic.org.au",
 // "ahearntu@nih.gov",
@@ -17,7 +17,7 @@ export const emailforChair = ['kraftp2@nih.gov','Roger.Milne@cancervic.org.au','
 //sbehpour@deloitte.com
 // ];
 
-export const emailforDACC = ['kraftp2@nih.gov', 'kopchickbp@nih.gov','pkraft@hsph.harvard.edu', 'garciacm@nih.gov', 'ahearntu@nih.gov',  'mukopadhyays2@nih.gov'];;
+export const emailforDACC = ['kopchickbp@nih.gov', 'ahearntu@nih.gov'];
 
 // [
 //   "pkraft@hsph.harvard.edu",
