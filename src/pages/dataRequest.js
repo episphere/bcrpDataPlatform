@@ -2908,9 +2908,9 @@ export async function viewFinalDecisionFiles(files) {
               .toDateString()
               .substring(4)}</div>
             <div class="col-lg-2 pl-6 text-right">${
-              fileInfo.parent.name === "Accepted"
+              fileInfo.parent.name === acceptedFolder
                 ? '<h6 class="badge badge-pill badge-success">Accepted</h6>'
-                : fileInfo.parent.name === "Denied"
+                : fileInfo.parent.name === deniedFolder
                 ? '<h6 class="badge badge-pill badge-danger">Denied</h6>'
                 : '<h6 class="badge badge-pill badge-warning">Under Review</h6>'
             }</div>
