@@ -3,22 +3,28 @@
     "last_update": "8/13/2024",
     "files": [
                 {
-            "title": "Breast Cancer Risk Prediction Project--Data Management, QC & Pipeline Development Team",
+            "title": " Concept 1 - Breast Cancer Risk Prediction Project--Data Management, QC & Pipeline Development Team",
             "contact": "Peter Kraft, Thomas Ahearn, Nilanjan Chatterjee, Montserrat Garcia-Closas",
             "box_id": "1422820941001",
             "accepted_group": "Main Concept"
         },
         {
-            "title": "Validating existing breast cancer risk prediction models for the general population using self-reported or clinical data across diverse prospective cohorts",
+            "title": " Concept 2 - Validating existing breast cancer risk prediction models for the general population using self-reported or clinical data across diverse prospective cohorts",
             "contact": "Peter Kraft, Kristen Brantley, Nilanjan Chatterjee, Montserrat Garcia-Closas, Thomas Ahearn",
             "box_id": "1422837565506",
             "accepted_group": "Main Concept"
         },
         {
-            "title": "Development and validation of a comprehensive and multi-ancestry breast cancer risk prediction model for the US population using data from the NCI cohort consortium",
+            "title": " Concept 3 - Development and validation of a comprehensive and multi-ancestry breast cancer risk prediction model for the US population using data from the NCI cohort consortium",
             "contact": "Nilanjan Chatterjee, Emily Norton, Peter Kraft, Montserrat Garcia-Closas, Thomas Ahearn, Kristen Brantley",
             "box_id": "1558424735868",
             "accepted_group": "Main Concept"
+        },
+        {
+            "title": " Concept 4 - Risk factors for diagnosis of interval breast cancers in women undergoing mammography screening",
+            "contact": "Montserrat Garcia-Closas, Peter Kraft, Thomas Ahearn, Kristen Brantley, Gretchen Gierach, Nilanjan Chatterjee, Parichoy Pal Choudhury, Amy Berrington",
+            "box_id": "1655037784326",
+            "accepted_group": "Concept 4"
         }
     ]
 }
