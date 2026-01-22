@@ -122,13 +122,13 @@ export const graphVariables = {
     bmi_earlyadult : {
         title: "BMI at Age 18-24",
         values: {
-            "bmi_18_5_24_9": "18.5-24.9",
-            "bmi_25_0_29_9": "25.0-29.9",
-            "bmi_30_0_34_9": "30.0-34.9",
-            "bmi_35_0_39_9": "35.0-39.9",
-            "bmi_DK": "Unknown",
-            "bmi_GE40_0": ">40",
-            "bmi_LT18_5": "<18.5"   
+            "bmi_earlyadult_18_5_24_9": "18.5-24.9",
+            "bmi_earlyadult_25_0_29_9": "25.0-29.9",
+            "bmi_earlyadult_30_0_34_9": "30.0-34.9",
+            "bmi_earlyadult_35_0_39_9": "35.0-39.9",
+            "bmi_earlyadult_DK": "Unknown",
+            "bmi_earlyadult_GE40_0": ">40",
+            "bmi_earlyadult_LT18_5": "<18.5"   
         }
     },
     ever_breastfeed : {
