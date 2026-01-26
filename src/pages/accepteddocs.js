@@ -31,8 +31,6 @@ export const acceptedDocs = () => {
 }
 
 export const acceptedDocsView = async () => {
-    console.log(accepted_data.files);
-
     //const allFiles = await getFolderItems(acceptedFolder);
     let filearrayAllFiles = accepted_data.files;
     viewAcceptedFilesTemplate(filearrayAllFiles);
