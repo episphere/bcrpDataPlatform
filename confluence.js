@@ -357,7 +357,7 @@ export const confluence = async () => {
           if (acceptedFormsElement.classList.contains('navbar-active')) return;
           const element = document.getElementById("acceptedForms")
           showAnimation();
-          assignNavbarActive(element, 2);
+          assignNavbarActive(element, 1);
           document.title = 'BCRPP - Accepted Data Requests';
           //confluenceDiv.innerHTML = authTableTemplate();
           console.log("accepted forms");
