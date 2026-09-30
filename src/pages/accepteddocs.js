@@ -1,7 +1,8 @@
 import { showPreview } from "../components/boxPreview.js";
 import { sortTableByColumn } from "../event.js";
 import {hideAnimation} from "../shared.js";
-import accepted_data from '../data/accepted_requests.json' with { type: 'json' };
+
+const acceptedRequestsUrl = "https://raw.githubusercontent.com/episphere/bcrpDataPlatform/master/src/data/accepted_requests.json";
 
 export const acceptedDocs = () => {
    //const userInfo = JSON.parse(localStorage.getItem('parms'))
@@ -31,10 +32,27 @@ export const acceptedDocs = () => {
 }
 
 export const acceptedDocsView = async () => {
-    //const allFiles = await getFolderItems(acceptedFolder);
-    let filearrayAllFiles = accepted_data.files;
-    viewAcceptedFilesTemplate(filearrayAllFiles);
-    hideAnimation();
+    try {
+      const response = await fetch(acceptedRequestsUrl, { cache: "no-store" });
+      if (!response.ok) {
+        throw new Error(`GitHub returned ${response.status}`);
+      }
+
+      const acceptedData = await response.json();
+      if (!Array.isArray(acceptedData.files)) {
+        throw new Error("The accepted requests file does not contain a files array");
+      }
+
+      await viewAcceptedFilesTemplate(acceptedData.files);
+    } catch (error) {
+      console.error("Unable to load accepted data requests from GitHub:", error);
+      document.getElementById("daccDecision").innerHTML = `
+        <div class="alert alert-danger" role="alert">
+          Accepted data requests could not be loaded. Please try again later.
+        </div>`;
+    } finally {
+      hideAnimation();
+    }
 }
 
 export function viewAcceptedFilesColumns() {
